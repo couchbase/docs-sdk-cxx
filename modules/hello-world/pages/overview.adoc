@@ -1,0 +1,116 @@
+= Couchbase C++ SDK 1.0
+:page-layout: landing-page-top-level-sdk
+:page-role: tiles
+:!sectids:
+
+= Couchbase C++ SDK 1.0
+
+////
+[source,java]
+----
+include::hello-world:example$Overview.java[tag=overview,indent=0]
+----
+////
+
+The Couchbase {cpp} client allows applications to access a Couchbase database.
+
+{empty} +
+
+== icon:database[] Using Your Database
+
+How-to guides to help you start your development journey with Couchbase and the {cpp} SDK.
+
+++++
+<div class="card-row three-column-row">
+++++
+
+[.column]
+.Getting Started
+* xref:hello-world:start-using-sdk.adoc[]
+* xref:howtos:kv-operations.adoc[]
+* xref:howtos:n1ql-queries-with-sdk.adoc[]
+* xref:howtos:full-text-searching-with-sdk.adoc[]
+* xref:hello-world:sample-application.adoc[]
+* xref:hello-world:spring-data-sample-application.adoc[]
+
+[.column]
+.Transactions
+* xref:howtos:distributed-acid-transactions-from-the-sdk.adoc[]
+* xref:concept-docs:transactions.adoc[]
+
+[.column]
+.Working with Data
+* xref:howtos:subdocument-operations.adoc[]
+* xref:howtos:analytics-using-sdk.adoc[]
+* xref:howtos:encrypting-using-sdk.adoc[]
+* xref:howtos:working-with-collections.adoc[Working with Collections]
+
+[.column]
+.Managing Couchbase
+* xref:howtos:managing-connections.adoc[]
+* xref:howtos:sdk-authentication.adoc[]
+* xref:howtos:provisioning-cluster-resources.adoc[]
+* xref:howtos:sdk-user-management-example.adoc[]
+
+[.column]
+.Errors & Diagnostics
+* xref:howtos:error-handling.adoc[]
+* xref:howtos:collecting-information-and-logging.adoc[]
+* xref:howtos:slow-operations-logging.adoc[]
+
+++++
+</div>
+++++
+
+== icon:graduation-cap[] Learn
+
+Take a deep-dive into the SDK concept material and learn more about Couchbase.
+
+++++
+<div class="card-row three-column-row">
+++++
+
+[.column]
+.Data Concepts
+* xref:concept-docs:data-model.adoc[]
+* xref:concept-docs:data-services.adoc[Service Selection]
+* xref:concept-docs:encryption.adoc[Field Level Encryption]
+
+[.column]
+.Errors & Diagnostics Concepts
+* xref:concept-docs:errors.adoc[]
+* xref:concept-docs:response-time-observability.adoc[]
+* xref:concept-docs:durability-replication-failure-considerations.adoc[]
+
+++++
+</div>
+++++
+
+== icon:book[] Resources
+
+Useful resources to help support your development experience with Couchbase and the Java SDK.
+
+++++
+<div class="card-row three-column-row">
+++++
+
+[.column]
+.Reference
+* https://docs.couchbase.com/sdk-api/couchbase-java-client/[API Reference]
+* xref:ref:client-settings.adoc[]
+* xref:ref:error-codes.adoc[]
+* xref:ref:glossary.adoc[Glossary]
+* xref:ref:travel-app-data-model.adoc[]
+
+[.column]
+.Project Docs
+* xref:project-docs:sdk-release-notes.adoc[]
+* xref:project-docs:compatibility.adoc[Compatibility]
+* https://docs-archive.couchbase.com/home/index.html[Older Versions Archive]
+* xref:project-docs:migrating-sdk-code-to-3.n.adoc[]
+* xref:project-docs:third-party-integrations.adoc[]
+* xref:project-docs:sdk-full-installation.adoc[]
+
+++++
+</div>
+++++
