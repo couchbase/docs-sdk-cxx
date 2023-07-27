@@ -1,0 +1,174 @@
+= Hello World
+:description: A quick start guide to get you up and running with Couchbase and the {cpp} SDK.
+
+
+[abstract]
+{description}
+
+
+
+Couchbase has a simple interface to create and modify records in a document, based upon the _Collection_ into which the documents are organised.
+You can read more about data modelling <<data-modelling,below>>, but first let's look at those data operations, and installing the {cpp} SDK.
+
+
+.Creating a new database entry with the {cpp} SDK
+[source,cxx]
+----
+    {
+        auto collection = cluster.bucket(bucket_name).scope(scope_name).collection(collection_name);
+ 
+        const std::string document_id{ "minimal_example" };
+        const tao::json::value basic_doc{
+            { "a", 1.0 },
+            { "b", 2.0 },
+        };
+ 
+        auto [ctx, resp] = collection.upsert(document_id, basic_doc, {}).get();
+        std::cout << "ec: " << ctx.ec().message() << ", id: " << document_id << ", CAS: " << resp.cas().value() << "\n";
+    }
+----
+
+We'll explore creating and retrieving data records in more detail <<create-read-update-delete,below>>, after walking through a quick installation.
+
+
+If you haven't already got a database set up, the easiest route is to xref:cloud:?????????????[sign up to a trial of Couchbase Capella], then come back to this page.
+
+Alternatively, you may want to look at one of the self-managed installation options:
+
+* [Docker Install]
+* 
+* 
+* 
+* Cloud Marketplace
+** [AWS Marketplace]
+** [Azure Marketplace]
+** [GCP Marketplace]
+
+
+
+
+
+== Installation
+
+Check that you have the dependencies installed:
+
+* cmake >= 3.20.0+ (e.g., brew install cmake)
+* c++ compiler >= std_17 (e.g., xcode-select --install)
+* openssl >= 1.1+ (e.g., brew install openssl)
+
+More details of the installation process, and extra steps required for openssl build, can be found in the xref:project-docs:sdk-full-installation.adoc[full installation guide].
+On most GNU/Linux platforms at least, installation is a matter of:
+
+[source,console]
+----
+git clone --recurse-submodules https://github.com/couchbaselabs/couchbase-cxx-client.git
+----
+
+[source,console]
+----
+export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/ 
+----
+
+.Building (command-line)
+[source,console]
+----
+cd couchbase-cxx-client
+----
+
+[source,console]
+----
+mkdir build; cd build
+----
+
+[source,console]
+----
+cmake ..
+----
+
+[source,console]
+----
+cmake --build .
+----
+
+
+
+== Connect to your Database
+
+Connect to your Couchbase Capella database (or your local Couchbase Cluster, if you are testing self-managed Couchbase).
+
+
+[{tabs}] 
+==== 
+Couchbase Capella::
++
+--
+[source,cxx]
+----
+    auto options = couchbase::cluster_options(username, password);
+    options.apply_profile("wan_development");
+    auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options).get();
+    if (ec) {
+        std::cout << "Unable to connect to the cluster. ec: " << ec.message() << "\n";
+    } else {
+        // Application code here
+    }
+----
+
+Note, the client certificate for connecting to a Capella database is included in the SDK installation.
+--
+
+Self-Managed Couchbase::
++ 
+-- 
+[source,cxx]
+----
+    std::string connection_string{ argv[1] }; // "couchbase://127.0.0.1"
+    std::string username{ argv[2] };          // "Administrator"
+    std::string password{ argv[3] };          // "password"
+    std::string bucket_name{ "travel-sample" };
+ 
+    auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options).get();
+    if (ec) {
+        fmt::print("unable to connect to the cluster: {}\n", ec.message());
+        return 1;
+    }
+----
+--
+====
+
+A deeper look at connection options can be found on * xref:howtos:managing-connections.adoc[].
+
+
+
+== Create, Read, Update, Delete
+
+
+
+
+
+
+
+CRUD operations -- Create, Read, Update, Delete.
+
+
+
+
+== Data Modelling
+
+Collection
+
+
+
+
+== Help and Troubleshooting
+
+
+
+
+
+== Next Steps
+
+* Take a look at the xref:hello-world:sample-application.adoc[].
+
+
+

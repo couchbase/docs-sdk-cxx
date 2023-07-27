@@ -1,7 +1,7 @@
 name: cxx-sdk
-version: '3.4'
+version: '3.5'
 title: C++ SDK
 start_page: hello-world:overview.adoc
 nav:
 - modules/ROOT/nav.adoc
-server_version: '7.1.2'
+server_version: '7.5'

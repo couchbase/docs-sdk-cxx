@@ -1,12 +1,154 @@
-.Getting Started
-* xref:hello-world:start-using-sdk.adoc[]
+* xref:hello-world:start-using-sdk.adoc[Hello World]
+** xref:hello-world:sample-application.adoc[]
+** xref:howtos:managing-connections.adoc[Connecting to Your Database]
+
+////
+REPL? / notebooks
+Getting Started & connecting section 
+...some integrations. 
+Cert auth 
+RBAC 
+Asynchronous API
+Troubleshooting 
+..... first section 
+////
+
+
+* xref:concept-docs:data-durability-acid-transactions.adoc[Data Modelling, Durability, and ACID Transactions]
+
+////
+Data
+Durability 
+Data structures &  binary & transcoders 
+JSON and nonJSON 
+Schemes, scopes, collections (capella and buckets)
+...and migration from SQL???
+Subdoc and xattr 
+Compression 
+Encryption 
+Graph. Time series.  Column?  
+txns 
+CAS
+////
+
+
+
 
 
 ////
+Above points out to separate,  detailed distributed acid txns section 
+////
+
+
+
+
+
+* xref:concept-docs:querying-your-data.adoc[]
+** xref:howtos:sqlpp-queries-with-sdk.adoc[]
+
+////
+Querying your data 
+SQL++    OLTP.. transactional processing 
+FTS 
+Combining both
+Consistency and ryow 
+?analytics- here or batch?   OLAP 
+Query without index
+Index management 
+...materialised views???
+KV range scan
+////
+
+////
+Batching.
+Compare MapReduce Views and Spark.
+...and other dataflow engines
+See ch10. 
+
+Batch / analytics section?
+Or "longer running queries"
+////
+
+
+* Error Handling and Diagnostics
+////
+Error handling
+Retry strategies 
+Logging 
+Health check 
+Failure considerations 
+CAS and point to durability and txns docs 
+Observability 
+Antipatterns and best practices? 
+////
+
+
+
+
+
+
+
+
+////
+Management APIs 
+...
+Involve cbsh in tasks 
+////
+
+
+
+
+
+
+
+////
+References 
+Section or integrated????
+////
+
+// API ??
+
+
+.test1
+
+* xref      deploy-best-practices.adoc
+** full install
+*** platform intro
+** integrations
+** compat
+*** migration
+** get involved
+*** docs contrib
+
+* ?? relnotes ??
+
+.test2
+
+////
+Project docs 
+API ???
+Relnotes 
+Full install
+-- ?platform intro? REPL? 
+Integrations 
+Compat
+Get involved 
+////
+// Best practices?
+// Or as top ten on overview page?
+// Deployment and best practices?!! (install) - with intergations as subpage
+
+
+
+
+
+////
+.Getting Started
+
+
+
 * xref:howtos:kv-operations.adoc[]
-* xref:howtos:n1ql-queries-with-sdk.adoc[]
 * xref:howtos:full-text-searching-with-sdk.adoc[]
-* xref:hello-world:sample-application.adoc[]
 * xref:hello-world:spring-data-sample-application.adoc[]
 
 .Transactions
@@ -31,7 +173,6 @@
 * xref:howtos:working-with-collections.adoc[Working with Collections]
 
 .Managing Couchbase
-* xref:howtos:managing-connections.adoc[]
 ** xref:howtos:sdk-authentication.adoc[]
 ** xref:howtos:troubleshooting-cloud-connections.adoc[Troubleshooting Cloud Connections]
 * xref:howtos:provisioning-cluster-resources.adoc[]

@@ -1,0 +1,103 @@
+= Data Modelling, Durability, and ACID Transactions
+:page-aliases: durability-replication-failure-considerations.adoc
+
+
+
+Designing an application to offer guarantees of durability or consistency in a networked environment is hard.
+The newcomer to the area has to wrestle with concepts like [CAP Theorum] and the [many possible interpretations] of ACID transactions. 
+Here we hope to keep it _relatively_ simple, with a look at which Couchbase features give you which guarantees, when you may prefer to use them, and -- 
+perhaps equally important, though sometimes overlooked -- what is the performance cost of these choices.
+
+
+
+////
+From 3.4 doc:
+
+Data durability refers to the fault tolerance and persistence of data in the face of software or hardware failure. Even the most reliable software and hardware might fail at some point, and along with the failures, introduce a chance of data loss. Couchbase’s durability features include Synchronous Replication, and the possibility to use distributed, multi-document ACID transactions. It is the responsibility of the development team and the software architect to evaluate the best choice for each use case.
+Couchbase’s distributed and scalable nature exposes any set-up to the risk of potential network and hardware problems. The key to durability is planning for resilience, by evaluating the options on offer for persistence and replication, and carefully considering the performance trade-offs involved.
+
+Durability
+Writes in Couchbase (from the SDK or elsewhere) are written to a single node. From there, Couchbase Server will take care of sending the mutation to any configured replicas, and to disk. By default all writes are asynchronous, but levels of durability can be set, to ensure replication and/or persistence to disks, before the write is committed.
+
+
+//// 
+
+
+
+
+== Data and Good Schema Design
+
+
+
+
+=== Collections
+
+// Working at the collection level - kv, query, ....
+// pull in some https://docs.couchbase.com/server/current/learn/data/scopes-and-collections.html ?
+
+
+=== Object Mapping & Modelling JSON
+
+
+
+== Durability
+
+
+
+
+
+This durability is enforced by the database, 
+
+
+
+// Worth putting in?
+// Note, if you are working with an older, no longer supported version of Couchbase, you may want to look at 3.3@java-sdk:concept-docs:durability-replication-failure-considerations.adoc#older-server-versions in the earlier SDK docs.
+// https://docs.couchbase.com/java-sdk/current/concept-docs/durability-replication-failure-considerations.html#older-server-versions
+// Change link once 3.3 is archived?
+
+== Concurrent Document Mutations
+
+
+
+
+=== Performance considerations
+
+CAS operations incur no additional overhead.
+CAS values are always returned from the server for each operation. 
+Comparing CAS at the server involves a simple integer comparison which incurs no overhead.
+
+=== CAS value format
+
+The CAS value should be treated as an opaque object at the application level. 
+No assumptions should be made with respect to how the value is changed (for example, it is wrong to assume that it is a simple counter value). 
+In the SDK, the CAS is represented as a 64 bit integer for efficient copying but should otherwise be treated as an opaque 8 byte buffer.
+
+
+
+== Pessimistic locking
+
+
+
+
+
+
+== Multi-Document ACID Transactions
+
+
+
+
+
+== Further Reading
+
+Below, we link some of the pages in this section that take a deeper dive into data structures, durability guarantees, and ???? --
+but if you are in a hurry to just learn more about querying your data, please skip ahead to xref:concept-docs:querying-your-data.adoc[the next section].
+
+* 
+
+* 
+
+* Backups
+
+* Retry strategy
+
+
