@@ -1,0 +1,13 @@
+= 3rd Party Integrations
+:page-topic-type: concept
+:description: 
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+
+The Couchbase {cpp} SDK is often used with unofficial and third party tools and applications to integrate into broader language and platform ecosystems, and across data lakes in heterogeneous environments.
+

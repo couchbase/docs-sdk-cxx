@@ -1,0 +1,12 @@
+= SDK Release Notes
+:page-topic-type: reference
+:description: Release notes and download archive for the Couchbase {cpp} Client.
+
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+

@@ -1,2 +1,33 @@
 =  Dealing with Errors, Delays, and Unreliable Networks
+:page-topic-type: concept
+:description: Even the most reliable software and hardware might fail at some point, and along with the failures, introduce a chance of data loss. 
+
+
+
+[abstract]
+{description}
+Evaluate the best options for durability in a world of unreliable networks.
+
+include::project-docs:partial$preview-warning.adoc[]
+
+
+// failure considerations concept?
+
+The key to durability is planning for resilience, by evaluating the options on offer for persistence and replication, and carefully considering the performance trade-offs involved.
+
+On this page we shall look at:
+
+* Durable writes
+* 
+* 
+* 
+* 
+* 
+* 
+* 
+
+
+
+
+
 

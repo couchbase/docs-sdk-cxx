@@ -65,8 +65,16 @@ Index management
 KV range scan
 ////
 
+* xref:concept-docs:durability-replication-failure-considerations.adoc[]
+** xref:howtos:error-handling.adoc[]
+** xref:howtos:collecting-information-and-logging.adoc[]
+** xref:howtos:health-check.adoc[]
+** xref:concept-docs:response-time-observability.adoc[Observability]
+*** xref:howtos:slow-operations-logging.adoc[]
+*** xref:howtos:observability-metrics.adoc[]
+*** xref:howtos:observability-orphan-logger.adoc[]
+*** xref:howtos:observability-tracing.adoc[]
 
-* Failure Considerations / Error Handling and Diagnostics
 ////
 Error handling
 Retry strategies 
@@ -77,17 +85,12 @@ CAS and point to durability and txns docs
 Observability 
 Antipatterns and best practices? 
 ////
-* xref:howtos:error-handling.adoc[]
-* xref:howtos:collecting-information-and-logging.adoc[]
-* xref:howtos:health-check.adoc[]
-* Observability
-** xref:howtos:slow-operations-logging.adoc[]
-** xref:howtos:observability-metrics.adoc[]
-** xref:howtos:observability-orphan-logger.adoc[]
-** xref:howtos:observability-tracing.adoc[]
 
 // speed up your app...
+
+
 * xref:concept-docs:best-practices.adoc[]
+
 ////
 Batching.
 Compare MapReduce Views and Spark.
@@ -99,19 +102,17 @@ Or "longer running queries"
 ////
 
 
-
-
-
-
-
 ////
 Management APIs 
 ...
 Involve cbsh in tasks 
+
+
+.Managing Couchbase
+* xref:howtos:provisioning-cluster-resources.adoc[]
+** xref:howtos:sdk-user-management-example.adoc[]
+
 ////
-
-
-
 
 
 
@@ -123,31 +124,18 @@ Section or integrated????
 
 // API ??
 
-
-.test1
-
-* xref      deploy-best-practices.adoc
-** full install
-*** platform intro
-** integrations
-** compat
-*** migration
-** get involved
-*** docs contrib
-
-* ?? relnotes ??
-
-* xref:project-docs[SDK Deployment]
+* xref:project-docs:deployment.adoc[SDK Deployment]
 ** xref:project-docs:sdk-release-notes.adoc[]
 ** xref:project-docs:compatibility.adoc[]
 // *** xref:project-docs:migrating-sdk-code-to-3.n.adoc[]
 // *** xref:project-docs:distributed-acid-transactions-migration-guide.adoc[]
-**** xref:project-docs:third-party-integrations.adoc[]
+*** xref:project-docs:third-party-integrations.adoc[]
 ** xref:project-docs:sdk-full-installation.adoc[]
 *** xref:hello-world:platform-help.adoc[]
-// ** https://docs-archive.couchbase.com/home/index.html[Older Versions Archive]
+// * https://docs-archive.couchbase.com/home/index.html[Older Versions Archive]
 ** xref:project-docs:get-involved.adoc[]
 *** xref:project-docs:sdk-licenses.adoc[]
+// Turn this into xref...
 *** https://docs.couchbase.com/home/contribute/index.html[Improve the Docs]
 *** xref:project-docs:metadoc-about-these-sdk-docs.adoc[About These Docs]
 
@@ -187,9 +175,6 @@ Get involved
 * xref:howtos:transcoders-nonjson.adoc[Transcoders & Non-JSON Documents]
 * xref:howtos:working-with-collections.adoc[Working with Collections]
 
-.Managing Couchbase
-* xref:howtos:provisioning-cluster-resources.adoc[]
-** xref:howtos:sdk-user-management-example.adoc[]
 
 
 .Learn
@@ -199,8 +184,6 @@ Get involved
 * xref:concept-docs:compression.adoc[]
 * xref:concept-docs:errors.adoc[Errors & Diagnostics]
 ** xref:concept-docs:health-check.adoc[]
-** xref:concept-docs:response-time-observability.adoc[]
-* xref:concept-docs:durability-replication-failure-considerations.adoc[]
 * xref:concept-docs:encryption.adoc[Field Level Encryption]
 * xref:concept-docs:data-services.adoc[Service Selection]
 ** xref:concept-docs:analytics-for-sdk-users.adoc[]
@@ -221,16 +204,4 @@ Get involved
 * xref:ref:travel-app-data-model.adoc[]
 
 .Project Docs
-* xref:project-docs:sdk-release-notes.adoc[]
-* xref:project-docs:compatibility.adoc[]
-** xref:project-docs:migrating-sdk-code-to-3.n.adoc[]
-** xref:project-docs:distributed-acid-transactions-migration-guide.adoc[]
-** xref:project-docs:third-party-integrations.adoc[]
-* xref:project-docs:sdk-full-installation.adoc[]
-// ** xref:hello-world:platform-help.adoc[]
-* https://docs-archive.couchbase.com/home/index.html[Older Versions Archive]
-* xref:project-docs:sdk-licenses.adoc[]
-* xref:project-docs:get-involved.adoc[]
- ** https://docs.couchbase.com/home/contribute/index.html[Improve the Docs]
-* xref:project-docs:metadoc-about-these-sdk-docs.adoc[About These Docs]
 ////
