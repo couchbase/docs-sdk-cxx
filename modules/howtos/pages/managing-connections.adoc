@@ -1,0 +1,142 @@
+= Managing Connections
+:page-topic-type: howto
+:description: 
+
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+
+
+A connection to a Couchbase cluster -- on Capella, or self-managed -- is represented by a cluster object. 
+A cluster provides access to Buckets, Scopes, and Collections, as well as various Couchbase services and management interfaces. 
+The simplest way to create a `cluster` object is to call `couchbase::cluster::connect()` with a connection string, username, and password:
+
+[source,C++]
+----
+auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options).get();
+----
+
+
+
+
+
+----
+#include <couchbase/cluster.hxx>
+ 
+int
+main(int argc, const char* argv[])
+{
+    if (argc != 4) {
+        fmt::print("USAGE: ./start_using couchbase://127.0.0.1 Administrator password\n");
+        return 1;
+    }
+ 
+    std::string connection_string{ argv[1] }; // "couchbase://127.0.0.1"
+    std::string username{ argv[2] };          // "Administrator"
+    std::string password{ argv[3] };          // "password"
+    std::string bucket_name{ "travel-sample" };
+ 
+    // run IO context on separate thread
+    asio::io_context io;
+    auto guard = asio::make_work_guard(io);
+    std::thread io_thread([&io]() { io.run(); });
+ 
+    auto options = couchbase::cluster_options(username, password);
+    // customize through the 'options'.
+    // For example, optimize timeouts for WAN
+    options.apply_profile("wan_development");
+ 
+    // [1] connect to cluster using the given connection string and the options
+    auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options).get();
+    if (ec) {
+        fmt::print("unable to connect to the cluster: {}\n", ec.message());
+        return 1;
+    }
+ 
+    // get a bucket reference
+    auto bucket = cluster.bucket(bucket_name);
+ 
+    // get a user-defined collection reference
+    auto scope = bucket.scope("tenant_agent_00");
+    auto collection = scope.collection("users");
+
+    { // your database interactions here
+    }
+  
+    // close cluster connection
+    cluster.close();
+    guard.reset();
+ 
+    io_thread.join();
+    return 0;
+}
+---- 
+
+
+If this were compilesd as `start_using`, then the connection string and authentication credentials would be passed as arguments to the command like so:
+
+[source,console]
+---- 
+$ ./start_using couchbase://127.0.0.1 Administrator password
+----
+
+Here we're talking to a local development cluster.
+For Capella, this will need `couchbases://` for TLS, followed by your Capella database name -- see xref:cloud:get-started:connect.adoc[].
+The client certificate for connecting to Capella is included in the {cpp} SDK installation.
+
+
+
+
+
+[#connection-strings]
+== Connection Strings
+
+A Couchbase connection string is a comma-delimited list of IP addresses and/or hostnames, optionally followed by a list of parameters.
+
+The parameter list is just like the query component of a URI; name-value pairs have an equals sign (`=`) separating the name and value, with an ampersand (`&`) between each pair.
+Just as in a URI, the first parameter is prefixed by a question mark (`?`).
+
+.Simple connection string with one seed node
+----
+127.0.0.1
+----
+
+.Connection string with two seed nodes
+----
+nodeA.example.com,nodeB.example.com
+----
+
+.Connection string with two parameters
+----
+127.0.0.1?io.networkResolution=external&timeout.kvTimeout=10s
+----
+
+
+////
+// Java:
+The full list of recognized parameters is documented in the client settings reference.
+Any client setting with a system property name may also be specified as a connection string parameter (without the `com.couchbase.env.` prefix).
+
+WARNING: When creating a `Cluster` using a custom `ClusterEnvironment`, *_connection string parameters are ignored_*, since client settings are frozen when the cluster environment is built.
+////
+
+
+
+
+
+
+
+
+////
+
+I believe Java has a way to specify config from environment variables already
+From Java system properties, yes, but not from environment variables.
+Config profile can be applied via the applyProfile client setting. Like:
+java -Dcom.couchbase.env.applyProfile=wan-development ...
+or via connection string:
+couchbase://example.com?applyProfile=wan-development
+////

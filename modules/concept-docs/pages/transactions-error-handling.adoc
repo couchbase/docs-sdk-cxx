@@ -1,0 +1,10 @@
+= Transactions Error Handling
+:page-topic-type: concept
+:description: Handling transaction errors with Couchbase.
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+

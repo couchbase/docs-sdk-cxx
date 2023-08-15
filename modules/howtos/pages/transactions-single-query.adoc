@@ -1,0 +1,14 @@
+= Single Query Transactions
+:page-topic-type: howto
+:description: Learn how to perform bulk-loading transactions with the SDK.
+
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+
+
+

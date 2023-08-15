@@ -1,0 +1,10 @@
+= Best Practices
+:page-topic-type: concept
+:description: Speed up your application with some best practices for using Couchbase SDKs.
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+

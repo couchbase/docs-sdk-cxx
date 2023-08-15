@@ -1,0 +1,56 @@
+= Deployment
+:page-topic-type: concept
+:description: 
+
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+
+
+
+
+One of Couchbase's strengths is speedy response, so deployment of apps should be in the same
+AZ?
+as the Server -- whether Capella, or your own self-managed cluster.
+
+We always recommend the 
+xref:relnote
+[latest version] of the SDK. This not only contains the latest security updates and bug fixes, but will be compatible with the latest Couchbase Server release.
+Note, Capella always runs a recent version of Couchbase Server.
+
+
+
+
+
+Before deploying, take note of any 
+xref:compat
+[compatibility] issues for the language platform and underlying OS.
+The 
+xref:sdk-full-installation.adoc
+[full installation guide] should cover any special cases for all supported environments.
+
+
+
+
+
+
+
+
+
+== Further Reading
+
+* Integrate Couchbase with your data ecosystem:
+** xref:project-docs:third-party-integrations.adoc[SDK Integrations]
+** xref:server:develop:integrations.adoc[Integrations across Couchbase]
+
+* Deploying Couchbase Server:
+** [Capella] -- Database as a Service
+** Self-managed Couchbase Server:
+*** [Docker]
+*** [Cloud Marketplace] ---
+*** [Cloud Native] -- orchestrate your Server deployment with Kubernetes.
+* xref:project-docs:get-involved.adoc[Contribute to the SDK] 

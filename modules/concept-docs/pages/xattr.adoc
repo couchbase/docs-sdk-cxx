@@ -1,5 +1,5 @@
-= Sample Application
-:page-topic-type: tutorial
+= Extended Attributes
+:page-topic-type: concepts
 :description: 
 
 
@@ -8,3 +8,4 @@
 {description}
 
 include::project-docs:partial$preview-warning.adoc[]
+

@@ -3,6 +3,8 @@
 :page-role: tiles
 :!sectids:
 
+include::project-docs:partial$preview-warning.adoc[]
+
 = Couchbase C++ SDK 1.0
 
 ////

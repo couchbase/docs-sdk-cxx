@@ -1,0 +1,15 @@
+= Data Operations
+:page-topic-type: howto
+:description: Data service offers the simplest way to retrieve or mutate data where the key is known. 
+
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+
+
+Here we cover CRUD operations, document expiration, and optimistic locking with CAS.
+// ??

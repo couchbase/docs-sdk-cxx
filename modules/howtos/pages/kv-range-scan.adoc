@@ -1,0 +1,18 @@
+= Key-Value Range Scan
+:page-topic-type: howto
+:description: Query without indexes, using a range of sequential keys.
+
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+Couchbase documents are accessed from the Data Service by Key, and if your data contains sequential keys, such as dates or geo-location data (co-ordinates, Zip codes, etc.), then scanning a range of keys is much faster than a query using {sqlpp}.
+This is because our Data (K-V) Service uses a fast binary protocol.
+
+If your document's keys cannot be arranged to take advantage of Key-Value Range Scans, then look instead at our xref:howtos:sqlpp-queries-with-sdk.adoc[Query Service],
+otherwise read on.
+
+

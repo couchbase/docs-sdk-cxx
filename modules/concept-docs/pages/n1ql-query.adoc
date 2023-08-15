@@ -1,0 +1,10 @@
+= Querying with {sqlpp}
+:page-topic-type: concept
+:description: Parallel data management for complex queries over many records, using a familiar SQL-like syntax.
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+

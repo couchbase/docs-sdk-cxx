@@ -1,0 +1,71 @@
+= Error Handling
+:page-topic-type: howto
+:description: 
+
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////
+
+
+Can someone please explain what does it mean to "shut down" the SDK in this document?
+docs.couchbase.comdocs.couchbase.com
+Handling Errors | Couchbase Docs
+Errors are inevitable. That's why the SDK has very extensive error handling and retry capabilties
+
+
+
+
+1 reply
+
+
+Graham Pople
+  7 days ago
+cluster.disconnect(), plus if you've created a ClusterEnvironment separately and passed that into Cluster.connect, then env.shutdown()
+
+////

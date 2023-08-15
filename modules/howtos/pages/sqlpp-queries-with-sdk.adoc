@@ -1,5 +1,13 @@
 = {sqlpp} Queries from the {cpp} SDK
 :page-aliases: n1ql-queries-with-sdk.adoc
+:description: 
+
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
 
 
 
@@ -7,4 +15,50 @@
 
 
 
+== Indexes
 
+You don't need to create an index to query a keyspace.
+However, an index can help you to query a keyspace more efficiently.
+
+=== Primary Index
+
+Primary indexes are optional.
+They may improve the efficiency of ad-hoc queries that are not supported by a secondary index.
+
+=== Secondary Index
+
+
+Indexes help to improve the performance of a query.
+An index replicates a subset of the fields and documents stored in the Data service.
+This allows specific data (for example, specific fields) to be retrieved quickly.
+
+You can also create a _secondary index_ on specific fields in a keyspace.
+Secondary indexes, often referred to as Global Secondary Indexes or GSIs, constitute the principal means of indexing documents to be accessed by the Query service.
+
+For example, creating a secondary index on the `name` and `email` fields in the `users` keyspace would allow you to query the keyspace regarding a document's `name` or `email` properties.
+
+
+==== Prepared 
+
+modules/n1ql/pages/n1ql-intro/queriesandresults.adoc
+
+
+
+
+
+
+
+// cli
+////
+== Creating an index
+
+To improve the speed of your queries, you can use the query editor to add an index to the bucket.
+To do this, enter the following command into the editor and press btn:[Enter].
+
+[source, sqlpp]
+----
+create primary index course_idx on `course-record-collection`
+----
+
+This will create a single index (`course_idx`) on your `course-record-collection`.
+////

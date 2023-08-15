@@ -1,0 +1,15 @@
+= Tracing
+:page-topic-type: howto
+:description: Tracing Couchbase Distributed ACID transactions.
+       
+
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+
+
+

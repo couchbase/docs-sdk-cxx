@@ -1,10 +1,13 @@
-= Sample Application
-:page-topic-type: tutorial
+= Authentication & Authorization
+:page-topic-type: howto
 :description: 
-
 
 
 [abstract]
 {description}
 
 include::project-docs:partial$preview-warning.adoc[]
+
+
+
+

@@ -1,10 +1,12 @@
 = Hello World
+:page-topic-type: tutorial
 :description: A quick start guide to get you up and running with Couchbase and the {cpp} SDK.
 
 
 [abstract]
 {description}
 
+include::project-docs:partial$preview-warning.adoc[]
 
 
 Couchbase has a simple interface to create and modify records in a document, based upon the _Collection_ into which the documents are organised.
@@ -169,6 +171,6 @@ Collection
 == Next Steps
 
 * Take a look at the xref:hello-world:sample-application.adoc[].
-
+* Ecosystem
 
 

@@ -1,7 +1,13 @@
 name: cxx-sdk
-version: '3.5'
+version: '1.0'
+prerelease: ALPHA
 title: C++ SDK
 start_page: hello-world:overview.adoc
 nav:
 - modules/ROOT/nav.adoc
 server_version: '7.5'
+sdk_current_version: '1.0.0-dp.7'
+version-server: '7.5'
+name-sdk: C++ SDK
+sdk_api: '3.5'
+:sdk-api-link: https://docs.couchbase.com/sdk-api/couchbase-cxx-client/

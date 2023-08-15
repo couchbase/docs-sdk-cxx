@@ -1,0 +1,10 @@
+= Encrypting Your Data
+:page-topic-type: howto
+:description: Field-Level Encryption means you can encrypt just your most sensitive data, and leave the rest accessible to {sqlpp} queries.
+
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]

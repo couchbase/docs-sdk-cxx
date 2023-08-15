@@ -1,0 +1,18 @@
+= Sub-Document Operations
+:page-topic-type: howto
+:description: Sub-Document operations can be used to efficiently access and change parts of documents.
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+
+Sub-Document operations may be quicker and more network-efficient than full-document operations such as upsert, replace and get because they only transmit the accessed sections of the document over the network.
+
+Sub-Document operations are also atomic, in that if one Sub-Document mutation fails then all will, 
+allowing safe modifications to documents with built-in concurrency control.
+
+
+

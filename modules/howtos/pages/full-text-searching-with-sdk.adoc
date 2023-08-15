@@ -1,5 +1,5 @@
-= Sample Application
-:page-topic-type: tutorial
+= Search
+:page-topic-type: howto
 :description: 
 
 
@@ -8,3 +8,7 @@
 {description}
 
 include::project-docs:partial$preview-warning.adoc[]
+
+
+
+

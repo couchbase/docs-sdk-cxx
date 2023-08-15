@@ -1,0 +1,10 @@
+= Transactions Cleanup
+:page-topic-type: concept
+:description: The SDK takes care of failed or lost transactions, using an asynchronous cleanup background task.
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+

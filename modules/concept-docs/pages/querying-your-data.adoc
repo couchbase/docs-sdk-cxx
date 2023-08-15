@@ -1,5 +1,13 @@
 = Querying Your Data
+:page-topic-type: concept
+:description: 
 
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
 
 
 You want to query your data, but does that always mean a {sqlpp} query to the Data Service?
@@ -11,9 +19,23 @@ Let's take a quick look at what you need to know to make an informed choice, and
 
 
 
-KV /
-Range Scan
+== Data Service
 
+When you already know the Key (ID) of the document, then Data Operations (using the KV -- or _Key - Value_ Service) are by far the simplest way to retrieve or mutate it. 
+The binary protocol used is far quicker than streaming JSON.
+
+If you know the path to the piece of information that you need within a JSON document, then Sub-Document operations will not only retrieve the information more quickly, but will reduce the amount of data that needs to be sent over the network.
+
+
+// Range Scan
+////
+From version 7.6 of self-managed Couchbase Server
+// -- and the current Capella --
+KV Range Scan offers the opportunity to 
+
+
+
+////
 
 
 

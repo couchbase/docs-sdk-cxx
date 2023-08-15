@@ -1,5 +1,5 @@
-= Sample Application
-:page-topic-type: tutorial
+= Documents
+:page-topic-type: concept
 :description: 
 
 
@@ -8,3 +8,4 @@
 {description}
 
 include::project-docs:partial$preview-warning.adoc[]
+
