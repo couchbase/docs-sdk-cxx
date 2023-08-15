@@ -3,11 +3,6 @@
 ** xref:howtos:managing-connections.adoc[Connecting to Your Database]
 *** xref:howtos:sdk-authentication.adoc[Authentication & Authorization]
 *** xref:howtos:troubleshooting-cloud-connections.adoc[Troubleshooting Cloud Connections]
-////
-REPL? / notebooks
-Asynchronous API
-////
-
 * xref:concept-docs:data-durability-acid-transactions.adoc[Data Modelling, Durability, and ACID Transactions]
 ** xref:howtos:kv-operations.adoc[]
 ** xref:howtos:concurrent-document-mutations.adoc[]
@@ -18,53 +13,18 @@ Asynchronous API
 *** xref:concept-docs:subdocument-operations.adoc[Sub-Documents]
 *** xref:concept-docs:xattr.adoc[XATTR & Virtual XATTR]
 ** xref:howtos:encrypting-using-sdk.adoc[Encrypting Your Data]
-
-////
-Data
-Durability 
-Data structures &  binary & transcoders 
-JSON and nonJSON 
-Schemes, scopes, collections (capella and buckets)
-...and migration from SQL???
-Subdoc and xattr 
-Compression 
-Encryption 
-Graph. Time series.  Column?  
-txns 
-CAS
-////
-
-
 * xref:howtos:distributed-acid-transactions-from-the-sdk.adoc[]
 ** xref:howtos:transactions-single-query.adoc[]
 ** xref:howtos:transactions-tracing.adoc[]
 ** xref:concept-docs:transactions.adoc[]
 *** xref:concept-docs:transactions-cleanup.adoc[]
 *** xref:concept-docs:transactions-error-handling.adoc[]
-
-
 * xref:concept-docs:querying-your-data.adoc[]
 ** xref:howtos:kv-range-scan.adoc[]
 ** xref:howtos:sqlpp-queries-with-sdk.adoc[]
 *** xref:concept-docs:n1ql-query.adoc[]
 ** xref:howtos:full-text-searching-with-sdk.adoc[]
 ** xref:howtos:analytics-using-sdk.adoc[]
-
-
-
-////
-Querying your data 
-SQL++    OLTP.. transactional processing 
-FTS 
-Combining both
-Consistency and ryow 
-?analytics- here or batch?   OLAP 
-Query without index
-Index management 
-...materialised views???
-KV range scan
-////
-
 * xref:concept-docs:durability-replication-failure-considerations.adoc[]
 ** xref:howtos:error-handling.adoc[]
 ** xref:howtos:collecting-information-and-logging.adoc[]
@@ -74,56 +34,10 @@ KV range scan
 *** xref:howtos:observability-metrics.adoc[]
 *** xref:howtos:observability-orphan-logger.adoc[]
 *** xref:howtos:observability-tracing.adoc[]
-
-////
-Error handling
-Retry strategies 
-Logging 
-Health check 
-Failure considerations 
-CAS and point to durability and txns docs 
-Observability 
-Antipatterns and best practices? 
-////
-
-// speed up your app...
-
-
 * xref:concept-docs:best-practices.adoc[]
-
-////
-Batching.
-Compare MapReduce Views and Spark.
-...and other dataflow engines
-See ch10. 
-
-Batch / analytics section?
-Or "longer running queries"
-////
-
-
-////
-Management APIs 
-...
-Involve cbsh in tasks 
-
-
-.Managing Couchbase
+// .Managing Couchbase
 * xref:howtos:provisioning-cluster-resources.adoc[]
 ** xref:howtos:sdk-user-management-example.adoc[]
-
-////
-
-
-
-
-////
-References 
-Section or integrated????
-////
-
-// API ??
-
 * xref:project-docs:deployment.adoc[SDK Deployment]
 ** xref:project-docs:sdk-release-notes.adoc[]
 ** xref:project-docs:compatibility.adoc[]
@@ -138,23 +52,6 @@ Section or integrated????
 // Turn this into xref...
 *** https://docs.couchbase.com/home/contribute/index.html[Improve the Docs]
 *** xref:project-docs:metadoc-about-these-sdk-docs.adoc[About These Docs]
-
-////
-Project docs 
-API ???
-Relnotes 
-Full install
--- ?platform intro? REPL? 
-Integrations 
-Compat
-Get involved 
-////
-// Best practices?
-// Or as top ten on overview page?
-// Deployment and best practices?!! (install) - with intergations as subpage
-
-
-
 
 
 ////
@@ -205,3 +102,104 @@ Get involved
 
 .Project Docs
 ////
+
+////
+REPL? / notebooks
+Asynchronous API
+////
+
+
+////
+Data
+Durability 
+Data structures &  binary & transcoders 
+JSON and nonJSON 
+Schemes, scopes, collections (capella and buckets)
+...and migration from SQL???
+Subdoc and xattr 
+Compression 
+Encryption 
+Graph. Time series.  Column?  
+txns 
+CAS
+////
+
+
+
+
+////
+Querying your data 
+SQL++    OLTP.. transactional processing 
+FTS 
+Combining both
+Consistency and ryow 
+?analytics- here or batch?   OLAP 
+Query without index
+Index management 
+...materialised views???
+KV range scan
+////
+
+
+////
+Error handling
+Retry strategies 
+Logging 
+Health check 
+Failure considerations 
+CAS and point to durability and txns docs 
+Observability 
+Antipatterns and best practices? 
+////
+
+// speed up your app...
+
+
+////
+Batching.
+Compare MapReduce Views and Spark.
+...and other dataflow engines
+See ch10. 
+
+Batch / analytics section?
+Or "longer running queries"
+////
+
+
+////
+Management APIs 
+...
+Involve cbsh in tasks 
+
+
+////
+
+
+
+
+////
+References 
+Section or integrated????
+////
+
+// API ??
+
+
+
+
+////
+Project docs 
+API ???
+Relnotes 
+Full install
+-- ?platform intro? REPL? 
+Integrations 
+Compat
+Get involved 
+////
+// Best practices?
+// Or as top ten on overview page?
+// Deployment and best practices?!! (install) - with intergations as subpage
+
+
+
