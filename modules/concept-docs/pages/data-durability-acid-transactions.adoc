@@ -1,6 +1,6 @@
 = Data Modelling, Durability, and ACID Transactions
 :page-topic-type: concept
-:page-aliases: durability-replication-failure-considerations.adoc
+// :page-aliases: durability-replication-failure-considerations.adoc
 :description: 
 
 include::project-docs:partial$preview-warning.adoc[]
