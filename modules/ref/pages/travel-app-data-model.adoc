@@ -1,0 +1,11 @@
+= Travel Sample Data Model
+:page-toclevels: 2
+:page-topic-type: reference
+:description: 
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+

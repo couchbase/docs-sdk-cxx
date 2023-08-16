@@ -40,14 +40,6 @@ How-to guides to help you start your development journey with Couchbase and the 
 * xref:howtos:analytics-using-sdk.adoc[]
 * xref:howtos:subdocument-operations.adoc[]
 //* xref:howtos:encrypting-using-sdk.adoc[]
-////
-[.column]
-.Managing Couchbase
-* xref:howtos:managing-connections.adoc[]
-* xref:howtos:sdk-authentication.adoc[]
-* xref:howtos:provisioning-cluster-resources.adoc[]
-* xref:howtos:sdk-user-management-example.adoc[]
-////
 
 [.column]
 .Durability
@@ -127,4 +119,14 @@ Useful resources to help support your development experience with Couchbase and 
 ++++
 </div>
 ++++
+
+
+
+////
+[.column]
+.Managing Couchbase
+* xref:howtos:managing-connections.adoc[]
+* xref:howtos:sdk-authentication.adoc[]
+* xref:howtos:provisioning-cluster-resources.adoc[]
+* xref:howtos:sdk-user-management-example.adoc[]
 ////
