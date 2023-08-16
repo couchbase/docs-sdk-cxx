@@ -1,4 +1,4 @@
-= Querying with {sqlpp}
+= Understanding {sqlpp} Queries with the SDK
 :page-topic-type: concept
 :description: Parallel data management for complex queries over many records, using a familiar SQL-like syntax.
 
