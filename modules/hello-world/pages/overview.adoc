@@ -1,10 +1,11 @@
-= Couchbase {name-sdk} {version}
-// :page-layout: landing-page-top-level-sdk
-// :page-role: tiles
-// :!sectids:
+= Couchbase {name-sdk} {sdk_dot_minor}
+:page-layout: landing-page-top-level-sdk
+:page-role: tiles
+:!sectids:
 
 include::project-docs:partial$preview-warning.adoc[]
 
+// = Couchbase C++ SDK 1.0
 
 [source,cxx]
 ----
@@ -12,23 +13,6 @@ auto inventory_scope = bucket.scope("inventory");
 auto [ctx, query_result] = inventory_scope.query("SELECT * FROM airline WHERE id = 10").get();
 ----
 
-
-
-
-
-
-
-
-// = Couchbase C++ SDK 1.0
-
-////
-[source,java]
-----
-include::hello-world:example$Overview.java[tag=overview,indent=0]
-----
-////
-
-////
 The Couchbase {cpp} client allows applications to access a Couchbase database.
 
 {empty} +
@@ -38,13 +22,15 @@ The Couchbase {cpp} client allows applications to access a Couchbase database.
 How-to guides to help you start your development journey with Couchbase and the {cpp} SDK.
 
 ++++
-<div class="card-row three-column-row">
+<div class="card-row two-column-row">
 ++++
 
 [.column]
 .Getting Started?
-* xref:hello-world:start-using-sdk.adoc[]* xref:hello-world:sample-application.adoc[]
+* xref:hello-world:start-using-sdk.adoc[]
+* xref:hello-world:sample-application.adoc[]
 // * xref:hello-world:spring-data-sample-application.adoc[]
+* xref:project-docs:third-party-integrations.adoc[]
 
 [.column]
 .Couchbase Services -- HOWTOs
@@ -53,7 +39,7 @@ How-to guides to help you start your development journey with Couchbase and the 
 * xref:howtos:full-text-searching-with-sdk.adoc[]
 * xref:howtos:analytics-using-sdk.adoc[]
 * xref:howtos:subdocument-operations.adoc[]
-* xref:howtos:encrypting-using-sdk.adoc[]
+//* xref:howtos:encrypting-using-sdk.adoc[]
 ////
 [.column]
 .Managing Couchbase
@@ -62,6 +48,7 @@ How-to guides to help you start your development journey with Couchbase and the 
 * xref:howtos:provisioning-cluster-resources.adoc[]
 * xref:howtos:sdk-user-management-example.adoc[]
 ////
+
 [.column]
 .Durability
 * xref:howtos:distributed-acid-transactions-from-the-sdk.adoc[]
@@ -84,6 +71,8 @@ How-to guides to help you start your development journey with Couchbase and the 
 </div>
 ++++
 
+
+////
 == icon:graduation-cap[] Learn
 
 Take a deep-dive into the SDK concept material and learn more about Couchbase.
@@ -107,18 +96,20 @@ Take a deep-dive into the SDK concept material and learn more about Couchbase.
 ++++
 </div>
 ++++
+////
+
 
 == icon:book[] Resources
 
 Useful resources to help support your development experience with Couchbase and the Java SDK.
 
 ++++
-<div class="card-row three-column-row">
+<div class="card-row two-column-row">
 ++++
 
 [.column]
 .Reference
-* https://docs.couchbase.com/sdk-api/couchbase-java-client/[API Reference]
+* https://docs.couchbase.com/sdk-api/couchbase-cxx-client/[API Reference]
 * xref:ref:client-settings.adoc[]
 * xref:ref:error-codes.adoc[]
 * xref:ref:glossary.adoc[Glossary]
@@ -128,8 +119,8 @@ Useful resources to help support your development experience with Couchbase and 
 .Project Docs
 * xref:project-docs:sdk-release-notes.adoc[]
 * xref:project-docs:compatibility.adoc[Compatibility]
-* https://docs-archive.couchbase.com/home/index.html[Older Versions Archive]
-* xref:project-docs:migrating-sdk-code-to-3.n.adoc[]
+// * https://docs-archive.couchbase.com/home/index.html[Older Versions Archive]
+// * xref:project-docs:migrating-sdk-code-to-3.n.adoc[]
 * xref:project-docs:third-party-integrations.adoc[]
 * xref:project-docs:sdk-full-installation.adoc[]
 
