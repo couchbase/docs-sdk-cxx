@@ -28,6 +28,7 @@ How-to guides to help you start your development journey with Couchbase and the 
 [.column]
 .Getting Started?
 * xref:hello-world:start-using-sdk.adoc[]
+
 * xref:hello-world:sample-application.adoc[]
 * xref:project-docs:third-party-integrations.adoc[]
 
@@ -60,7 +61,6 @@ How-to guides to help you start your development journey with Couchbase and the 
 ++++
 </div>
 ++++
-
 
 ////
 == icon:graduation-cap[] Learn
