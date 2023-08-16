@@ -1,11 +1,25 @@
-= Couchbase C++ SDK 1.0
-:page-layout: landing-page-top-level-sdk
-:page-role: tiles
-:!sectids:
+= Couchbase {name-sdk} {version}
+// :page-layout: landing-page-top-level-sdk
+// :page-role: tiles
+// :!sectids:
 
 include::project-docs:partial$preview-warning.adoc[]
 
-= Couchbase C++ SDK 1.0
+
+[source,cxx]
+----
+auto inventory_scope = bucket.scope("inventory");
+auto [ctx, query_result] = inventory_scope.query("SELECT * FROM airline WHERE id = 10").get();
+----
+
+
+
+
+
+
+
+
+// = Couchbase C++ SDK 1.0
 
 ////
 [source,java]
@@ -14,6 +28,7 @@ include::hello-world:example$Overview.java[tag=overview,indent=0]
 ----
 ////
 
+////
 The Couchbase {cpp} client allows applications to access a Couchbase database.
 
 {empty} +
@@ -27,38 +42,43 @@ How-to guides to help you start your development journey with Couchbase and the 
 ++++
 
 [.column]
-.Getting Started
-* xref:hello-world:start-using-sdk.adoc[]
+.Getting Started?
+* xref:hello-world:start-using-sdk.adoc[]* xref:hello-world:sample-application.adoc[]
+// * xref:hello-world:spring-data-sample-application.adoc[]
+
+[.column]
+.Couchbase Services -- HOWTOs
 * xref:howtos:kv-operations.adoc[]
 * xref:howtos:n1ql-queries-with-sdk.adoc[]
 * xref:howtos:full-text-searching-with-sdk.adoc[]
-* xref:hello-world:sample-application.adoc[]
-* xref:hello-world:spring-data-sample-application.adoc[]
-
-[.column]
-.Transactions
-* xref:howtos:distributed-acid-transactions-from-the-sdk.adoc[]
-* xref:concept-docs:transactions.adoc[]
-
-[.column]
-.Working with Data
-* xref:howtos:subdocument-operations.adoc[]
 * xref:howtos:analytics-using-sdk.adoc[]
+* xref:howtos:subdocument-operations.adoc[]
 * xref:howtos:encrypting-using-sdk.adoc[]
-* xref:howtos:working-with-collections.adoc[Working with Collections]
-
+////
 [.column]
 .Managing Couchbase
 * xref:howtos:managing-connections.adoc[]
 * xref:howtos:sdk-authentication.adoc[]
 * xref:howtos:provisioning-cluster-resources.adoc[]
 * xref:howtos:sdk-user-management-example.adoc[]
+////
+[.column]
+.Durability
+* xref:howtos:distributed-acid-transactions-from-the-sdk.adoc[]
+* xref:concept-docs:transactions.adoc[]
+* xref:concept-docs:durability-replication-failure-considerations.adoc[]
+* xref:concept-docs:data-model.adoc[]
 
 [.column]
-.Errors & Diagnostics
+.Lost?
+* xref:hello-world:start-using-sdk.adoc[]* xref:hello-world:sample-application.adoc[]
+* xref:howtos:troubleshooting-cloud-connections.adoc[Troubleshooting Cloud Connections]
 * xref:howtos:error-handling.adoc[]
 * xref:howtos:collecting-information-and-logging.adoc[]
 * xref:howtos:slow-operations-logging.adoc[]
+* xref:project-docs:sdk-full-installation.adoc[]
+* xref:hello-world:platform-help.adoc[]
+*** xref:project-docs:metadoc-about-these-sdk-docs.adoc[About These Docs]
 
 ++++
 </div>
@@ -116,3 +136,4 @@ Useful resources to help support your development experience with Couchbase and 
 ++++
 </div>
 ++++
+////
