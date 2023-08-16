@@ -35,6 +35,7 @@
 *** xref:howtos:observability-orphan-logger.adoc[]
 *** xref:howtos:observability-tracing.adoc[]
 * xref:concept-docs:best-practices.adoc[]
+** xref:howtos:concurrent-async-apis.adoc[Async & Reactive APIs]
 // .Managing Couchbase
 * xref:howtos:provisioning-cluster-resources.adoc[]
 ** xref:howtos:sdk-user-management-example.adoc[]
@@ -68,7 +69,6 @@
 //  ** xref:howtos:sdk-xattr-example.adoc[Extended Attributes]
 //  ** xref:howtos:advanced-analytics-querying.adoc[Advanced Analytics Querying]
 * xref:howtos:view-queries-with-sdk.adoc[]
-* xref:howtos:concurrent-async-apis.adoc[Async & Reactive APIs]
 * xref:howtos:transcoders-nonjson.adoc[Transcoders & Non-JSON Documents]
 * xref:howtos:working-with-collections.adoc[Working with Collections]
 
