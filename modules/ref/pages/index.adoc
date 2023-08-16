@@ -1,4 +1,4 @@
-= Reference pages
+= Reference Pages
 :page-toclevels: 2
 :page-topic-type: reference
 :description: 
