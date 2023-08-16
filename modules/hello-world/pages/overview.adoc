@@ -1,11 +1,11 @@
-= Couchbase {name-sdk} {sdk_dot_minor}
+= Couchbase C++ SDK 1.0
 :page-layout: landing-page-top-level-sdk
 :page-role: tiles
 :!sectids:
 
 include::project-docs:partial$preview-warning.adoc[]
 
-// = Couchbase C++ SDK 1.0
+= Couchbase {name-sdk} {sdk_dot_minor}
 
 [source,cxx]
 ----
