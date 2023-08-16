@@ -1,4 +1,4 @@
-=  Dealing with Errors, Delays, and Unreliable Networks
+=  Dealing with Delays, Outages, and Unreliable Networks
 :page-topic-type: concept
 :description: Even the most reliable software and hardware might fail at some point, and along with the failures, introduce a chance of data loss. 
 
@@ -18,7 +18,7 @@ The key to durability is planning for resilience, by evaluating the options on o
 On this page we shall look at:
 
 * Durable writes
-* 
+* Diagnostics
 * 
 * 
 * 

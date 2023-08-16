@@ -26,7 +26,6 @@
 ** xref:howtos:full-text-searching-with-sdk.adoc[]
 ** xref:howtos:analytics-using-sdk.adoc[]
 * xref:concept-docs:durability-replication-failure-considerations.adoc[]
-** xref:howtos:error-handling.adoc[]
 ** xref:howtos:collecting-information-and-logging.adoc[]
 ** xref:howtos:health-check.adoc[]
 ** xref:concept-docs:response-time-observability.adoc[Observability]
@@ -36,6 +35,8 @@
 *** xref:howtos:observability-tracing.adoc[]
 * xref:concept-docs:best-practices.adoc[]
 ** xref:howtos:concurrent-async-apis.adoc[Async & Reactive APIs]
+** xref:howtos:error-handling.adoc[]
+** xref:howtos:unit-testing.adoc[]
 // .Managing Couchbase
 * xref:howtos:provisioning-cluster-resources.adoc[]
 ** xref:howtos:sdk-user-management-example.adoc[]
