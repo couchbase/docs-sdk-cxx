@@ -39,9 +39,9 @@ If you haven't already got a database set up, the easiest route is to xref:cloud
 Alternatively, you may want to look at one of the self-managed installation options:
 
 * [Docker Install]
-* 
-* 
-* 
+* ?
+* ?
+* ?
 * Cloud Marketplace
 ** [AWS Marketplace]
 ** [Azure Marketplace]
@@ -177,6 +177,4 @@ Collection
 == Next Steps
 
 * Take a look at the xref:hello-world:sample-application.adoc[].
-* Ecosystem
-
-
+* Explore some of the xref:project-docs:third-party-integrations.adoc[third party integrations] with Couchbase and the {cpp} SDK, across the {cpp} ecosystem.
