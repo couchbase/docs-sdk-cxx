@@ -9,3 +9,11 @@
 include::project-docs:partial$preview-warning.adoc[]
 
 
+
+
+////
+include Go's
+https://docs.couchbase.com/go-sdk/current/howtos/sdk-user-management-example.html
+password change example in other SDKs
+////
+
