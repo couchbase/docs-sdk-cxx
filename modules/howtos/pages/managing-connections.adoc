@@ -21,9 +21,9 @@ auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options)
 ----
 
 
+And here it is in the context of a full connection lifecycle:
 
-
-
+[source,C++]
 ----
 #include <couchbase/cluster.hxx>
  
