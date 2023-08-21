@@ -1,4 +1,4 @@
-= Transaction Concepts
+= Understanding Transactions
 :page-topic-type: concept
 :description: A high-level overview of Distributed ACID Transactions with Couchbase.
 

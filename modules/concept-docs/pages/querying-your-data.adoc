@@ -1,7 +1,7 @@
 = Querying Your Data
 :page-topic-type: concept
-:description: 
-
+:page-aliases: data-services.adoc,choosing-the-right-service.adoc,http-services.adoc
+:description: Choosing the right service to query your data.
 
 
 [abstract]
