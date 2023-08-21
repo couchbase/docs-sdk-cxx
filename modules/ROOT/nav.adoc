@@ -5,6 +5,7 @@
 *** xref:howtos:troubleshooting-cloud-connections.adoc[Troubleshooting Cloud Connections]
 * xref:concept-docs:data-durability-acid-transactions.adoc[Data Modelling, Durability, and Consistency]
 ** xref:howtos:kv-operations.adoc[]
+// *** xref:3.0@python-sdk:howtos:caching-example.adoc
 ** xref:howtos:concurrent-document-mutations.adoc[]
 ** xref:howtos:subdocument-operations.adoc[]
 ** xref:concept-docs:data-model.adoc[]
@@ -13,12 +14,14 @@
 *** xref:concept-docs:subdocument-operations.adoc[Sub-Documents]
 *** xref:concept-docs:xattr.adoc[XATTR & Virtual XATTR]
 ** xref:howtos:encrypting-using-sdk.adoc[Encrypting Your Data]
+** xref:concept-docs:compression.adoc[]
 * xref:concept-docs:querying-your-data.adoc[]
 ** xref:howtos:kv-range-scan.adoc[]
 ** xref:howtos:sqlpp-queries-with-sdk.adoc[]
 *** xref:concept-docs:n1ql-query.adoc[Understanding {sqlpp} Queries]
 ** xref:howtos:full-text-searching-with-sdk.adoc[]
 ** xref:howtos:analytics-using-sdk.adoc[]
+*** xref:concept-docs:analytics-for-sdk-users.adoc[]
 * xref:howtos:distributed-acid-transactions-from-the-sdk.adoc[]
 ** xref:howtos:transactions-single-query.adoc[]
 ** xref:howtos:transactions-tracing.adoc[]
@@ -27,7 +30,8 @@
 *** xref:concept-docs:transactions-error-handling.adoc[]
 * xref:concept-docs:durability-replication-failure-considerations.adoc[]
 ** xref:howtos:collecting-information-and-logging.adoc[]
-** xref:howtos:health-check.adoc[]
+** xref:howtos:health-check.adoc[Using Health Check]
+*** xref:concept-docs:health-check.adoc[Understanding Health Check]
 ** xref:concept-docs:response-time-observability.adoc[Observability]
 *** xref:howtos:slow-operations-logging.adoc[]
 *** xref:howtos:observability-metrics.adoc[]
@@ -40,6 +44,7 @@
 * xref:concept-docs:management-api.adoc[Managing Couchbase]
 ** xref:howtos:provisioning-cluster-resources.adoc[]
 ** xref:howtos:sdk-user-management-example.adoc[]
+*** xref:concept-docs:sdk-user-management-overview.adoc[User Management]
 * xref:project-docs:deployment.adoc[SDK Deployment]
 ** xref:project-docs:sdk-release-notes.adoc[]
 ** xref:project-docs:compatibility.adoc[]
@@ -61,14 +66,6 @@
 ** xref:ref:travel-app-data-model.adoc[]
 
 ////
-.Getting Started
-
-
-
-* xref:hello-world:spring-data-sample-application.adoc[]
-
-
-
 .Working with Data
 * xref:howtos:json.adoc[]
 //  ** xref:howtos:sdk-xattr-example.adoc[Extended Attributes]
@@ -83,15 +80,11 @@
 * xref:concept-docs:concepts.adoc[]
 * xref:concept-docs:buckets-and-clusters.adoc[Buckets & Clusters]
 * xref:concept-docs:collections.adoc[Collections & Scopes]
-* xref:concept-docs:compression.adoc[]
 * xref:concept-docs:errors.adoc[Errors & Diagnostics]
-** xref:concept-docs:health-check.adoc[]
 * xref:concept-docs:encryption.adoc[Field Level Encryption]
 * xref:concept-docs:data-services.adoc[Service Selection]
-** xref:concept-docs:analytics-for-sdk-users.adoc[]
 ** xref:concept-docs:understanding-views.adoc[Views]
 ** xref:concept-docs:full-text-search-overview.adoc[Search]
-* xref:concept-docs:sdk-user-management-overview.adoc[User Management]
 ** xref:concept-docs:certificate-based-authentication.adoc[Cert Auth]
 ** xref:concept-docs:rbac.adoc[RBAC]
 
@@ -103,15 +96,12 @@
 
 
 .Project Docs
-////
 
-////
 REPL? / notebooks
 Asynchronous API
-////
 
 
-////
+
 Data
 Durability 
 Data structures &  binary & transcoders 
@@ -124,12 +114,10 @@ Encryption
 Graph. Time series.  Column?  
 txns 
 CAS
-////
 
 
 
 
-////
 Querying your data 
 SQL++    OLTP.. transactional processing 
 FTS 
@@ -140,10 +128,10 @@ Query without index
 Index management 
 ...materialised views???
 KV range scan
-////
 
 
-////
+
+
 Error handling
 Retry strategies 
 Logging 
@@ -152,12 +140,13 @@ Failure considerations
 CAS and point to durability and txns docs 
 Observability 
 Antipatterns and best practices? 
-////
+
+
+
 
 // speed up your app...
 
 
-////
 Batching.
 Compare MapReduce Views and Spark.
 ...and other dataflow engines
@@ -165,31 +154,31 @@ See ch10.
 
 Batch / analytics section?
 Or "longer running queries"
-////
 
 
-////
+
+
 Management APIs 
 ...
 Involve cbsh in tasks 
 
 
-////
 
 
 
 
-////
+
+
 References 
 Section or integrated????
-////
+
 
 // API ??
 
 
 
 
-////
+
 Project docs 
 API ???
 Relnotes 
@@ -203,5 +192,4 @@ Get involved
 // Or as top ten on overview page?
 // Deployment and best practices?!! (install) - with intergations as subpage
 
-
-
+////
