@@ -9,7 +9,7 @@ endif::[]
 :url-ui: {url-org}/docs-ui
 :url-playbook: {url-org}/docs-site
 
-This repository hosts the documentation source for the Couchbase C SDK.
+This repository hosts the documentation source for the Couchbase C++ SDK.
 
 == Contributing
 
