@@ -1,4 +1,5 @@
 = SDK Release Notes
+:page-toclevels: 2
 :page-topic-type: reference
 :description: Release notes and download archive for the Couchbase {cpp} Client.
 
