@@ -10,3 +10,38 @@
 include::project-docs:partial$preview-warning.adoc[]
 
 
+The Couchbase {name-sdk} ...
+
+
+== Installation and Platform Compatibility
+
+Our xref:hello-world:start-using-sdk.adoc#installation[getting started guide] contains quick-start installation instructions which cover most platforms -- 
+but for more detailed platform compatibility and installation information, see our 
+xref:project-docs:compatibility.adoc[compatibility guide]
+and xref:project-docs:sdk-full-installation.adoc[full installation guide]
+in the xref:project-docs:deployment.adoc[SDK Deployment section]. 
+
+Source code for the SDK is available on {sdk-gh-link}[GitHub].
+
+
+[#latest-release]
+== 1.x Releases
+
+We always recommend using the latest version of the SDK -- it contains all of the latest security patches and support for new and upcoming features.
+All patch releases for each dot minor release should be API compatible, and safe to upgrade;
+any changes to expected behavior are noted in the release notes that follow.
+
+
+
+=== Version 1.0.0 (? February 2024)
+
+...
+
+
+
+
+
+
+== Older Versions
+
+Release Notes for the developer preview releases before the 1.0.0 release can be found on https://github.com/couchbaselabs/couchbase-cxx-client/releases[GitHub].

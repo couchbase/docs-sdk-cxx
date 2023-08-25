@@ -12,3 +12,19 @@ include::project-docs:partial$preview-warning.adoc[]
 
 
 
+
+
+
+
+
+
+
+////
+Ruby:
+
+By default, a mock cluster is used for testing. If you wish to use a real cluster, you can define the TEST_CONNECTION_STRING environment variable (e.g. TEST_CONNECTION_STRING=couchbase://localhost). You might also need to set the values for the TEST_USERNAME, TEST_PASSWORD, and TEST_BUCKET environment variables.
+
+To run the tests:
+
+$ bundle exec rake test
+////

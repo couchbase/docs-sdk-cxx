@@ -15,3 +15,4 @@ asciidoc:
     name-sdk: C++ SDK
     sdk_api: '3.5'
     sdk-api-link: https://docs.couchbase.com/sdk-api/couchbase-cxx-client/
+    sdk-gh-link: https://github.com/couchbaselabs/couchbase-cxx-client/tree/main

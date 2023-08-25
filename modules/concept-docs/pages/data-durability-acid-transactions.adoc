@@ -1,4 +1,4 @@
-= Data Modelling, Durability, and ACID Transactions
+= Data Modelling, Durability, and Consistency
 :page-topic-type: concept
 // :page-aliases: durability-replication-failure-considerations.adoc
 :description: 

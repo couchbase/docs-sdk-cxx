@@ -1,7 +1,7 @@
 = Hello World
 :page-toclevels: 2
 :page-topic-type: tutorial
-:description: A quick start guide to get you up and running with Couchbase and the {cpp} SDK.
+:description: Install, connect, try. A quick start guide to get you up and running with Couchbase and the {cpp} SDK.
 
 
 [abstract]
