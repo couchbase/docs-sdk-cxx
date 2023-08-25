@@ -26,7 +26,7 @@ Source code for the SDK is available on {sdk-gh-link}[GitHub].
 
 
 [#latest-release]
-== 1.x Releases
+== {name-sdk} {sdk_dot_major} Releases
 
 We always recommend using the latest version of the SDK -- it contains all of the latest security patches and support for new and upcoming features.
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
@@ -45,4 +45,4 @@ any changes to expected behavior are noted in the release notes that follow.
 
 == Older Versions
 
-Release Notes for the developer preview releases before the 1.0.0 release can be found on https://github.com/couchbaselabs/couchbase-cxx-client/releases[GitHub].
+Release Notes for the developer preview releases before the 1.0.0 release can be found on {sdk-gh-link}releases[GitHub].
