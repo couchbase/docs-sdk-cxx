@@ -1,0 +1,54 @@
+= SDK Release Notes
+:page-toclevels: 2
+:page-aliases: concept-docs:data-services.adoc
+:page-topic-type: reference
+:description: See which data service best matches your use case.
+
+
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+// need to think about some of these in more depth
+//
+//
+//
+//
+//
+
+
+. Service Selection by Use Case
+[cols="40,50"]
+|===
+| Data Service | Use Case
+
+
+| Data Service (K/V or Key-Value)
+| Super fast binary protocol -- if you know the keys, this is the fastest way of interoperating with your data by far.
+
+| Sub-Document
+| Save network bandwidth.
+
+| Array Mutations
+| 
+
+| Low latency streams
+a| Streaming in a distributed system is complex, and thus we do not make our internal streams and changes feed directly available.
+However, it is exposed through use of our xref:spark-connector::index.adoc[Spark] or xref:kafka-connector::index.adoc[Kafka] connectors, which give you a high level API to our low level primitives.
+
+| Search
+| 
+
+| Query
+| 
+
+| CBAS
+| 
+
+
+
+
+
+|===

@@ -13,6 +13,7 @@ include::project-docs:partial$preview-warning.adoc[]
 
 The Couchbase {name-sdk} ...
 
+// Jump straight to the <<#latest-release,latest release>>, or 
 
 == Installation and Platform Compatibility
 
