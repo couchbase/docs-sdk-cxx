@@ -1,6 +1,6 @@
 = SDK Release Notes
 :page-toclevels: 2
-:page-aliases: concept-docs:data-services.adoc
+// :page-aliases: concept-docs:data-services.adoc
 :page-topic-type: reference
 :description: See which data service best matches your use case.
 
