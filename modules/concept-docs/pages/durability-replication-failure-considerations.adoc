@@ -19,8 +19,8 @@ On this page we shall look at:
 
 * Durable writes
 * Diagnostics
-* 
-* 
+* Observability
+* Operating during rebalance
 * 
 * 
 * 

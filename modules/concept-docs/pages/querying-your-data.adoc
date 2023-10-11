@@ -12,7 +12,9 @@ include::project-docs:partial$preview-warning.adoc[]
 
 You want to query your data, but does that always mean a {sqlpp} query to the Data Service?
 
-{sqlpp} is a familiar language, and an easy way for anyone familiar with Relational Databases (RDBMS) to work with Couchbase.
+{sqlpp} is a familiar language, and an easy way for anyone familiar with Relational Databases (RDBMS) to work with documents stored in Couchbase --
+if you're sure that's the service that you want, jump to our xref:howtos:sqlpp-queries-with-sdk.adoc[Query Howto doc].
+
 However it is not the most efficient choice for every use case.
 Let's take a quick look at what you need to know to make an informed choice, and get the best performance you can out of your app.
 
@@ -21,25 +23,26 @@ Let's take a quick look at what you need to know to make an informed choice, and
 
 == Data Service
 
-When you already know the Key (ID) of the document, then Data Operations (using the KV -- or _Key - Value_ Service) are by far the simplest way to retrieve or mutate it. 
+When you already know the Key (ID) of the document, then xref:howtos:kv-operations.adoc[Data Operations] (using the KV -- or _Key - Value_ Service) are by far the simplest way to retrieve or mutate it. 
 The binary protocol used is far quicker than streaming JSON.
 
 If you know the path to the piece of information that you need within a JSON document, then Sub-Document operations will not only retrieve the information more quickly, but will reduce the amount of data that needs to be sent over the network.
 
 
-// Range Scan
-////
+== Range Scan
+
 From version 7.6 of self-managed Couchbase Server
-// -- and the current Capella --
-KV Range Scan offers the opportunity to 
+ -- and the current Capella --
+xref:howtos:kv-range-scan.adoc[KV Range Scan] offers the opportunity to group operations by ranges of alphanumerically adjacent keys.
+One common use case would be sequentially captured data given date/time-prefixed keys.
 
 
+== Query
 
-////
+If you are familiar with SQL, Couhbase's {sqlpp} dialect will hold few surprises.
+Combining semi-flexible schema with SQL works well in a lot of use cases, but do remember that our Data Service is even faster if you do already know the keys.
+See the xref:ref:which-data-service.adoc[service selection doc] for key consideration points in selecting which service to work with to get the best performance with your data, summarised in a handy table form.
 
-
-
-Query
 
 + index - or not!
 
@@ -65,6 +68,7 @@ Eventing / Connectors
 
 
 An honourable mention of Map/Reduce Views
+
 
 
 

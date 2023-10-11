@@ -9,3 +9,50 @@
 include::project-docs:partial$preview-warning.adoc[]
 
 From batching and reactive APIs, to unit tests and handling errors.
+There's plenty that can be done to remove bottlenecks in development and in performance, and this page can be your checklist of areas not to neglect as you develop your app.
+
+
+
+
+
+
+
+
+
+
+
+
+
+== Dealing with Timeout Errors
+
+
+// see also
+// https://couchbasecloud.atlassian.net/wiki/spaces/CST/pages/1993769712/Java+-+Debugging+KV+Timeouts
+// in Support wiki
+
+
+* waitUntilReady
+* WAN development
+
+
+
+
+== Concurrency and Async APIs
+
+
+....this paragraph different for each SDK.
+
+
+== Error Handling
+
+Errors
+
+
+== Testing
+
+
+.
+
+
+
+

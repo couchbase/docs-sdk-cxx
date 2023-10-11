@@ -91,7 +91,7 @@
 .References
 * https://docs.couchbase.com/sdk-api/couchbase-core-io/[JVM Core IO API]
 * https://docs.couchbase.com/sdk-api/couchbase-transactions-java/index.html?overview-summary.html[Transactions API Reference]
-* xref:ref:client-settings.adoc[]
+
 // * xref:ref:data-structures[Data Structures]
 
 

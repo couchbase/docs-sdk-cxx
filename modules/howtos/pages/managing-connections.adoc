@@ -12,7 +12,7 @@ include::project-docs:partial$preview-warning.adoc[]
 
 
 A connection to a Couchbase cluster -- on Capella, or self-managed -- is represented by a cluster object. 
-A cluster provides access to Buckets, Scopes, and Collections, as well as various Couchbase services and management interfaces. 
+A cluster provides access to buckets, scopes, and collections, as well as various Couchbase services and management interfaces. 
 The simplest way to create a `cluster` object is to call `couchbase::cluster::connect()` with a connection string, username, and password:
 
 [source,C++]
@@ -86,7 +86,7 @@ $ ./start_using couchbase://127.0.0.1 Administrator password
 
 Here we're talking to a local development cluster.
 For Capella, this will need `couchbases://` for TLS, followed by your Capella database name -- see xref:cloud:get-started:connect.adoc[].
-The client certificate for connecting to Capella is included in the {cpp} SDK installation.
+The client certificate for connecting to Capella is included in the {name-SDK} installation.
 
 
 
@@ -115,36 +115,91 @@ nodeA.example.com,nodeB.example.com
 127.0.0.1?io.networkResolution=external&timeout.kvTimeout=10s
 ----
 
+For the {cpp} SDK and its wrapper SDKs, this is the main method of passing client options, such as timout options or I/O options.
+For more details see xref:ref:client-settings.adoc[], or the latest, complete listing in the 
+###
+[API Reference].
 
 
 
-== Working in the Cloud
 
-For most use cases, connecting client software using a Couchbase SDK to the new https://docs.couchbase.com/cloud/clouds/clouds.html[Couchbase Capella service] is similar to connecting to an on-premises Couchbase Cluster.
-The use of DNS-SRV. Alternate Address, and TLS is covered below.
+[#ssl]
+== Secure Connections
+
+Couchbase Server Enterprise Edition and Couchbase Capella support full encryption of client-side traffic using Transport Layer Security (TLS). 
+
+// min TLS version
+
+// EE
+
+// tls-no-verify vs ?
+
+// auth page.
+
+
+
+
+
+== Dealing With Network Latency
+
+=== Waiting for Bootstrap Completion
+
+waitUntilReady
+
+
+=== Working in the Cloud
+
+For most use cases, connecting client software using a Couchbase SDK to https://docs.couchbase.com/cloud/clouds/clouds.html[Couchbase Capella service] is similar to connecting to an on-premises Couchbase Cluster.
+The use of DNS-SRV and Alternate Address is covered in the next section, and TLS in the previous section.
 
 We strongly recommend that the client and server xref:project-docs:compatibility.adoc#network-requirements[are in the same LAN-like environment] (e.g. AWS Region).
 As this may not always be possible during development, read the guidance on working with xref:ref:client-settings.adoc#commonly-used-options[constrained network environments].
 More details on connecting your client code to Couchbase Capella can be found xref:cloud:clouds:connect-an-sdk.adoc#connecting-your-sdk-to-capella[in the Cloud docs].
 
+// Add WAN profile info
 
 IMPORTANT: If you are connecting from _IPv6-only_ environment, you cannot connect to Couchbase Capella as you are unable to use the IPv4 records published for Capella clusters.
 
 
 
-=== Troubleshooting Connections to Cloud
+==== Troubleshooting Connections to Cloud
 
 Some DNS caching providers (notably, home routers) can’t handle an SRV record that’s large -- if you have DNS-SRV issues with such a set-up, reduce your DNS-SRV to only include three records.
 [_For development only, not production._]. 
 Our xref:troubleshooting-cloud-connections.adoc[Troubleshooting Cloud Connections] page will help you to diagnose this and other problems -- as well as introducing the SDK doctor tool.
 
 
+== Complex Environments
+
+== Alternate Addresses and Custom Ports
+
+If your Couchbase Server cluster is running in a containerized, port mapped, or otherwise NAT’d environment like Docker or Kubernetes, 
+a client running outside that environment may need additional information in order to connect the cluster. 
+Both the client and server require special configuration in this case.
+
+
+
+=== gRPC
+
+...
+
+=== Connecting to Multiple Clusters
+
+
+?
+
+=== Using DNS SRV records
+
+As an alternative to specifying multiple hosts in your program, you can get the actual bootstrap node list from a DNS SRV record. The following steps are necessary to make it work:
+
+. Set up your DNS server to respond properly from a DNS SRV request.
+. Enable it on the SDK and point it towards the DNS SRV entry.
 
 
 
 
-// re jigged stuff below
-// DNS-SRV etc
+
+
 
 
 
@@ -174,4 +229,36 @@ couchbase://example.com?applyProfile=wan-development
 ////
 
 
+
+// cert auth
+////
+
+Harsh Patel
+  1 day ago
+Hi team, can someone share documentation around setting connection string in NodeJS SDK v4.x? I believe things have changed from 3.x to 4.x.
+Customer specifically want to know details around setting connection string options using SecurityConfig object and setting the cert path.
+
+
+
+
+3 replies
+
+
+Jared Casey
+  1 day ago
+Example in the docs: https://docs.couchbase.com/nodejs-sdk/current/howtos/sdk-authentication.html#authenticating-a-node-js-client-by-certificate
+docs.couchbase.comdocs.couchbase.com
+Authentication | Couchbase Docs
+As well as Role-Based Access Control (RBAC), Couchbase offers connection with Certificate Authentication, and works transparently with LDAP.
+
+
+Jared Casey
+  1 day ago
+Also, JSCBC-1187 will allow for the trust_store_path to be placed in the connection string, it does not work currently so one must use the SecurityConfig .
+
+
+Harsh Patel
+  14 hours ago
+Thanks Jared!
+////
 

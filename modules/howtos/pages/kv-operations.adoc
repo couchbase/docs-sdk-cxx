@@ -1,5 +1,7 @@
 = Data Operations
 :page-topic-type: howto
+:page-toclevels: 2
+:page-pagination: full
 :description: Data service offers the simplest way to retrieve or mutate data where the key is known. 
 
 
@@ -9,7 +11,343 @@
 
 include::project-docs:partial$preview-warning.adoc[]
 
+Here we cover CRUD operations and locking strategies.
+
+[#prerequisites]
+== Before You Start
+
+You should know xref:howtos:connecting.adoc[how to connect to a Couchbase cluster].
+
+You should know about xref:howtos:organizing-documents.adoc[documents and collections, and how to get a Couchbase `Collection` object].
+
+You should know https://kotlinlang.org/docs/coroutines-basics.html[how to call a Kotlin suspending function].
+
+[#basic-kv-ops]
+== CRUD Operations
+
+The KV service has https://en.wikipedia.org/wiki/CRUD[CRUD] operations for working with whole documents.
+This table shows the Couchbase KV method for each CRUD operation.
+
+[%autowidth,cols="<,1*<"]
+|===
+h| CRUD operation  h| Couchbase KV method
+ | Create           | <<insert,Collection.insert>>
+ | Read             | <<get,Collection.get>>
+ | Update           | <<replace,Collection.replace>>
+ | Delete           | <<remove,Collection.remove>>
+ | Create or Update | <<upsert,Collection.upsert>>
+|===
+
+[#insert]
+=== Insert (Create)
+
+The `insert` method creates a new document in a collection.
+
+This method has two required parameters:
+
+* *`id: String`* - The new document's ID.
+* *`content: Any?`* - The new document's value.
+
+If the collection already has a document with the same ID, the `insert` method throws `DocumentExistsException`.
+
+For example, let's pretend we're writing a program that helps a storyteller remember details about characters in a story.
+
+To start, let's insert a document that represents a character in a story.
+The document ID is the character's name.
+The document content is some information about the character.
+
+.Creating a new document
+[source,kotlin]
+----
+include::example$KvBasic.kt[tag=insert,indent=0]
+----
+<1> The content doesn't have to be a `Map`.
+To learn more, please read xref:howtos:json.adoc[].
+
+[#get]
+=== Get (Read)
+
+The `get` method reads a document from a collection.
+
+It has one required parameter:
+
+* *`id: String`* - The ID of the document to get.
+
+If the collection does not have a document with this ID, the `get` method throws `DocumentNotFoundException`.
+
+.Reading a document
+[source,kotlin]
+----
+include::example$KvBasic.kt[tag=get,indent=0]
+----
+
+[#replace]
+=== Replace (Update)
+
+The `replace` method updates the value of an existing document.
+
+This method has two required parameters:
+
+* *`id: String`* - The ID of the document to replace.
+* *`content: Any?`* - The document's new value.
+
+If the collection does not have a document with this ID, the `replace` method throws `DocumentNotFoundException`.
+
+.Updating an existing document
+[source,kotlin]
+----
+include::example$KvBasic.kt[tag=replace,indent=0]
+----
+
+CAUTION: When you replace a document, it's usually good to use <<optimistic-locking,optimistic locking>>.
+Otherwise, changes might get lost if two people change the same document at the same time.
+
+[#remove]
+=== Remove (Delete)
+
+The `remove` method deletes a document from a collection.
+
+This method has one required parameter:
+
+* *`id: String`* - The ID of the document to remove.
+
+If the collection does not have a document with this ID, the `remove` method throws `DocumentNotFoundException`.
+
+.Deleting a document
+[source,kotlin]
+----
+include::example$KvBasic.kt[tag=remove,indent=0]
+----
+
+[#upsert]
+=== Upsert (Create or Update)
+
+The word "upsert" is a https://simple.wikipedia.org/wiki/Portmanteau_word[portmanteau word] that means "**up**date or in**sert**."
+
+If the document already exists, the `upsert` method updates (replaces) it.
+If the document does not exist, the `upsert` method inserts it.
+
+This method has two required parameters:
+
+* *`id: String`* - The ID of the document to create or update.
+* *`content: Any?`* - The document's new value.
+
+.Creating or updating a document
+[source,kotlin]
+----
+include::example$KvBasic.kt[tag=upsert,indent=0]
+----
+
+You can run this example many times.
+It should succeed each time, because the `upsert` method does not care if the document already exists.
+
+[#bulk]
+== Bulk Operations
+
+The Couchbase Kotlin SDK does not have bulk operations.
+However, coroutines make it easy to do many things at the same time.
+
+Here is an example `bulkGet` function you can add to your project.
+This function can get many documents at the same time.
+
+.Extension function `Collection.bulkGet`
+[source,kotlin]
+----
+include::example$KvBasic.kt[tag=bulkGet,indent=0]
+----
+<1> Starting a new coroutine scope ensures the `bulkGet` method does not return until all coroutines launched inside the scope finish.
+<2> Start a new coroutine for each `get` operation, so all the gets happen at the same time.
+<3> The semaphore prevents sending too many requests at once.
+You can change the function to take the semaphore as a parameter, and pass the same semaphore whenever calling the method.
+If you do that, the concurrency limit will be shared by all bulk requests.
+
+After adding the `Collection.bulkGet` extension function to your project, call it like this:
+
+.Calling the `Collection.bulkGet` extension function
+[source,kotlin]
+----
+include::example$KvBasic.kt[tag=callBulkGet,indent=0]
+----
+
+TIP: You can copy the `bulkGet` extension function and change it to do other operations, like upsert.
+
+[#locking]
+== Locking
+
+A Key Value operation is atomic.
+
+[NOTE]
+.What is an "atomic" operation?
+====
+An atomic operation succeeds completely or fails completely.
+When Couchbase Server works on an atomic operation, you never see the result of incomplete work.
+A failed atomic operation never changes a document.
+
+If two or more atomic operations use the same document, Couchbase Server works on only one of the operations at a time.
+====
+
+However, a _sequence_ of KV operations is _not_ atomic.
+
+You can use a locking strategy to make a sequence of KV operations on the same document succeed or fail together.
+This makes the sequence of operations behave like a single atomic operation.
+
+The locking strategy can be optimistic or pessimistic.
+
+[#optimistic-locking]
+=== Optimistic Locking
+
+When you use optimistic locking, you assume nobody else will change a document while you work with it.
+If somebody else _does_ change the document, start again.
+Keep trying until you succeed or decide to give up.
+
+How do you tell if the document changed?
+Every Couchbase document has a Compare-And-Swap (CAS) value.
+The CAS value is a number that changes every time the document changes.
+
+Most KV operations that change documents have a `cas` parameter.
+If you set this parameter, the operation fails with `CasMismatchException` if the document's current CAS value does not match the `cas` parameter value.
+
+Optimistic locking can make `get` and `replace` behave like an atomic unit:
+
+1. Read a document using the `get` method.
+Remember the document's CAS value.
+
+2. Use the old document content to make new content.
+For example, add or remove a field, or change a field value.
+
+3. Replace the document content using the `replace` method. Pass the new content and the CAS value from step 1.
+If `replace` throws `CasMismatchException`, start again at step 1.
+
+If you pass a CAS value to `replace`, the operation succeeds only if nobody changed the document after you got the CAS value.
+
+This example shows how to safely change a document, without losing changes made by somebody else at the same time:
+
+[source,kotlin]
+----
+include::example$KvBasic.kt[tag=replaceWithCas,indent=0]
+----
+<1> This example keeps trying until the coroutine is cancelled.
+Another choice would be to set a time limit, or limit the number of tries.
+
+[#collection-mutate]
+[TIP]
+====
+You don't need to write all of that code every time you want to use optimistic locking.
+Instead, you can define your own extension function like this:
+
+[source,kotlin]
+----
+include::example$KvBasic.kt[tag=mutate,indent=0]
+----
+
+Now the optimistic locking example from before looks like this:
+
+[source,kotlin]
+----
+include::example$KvBasic.kt[tag=callingMutate,indent=0]
+----
+====
+
+[#pessimistic-locking]
+=== Pessimistic Locking
+
+Pessimistic locking stops anyone except you from changing a document.
+
+When a document is locked, only people who know the CAS value from `getAndLock` can modify the document.
+
+The lock is released when you change the document using the correct CAS, or when you call the `unlock` method.
+
+.Changing a document safely, using pessimistic locking
+[source,kotlin]
+----
+include::example$KvBasic.kt[tag=pessimisticLocking,indent=0]
+----
+<1> The lock is automatically released (unlocked) after this duration.
+The lock time can be as short as 1 second, or as long as 30 seconds.
+<2> `replace` automatically releases the lock.
+Alternatively, you can release the lock by calling `unlock`.
+
+Pessimistic locking is expensive.
+It's usually better to use optimistic locking.
 
 
-Here we cover CRUD operations, document expiration, and optimistic locking with CAS.
-// ??
+
+== Selecting Fields
+
+The `project()` feature allows you to select a couple of fields -- specify a path or paths within the JSON document, and this list is fetched rather than the whole document.
+
+[source,kotlin]
+----
+	project​(Iterable<String> paths)
+	project​(String path, String... morePaths)
+----
+
+This feature is implemented by internally using our subdocument API, which you can access directly -- for more sophisticated selection of portions of a document -- xref:subdocument-operations.adoc[].
+
+
+[#summary]
+== Summary
+
+The Couchbase Key Value (KV) service is the fastest way to work with single documents when you know the document ID.
+
+The `insert`, `get`, `replace`, `remove`, and `upsert` methods of the `Collection` object do the standard <<basic-kv-ops,CRUD operations>> on full documents.
+
+When changing a document, use a <<locking,locking strategy>> if the new content depends on the old content.
+<<optimistic-locking,Optimistic locking>> usually performs better than <<pessimistic-locking,pessimistic locking>>.
+
+
+
+
+// ttl
+////
+Harsh Patel
+  14 hours ago
+Hi team, if we set TTL at collection level and if we then set a different TTL for an individual document during insert/update operation via the SDKs, then what will be the actual TTL set for that document?  (edited) 
+
+
+
+
+8 replies
+
+
+Sergey Auseyau
+  13 hours ago
+the rules when TTL is modified in presence of bucket or collection level setting are documented here https://docs.couchbase.com/server/7.1/learn/data/expiration.html#expiration-bucket-versus-item
+
+
+Sergey Auseyau
+  13 hours ago
+so I think there server will apply restrictions as per those rules and change the document's expiry time
+
+
+Harsh Patel
+  13 hours ago
+So, even if we pass the expiry for a single doc via the SDK, the collection level expiry will always override the doc level expiry that we set via the SDK client?
+
+
+Harsh Patel
+  13 hours ago
+Oh, got it in the doc :+1:
+
+
+Sergey Auseyau
+  13 hours ago
+not always, but yes. For example, the document says that if TTL of the document is less then collection's TTL but greater than zero, it will be left as is
+
+
+Sergey Auseyau
+  13 hours ago
+in a way setting TTL for bucket/collection means two things:
+1) SDK cannot create documents that live indefinitely
+2) the bucket/collection TTL is the maximum and default value that SDK is allowed to use (edited) 
+
+
+Sergey Auseyau
+  13 hours ago
+but yes, it will be better to direct customers/users to the documentation page
+
+
+Harsh Patel
+  13 hours ago
+Got it, thanks Sergey!
+////

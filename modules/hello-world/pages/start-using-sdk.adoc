@@ -13,6 +13,7 @@ include::project-docs:partial$preview-warning.adoc[]
 Couchbase has a simple interface to create and modify records in a document, based upon the _Collection_ into which the documents are organised.
 You can read more about data modelling <<data-modelling,below>>, but first let's look at those data operations, and installing the {cpp} SDK.
 
+// remember to add a nomenclature note to the next version of this page for LCB.
 
 .Creating a new database entry with the {cpp} SDK
 [source,cxx]
@@ -34,22 +35,26 @@ You can read more about data modelling <<data-modelling,below>>, but first let's
 We'll explore creating and retrieving data records in more detail <<create-read-update-delete,below>>, after walking through a quick installation.
 
 
-If you haven't already got a database set up, the easiest route is to xref:cloud:?????????????[sign up to a trial of Couchbase Capella], then come back to this page.
+== Before You Start
+
+If you haven't already got a database set up, the easiest route is to https://cloud.couchbase.com/sign-up[sign up to a trial of Couchbase Capella], then come back to this page.
 
 Alternatively, you may want to look at one of the self-managed installation options:
 
-* [Docker Install]
-* ?
-* ?
-* ?
-* Cloud Marketplace
-** [AWS Marketplace]
-** [Azure Marketplace]
-** [GCP Marketplace]
+* xref:server:install:get-started.adoc[Deployment overview]
+* xref:server:install:getting-started-docker.adoc[Docker Install]
+* xref:operator::overview.adoc[Couchbase Autonomous Operator]
+** xref:operator::install-kubernetes.adoc[Kubernetes]
+** xref:operator::install-openshiftadoc[Openshift]
+* xref:server:cloud:couchbase-cloud-deployment.adocCloud Marketplace:
+** xref:server:cloud:couchbase-aws-marketplace.adoc[AWS Marketplace]
+** xref:server:cloud:couchbase-azure-marketplace.adoc[Azure Marketplace]
+** xref:server:cloud:couchbase-gcp-cloud-launcher.adoc[GCP Marketplace]
 
 
 
-
+// Script the docs!
+// Can any of the SDK installations be scripted?
 
 == Installation
 
@@ -58,6 +63,8 @@ Check that you have the dependencies installed:
 * cmake >= 3.20.0+ (e.g., brew install cmake)
 * c++ compiler >= std_17 (e.g., xcode-select --install)
 * openssl >= 1.1+ (e.g., brew install openssl)
+
+Supprted Operating Systems are listed on the xref:project-docs:compatibility.adoc#platform-compatibility[compatibility page].
 
 More details of the installation process, and extra steps required for openssl build, can be found in the xref:project-docs:sdk-full-installation.adoc[full installation guide].
 On most GNU/Linux platforms at least, installation is a matter of:
@@ -102,7 +109,7 @@ For links and more information on these and other integrations across the {name_
 
 == Connect to your Database
 
-Connect to your Couchbase Capella database (or your local Couchbase Cluster, if you are testing self-managed Couchbase).
+Connect to your Couchbase Capella database (or your local Couchbase Cluster, if you are trying out self-managed Couchbase).
 
 
 [{tabs}] 
@@ -150,26 +157,92 @@ A deeper look at connection options can be found in xref:howtos:managing-connect
 
 == Create, Read, Update, Delete
 
+Couchbase documents are organized into buckets, scopes, and collections.
+https://en.wikipedia.org/wiki/CRUD[CRUD operations] -- Create, Read, Update, Delete -- can be performed upon documents in a collection.
 
 
+[source,cxx]
+----
+#include "core/logger/logger.hxx"
 
+#include <couchbase/cluster.hxx>
 
+#include <asio.hpp>
 
+#include <iostream>
+#include <system_error>
 
-CRUD operations -- Create, Read, Update, Delete.
+static constexpr auto connection_string{ "couchbase://127.0.0.1" };
+static constexpr auto username{ "Administrator" };
+static constexpr auto password{ "password" };
+static constexpr auto bucket_name{ "default" };
+static constexpr auto scope_name{ couchbase::scope::default_name };
+static constexpr auto collection_name{ couchbase::collection::default_name };
 
+int
+main()
+{
+    couchbase::core::logger::create_console_logger();
+    couchbase::core::logger::set_log_levels(couchbase::core::logger::level::trace);
 
+    asio::io_context io;
+    auto guard = asio::make_work_guard(io);
+    std::thread io_thread([&io]() { io.run(); });
 
+    auto options = couchbase::cluster_options(username, password);
+    options.apply_profile("wan_development");
+    auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options).get();
+    if (ec) {
+        std::cout << "Unable to connect to the cluster. ec: " << ec.message() << "\n";
+    } else {
+        auto collection = cluster.bucket(bucket_name).scope(scope_name).collection(collection_name);
+
+        const std::string document_id{ "minimal_example" };
+        const tao::json::value basic_doc{
+            { "a", 1.0 },
+            { "b", 2.0 },
+        };
+
+        auto [ctx, resp] = collection.upsert(document_id, basic_doc, {}).get();
+        std::cout << "ec: " << ctx.ec().message() << ", id: " << document_id << ", CAS: " << resp.cas().value() << "\n";
+    }
+
+    cluster.close();
+    guard.reset();
+
+    io_thread.join();
+
+    return 0;
+}
+----
 
 == Data Modelling
 
-Collection
+Documents are organized into collections -- collections of documents that belong together.. 
+You get to decide what it means to "belong." 
+Developers usually put documents of the same type in the same collection.
+
+For example, imagine you have two types of documents: customers and invoices. 
+You could put the customer documents in a collection called customers`, and the invoice documents in a collection called `invoices`.
+
+Each document belongs to exactly one collection. 
+A document’s ID is unique _within_ the collection.
+
+Different scopes can hold collections with different names. 
+There is no relationship between collections in different scopes.
+
+Each collection belongs to exactly one scope. 
+A collection’s name is unique within the scope.
 
 
+More details can be found on the xref:concept-docs.data-model.adoc[Data Model page].
 
 
 == Help and Troubleshooting
 
+* Forum
+* Discord
+* Read the xref:[error handling page].
 
 
 
@@ -177,4 +250,4 @@ Collection
 == Next Steps
 
 * Take a look at the xref:hello-world:sample-application.adoc[].
-* Explore some of the xref:project-docs:third-party-integrations.adoc[third party integrations] with Couchbase and the {cpp} SDK, across the {cpp} ecosystem.
+* Explore some of the xref:project-docs:third-party-integrations.adoc[third party integrations] with Couchbase and the {name_platform} SDK, across the {name_platform} ecosystem.

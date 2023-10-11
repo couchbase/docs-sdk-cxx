@@ -44,6 +44,8 @@ This combination is not recommended by our technical support organization.
 It is best to upgrade either the SDK or the Couchbase version you are using.
 * ✔ *Supported*: This combination is subject to ongoing quality assurance, and is fully supported by our technical support organization.
 
+// consider carefully the 2.x/6.x for other SDKs, to help support calls.
+
 .Recommended SDK per Server Version Matrix
 [#table_sdk_versions]
 [cols="40,50"]

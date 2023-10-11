@@ -10,10 +10,18 @@
 include::project-docs:partial$preview-warning.adoc[]
 
 
-
-
-
-
+[source,sqlpp]
+----
+CREATE PRIMARY INDEX ON 'travel-sample';
+SELECT country, id, name
+FROM 'travel-sample'
+WHERE type = "airline"
+AND country = "United States"
+   AND id BETWEEN 0 AND 1000
+ORDER BY id
+LIMIT 10
+OFFSET 5;
+----
 
 == Indexes
 

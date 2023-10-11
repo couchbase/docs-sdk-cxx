@@ -8,3 +8,24 @@
 
 include::project-docs:partial$preview-warning.adoc[]
 
+
+Comprehensive REST APIs cover most management tasks in both Capella and self-managed Couchbase Server, and can all be accessed directly from the SDK, via ???
+
+Most common management tasks can be managed with SDK APIs, and these are documented in this section.
+
+* xref:howtos:provisioning-cluster-resources.adoc[]
+* xref:howtos:sdk-user-management-example.adoc[]
+** xref:concept-docs:sdk-user-management-overview.adoc[User Management]
+* [Index Management]
+* ...
+* ...
+* ...
+* ...
+* ...
+
+
+
+
+
+
+

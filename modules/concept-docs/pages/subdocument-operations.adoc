@@ -10,3 +10,28 @@
 include::project-docs:partial$preview-warning.adoc[]
 
 x
+
+
+
+
+////
+Graham Pople
+:palm_tree:  14 days ago
+Do other SDKs have a DocumentTooDeepException ?  We create it if a subdoc op is being performed on a massively nested JSON document.  It's not in the error handling RFC though.
+
+
+
+
+
+
+
+Richard Smedley
+  14 days ago
+Java is the only one to mention it in the docs.
+(looks like I added it 16/1/2021)
+
+
+Dimitris Christodoulou
+  20 hours ago
+I've just seen this but this thread is relevant. In short, JVM's DocumentTooDeepException is equivalent to PathTooDeepException in other SDKs and the RFC and JVM's PathTooDeepException is equivalent to PathTooBigException in other SDKs and the RFC
+////

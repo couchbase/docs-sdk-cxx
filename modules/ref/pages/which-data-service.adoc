@@ -1,4 +1,4 @@
-= SDK Release Notes
+= Service Selection
 :page-toclevels: 2
 // :page-aliases: concept-docs:data-services.adoc
 :page-topic-type: reference
