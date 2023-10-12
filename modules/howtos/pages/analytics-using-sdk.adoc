@@ -4,6 +4,13 @@
 
 
 
+// Note to editors
+// 
+// This page pulls in content from -sdk-common-
+// and code samples from -example-dir-
+// 
+// It can be seen built at wwww.
+
 
 [abstract]
 {description}

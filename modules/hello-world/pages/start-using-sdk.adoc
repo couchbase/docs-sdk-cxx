@@ -4,6 +4,14 @@
 :description: Install, connect, try. A quick start guide to get you up and running with Couchbase and the {cpp} SDK.
 
 
+// Note to editors
+// 
+// This page pulls in content from -sdk-common-
+// and code samples from -example-dir-
+// 
+// It can be seen built at wwww.
+
+
 [abstract]
 {description}
 
@@ -236,6 +244,16 @@ A collection’s name is unique within the scope.
 
 
 More details can be found on the xref:concept-docs.data-model.adoc[Data Model page].
+
+
+=== What Next?
+
+////
+Query and KV -
+both
+- but different emphasis on modelling objects....
+////
+
 
 
 == Help and Troubleshooting

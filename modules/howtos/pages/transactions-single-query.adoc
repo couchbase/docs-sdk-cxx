@@ -3,6 +3,13 @@
 :description: Learn how to perform bulk-loading transactions with the SDK.
 
 
+// Note to editors
+// 
+// This page pulls in content from -sdk-common-
+// and code samples from -example-dir-
+// 
+// It can be seen built at wwww.
+
 
 [abstract]
 {description}
