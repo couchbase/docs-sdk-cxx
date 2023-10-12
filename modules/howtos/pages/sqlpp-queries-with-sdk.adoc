@@ -17,6 +17,9 @@
 include::project-docs:partial$preview-warning.adoc[]
 
 
+// remember - inventory scope ;)
+
+
 [source,sqlpp]
 ----
 CREATE PRIMARY INDEX ON 'travel-sample';

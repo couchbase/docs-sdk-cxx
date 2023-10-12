@@ -292,6 +292,31 @@ The `project()` feature allows you to select a couple of fields -- specify a pat
 This feature is implemented by internally using our subdocument API, which you can access directly -- for more sophisticated selection of portions of a document -- xref:subdocument-operations.adoc[].
 
 
+
+== Working with Replicas
+
+////
+Ray Cardillo
+  1 day ago
+The API ref docs aren't generating fully because of some problems, but if you review the source code, you'll see that lcb_cmdgetreplica_create has a parameter for lcb_REPLICA_MODE which includes LCB_REPLICA_MODE_ALL:
+https://github.com/couchbase/libcouchbase/blob/master/include/libcouchbase/couchbase.h#L789
+:+1:
+1
+
+
+
+
+
+
+Ray Cardillo
+  1 day ago
+The pattern in LCB is that you create the request "command" first (using the create helpers like above), set optional params, install a callback handler, and then pass the command to the request operation like lcb_getreplica and the callback will be inoked when the request is processed, etc.
+////
+
+
+
+
+
 [#summary]
 == Summary
 

@@ -16,3 +16,4 @@
 
 include::project-docs:partial$preview-warning.adoc[]
 
+// remember - inventory scope ;)

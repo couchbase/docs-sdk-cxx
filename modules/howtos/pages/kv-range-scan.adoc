@@ -1,4 +1,4 @@
-= Key-Value Range Scan
+= Using Key-Value Range Scan
 :page-topic-type: howto
 :description: Query without indexes, using a range of sequential keys.
 

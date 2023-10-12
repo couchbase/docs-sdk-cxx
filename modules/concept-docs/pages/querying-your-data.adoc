@@ -16,6 +16,7 @@
 
 include::project-docs:partial$preview-warning.adoc[]
 
+// remember - inventory scope ;)
 
 You want to query your data, but does that always mean a {sqlpp} query to the Data Service?
 
