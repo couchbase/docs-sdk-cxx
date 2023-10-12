@@ -1,5 +1,6 @@
 = Understanding {sqlpp} Queries with the SDK
 :page-topic-type: concept
+:page-aliases: n1ql-query.adoc
 :description: Parallel data management for complex queries over many records, using a familiar SQL-like syntax.
 
 
