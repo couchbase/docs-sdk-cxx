@@ -44,3 +44,4 @@ cmake ..
 cmake --build .
 
 
+// Node - https://www.couchbase.com/forums/t/build-of-node-js-sdk-4-2-6-fail-on-debian-11-bullseye/36792/6 

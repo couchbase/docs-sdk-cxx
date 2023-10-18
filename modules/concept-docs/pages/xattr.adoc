@@ -1,4 +1,4 @@
-= Extended Attributes
+= Understanding Extended Attributes
 :page-topic-type: concepts
 :description: 
 

@@ -45,6 +45,7 @@ They may improve the efficiency of ad-hoc queries that are not supported by a se
 
 === Secondary Index
 
+// <3.5 it's in the concept - rewrite HERE!
 
 Indexes help to improve the performance of a query.
 An index replicates a subset of the fields and documents stored in the Data service.

@@ -293,6 +293,13 @@ This feature is implemented by internally using our subdocument API, which you c
 
 
 
+// need to mention ttl / expiry not changed by counter operations
+////
+TIP: Setting the document expiry time only works when a document is created, and it is not possible to update the expiry time of an existing counter document with the Increment method -- to do this during an increment, use with the `Touch()` method.
+////
+
+
+
 == Working with Replicas
 
 ////

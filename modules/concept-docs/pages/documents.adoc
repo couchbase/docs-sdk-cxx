@@ -16,3 +16,5 @@
 
 include::project-docs:partial$preview-warning.adoc[]
 
+// remove pseudocode / C++ from the sample?
+// https://issues.couchbase.com/browse/DOC-11510

@@ -23,6 +23,9 @@ You want to query your data, but does that always mean a {sqlpp} query to the Da
 {sqlpp} is a familiar language, and an easy way for anyone familiar with Relational Databases (RDBMS) to work with documents stored in Couchbase --
 if you're sure that's the service that you want, jump to our xref:howtos:sqlpp-queries-with-sdk.adoc[Query Howto doc].
 
+// https://asterixdb.apache.org/docs/0.9.8/sqlpp/manual.html#Introduction
+// "...SQL++, a declarative query language for JSON data which is largely backwards compatible with SQL..."
+
 However it is not the most efficient choice for every use case.
 Let's take a quick look at what you need to know to make an informed choice, and get the best performance you can out of your app.
 
@@ -44,6 +47,7 @@ From version 7.6 of self-managed Couchbase Server
 xref:howtos:kv-range-scan.adoc[KV Range Scan] offers the opportunity to group operations by ranges of alphanumerically adjacent keys.
 One common use case would be sequentially captured data given date/time-prefixed keys.
 
+// index  ^
 
 == Query
 
