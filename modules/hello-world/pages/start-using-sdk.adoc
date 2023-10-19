@@ -45,8 +45,20 @@ We'll explore creating and retrieving data records in more detail <<create-read-
 
 == Before You Start
 
-If you haven't already got a database set up, the easiest route is to https://cloud.couchbase.com/sign-up[sign up to a trial of Couchbase Capella], then come back to this page.
+Couchbase Capella, our Database-as-a-Service, lets you get on with what matters, whilst we take care of the administration for you.
+Alternately, if you need to control every aspect of deployment -- or just want to run the Server in a VM on your laptop -- there are several self-managed options available:
 
+[{tabs}]
+==== 
+Couchbase Capella::
++
+--
+If you haven't already got a database set up, the easiest route is to https://cloud.couchbase.com/sign-up[sign up to a trial of Couchbase Capella], then come back to this page.
+--
+
+Self-Managed Couchbase Server Options::
++
+--
 Alternatively, you may want to look at one of the self-managed installation options:
 
 * xref:server:install:get-started.adoc[Deployment overview]
@@ -54,11 +66,12 @@ Alternatively, you may want to look at one of the self-managed installation opti
 * xref:operator::overview.adoc[Couchbase Autonomous Operator]
 ** xref:operator::install-kubernetes.adoc[Kubernetes]
 ** xref:operator::install-openshiftadoc[Openshift]
-* xref:server:cloud:couchbase-cloud-deployment.adocCloud Marketplace:
+* xref:server:cloud:couchbase-cloud-deployment.adoc[Cloud Marketplace]:
 ** xref:server:cloud:couchbase-aws-marketplace.adoc[AWS Marketplace]
 ** xref:server:cloud:couchbase-azure-marketplace.adoc[Azure Marketplace]
 ** xref:server:cloud:couchbase-gcp-cloud-launcher.adoc[GCP Marketplace]
-
+--
+====
 
 
 // Script the docs!
