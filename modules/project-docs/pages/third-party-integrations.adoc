@@ -18,3 +18,23 @@ include::project-docs:partial$preview-warning.adoc[]
 
 The Couchbase {cpp} SDK is often used with unofficial and third party tools and applications to integrate into broader language and platform ecosystems, and across data lakes in heterogeneous environments.
 
+These are some of the applications that you need to be aware of.
+
+
+== Across the Ecosystem
+
+Although unsupported, and not maintained by Couchbase, several projects are worth a look at.
+We offer brief notes on what you should consider if integrating with them:
+
+
+== Community 
+
+There are too many third party integrations to evaluate and list (and absence of a mention in these pages is no judgement on importance or quality), but the following are well worth investigating:
+
+
+
+== Further Integrations
+
+Integrations across Couchbase -- 
+including xref:{server_version}@server:develop:integrations.adoc#sdk-language-ecosystem[other SDKs] -- 
+can be found on the xref:{server_version}@server:develop:integrations.adoc[Integrations, Connectors, and Tools] page.

@@ -81,3 +81,48 @@ create primary index course_idx on `course-record-collection`
 
 This will create a single index (`course_idx`) on your `course-record-collection`.
 ////
+
+
+
+
+////
+Michael R saieth:
+ just learned an awesome tool for troubleshooting query timeouts.  So you can see what the server did with the request.
+select * from system:completed_requests 
+
+"completed_requests": {
+      "clientContextID": "f24fe9fc-3480-42e9-9404-61c2e0527dad",
+      "cpuTime": "7.626µs",
+      "elapsedTime": "3.581500973s",
+      "errorCount": 0,
+      "errors": [],
+      "n1qlFeatCtrl": 76,
+      "node": "127.0.0.1:8091",
+      "phaseOperators": {
+        "authorize": 1,
+        "stream": 1
+      },
+      "phaseTimes": {
+        "authorize": "10.71µs",
+        "instantiate": "5.47µs",
+        "parse": "379.745µs",
+        "plan": "18.35µs",
+        "plan.keyspace.metadata": "3.498µs",
+        "run": "3.581035378s",
+        "stream": "5.435µs"
+      },
+      "remoteAddr": "127.0.0.1:51820",
+      "requestId": "46c22706-a11d-4289-888a-d626d051f25e",
+      "requestTime": "2023-10-23T11:10:48.548-07:00",
+      "resultCount": 0,
+      "resultSize": 0,
+      "scanConsistency": "unbounded",
+      "serviceTime": "3.581444592s",
+      "state": "completed",
+      "statement": "CREATE PRIMARY INDEX ON `b79483ae-89fd-486e-bd30-f29bcdeff9e6`.`21c1d144-bbef-4d21-bc3f-4367a745e4ad`.`423a8f7a-69da-4729-aac4-6e387d6e49ff` WITH {\"num_replica\":0}",
+      "statementType": "CREATE_PRIMARY_INDEX",
+      "useCBO": true,
+      "userAgent": "couchbase-java/0.0.0 (Mac OS X 13.3.1 x86_64; Java HotSpot(TM) 64-Bit Server VM 17.0.1+12-LTS-39)",
+      "users": "builtin:Administrator"
+    }
+////

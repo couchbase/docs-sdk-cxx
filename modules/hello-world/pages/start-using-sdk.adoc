@@ -1,7 +1,7 @@
 = Hello World
 :page-toclevels: 2
 :page-topic-type: tutorial
-:description: Install, connect, try. A quick start guide to get you up and running with Couchbase and the {cpp} SDK.
+:description: Install, connect, try. A quick start guide to get you up and running with Couchbase and the {name-SDK}.
 
 
 // Note to editors
@@ -77,48 +77,51 @@ Alternatively, you may want to look at one of the self-managed installation opti
 // Script the docs!
 // Can any of the SDK installations be scripted?
 
-== Installation
+=== Prerequisites
 
 Check that you have the dependencies installed:
 
-* cmake >= 3.20.0+ (e.g., brew install cmake)
-* c++ compiler >= std_17 (e.g., xcode-select --install)
-* openssl >= 1.1+ (e.g., brew install openssl)
+* cmake >= 3.20.0+ (e.g., `brew install cmake`)
+* c++ compiler >= std_17 (e.g., `xcode-select --install`)
+* openssl >= 1.1+ (e.g., `brew install openssl`)
 
 Supprted Operating Systems are listed on the xref:project-docs:compatibility.adoc#platform-compatibility[compatibility page].
+
+
+== Installation
 
 More details of the installation process, and extra steps required for openssl build, can be found in the xref:project-docs:sdk-full-installation.adoc[full installation guide].
 On most GNU/Linux platforms at least, installation is a matter of:
 
 [source,console]
 ----
-git clone --recurse-submodules https://github.com/couchbaselabs/couchbase-cxx-client.git
+$ git clone --recurse-submodules https://github.com/couchbaselabs/couchbase-cxx-client.git
 ----
 
 [source,console]
 ----
-export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/ 
+$ export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/ 
 ----
 
 .Building (command-line)
 [source,console]
 ----
-cd couchbase-cxx-client
+$ cd couchbase-cxx-client
 ----
 
 [source,console]
 ----
-mkdir build; cd build
+$ mkdir build; cd build
 ----
 
 [source,console]
 ----
-cmake ..
+$ cmake ..
 ----
 
 [source,console]
 ----
-cmake --build .
+$ cmake --build .
 ----
 
 === IDE Plugins

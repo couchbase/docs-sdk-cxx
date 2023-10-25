@@ -30,6 +30,16 @@ However it is not the most efficient choice for every use case.
 Let's take a quick look at what you need to know to make an informed choice, and get the best performance you can out of your app.
 
 
+You may want to do many multi-object operations -- 
+to process order checkout; 
+for analyzing customer growth;
+to merging customer lists; 
+or simply for loading new inventory data.
+Most tasks can be accomplished with more than one service.
+You may choose, simply because you have RDBMS expertise, to use SQL++ and the Couchbase Query Service.
+Conversely, your team may prefer to retrieve whole documents, and manipulate them using their preferred high-level SDK language.
+In all cases, it is useful to be aware of the choice you are making, so that you can revisit later, if you need to optimise for performance improvements somewhere in the application.
+
 
 
 == Data Service
@@ -81,6 +91,6 @@ Eventing / Connectors
 
 An honourable mention of Map/Reduce Views
 
-
+or not
 
 
