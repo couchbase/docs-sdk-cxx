@@ -1,5 +1,6 @@
 = {sqlpp} Queries from the {cpp} SDK
 :page-aliases: n1ql-queries-with-sdk.adoc
+// :page-aliases: ROOT:document-operations.adoc,ROOT:documents-creating,ROOT:documents-updating,ROOT:documents-retrieving,ROOT:documents-deleting,n1ql-queries-with-sdk.adoc
 :description: 
 
 
@@ -125,4 +126,9 @@ select * from system:completed_requests
       "userAgent": "couchbase-java/0.0.0 (Mac OS X 13.3.1 x86_64; Java HotSpot(TM) 64-Bit Server VM 17.0.1+12-LTS-39)",
       "users": "builtin:Administrator"
     }
+////
+
+
+////
+Worth knowing that they only log slower queries by default.  But it should include timed out ones (as long as they hit query service, of course), which will be very useful (edited) 
 ////
