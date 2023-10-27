@@ -5,8 +5,7 @@
 
 include::project-docs:partial$preview-warning.adoc[]
 
-= Couchbase {name-sdk} 1.0
-// = Couchbase {name-sdk} {sdk_dot_minor}
+= Couchbase {name-sdk} {sdk_dot_minor}
 
 [source,cpp]
 ----
