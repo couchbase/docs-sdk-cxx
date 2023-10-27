@@ -1,6 +1,5 @@
 = Hello World
 :page-toclevels: 2
-:page-topic-type: tutorial
 :description: Install, connect, try. A quick start guide to get you up and running with Couchbase and the {name-SDK}.
 
 
