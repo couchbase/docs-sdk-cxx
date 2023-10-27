@@ -1,4 +1,6 @@
 // Required attributes:
+:page-status: Developer Preview
+
 [WARNING]
 ====
 These pages cover the _Developer Preview_ of the Couchbase {cpp} SDK.
