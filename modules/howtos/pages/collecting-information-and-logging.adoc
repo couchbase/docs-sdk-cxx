@@ -17,7 +17,21 @@
 include::project-docs:partial$preview-warning.adoc[]
 
 
+The Couchbase {cpp} SDK has no hard dependency on a specific logger implementation.
+By default it uses built-in means to report events.
+The default log level is `warning`.
 
+The following log levels are supported (in order of increasing amount of information logged):
 
+. off
+. critical
+. error
+. warning
+. info
+. debug
+. trace
 
-////
+The {cpp} SDK is configured to send logs to standard output.
+The logging level can be changed using the environment variable `COUCHBASE_BACKEND_LOG_LEVEL`.
+
+?? or can it ??

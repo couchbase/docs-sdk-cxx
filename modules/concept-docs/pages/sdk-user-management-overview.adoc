@@ -1,0 +1,29 @@
+= User Management
+:nav-title: User Management
+:description: pass:q[The {cpp} SDK lets you create _users_, assign them _roles_ and associated _privileges_, and remove them from the system.]
+// :page-aliases: ROOT:sdk-user-management-overview.adoc
+
+
+
+// Note to editors
+// 
+// This page pulls in content from -sdk-common-
+// and code samples from -example-dir-
+// 
+// It can be seen built at wwww.
+
+[abstract]
+{description}
+
+include::project-docs:partial$preview-warning.adoc[]
+
+
+*Is this implemented in {cpp} yet?*
+
+
+[abstract]
+The SDK lets you programmatically create _users_, assign them _roles_ and associated _privileges_, and remove them from the system.
+
+This is an overview of the user management API's capabilities.
+// For a practical look at using it, see xref:howtos:sdk-user-management-example.adoc[Sample Code].
+

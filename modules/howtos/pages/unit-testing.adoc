@@ -1,6 +1,6 @@
 = Unit Testing your Couchbase Application
 :page-topic-type: howto
-:description: 
+:description: Best practices and platform peculiarities to test your Couchbase app as you develop.
 
 
 // Note to editors

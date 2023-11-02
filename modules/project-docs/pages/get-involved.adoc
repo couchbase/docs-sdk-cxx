@@ -16,3 +16,17 @@
 include::project-docs:partial$preview-warning.adoc[]
 
 
+== Contributing
+
+Couchbase welcomes community contributions to the {name-sdk}.
+The https://github.com/couchbase/couchbase-cxx-client[Ruby{cpp} SDK source code^] is available on GitHub.
+Please see the https://github.com/couchbase/couchbase-cxx-client/blob/master/CONTRIBUTING.md[CONTRIBUTING^] file for further information.
+
+== Other Ways to Contribute
+
+* Join the discussion in our https://forums.couchbase.com/[forum] and on our https://discord.com/invite/sQ5qbPZuTh[Discord server].
+
+* Improve the documentation -- https://docs.couchbase.com/home/contribute/index.html[bug reports and pull requests are welcome].
+
+
+

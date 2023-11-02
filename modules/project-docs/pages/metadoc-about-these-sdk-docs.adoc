@@ -11,6 +11,9 @@
 // 
 // It can be seen built at wwww.
 
+[abstract]
+{description}
+
 
 Welcome to the xref:project-docs:compatibility.adoc#api-version[{name-sdk} {sdk_dot_minor}] docs -- this is an _afterword_ to the documentation, rather than something most people will read as a _foreword_.
 Why so?

@@ -1,6 +1,7 @@
 = Licenses
 :page-topic-type: reference
 :description: Couchbase SDKs' source code is licensed under the Apache Licence 2.0.
+// :page-aliases: ROOT:sdk-licenses.adoc
 
 
 // Note to editors
@@ -19,3 +20,17 @@ include::project-docs:partial$preview-warning.adoc[]
 
 
 
+The Couchbase {cpp} Client is distributed as source under the https://www.apache.org/licenses/LICENSE-2.0[Apache License, Version 2.0].
+
+
+== Binary Distribution
+
+Binary distributions are made under Couchbase's own license agreements. 
+
+* https://www.couchbase.com/LA03262019[Enterprise License Agreement]
+* https://www.couchbase.com/binaries/content/assets/website/legal/ce-license-agreement.pdf[Community License Agreement (PDF)]
+
+
+== Dependencies
+
+Any dependencies may have their https://www.couchbase.com/legal/agreements#ThirdPartyComponents[own, separate licenses].

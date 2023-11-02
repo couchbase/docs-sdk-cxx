@@ -1,5 +1,4 @@
-= Diagnosing and preventing Network Problems with Health Check
-:page-topic-type: howto
+= Understanding Health Check
 :description: Health Check provides ping() and diagnostics() tests for the health of the network and the cluster.
 
 

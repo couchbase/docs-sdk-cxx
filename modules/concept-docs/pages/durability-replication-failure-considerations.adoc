@@ -1,5 +1,4 @@
 = Dealing with Delays, Outages, and Unreliable Networks
-:page-topic-type: concept
 :description: Even the most reliable software and hardware might fail at some point, and along with the failures, introduce a chance of data loss. 
 
 
@@ -28,11 +27,13 @@ On this page we shall look at:
 * Diagnostics
 * Observability
 * Operating during rebalance
-* 
-* 
-* 
-* 
 
+////
+* 
+* 
+* 
+* 
+////
 
 
 

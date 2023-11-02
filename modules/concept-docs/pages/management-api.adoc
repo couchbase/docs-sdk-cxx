@@ -1,6 +1,5 @@
 = Managing Couchbase
-:page-topic-type: concept
-:description: 
+:description: Management tasks, programmatically from the SDK.
 
 
 // Note to editors
@@ -23,13 +22,15 @@ Most common management tasks can be managed with SDK APIs, and these are documen
 * xref:howtos:provisioning-cluster-resources.adoc[]
 * xref:howtos:sdk-user-management-example.adoc[]
 ** xref:concept-docs:sdk-user-management-overview.adoc[User Management]
+
+////
 * [Index Management]
 * ...
 * ...
 * ...
 * ...
 * ...
-
+////
 
 
 
