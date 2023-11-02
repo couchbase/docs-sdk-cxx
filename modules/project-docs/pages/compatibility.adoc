@@ -132,7 +132,7 @@ If that is not a option, then a possible workaround that can be applied is as fo
 
 .Couchbase Server and SDK Supported Version Matrix
 [.table-merge-cells] 
-[cols="7,5,5,5,7"]
+[cols="7,7"]
 |===
 | | Server 7.0 - 7.2
 
@@ -146,7 +146,7 @@ If that is not a option, then a possible workaround that can be applied is as fo
 | All SDK versions
 
 | DP in 5.5 with SDK 2.6
-3+| Since SDK 2.7
+| Since SDK 2.7
 
 | Distributed ACID Transactions
 | All SDK versions
@@ -301,7 +301,7 @@ Whilst these two numbers match for the .NET, Java, and Ruby SDKs, this is not th
 | 3.2
 | 3.3.0 - 3.3.2
 | 3.3.3 footnote:[Excludes DNS SRV refresh support in Serverless Environments.]
-| 3.??
+| 3.3.9 footnote:[Faster failover, but not KV Range Scan.]
 
 | .NET
 | 3.0
