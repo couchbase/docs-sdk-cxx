@@ -145,9 +145,6 @@ If that is not a option, then a possible workaround that can be applied is as fo
 | Analytics
 | All SDK versions
 
-| DP in 5.5 with SDK 2.6
-| Since SDK 2.7
-
 | Distributed ACID Transactions
 | All SDK versions
 
