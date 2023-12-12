@@ -12,7 +12,7 @@ asciidoc:
     sdk_current_version: '1.0.0-dp.10'
     sdk_dot_minor: '1.0'
     sdk_dot_major: '1.x'
-    version-server: '7.5'
+    version-server: '7.6'
     version-common: '7.5'
     name_platform: 'C++'
     name-sdk: 'C++ SDK'
