@@ -1,12 +1,9 @@
-= Couchbase Scala SDK Documentation
+= Couchbase C++ SDK Documentation
 
-This repository hosts the documentation source for the https://docs.couchbase.com/scala-sdk/1.6/hello-world/overview.html[Couchbase Scala SDK].
+This repository hosts the documentation source for the https://docs.couchbase.com/cxx-sdk/1.0/hello-world/overview.html[Couchbase Scala SDK].
 
-This branch documents the 1.6 release of the SDK.
-It follows the https://docs.couchbase.com/scala-sdk/1.6/project-docs/compatibility.html#api-version[SDK 3.5 API].
-
-This branch reflects the new Information Architecture for the SDK docs -- this release was previously documented with the old structure (those old docs can be found under `temp/1.6`), and docs with this structure can be seen on the Couchbase docs site for releases 1.5 and earlier.
-
+This branch documents the 1.0 release of the SDK.
+It follows the https://docs.couchbase.com/cxx-sdk/1.0/project-docs/compatibility.html#api-version[SDK 3.6 API].
 
 == Contributing
 
@@ -26,7 +23,7 @@ TODO: Add in link to new JIRA.
 
 == Notes for Docs Maintainers
 
-The philosophy behind the Information Architecture can be found in the https://docs.couchbase.com/scala-sdk/1.6/project-docs/metadoc-about-these-sdk-docs.html[meta doc].
+The philosophy behind the Information Architecture can be found in the https://docs.couchbase.com/cxx-sdk/1.0/project-docs/metadoc-about-these-sdk-docs.html[meta doc].
 
 === Directory Structure
 
@@ -109,20 +106,18 @@ The `:page-aliases:` directive enables Antora to build 502 redirects -- meaning 
 
 `:page-toclevels:` should be set to `2` to include h3 headers along with h2s in the in-page navigation (right-hand nav).
 Leaving out this directive means that the page will default to `1`, showing only h2 headers in the in-page nav.
-A value of `3` should not be used, save in exceptionally complicated pages like that shown (the https://docs.couchbase.com/scala-sdk/1.6/project-docs/compatibility.html[compatibility page]).
+A value of `3` should not be used, save in exceptionally complicated pages like that shown (the https://docs.couchbase.com/cxx-sdk/1.0/project-docs/compatibility.html[compatibility page]).
 
 === Patch Releases
 
 Update the following files:
 
 * antora.yml
-* build.gradle
-* modules/devguide/examples/scala/pom.xml
 * modules/project-docs/pages/sdk-release-notes.adoc
 
 === New Branches
 
-Production branches use the *release/x.y* naming pattern (e.g. `release/3.5`, `release/3.6`).
+Production branches use the *release/x.y* naming pattern (e.g. `release/3.7`, `release/3.6`).
 Antora uses the branch names in the playbook, but also uses the `version` given in the antor.yml file, to create the version navigation -- so this version number must be unique within the repo for any branches included in the playbook.
 When creating a new branch for a new release, remember to update the antora.yml file before trying to build.
 
