@@ -1,0 +1,14 @@
+= Get Involved
+:description: Get involved with Couchbase's Open Source SDKs.
+:page-toclevels: 2
+
+[abstract]
+{description}
+
+== Contributing
+
+Couchbase welcomes community contributions to the Scala SDK.
+The https://github.com/couchbase/couchbase-jvm-clients/tree/master/scala-client[Scala SDK source code^] is available on GitHub.
+Please see the https://github.com/couchbase/couchbase-jvm-clients/blob/master/README.md[README^] file for further information.
+
+include::{version-common}@sdk:shared:partial$contrib.adoc[tag=contrib]

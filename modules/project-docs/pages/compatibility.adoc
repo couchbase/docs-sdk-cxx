@@ -1,0 +1,243 @@
+= Compatibility
+:description: Platform compatibility, and features available in different SDK versions, and compatibility between Server and SDK. \
+Plus notes on Cloud, networks, and AWS Lambda.
+:page-aliases: ROOT:overview,ROOT:compatibility-versions-features,compatibility-versions-features
+:page-toclevels: 3
+:table-caption!:
+
+
+[abstract]
+{description}
+
+
+The Couchbase Scala SDK {sdk_dot_minor} Client supports Scala 2.12 and 2.13.
+
+
+== Platform Compatibility
+
+
+
+
+
+
+=== JDK Version Compatibility
+
+The {name-sdk} is tested with Oracle JDK and OpenJDK.
+Other JDK implementations might work but are not tested and are unsupported.
+We recommend running the latest LTS version (i.e. at the time of writing JDK 21) with the highest patch version available.
+
+The following JDK releases are supported:
+
+* https://adoptium.net/[OpenJDK 21 with HotSpot JVM] (recommended)
+* https://adoptium.net/[OpenJDK 17 with HotSpot JVM]
+* https://www.oracle.com/java/technologies/downloads/#jdk17[Oracle JDK 17]
+* https://adoptium.net/[OpenJDK 11] (Hotspot recommended) or https://www.oracle.com/java/technologies/downloads/#jdk11[Oracle JDK 11]
+* https://adoptium.net/[OpenJDK 1.8 with HotSpot JVM]
+* https://www.oracle.com/java/technologies/downloads/#java8[Oracle JDK 1.8]
+
+Please make sure you run on one of the latest patch releases, since they provide stability improvements and security fixes in general.
+
+
+
+=== OS Compatibility
+
+In general, the JVM eliminates concerns about underlying OS compatibility, 
+and Couchbase JVM SDKs can be expected to run on all of the Operating Systems supported by xref:{version-server}@server:install:install-platforms.adoc[Couchbase Server].
+
+The {name-sdk} is tested and supported on the following OSs and platforms:
+
+****
+[discrete]
+=== GNU/Linux
+
+* Amazon Linux 2 & AL2023.
+* Red Hat Enterprise Linux 8 & 9;
+* Oracle Linux 8 & 9.
+* Ubuntu (LTS) 20.04 (_Focal_) & 22.04 (_Jammy_).
+* Debian 10 (_Buster_), 11 (_Bullseye_), and Debian 12 (_Bookworm_).
+* SUSE Enterprise Linux 12 & 15
+* Alpine Linux 3.18 (_Oracle JDK only_) -- but see <<alpine-linux-compatibility, workaround note below>>.
+
+[discrete]
+=== Microsoft Windows
+
+* Microsoft Windows 10 & 11;
+* Windows Server 2019 & 2022.
+
+[discrete]
+=== Mac OS X
+
+The current and previous two releases of OS X.
+At time of writing (March 2024): 14 (Sonoma), 13 (Ventura), and 12 (Monterey).
+M1 ARM  architecture is fully supported in the Scala SDK.
+
+[discrete]
+=== ARM Processor Support
+
+ARM64: support for ARMv8 CPUs, such as the Amazon Graviton series and Apple M1 ARM processors.
+****
+
+The JVM SDKs should also be expected to run on other commonly-available GNU/Linux distributions which support an appropriate JDK, but not all combinations can be tested -- notable exceptions are listed below.
+
+==== Alpine Linux Compatibility
+
+The https://netty.io[Netty] I/O library used by our JVM SDKs supports native optimizations to achieve higher throughput and lower latency 
+-- which the SDK enables by default. 
+Those modules are compiled against `glibc` and Alpine Linux uses `musl` instead --
+so the {name-sdk} is unable to complete bootstrapping on this platform.
+
+Because Alpine Linux does not have the `glibc` support needed,
+we highly recommend that you seek an alternative distribution where possible. 
+If that is not a option, then a possible workaround that can be applied is as follows:
+
+* Disable the native IO:
++
+[source,toml]
+====
+ClusterEnvironment env = ClusterEnvironment.builder().ioEnvironment(IoEnvironment.enableNativeIo(false)).build();
+====
+
+* Disable it in Netty itself via the following system property:
+`-Dcom.couchbase.client.core.deps.io.netty.transport.noNative=true`
+
+The downside of these workarounds is potentially reduced performance, which can be determined through benchmarking and profiling.
+
+
+
+
+// Network Requirements
+include::{version-common}@sdk:shared:partial$network-requirements.adoc[]
+
+
+
+
+
+
+== Couchbase Server Compatibility
+
+
+Couchbase SDKs are tested against a variety of different environments to ensure both backward and forward compatibility with different versions of Couchbase Server.
+
+=== Couchbase Version/SDK Version Matrix
+
+The matrix below denotes the version of Couchbase Server, the version of the Scala SDK and whether the SDK is:
+
+* ✖ *Unsupported*: This combination is not tested, and is not within the scope of technical support if you have purchased a support agreement.
+* ◎ *Compatible*: This combination has been tested previously, and should be compatible.
+This combination is not recommended by our technical support organization.
+It is best to upgrade either the SDK or the Couchbase version you are using.
+* ✔ *Supported*: This combination is subject to ongoing quality assurance, and is fully supported by our technical support organization.
+
+.Recommended SDK per Server Version Matrix
+[#table_sdk_versions]
+|===
+| | 1.3 | 1.4, 1.5 | 1.6
+
+| *Server 7.0 - 7.2*
+| *✔*
+| *✔*
+| *✔*
+
+| *Server 7.6* ①
+| *✔*
+| *✔*
+| *✔*
+|===
+
+① Server 7.6 is compatible with all supported (not yet End-of-Life) versions of the {name-sdk}, but for full support of the latest features you need to upgrade to a recent version of the SDK.
+See the <<#couchbase-new-feature-availability-matrix,Feature Availablity matrix below>> and the xref:sdk-release-notes.adoc[Release Notes page].
+
+Note the https://www.couchbase.com/support-policy[End of Life dates^] for Couchbase Server and SDK versions.
+See the notes there for Support details.
+
+=== Capella Compatibility
+
+The Couchbase {name_platform} SDK is fully compatible with Couchbase Capella, our fully-hosted database-as-a-service.
+To make development easier, the SDK includes the Capella client certificate ready installed.
+
+include::{version-common}@sdk:shared:partial$capella.adoc[tag=cloud]
+
+
+// add in Columnar link
+
+=== Couchbase New Feature Availability Matrix
+
+.Couchbase Server and SDK Supported Version Matrix
+[.table-merge-cells]
+[cols="7,6,6,6"]
+|===
+| | Server 7.0 & 7.1 | Server 7.2 | Server 7.6
+
+| Enhanced Durability
+3+| All SDK versions
+
+| Durable Writes
+3+| Since 1.0
+
+| Analytics
+3+| Since 1.0
+
+| Collections
+3+| Since 1.0.10
+
+| Scope-Level {sqlpp} (formerly N1QL) Queries & all Collections features
+3+| Since SDK 1.2.0
+
+| Request Tracing
+3+| Since SDK 1.2.0
+
+| Cloud Native Gateway
+| Not Supported
+2+| From SDK 1.5.0 (with xref:operator::overview.adoc[Couchbase Autonomous Operator] 2.6.1+)
+
+| Vector Search
+2+| N/A
+| From SDK 1.6.0
+|===
+
+This table is not an exhaustive list -- just a few highlights -- provided to help assess compatibility of older versions in particular.
+For alignment of SDKs and new Server features, scroll down to the information below the <<api-version,API Version table>>.
+
+
+=== Spring Data Couchbase Compatibility
+
+https://projects.spring.io/spring-data-couchbase/[Spring Data Couchbase^] uses the Java SDK underneath and as a result it also provides different compatibilities with Couchbase Server.
+The following table provides an overview.
+
+.Recommended Spring Data Couchbase per Server Version Matrix
+[#table_spring_versions]
+|===
+|  | SDC 4.3 - 4.4 | SDC 5.0 - 5.2
+
+| _Status ->_
+| _Maintenance Support_
+| _New Features, Active Development_
+
+| *Server 7.0 - 7.6*
+| *Compatible*
+| *Recommended*
+|===
+
+NOTE: Check the Spring Data Couchbase's compile dependencies -- older versions may link an out-of-date version of the SDK in their dependencies list, although a supported version should be in the `updates`.
+Please make sure that you are using a supported version of the Couchbase Scala SDK, prefereably the latest version, which will contain any available bug fixes.
+Using the latest Spring Data Couchbase should ensure that this is so.
+
+
+=== API Version
+
+include::{version-common}@sdk:shared:partial$api-version.adoc[tag=api-version]
+
+
+
+
+== SDK API Stability
+
+
+=== Interface Stability
+
+include::{version-common}@sdk:shared:partial$interface-stability-pars.adoc[tag=interface-stability-section]
+
+
+=== Older SDK Versions
+
+include::{version-common}@sdk:shared:partial$archive.adoc[tag=link]

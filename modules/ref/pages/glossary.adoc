@@ -1,0 +1,2 @@
+
+include::{version-common}@sdk:pages:partial$glossary.adoc[]

@@ -1,0 +1,16 @@
+= Tracing from the .NET SDK
+:description: Threshold logging
+:navtitle: Tracing from the SDK
+
+
+[abstract]
+{description}
+
+// https://issues.couchbase.com/browse/DOC-4791 - 
+
+
+opentelemetry
+
+// need KV _and_ query examples - with note on what it *doesn't* tell you (server-side timings).
+
+

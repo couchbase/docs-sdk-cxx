@@ -1,0 +1,51 @@
+= Sample Application
+:description: Discover how to program interactions with the Couchbase Server via the data, query, and search services -- using the Travel Sample Application with the built-in Travel Sample data Bucket.
+// :page-aliases: ROOT:sample-application,ROOT:tutorial4,ROOT:sample-app-backend
+:page-pagination: prev
+
+:travel-sample-git-project: try-cb-scala
+
+// include::project-docs:partial$attributes.adoc[]
+
+
+
+////
+For 1.7:
+https://github.com/couchbase-examples/scala-quickstart
+
+use some of https://developer.couchbase.com/tutorial-quickstart-scala-webservers ?
+
+point back to the previous version (Travel Sample) as an alternate version??
+////
+
+
+
+include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=abstract]
+
+include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=quick-start]
+
+include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=bring-your-own]
+
+include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=using]
+
+
+== Sample App Backend
+
+The backend code shows Couchbase {name-sdk} in action with Query and Search,
+but also how to plug together all of the elements and build an application with Couchbase Server and the {name-sdk}.
+
+The https://github.com/couchbaselabs/{travel-sample-git-project}/tree/HEAD/app[`app` directory] contains the various components, classes and functions for handling users, registration, and {sqlpp} (formerly N1QL) queries.
+
+
+include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=data-model]
+
+include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=rest-api]
+
+
+// TODO: we don't use the partial here, because of the location of swagger.json
+// in try-cb-dotnet/wwwroot/
+== REST API
+
+You can explore the REST API here in read-only mode, or once you are running the application, at the `/apidocs` endpoint.
+
+swagger_ui::https://raw.githubusercontent.com/couchbaselabs/{travel-sample-git-project}/HEAD/try-cb-dotnet/wwwroot/swagger.json[]

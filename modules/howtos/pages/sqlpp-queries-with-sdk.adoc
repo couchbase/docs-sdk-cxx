@@ -1,0 +1,184 @@
+= Querying with {sqlpp}
+:description: You can query for documents in Couchbase using the {sqlpp} query language, a language based on SQL, but designed for structured and flexible JSON documents.
+:page-aliases: n1ql-query.adoc,n1ql-queries-with-sdk.adoc
+// :page-aliases: ROOT:document-operations.adoc,ROOT:documents-creating,ROOT:documents-updating,ROOT:documents-retrieving,ROOT:documents-deleting,n1ql-queries-with-sdk.adoc
+:lang: Scala
+:example-source: devguide:example$scala/Queries.scala
+:example-source-lang: scala
+
+[abstract]
+{description}
+
+
+
+On this page we dive straight into using the Query Service API from the {name-sdk}.
+For a deeper look at the concepts, to help you better understand the Query Service, the {sqlpp} language, and the Index Service, see the links in the <<further-information,Further Information>> section at the end of this page.
+
+
+
+
+
+
+
+
+include::howtos:partial$n1ql-intro.adoc[]
+include::howtos:partial$n1ql-getting-started.adoc[]
+
+
+// index first - start again - see both C++ and .NET versions....
+// https://docs.couchbase.com/dotnet-sdk/current/howtos/n1ql-queries-with-sdk.html#querying-at-scope-level
+
+
+Note that building indexes is covered in more detail on the xref:concept-docs:n1ql-query.adoc#index-building[Query concept page] --
+and in the https://docs.couchbase.com/sdk-api/couchbase-scala-client/com/couchbase/client/scala/manager/query/index.html[API Reference].
+
+
+== A Simple Query
+Here's the basics of how to run a simple query to fetch 10 random rows from travel-sample and print the results:
+
+[source,scala]
+----
+include::devguide:example$scala/Queries.scala[tag=simple,indent=0]
+----
+
+(Note that we won't be covering the {sqlpp} language itself in any detail here, but if you're familiar with SQL you'll see it's very similar.)
+
+The Scala SDK returns `Try` rather than throwing exceptions, to allow you to handle errors in a functional way.  A `Try` can either be a `Success(QueryResult)` if the {sqlpp} statement was successfully executed, or `Failure(Throwable)` if something went wrong.  It can be pattern matched on like this:
+
+[source,scala]
+----
+include::devguide:example$scala/Queries.scala[tag=simple-results,indent=0]
+----
+
+The returned `QueryResult` contains an `rowsAs[T]` method, allowing the results to be converted into something useful.  The above
+example demonstrates returning the results as `JsonObject`, the JSON library built-in to the Scala SDK.
+
+Other things rowsAs can convert to are:
+
+* `io.circe.Json` from the popular Scala JSON library https://circe.github.io/circe/[Circe]
+* Similar support is included for other excellent JSON libraries: https://github.com/lihaoyi/upickle[uPickle/uJson], https://github.com/playframework/play-json[Play Json], https://github.com/typelevel/jawn[Jawn], and https://github.com/json4s/json4s[Json4s].
+* Scala case classes.  A tiny amount of boilerplate is needed to support this: see xref:kv-operations.adoc[Key-Value Operations] for details.
+* `String`
+* `Array[Byte]`
+
+Please see xref:json.adoc[this guide] for more information on the supported ways of working with JSON.
+
+Of course, it wouldn't be Scala if we couldn't elegantly combine the operations above more concisely:
+
+[source,scala]
+----
+include::devguide:example$scala/Queries.scala[tag=get-rows,indent=0]
+----
+
+[NOTE]
+=====
+Most of the examples here use the simplest of the three APIs provided by the Scala SDK, which blocks until the operation is performed.  There's also an asynchronous API that is based around Scala `Future`, and a
+streaming reactive API, for which we'll see an example later.
+=====
+
+include::howtos:partial$n1ql-placeholders.adoc[]
+include::howtos:partial$n1ql-scan-consistency.adoc[]
+
+And the `AtPlus` level is represented with `QueryScanConsistency.ConsistentWith`:
+
+[source,scala]
+----
+include::devguide:example$scala/Queries.scala[tag=at-plus,indent=0]
+----
+
+== Returning Results as Case Classes
+The Scala SDK supports returning {sqlpp} results directly as Scala case classes.
+
+A small amount of boilerplate is required to tell the SDK how to convert your case class to/from JSON.  There are more details
+available xref:json.adoc#case-classes[here], but the short version is to add a `Codec` in the case class's companion object like this:
+
+[source,scala]
+----
+include::devguide:example$scala/Queries.scala[tag=codec,indent=0]
+----
+
+Now you're free to pull out the results directly as your case class:
+
+[source,scala]
+----
+include::devguide:example$scala/Queries.scala[tag=case-classes,indent=0]
+----
+
+== Streaming Large Result Sets
+As mentioned earlier, the Scala SDK provides three SDKs (documented further on xref:howtos:concurrent-async-apis.adoc[Choosing an API]):
+
+* The blocking API you've seen so far, that returns a `QueryResult` containing all rows.
+
+* An async API that returns a `Future[QueryResult]`, which also contains all rows.  This can be accessed like this:
+
+[source,scala]
+----
+include::devguide:example$scala/Queries.scala[tag=async,indent=0]
+----
+
+* A reactive API, that can be used to stream rows.
+
+The former two APIs buffer all rows in-memory until they can be returned to you.  With smaller queries this is likely to be fine, but for large data sets this could lead to Java `OutOfMemoryError` exceptions.
+
+The recommended solution is to use the reactive API.  Reactive programming is a sophisticated paradigm that is rapidly gaining popularity for its ability to handle, amongst other things, streaming large amounts of data over fallible networks, while allowing error handling and backpressure.
+
+The Scala SDK exposes primitives from the https://projectreactor.io/[Project Reactor] library, most notably `Mono` and `Flux`.  We strongly recommend https://projectreactor.io/learn[learning] a little of this library first, and the following examples will assume basic familiarity with Reactor.
+
+[NOTE]
+You'll see both `reactor.core.scala.publisher` and `reactor.core.publisher` imports available for Reactor.  Use the former, it is the Scala-optimized variant that the Scala SDK will return.
+
+Here's how to perform a query and stream the results using the reactive API:
+
+[source,scala]
+----
+include::devguide:example$scala/Queries.scala[tag=reactive,indent=0]
+----
+
+
+== Querying at Scope Level
+
+// rearrange and put scope first????
+
+It is possible to query off the xref:7.1@server:learn:data/scopes-and-collections.adoc[`Scope` level] with _Couchbase Server version 7.0_ onwards,
+using the `scope.query()` method.
+It takes the statement as a required argument, and then allows additional options if needed.
+
+The code snippet below shows how to run a simple query to fetch 10 random rows from travel-sample and print the results,
+the assumption is that the `airline` collection exists within a scope `us`.
+
+[source,scala]
+----
+scope
+  .query("""select * from `airline` limit 10;""")
+  .flatMap(_.rowsAs[JsonObject]) match {
+  case Success(rows: Seq[JsonObject]) =>
+    rows.foreach(row => println(row))
+  case Failure(err) =>
+    println(s"Error: $err")
+}
+----
+
+A complete list of `QueryOptions` can be found in the https://docs.couchbase.com/sdk-api/couchbase-scala-client/com/couchbase/client/scala/query/QueryOptions.html[API docs].
+
+
+include::howtos:partial$n1ql-additional-resources.adoc[]
+
+// tutorial - https://query.pub.couchbase.com/tutorial/#1
+// check it's working still?
+
+// recursive
+// https://www.couchbase.com/blog/recursive-query-processing-in-sql-n1ql/ 
+
+
+
+
+
+// also
+// query options
+// https://github.com/couchbaselabs/sdk-rfcs/pull/125/files 
+
+
+
+== Further Information
+
+

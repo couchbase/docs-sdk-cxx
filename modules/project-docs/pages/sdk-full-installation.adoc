@@ -1,0 +1,128 @@
+= Couchbase Scala SDK Installation
+:description: Installation instructions for the Couchbase Scala Client.
+:navtitle: Full Installation
+:page-partial:
+:page-toclevels: 2
+
+[abstract]
+{description}
+
+
+This page gives full installation instructions for the {name-sdk}.
+In most cases, the xref:hello-world:start-using-sdk.adoc[Quickstart Guide] should be enough to get you up and running if you're in a hurry.
+
+
+== Prerequisites
+
+The Scala SDK is tested against LTS versions of Oracle JDK and OpenJDK -- see our xref:project-docs:compatibility.adoc#jdk-compat[compatibility docs].
+The underlying OS normally makes no difference, but library incompatibilities in Alpine Linux makes a xref:project-docs:compatibility.adoc#alpine-linux-compatibility[workaround] necessary for this OS.
+
+
+== Installing the SDK
+
+The Couchbase Scala SDK is available on the Maven repository, packaged for Scala 2.12 and 2.13.
+
+=== With SBT Projects
+
+It can be included in your SBT build like this:
+
+[source,sbt]
+----
+libraryDependencies += "com.couchbase.client" %% "scala-client" % "1.5.1"
+----
+
+This will automatically use the Scala 2.12 or 2.13 builds, as appropriate for your SBT project.
+
+=== With Gradle Projects
+
+It can be included in your `build.gradle` like this for 2.12:
+
+[source,groovy]
+----
+dependencies {
+    compile group: 'com.couchbase.client', name: 'scala-client_2.12', version: '1.5.1'
+}
+----
+
+or 2.13:
+
+[source,groovy]
+----
+dependencies {
+    compile group: 'com.couchbase.client', name: 'scala-client_2.13', version: '1.5.1'
+}
+----
+
+=== With Maven Projects
+
+It can be included in your Maven `pom.xml` like this for 2.12:
+
+[source,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>com.couchbase.client</groupId>
+        <artifactId>scala-client_2.12</artifactId>
+        <version>1.5.1</version>
+    </dependency>
+</dependencies>
+----
+
+or 2.13:
+
+[source,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>com.couchbase.client</groupId>
+        <artifactId>scala-client_2.13</artifactId>
+        <version>1.5.1</version>
+    </dependency>
+</dependencies>
+----
+
+
+[snapshots]
+== Using a Snapshot Version
+
+Couchbase publishes pre-release snapshot artifacts to the Sonatype OSS Snapshot Repository.
+If you wish to use a snapshot version, you'll need to tell your build tool about this repository.
+
+[{tabs}]
+====
+Maven::
++
+--
+.`*pom.xml*`
+[source,xml]
+----
+<repositories>
+  <repository>
+    <id>sonatype-snapshots</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    <releases><enabled>false</enabled></releases>
+    <snapshots><enabled>true</enabled></snapshots>
+  </repository>
+</repositories>
+----
+--
+Gradle (Groovy)::
++
+--
+.`*build.gradle*`
+[source,groovy]
+----
+repositories {
+    mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+        mavenContent { snapshotsOnly() }
+    }
+}
+----
+--
+====
+
+== Further Reading
+
+For those who spend little or no time using {name_platform}, but have to evaluate the platform, further installation and background help is available on the xref:hello-world:platform-help.adoc[{name_platform} Platform Introduction page].

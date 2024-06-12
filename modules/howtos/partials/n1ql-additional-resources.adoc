@@ -1,0 +1,7 @@
+== Additional Resources
+
+
+NOTE: {sqlpp} is not the only query option in Couchbase.
+Be sure to check that xref:concept-docs:data-services.adoc[your use case fits your selection of query service].
+
+The http://query.pub.couchbase.com/tutorial/#1[{sqlpp} interactive tutorial] is a good introduction to the basics of {sqlpp} use.
