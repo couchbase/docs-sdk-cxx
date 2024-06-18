@@ -35,15 +35,20 @@ Couchbase gives you the {name_platform} APIs to work with Capella, our managed s
 Data Ops (CRUD)::
 +
 --
-
-[source,scala]
+[source,cxx]
 ----
-val json = JsonObject("foo" -> "bar", "baz" -> "qux")
-
-collection.upsert("document-key", json) match {
-  case Success(result)    => println("Document upsert successful")
-  case Failure(exception) => println("Error: " + exception)
-}
+    {
+        auto collection = cluster.bucket(bucket_name).scope(scope_name).collection(collection_name);
+ 
+        const std::string document_id{ "minimal_example" };
+        const tao::json::value basic_doc{
+            { "a", 1.0 },
+            { "b", 2.0 },
+        };
+ 
+        auto [ctx, resp] = collection.upsert(document_id, basic_doc, {}).get();
+        std::cout << "ec: " << ctx.ec().message() << ", id: " << document_id << ", CAS: " << resp.cas().value() << "\n";
+    }
 ----
 --
 
@@ -51,10 +56,9 @@ collection.upsert("document-key", json) match {
 +
 --
 
-[source,scala]
+[source,cxx]
 ----
-val statement = """select * from `travel-sample` limit 10;"""
-val result: Try[QueryResult] = cluster.query(statement)
+// query
 ----
 --
 
@@ -62,11 +66,9 @@ Vector Search::
 +
 --
 
-[source,scala]
+[source,cxx]
 ----
-val request = SearchRequest.vectorSearch(VectorSearch(VectorQuery("vector_field", vectorQuery)))
-
-val result: Try[SearchResult] = scope.search("vector-index", request)
+// vector
 ----
 --
 ====
@@ -76,11 +78,15 @@ Couchbase is a large platform -- covering many services -- and Couchbase SDKs ar
 and work with Couchbase in more natural ways for your platform.
 Install the SDK, and explore in the way that works best for you.
 
-.Installing the SDK via Scala Build Tool
-[source,sbt,subs="normal, attributes"]
+.Building (command-line)
+[source,console]
 ----
-libraryDependencies += "com.couchbase.client" %% "scala-client" % "{sdk_current_version}"
+$ cd couchbase-cxx-client
+$ mkdir build; cd build
+$ cmake ..
+$ cmake --build .
 ----
+
 
 
 The links below will take you where you want to go -- as will the navigation on the left-hand side of this page.
@@ -105,7 +111,7 @@ How-to guides to help you start your development journey with Couchbase and the 
 [.column]
 .Easy to Connect & Get Started
 * xref:hello-world:start-using-sdk.adoc[Quickstart Guide]
-* xref:hello-world:sample-application.adoc[]
+// * xref:hello-world:sample-application.adoc[]
 * xref:howtos:managing-connections.adoc[]
 // * xref:hello-world:student-record-developer-tutorial.adoc[Beginners' Couchbase Tutorial]
 

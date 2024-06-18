@@ -21,15 +21,18 @@ You want to query your data, but does that always mean a {sqlpp} query to the Da
 The CRUD API of the {sqlpp} Query service is mirrored by the Data Service's API, but without the need for indexes, and using a binary protocol gives faster access than streaming JSON from the Query Service.
 
 
-[source,scala]
+[source,cxx]
 ----
-collection.remove("document-key2", durability = Durability.Majority) match {
-  case Success(result) => println("Document removed successfully")
-  // The mutation is available in-memory on at least a majority of replicas
-  case Failure(err: DocumentNotFoundException) =>
-    println("The document does not exist")
-  case Failure(err) => println("Error: " + err)
-}
+  {
+    std::scoped_lock lock(mutex_);
+    auto options =
+      couchbase::get_and_lock_options{}.retry_strategy(retry_strategy_).timeout(timeout_);
+    auto [err, resp] = collection_.get_and_lock(document_id_, lock_duration_, options).get();
+    auto ctx = err.ctx().as<tao::json::value>();
+    std::size_t retry_attempts = 0;
+    if (const auto* attempts = ctx.find("retry_attempts"); attempts != nullptr) {
+      retry_attempts = attempts->get_unsigned();
+    }
 ----
 
 At its heart, a database is in the business of storing data and letting you query and retrieve it.
