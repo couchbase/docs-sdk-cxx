@@ -2,13 +2,27 @@
 :description: Get involved with Couchbase's Open Source SDKs.
 :page-toclevels: 2
 
+
+// Note to editors
+// 
+// This page pulls in content from -sdk-common-
+// and code samples from -example-dir-
+// 
+// It can be seen built at wwww.
+
 [abstract]
 {description}
 
+
 == Contributing
 
-Couchbase welcomes community contributions to the Scala SDK.
-The https://github.com/couchbase/couchbase-jvm-clients/tree/master/scala-client[Scala SDK source code^] is available on GitHub.
-Please see the https://github.com/couchbase/couchbase-jvm-clients/blob/master/README.md[README^] file for further information.
+Couchbase welcomes community contributions to the {name-sdk}.
+The https://github.com/couchbase/couchbase-cxx-client[{cpp} SDK source code^] is available on GitHub.
+Please see the https://github.com/couchbase/couchbase-cxx-client/blob/master/CONTRIBUTING.md[CONTRIBUTING^] file for further information.
 
-include::{version-common}@sdk:shared:partial$contrib.adoc[tag=contrib]
+== Other Ways to Contribute
+
+* Join the discussion in our https://forums.couchbase.com/[forum] and on our https://discord.com/invite/sQ5qbPZuTh[Discord server].
+
+* Improve the documentation -- https://docs.couchbase.com/home/contribute/index.html[bug reports and pull requests are welcome].
+
