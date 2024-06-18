@@ -1,7 +1,7 @@
 .Couchbase Scala SDK
 
 * xref:hello-world:start-using-sdk.adoc[Hello World]
-** xref:hello-world:sample-application.adoc[]
+// ** xref:hello-world:sample-application.adoc[]
 // ** xref:hello-world:student-record-developer-tutorial.adoc[]
 ** xref:howtos:managing-connections.adoc[Connecting to Your Database]
 *** xref:howtos:sdk-authentication.adoc[Authentication & Authorization]
