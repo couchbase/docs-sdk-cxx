@@ -3,6 +3,62 @@
 // :page-aliases: ROOT:managing-clusters
 :page-toclevels: 2
 
+
+// Note to editors
+// 
+// This page pulls in content from -sdk-common-
+// and code samples from -example-dir-
+// 
+// It can be seen built at wwww.
+
+[abstract]
+{description}
+
+
+Common use cases are outlined here, less common use cases are covered in the https://docs.couchbase.com/sdk-api/couchbase-cxx-client/[API docs].
+
+
+
+
+// include::{version-common}@sdk:shared:partial$flush-info-pars.adoc[tag=management-intro]
+// common-file -
+The primary means for managing clusters is through the Couchbase Web UI which provides an easy to use interface for adding, removing, monitoring and modifying buckets. 
+Or through the REST API.
+In some instances you may wish to have a programmatic interface. For example, if you wish to manage a cluster from a setup script, or if you are setting up buckets in test scaffolding.
+
+
+
+
+
+
+The {name-sdk} also comes with some convenience functionality for common Couchbase management requests.
+
+Management operations in the SDK may be performed through several interfaces depending on the object:
+
+* BucketManager -- `Couchbase::Management::BucketManager`
+-- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.0-dp.9/classcouchbase_1_1bucket__manager.html[API docs].
+// * UserManager -- `Couchbase::Management::UserManager`
+// -- see https://docs.couchbase.com/sdk-api/couchbase-ruby-client/Couchbase/Management/UserManager.html[API docs].
+* QueryIndexManager -- `Couchbase::Management::QueryIndexManager`
+-- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.0-dp.9/structcouchbase_1_1management_1_1query_1_1index.html[API docs].
+// * AnalyticsIndexManager -- `Couchbase::Management::AnalyticsIndexManager`
+// -- see https://docs.couchbase.com/sdk-api/couchbase-ruby-client/Couchbase/Management/AnalyticsIndexManager.html[API docs].
+// * SearchIndexManager -- `Couchbase::Management::SearchIndexManager`
+// -- see https://docs.couchbase.com/sdk-api/couchbase-ruby-client/Couchbase/Management/SearchIndexManager.html[API docs].
+* CollectionManager -- `Couchbase::Management::CollectionManager`
+-- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.0-dp.9/classcouchbase_1_1collection__manager.html[API docs].
+// * ViewIndexManager -- `Couchbase::Management::ViewIndexManager`
+// -- see https://docs.couchbase.com/sdk-api/couchbase-ruby-client/Couchbase/Management/ViewIndexManager.html[API docs].
+
+
+
+
+
+
+
+
+
+////
 // API refs
 :bucket-api-reference: pass:q[BucketManager -- https://docs.couchbase.com/sdk-api/couchbase-scala-client/com/couchbase/client/scala/Cluster.html#buckets:com.couchbase.client.scala.manager.bucket.BucketManager[`Cluster.buckets`]]
 :user-api-reference: pass:q[UserManager -- https://docs.couchbase.com/sdk-api/couchbase-scala-client/com/couchbase/client/scala/Cluster.html#users:com.couchbase.client.scala.manager.user.UserManager[`Cluster.users`]]
@@ -219,7 +275,7 @@ include::devguide:example$scala/QueryIndexManagerExample.scala[tag=drop-primary-
 == Eventing Management
 
 // some SDKs (PHP, Ruby, Kotlin, C++) because they don't currently have any eventing management. 
-
+////
 
 ////
 https://issues.couchbase.com/browse/CBD-4930
@@ -229,7 +285,7 @@ While investigating PYCBC-1277 and MB-51480 we saw the new function_scope field 
 
 
 
-
+////
 == View Management
 
 include::{version-common}@sdk:shared:partial$flush-info-pars.adoc[tag=view-management]
@@ -274,3 +330,4 @@ To remove this design document:
 ----
 include::devguide:example$scala/ClusterResources.scala[tag=view-remove,indent=0]
 ----
+////
