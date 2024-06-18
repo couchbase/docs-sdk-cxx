@@ -2,7 +2,7 @@
 // :page-aliases: ROOT:getting-started.adoc,ROOT:start-using.adoc,ROOT:hello-couchbase.adoc,ROOT:start-using-sdk.adoc
 :page-toclevels: 3
 :description: Install, connect, try. A quick start guide to get you up and running with Couchbase and the {name-sdk}.
-:forum-link: https://www.couchbase.com/forums/c/scala-sdk/37
+// :forum-link: https://www.couchbase.com/forums/c/c-sdk/7
 :page-partial:
 
 // Note to editors
@@ -29,19 +29,25 @@ but first let's look at those data operations, and installing the {name-sdk}.
 
 // remember to add a nomenclature note to the next version of this page for LCB.
 
-.Upsert with a Unique ID
-[source,scala]
+.Creating a new database entry with the {cpp} SDK, using `upsert()`
+[source,cxx]
 ----
-val docId = UUID.randomUUID().toString
-collection.upsert(docId, json) match {
-  case Success(result)    =>
-  case Failure(exception) => println("Error: " + exception)
-}
+    {
+        auto collection = cluster.bucket(bucket_name).scope(scope_name).collection(collection_name);
+ 
+        const std::string document_id{ "minimal_example" };
+        const tao::json::value basic_doc{
+            { "a", 1.0 },
+            { "b", 2.0 },
+        };
+ 
+        auto [ctx, resp] = collection.upsert(document_id, basic_doc, {}).get();
+        std::cout << "ec: " << ctx.ec().message() << ", id: " << document_id << ", CAS: " << resp.cas().value() << "\n";
+    }
 ----
 
 `upsert` inserts (creates) the document if it does not exist, or replaces it if it does.
-We'll explore creating and retrieving data records in more detail <<create-read-update-delete,below>>
-(and touch lightly upon a little of Scala's functional programming approach as we go), 
+We'll explore creating and retrieving data records in more detail <<create-read-update-delete,below>>,
 after walking through a quick installation.
 
 
@@ -88,9 +94,13 @@ For the example code below to run, you'll need the username and password of the 
 
 === Prerequisites
 
-* The Scala SDK is tested against LTS versions of Oracle JDK and OpenJDK -- 
-see the xref:project-docs:compatibility.adoc#jdk-compat[compatibility docs].
-* The Couchbase {name-sdk} {sdk_dot_minor} Client supports Scala 2.12 and 2.13.
+Check that you have the dependencies installed:
+
+* `cmake` >= 3.20.0+ (e.g., `brew install cmake`)
+* c++ compiler >= std_17 (e.g., `xcode-select --install`)
+* `openssl` >= 1.1+ (e.g., `brew install openssl`)
+
+Supprted Operating Systems are listed on the xref:project-docs:compatibility.adoc#platform-compatibility[compatibility page].
 
 The code examples also assume:
 
@@ -134,55 +144,39 @@ In production, Couchbase strongly recommends setting up users with more granular
 // tag::quick-install[]
 More details of the installation process are in the 
 xref:project-docs:sdk-full-installation.adoc[full installation guide].
-In most cases, given the above prerequisites, it's a simple matter of the following for your favorite build tool:
+On most GNU/Linux platforms at least, installation is a matter of:
 
-[tabs] 
-==== 
-Scala Build Tool (SBT)::
-+
---
-[source,sbt,subs="+attributes"]
+
+[source,console]
 ----
-libraryDependencies += "com.couchbase.client" %% "scala-client" % "{sdk_current_version}"
+$ git clone --recurse-submodules https://github.com/couchbaselabs/couchbase-cxx-client.git
 ----
 
-This will automatically use the Scala 2.12 or 2.13 builds, as appropriate for your SBT project.
---
-
-Gradle::
-+
---
-For Scala 2.13, include the following in your `build.gradle`:
-
-[source,groovy,subs="+attributes"]
+[source,console]
 ----
-dependencies {
-    compile group: 'com.couchbase.client', name: 'scala-client_2.13', version: '{sdk_current_version}'
-}
+$ export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/ 
 ----
 
-For Scala 2.12, refer to the full xref:project-docs:sdk-full-installation.adoc[Installation page].
---
-
-Maven::
-+
---
-For Scala 2.13, include the following in your Maven `pom.xml`:
-
-[source,xml,subs="+attributes"]
+.Building (command-line)
+[source,console]
 ----
-<dependencies>
-    <dependency>
-        <groupId>com.couchbase.client</groupId>
-        <artifactId>scala-client_2.13</artifactId>
-        <version>{sdk_current_version}</version>
-    </dependency>
-</dependencies>
+$ cd couchbase-cxx-client
 ----
 
-For Scala 2.12, refer to the full xref:project-docs:sdk-full-installation.adoc[Installation page].
---
-====
+[source,console]
+----
+$ mkdir build; cd build
+----
+
+[source,console]
+----
+$ cmake ..
+----
+
+[source,console]
+----
+$ cmake --build .
+----
 // end::quick-install[]
 
 === IDE Plugins
@@ -192,6 +186,8 @@ For links and more information on these and other integrations across the {name_
 check out the xref:project-docs:third-party-integrations.adoc[] page.
 
 
+
+////
 === Grab the Code
 
 If you're all set up and in a real hurry, just grab this code sample and add in your Capella details.
@@ -207,6 +203,10 @@ include::devguide:example$scala/Cloud.scala[]
 Otherwise, read on as we introduce the CRUD API and connection to Capella or self-managed Couchbase Server.
 
 TIP: There's a *View* link to the complete sample code on GitHub above each of the snippets on these SDK pages, and a *Copy* icon to grab just the snippet shown.
+////
+
+
+
 
 
 == Connect to your Database
@@ -219,9 +219,16 @@ Connect to your Couchbase Capella database (or your local Couchbase Cluster, if 
 Couchbase Capella::
 +
 --
-[source,scala]
+[source,cxx]
 ----
-include::devguide:example$scala/Cloud.scala[tag=connect,indent=0]
+    auto options = couchbase::cluster_options(username, password);
+    options.apply_profile("wan_development");
+    auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options).get();
+    if (ec) {
+        std::cout << "Unable to connect to the cluster. ec: " << ec.message() << "\n";
+    } else {
+        // Application code here
+    }
 ----
 
 Note, the client certificate for connecting to a Capella database is included in the SDK installation.
@@ -230,10 +237,20 @@ Note, the client certificate for connecting to a Capella database is included in
 Self-Managed Couchbase Server::
 + 
 -- 
-[source,scala]
+[source,cxx]
 ----
-include::devguide:example$scala/StartUsing.scala[tag=connect,indent=0]
+    std::string connection_string{ argv[1] }; // "couchbase://127.0.0.1"
+    std::string username{ argv[2] };          // "Administrator"
+    std::string password{ argv[3] };          // "password"
+    std::string bucket_name{ "travel-sample" };
+ 
+    auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options).get();
+    if (ec) {
+        fmt::print("unable to connect to the cluster: {}\n", ec.message());
+        return 1;
+    }
 ----
+////
 --
 
 Cloud Native Gateway (CNG)::
@@ -253,16 +270,10 @@ currently only compatible with recent versions of xref:operator:ROOT:concept-clo
 ----
 
 Read more on the xref:howtos:managing-connections.adoc#cloud-native-gateway[Connections] page.
-
+////
 --
 ====
 
-
-The `ClusterEnvironment.builder` is covered more fully on the xref:ref:client-settings.adoc#the-environment-builder[Clint Settings] page.
-
-
-NOTE: `Cluster.connect` returns a `Try[Cluster]`, as the Scala client uses functional error handling and does not throw exceptions.
-You'll see examples later of how to better handle a `Try`, but for simplicity here we'll assume the operation succeeded and get the result as a `Cluster` using `.get`.
 
 For a deeper look at connection options, read xref:howtos:managing-connections.adoc[].
 
@@ -270,6 +281,7 @@ TIP: The connection code for getting started uses the Administrator password tha
 In any production app you should create a role restricted to the permissions needed for your app -- 
 more on this in xref:concept-docs:best-practices.adoc#roles-and-rbac[the Security documentation].
 
+////
 === Opening a Bucket
 
 Following successful authentication, open the bucket with:
@@ -278,14 +290,14 @@ Following successful authentication, open the bucket with:
 ----
 include::devguide:example$scala/Cloud.scala[tag=bucket,indent=0]
 ----
-
+////
 
 
 ////
 client has not yet completed bootstrapping (connecting to the cluster, getting the configuration, connecting to the nodes).
 ////
 
-
+////
 `waitUntilReady` is an optional call,
 but it is good practice to use it.
 Opening resources such as buckets is asynchronous --
@@ -293,7 +305,9 @@ that is, the `cluster.bucket` call returns immediately and proceeds in the backg
 `waitUntilReady` ensures that the bucket resource is fully loaded before proceeding.
 If not present, then the first key-value (KV) operation on the bucket will wait for it to be ready.
 As with the earlier `Cluster.connect`, we use `.get` on the result here for simplicity.
+////
 
+////
 *Collections* allow documents to be grouped by purpose or theme, according to a specified *scope* -- see data modeling, <<data-modeling,below>>.
 Here we will use the `airport` collection within the `inventory` scope from `travel-sample` bucket as an example.
 
@@ -301,104 +315,38 @@ Here we will use the `airport` collection within the `inventory` scope from `tra
 ----
 include::devguide:example$scala/Cloud.scala[tag=collection,indent=0]
 ----
-
+////
 
 == Create, Read, Update, Delete
 
 Couchbase documents are organized into buckets, scopes, and collections.
 https://en.wikipedia.org/wiki/CRUD[CRUD operations^] -- Create, Read, Update, Delete -- can be performed upon documents in a collection.
 
-=== JSON
-
-We'll create a snippet of JSON to work with, using the client's own JSON library,
-but you can read about the Scala SDK's support for other JSON libraries on the
-xref:howtos:json.adoc[] page.
-
-[source,scala]
-----
-include::devguide:example$scala/Cloud.scala[tag=json,indent=0]
-----
-
 === Insert (Create) and Upsert
 
 `insert` and `upsert` will both create a new document.
 The difference between the two is that if a document with that key already exists, the `insert` operation will fail,
-// throwing `DocumentExistsException` --
+throwing `DocumentExistsException` --
 while the `upsert` operation will succeed, replacing the content.
 
-We need to provide a unique ID as the key, and we’ll use a UUID here:
-
-.Creating a new document
-[source,scala]
-----
-include::devguide:example$scala/Cloud.scala[tag=upsert,indent=0]
-----
 
 === Get (Read)
 
 The `get` method reads a document from a collection.
-// If the collection does not have a document with this ID, the `get` method also throws `DocumentNotFoundException`.
+If the collection does not have a document with this ID, the `get` method also throws `DocumentNotFoundException`.
 
-As mentioned above, the Scala SDK will not throw exceptions.
-Instead, methods that can error -- such as the `upsert` above --
-will return a Scala `Try` result, which can either be a `Success` containing the result, or a `Failure` containing a _Throwable_ exception.
-The easiest way to handle a single operation is with pattern matching, as shown above.
-
-Now let's get the data back (this example will look a little messy due the nested handling of multiple `Try` results, but we'll see how to clean it up shortly):
-
-[source,scala]
+[source,cxx]
 ----
-include::devguide:example$scala/Cloud.scala[tag=get,indent=0]
+// get()
 ----
 
-Here we're fetching the value for the key `docId`,
-converting that value to a `JsonObjectSafe`
-(a simple wrapper around `JsonObject` that returns `Try` results -- see
-xref:howtos:json.adoc#error-handling-and-jsonobjectsafe[JsonObjectSafe] for details),
-and then accessing the value of the *status* key as a String.
-
-==== Better Error Handling
-
-All three of these operations could fail, so there's quite a lot of error handling code here to do something quite simple.
-One way to improve on this is by using `flatMap`, like this:
-
-[source,scala]
-----
-include::devguide:example$scala/Cloud.scala[tag=get-map,indent=0]
-----
-
-Alternatively, you can use a for-comprehension, like so:
-
-[source,scala]
-----
-include::devguide:example$scala/Cloud.scala[tag=get-for,indent=0]
-----
-
-Either of these methods will stop on the first failed operation.  So the final returned `Try` contains either 
-a) `Success` and the result of the final operation, indicating that everything was successful, or 
-b) `Failure` with the error returned by the first failing operation.
 
 === Replace (Update) and Overloads
 
-You'll notice that most operations in the Scala SDK have two overloads.
-One will take an Options builder, which provides all possible options that operation takes.
-For instance:
-
 .The replace method updates the value of an existing document
-[source,scala]
+[source,cxx]
 ----
-include::devguide:example$scala/Cloud.scala[tag=replace-options,indent=0]
-----
-
-These options blocks are implemented as Scala case classes:
-they are immutable data objects that return a copy of themselves on each change.
-
-The other overload is provided purely for convenience.
-It takes named arguments instead of an Options object, and provides only the most commonly used options:
-
-[source,scala]
-----
-include::devguide:example$scala/Cloud.scala[tag=replace-named,indent=0]
+// replace()
 ----
 
 CAUTION: When you replace a document, it's usually good practice to use xref:howtos:kv-operations.adoc#optimistic-locking[optimistic locking].
@@ -408,9 +356,9 @@ Otherwise, changes might get lost if two people change the same document at the 
 
 The remove method deletes a document from a collection:
 
-[source,scala]
+[source,cxx]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=remove]
+// delete()
 ----
 
 
@@ -449,7 +397,7 @@ both
 === Help and Troubleshooting
 
 * xref:howtos:troubleshooting-cloud-connections.adoc[Troubleshooting common network problems].
-* {forum-link}[Help forum].
+// * {forum-link}[Help forum].
 * https://discord.com/channels/915294689681362954/1217642561645318194[Discord channel].
 * Read the xref:howtos:error-handling.adoc[error handling page].
 * xref:cloud:get-started:capella-iq/get-started-with-iq.adoc#generate-sdk-code-preview[Get help from Couchbase iQ].
