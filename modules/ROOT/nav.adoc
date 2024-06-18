@@ -70,5 +70,5 @@
 ** xref:ref:client-settings.adoc[]
 ** xref:ref:error-codes.adoc[]
 ** xref:ref:glossary.adoc[Glossary]
-** xref:ref:travel-app-data-model.adoc[]
+// ** xref:ref:travel-app-data-model.adoc[]
 ** xref:project-docs:metadoc-about-these-sdk-docs.adoc[About These Docs]
