@@ -1,11 +1,21 @@
-= Couchbase Scala SDK Installation
+= Full Installation of the {cpp} SDK
 :description: Installation instructions for the Couchbase Scala Client.
 :navtitle: Full Installation
 :page-partial:
 :page-toclevels: 2
 
+// Note to editors
+// 
+// This page pulls in content from -sdk-common-
+// and code samples from -example-dir-
+// 
+// It can be seen built at wwww.
+
+
 [abstract]
 {description}
+
+
 
 
 This page gives full installation instructions for the {name-sdk}.
@@ -14,115 +24,67 @@ In most cases, the xref:hello-world:start-using-sdk.adoc[Quickstart Guide] shoul
 
 == Prerequisites
 
-The Scala SDK is tested against LTS versions of Oracle JDK and OpenJDK -- see our xref:project-docs:compatibility.adoc#jdk-compat[compatibility docs].
-The underlying OS normally makes no difference, but library incompatibilities in Alpine Linux makes a xref:project-docs:compatibility.adoc#alpine-linux-compatibility[workaround] necessary for this OS.
 
 
-== Installing the SDK
+=== Getting the Source Code
 
-The Couchbase Scala SDK is available on the Maven repository, packaged for Scala 2.12 and 2.13.
+This repo uses several git submodules. If you are fetching the repo for the first time by command line, the `--recurse-submodules` option will init the submodules recursively as well:
 
-=== With SBT Projects
-
-It can be included in your SBT build like this:
-
-[source,sbt]
+[source,console]
 ----
-libraryDependencies += "com.couchbase.client" %% "scala-client" % "1.5.1"
+git clone --recurse-submodules https://github.com/couchbaselabs/couchbase-cxx-client.git
 ----
 
-This will automatically use the Scala 2.12 or 2.13 builds, as appropriate for your SBT project.
+However, if you fetched using a simple clone command (or another IDE or tool) you must also perform the following command to recursively update and initialize the submodules:
 
-=== With Gradle Projects
-
-It can be included in your `build.gradle` like this for 2.12:
-
-[source,groovy]
+[source,console]
 ----
-dependencies {
-    compile group: 'com.couchbase.client', name: 'scala-client_2.12', version: '1.5.1'
-}
+git submodule update --init --recursive
 ----
 
-or 2.13:
+=== Building with CMake
 
-[source,groovy]
-----
-dependencies {
-    compile group: 'com.couchbase.client', name: 'scala-client_2.13', version: '1.5.1'
-}
-----
+This repo is being built with CMake so everything should build easily once the basic dev dependencies are satisfied.
 
-=== With Maven Projects
+=== Dev Dependencies
 
-It can be included in your Maven `pom.xml` like this for 2.12:
+The following dependencies must be installed before the project can be built. We recommend using OS specific utilities such as brew, apt-get, and similar package management utilities (depending on your environment).
 
-[source,xml]
-----
-<dependencies>
-    <dependency>
-        <groupId>com.couchbase.client</groupId>
-        <artifactId>scala-client_2.12</artifactId>
-        <version>1.5.1</version>
-    </dependency>
-</dependencies>
-----
-
-or 2.13:
-
-[source,xml]
-----
-<dependencies>
-    <dependency>
-        <groupId>com.couchbase.client</groupId>
-        <artifactId>scala-client_2.13</artifactId>
-        <version>1.5.1</version>
-    </dependency>
-</dependencies>
-----
-
-
-[snapshots]
-== Using a Snapshot Version
-
-Couchbase publishes pre-release snapshot artifacts to the Sonatype OSS Snapshot Repository.
-If you wish to use a snapshot version, you'll need to tell your build tool about this repository.
-
-[{tabs}]
 ====
-Maven::
-+
---
-.`*pom.xml*`
-[source,xml]
-----
-<repositories>
-  <repository>
-    <id>sonatype-snapshots</id>
-    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    <releases><enabled>false</enabled></releases>
-    <snapshots><enabled>true</enabled></snapshots>
-  </repository>
-</repositories>
-----
---
-Gradle (Groovy)::
-+
---
-.`*build.gradle*`
-[source,groovy]
-----
-repositories {
-    mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots"
-        mavenContent { snapshotsOnly() }
-    }
-}
-----
---
+cmake >= 3.20.0+ (e.g., brew install cmake)
+c++ compiler >= std_17 (e.g., xcode-select --install)
+openssl >= 1.1+ (e.g., brew install openssl)
 ====
 
-== Further Reading
+IMPORTANT: On macOS, the OpenSSL brew install command mentioned above is not sufficient to be able to build. 
+The easiest way to fix this is to add the `OPENSSL_ROOT_DIR` env variable to your exports (e.g., .zshenv). 
+If this is not sufficient, see the other tips mentioned when you run brew info openssl.
 
-For those who spend little or no time using {name_platform}, but have to evaluate the platform, further installation and background help is available on the xref:hello-world:platform-help.adoc[{name_platform} Platform Introduction page].
+[source,console]
+----
+export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/ 
+----
+
+=== Building (command-line)
+
+[source,console]
+----
+$ cd couchbase-cxx-client
+----
+
+[source,console]
+----
+$ mkdir build; cd build
+----
+
+[source,console]
+----
+$ cmake ..
+----
+
+[source,console]
+----
+$ cmake --build
+----
+
+// Node - https://www.couchbase.com/forums/t/build-of-node-js-sdk-4-2-6-fail-on-debian-11-bullseye/36792/6 
