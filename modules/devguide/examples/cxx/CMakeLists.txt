@@ -28,3 +28,4 @@ add_subdirectory("${PROJECT_SOURCE_DIR}/couchbase-cxx-client")
 file(GLOB_RECURSE SOURCES "${PROJECT_SOURCE_DIR}/src/*.cxx")
 
 define_example(minimal)
+define_example(subdocument)
