@@ -66,70 +66,40 @@ The latter saves even more bandwidth by not retrieving the contents of the path 
 .Imports
 The examples use the following imports:
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=imports,indent=0,indent=0]
+include::devguide:example$cxx/src/subdocument.cxx[tag=imports,indent=0]
 ----
 
 .Retrieve Sub-Document value
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=get]
-----
-
-NOTE: Use `import com.couchbase.client.scala.kv.LookupInSpec._` to make sure all operations are in scope.
-
-Operations in the Scala SDK return a `Try` to indicate success or failure.
-It can be hard to read multiple nested `Try` so you may prefer to use either flatMap:
-
-[source,scala]
-----
-include::devguide:example$scala/SubDocument.scala[tag=get-flatmap]
-----
-
-or a for-comprehension:
-
-[source,scala]
-----
-include::devguide:example$scala/SubDocument.scala[tag=get-forcomp]
+include::devguide:example$cxx/src/subdocument.cxx[tag=get,indent=0]
 ----
 
 .Check existence of Sub-Document path
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=exists]
+include::devguide:example$cxx/src/subdocument.cxx[tag=exists,indent=0]
 ----
-
-NOTE: LookupInResult has an `exists` method, but this should not be confused with the exists __operation__.  The `exists` method
-is used to check if anything was returned by the server for a given operation.  The result of the exists operation should
-be checked with `contentAs[Boolean]`, as in the example.
 
 Multiple operations can be combined, and this can be most neatly done with a for-comprehension:
 
 .Combine multiple lookup operations
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=combine]
+include::devguide:example$cxx/src/subdocument.cxx[tag=combine,indent=0]
 ----
 
 
 == Choosing an API
 
-The Scala SDK provides three APIs for all operations.  There's the simple blocking one you've already seen, then this
-asynchronous variant that returns Scala `Future`:
+The C++ SDK provides two async APIs for all operations. There's the one returning `std::future` you've already seen, as well as a callback-based variant:
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=get-future]
+include::devguide:example$cxx/src/subdocument.cxx[tag=get-callback,indent=0]
 ----
-
-And a third that uses reactive programming primitives from https://projectreactor.io/[Project Reactor]:
-
-[source,scala]
-----
-include::devguide:example$scala/SubDocument.scala[tag=get-reactive]
-----
-
 
 == Mutating
 
@@ -137,30 +107,28 @@ Mutation operations modify one or more paths in the document.
 The simplest of these operations is _upsert_, which, similar to the fulldoc-level _upsert_, will either modify the value of an existing path or create it if it does not exist:
 
 .Upserting a new Sub-Document value
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=upsert]
+include::devguide:example$cxx/src/subdocument.cxx[tag=upsert,indent=0]
 ----
-
-NOTE: Use `import com.couchbase.client.scala.kv.MutateInSpec._` to make sure all operations are in scope.
 
 Likewise, the _insert_ operation will only add the new value to the path if it does not exist:
 
 .Inserting a Sub-Document value
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=insert]
+include::devguide:example$cxx/src/subdocument.cxx[tag=insert,indent=0]
 ----
 
 Dictionary values can also be replaced or removed, and you may combine any number of mutation operations within the same general _mutateIn_ API.
 Here's an example of one which replaces one path and removes another.
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=multi]
+include::devguide:example$cxx/src/subdocument.cxx[tag=mutation-combine,indent=0]
 ----
 
-NOTE: `mutateIn` is an _atomic_ operation.  If any single operation fails, then the entire document is left unchanged.
+NOTE: `mutate_in` is an _atomic_ operation.  If any single operation fails, then the entire document is left unchanged.
 
 == Supported Types
 
@@ -173,48 +141,48 @@ See the xref:kv-operations.adoc#json[Data Operations page] for more details.
 
 == Array Append and Prepend
 
-The _arrayPrepend_ and _arrayAppend_ operations are true array prepend and append operations.
-Unlike fulldoc _append_/_prepend_ operations (which simply concatenate bytes to the existing value), _arrayAppend_ and _arrayPrepend_ are JSON-aware:
+The `array_prepend` and `array_append` operations are true array prepend and append operations.
+Unlike fulldoc `append`/`prepend` operations (which simply concatenate bytes to the existing value), `array_append` and `array_prepend` are JSON-aware:
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=array-append]
+include::devguide:example$cxx/src/subdocument.cxx[tag=array-append,indent=0]
 ----
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=array-prepend]
+include::devguide:example$cxx/src/subdocument.cxx[tag=array-prepend,indent=0]
 ----
 
 If your document only needs to contain an array, you do not have to create a top-level object wrapper to contain it.
 Simply initialize the document with an empty array and then use the empty path for subsequent Sub-Document array operations:
 
 .Creating and populating an array document
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=array-create]
+include::devguide:example$cxx/src/subdocument.cxx[tag=array-create,indent=0]
 ----
 
-If you wish to create an array if it does not exist and also push elements to it within the same operation you may use the <<subdoc_create_path,_createPath_>> option:
+If you wish to create an array if it does not exist and also push elements to it within the same operation you may use the `create_path` option:
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=array-upsert]
+include::devguide:example$cxx/src/subdocument.cxx[tag=array-upsert,indent=0]
 ----
 
 
 == Arrays as Unique Sets
 
-Limited support also exists for treating arrays like unique sets, using the _arrayAddUnique_ command.
+Limited support also exists for treating arrays like unique sets, using the `array_add_unique` command.
 This will do a check to determine if the given value exists or not before actually adding the item to the array:
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=array-unique]
+include::devguide:example$cxx/src/subdocument.cxx[tag=array-unique,indent=0]
 ----
 
-Note that currently the _arrayAddUnique_ will fail with a _PathMismatchException_ if the array contains JSON _floats_, _objects_, or _arrays_.
-The _arrayAddUnique_ operation will also fail with _CannotInsertValueException_ if the value to be added is one of those types as well.
+Note that currently the `array_add_unique` will fail with a `couchbase::errc::key_value::path_mismatch` error code if the array contains JSON _objects_, or _arrays_.
+The `array_add_unique` operation will also fail with `couchbase::errc::key_value::value_invalid` if the value to be added is one of those types as well.
 
 Note that the actual position of the new element is undefined, and that the array is not ordered.
 
@@ -226,9 +194,9 @@ While _append_ will place a new item at the _end_ of an array and _prepend_ will
 The position is indicated by the last path component, which should be an array index.
 For example, to insert `"cruel"` as the second element in the array `["Hello", "world"]`, the code would look like:
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=array-insert]
+include::devguide:example$cxx/src/subdocument.cxx[tag=array-insert,indent=0]
 ----
 
 // for your examples, above, CD: “I feel like somewhere in this we should also just a an example path like "my.path[1]" too, just to show how to use the index with a nested path. I don't think it's necessarily clear.”
@@ -242,17 +210,17 @@ it must not point to an element which is out of bounds).
 Counter operations allow the manipulation of a _numeric_ value inside a document.
 These operations are logically similar to the _increment_ and _decrement_ full-document operations:
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=counter-inc]
+include::devguide:example$cxx/src/subdocument.cxx[tag=counter-inc,indent=0]
 ----
 
 The _increment_ and _decrement_ operations perform simple arithmetic against a numeric value.
 The updated value is returned.
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=counter-dec]
+include::devguide:example$cxx/src/subdocument.cxx[tag=counter-dec,indent=0]
 ----
 
 The existing value for counter operations must be within range of a 64 bit signed integer.
@@ -308,11 +276,11 @@ Attempting to perform such an operation would result in a Path Not Found error.
 
 By default the automatic creation of parents is disabled, as a simple typo in application code can result in a rather confusing document structure.
 Sometimes it is necessary to have the server create the hierarchy however.
-In this case, the _createPath_ option may be used.
+In this case, the `create_path` option may be used.
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=create-path]
+include::devguide:example$cxx/src/subdocument.cxx[tag=create-path,indent=0]
 ----
 
 
@@ -336,9 +304,9 @@ To perform sub-document operations on a (bulk) list of documents, follow the bul
 Concurrent Sub-Document operations on different parts of a document will not conflict.
 For example the following two blocks can execute concurrently without any risk of conflict:
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=concurrent]
+include::devguide:example$cxx/src/subdocument.cxx[tag=concurrent,indent=0]
 ----
 
 Even when modifying the _same_ part of the document, operations will not necessarily conflict.
@@ -350,43 +318,43 @@ against concurrent modifications.
 
 If CAS is required then it can be provided like this:
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=cas]
+include::devguide:example$cxx/src/subdocument.cxx[tag=cas,indent=0]
 ----
 
 
 == Durability
 
-Couchbase's xref:2.7@java-sdk::durability.adoc[traditional durability], using `PersistTo` and `ReplicateTo`, is
+Couchbase's xref:2.7@java-sdk::durability.adoc[traditional durability], using `persist_to` and `replicate_to`, is
 xref:concept-docs:durability-replication-failure-considerations.adoc#older-server-versions[still available], particularly for talking to Couchbase Server 6.0 and earlier:
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=durability,indent=0]
+include::devguide:example$cxx/src/subdocument.cxx[tag=durability,indent=0]
 ----
 
 In Couchbase Server 6.5 and up, this is built upon with xref:concept-docs:durability-replication-failure-considerations.adoc#durable-writes[Durable Writes],
 which uses the concept of xref:{version-server}@server:learn:data/durability.adoc#majority[majority] to indicate the number of configured Data Service nodes to which commitment is required:
 
-[source,scala]
+[source,c++]
 ----
-include::devguide:example$scala/SubDocument.scala[tag=sync-durability,indent=0]
+include::devguide:example$cxx/src/subdocument.cxx[tag=sync-durability,indent=0]
 ----
 
 
 == Error Handling
 
-Sub-Document operations have their own set of errors.
-When programming with Sub-Document, be prepared for any of the full-document errors (such as _DocumentNotFoundException_) as well as
+Sub-Document operations have their own set of error codes.
+When programming with Sub-Document, be prepared for any of the full-document error codes (such as `couchbase::errc::key_value::document_not_found`) as well as
 special Sub-Document errors which are received when certain constraints are not satisfied.
-Some of the errors include:
+Some of the error codes include (all under the `couchbase::errc::key_value` namespace):
 
-* *PathNotFoundException*: When retrieving a path, this means the path does not exist in the document.
+* `path_not_found`: When retrieving a path, this means the path does not exist in the document.
 When inserting or upserting a path, this means the _immediate parent_ does not exist.
-* *PathExistsException*: In the context of an _insert_, it means the given path already exists.
+* `path_exists`: In the context of an _insert_, it means the given path already exists.
 In the context of _arrayAddUnique_, it means the given value already exists.
-* *PathMismatchException*: This means the path may exist in the document, but that there is a type conflict between the path in the document and the path in the command.
+* `path_mismatch`: This means the path may exist in the document, but that there is a type conflict between the path in the document and the path in the command.
 Consider the document:
 +
 [source,json]
@@ -396,12 +364,9 @@ Consider the document:
 +
 The path `tags.sierra` is a mismatch, since `tags` is actually an array, while the path assumes it is a JSON object (dictionary).
 
-* *DocumentNotJsonException*: This means you are attempting to modify a binary document using Sub-Document operations.
-* *PathInvalidException*: This means the path is invalid for the command.
+* `document_not_json`: This means you are attempting to modify a binary document using Sub-Document operations.
+* `path_invalid`: This means the path is invalid for the command.
 Certain commands such as _arrayInsert_ expect array elements as their final component, while others such as _upsert_ and _insert_ expect dictionary (object) keys.
-
-If a Sub-Document command fails a top-level error is reported (_MultiMutationException_), rather than an individual error code (e.g. _PathNotFoundException_).
-When receiving a top-level error code, you should traverse the results of the command to see which individual code failed.
 
 == Path Syntax
 

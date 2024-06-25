@@ -1,0 +1,4 @@
+/modules/devguide/examples/cxx/build
+.idea
+.vscode
+cmake-build-debug

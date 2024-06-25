@@ -12,14 +12,14 @@ Positional parameters use an ordinal placeholder for substitution and can be use
 
 [source,{example-source-lang}]
 ----
-include::{example-source}[tag=positional]
+include::{example-source}[tag=positional,indent=0]
 ----
 
 Whereas named parameters can be used like this:
 
 [source,{example-source-lang}]
 ----
-include::{example-source}[tag=named]
+include::{example-source}[tag=named,indent=0]
 ----
 
 

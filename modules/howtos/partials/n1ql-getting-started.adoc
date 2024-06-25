@@ -8,14 +8,14 @@ Let's get started by pulling in all the imports needed in the examples below:
 
 [source,{example-source-lang}]
 ----
-include::{example-source}[tag=imports]
+include::{example-source}[tag=imports,indent=0]
 ----
 
 Then we connect to a Couchbase cluster, as usual (of course, change the address and credentials to match your own cluster's):
 
 [source,{example-source-lang}]
 ----
-include::{example-source}[tag=cluster]
+include::{example-source}[tag=cluster,indent=0]
 ----
 
 The examples below will use the travel-sample example bucket.  This can be installed through the Couchbase Admin UI in Settings -> Sample Buckets.
