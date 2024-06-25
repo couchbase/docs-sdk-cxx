@@ -4,18 +4,18 @@
 // :example-source: 3.0@java-sdk:howtos:example$Queries.java
 // :example-source-lang: java
 == Scan Consistency
-Queries take an optional `scanConsistency` parameter that enables a tradeoff between latency and (eventual) consistency.
+Queries take an optional `scan_consistency` parameter that enables a tradeoff between latency and (eventual) consistency.
 
-* A {sqlpp} query using the default `NotBounded` scan consistency will not wait for any indexes to finish updating before running the query and returning results, meaning that results are returned quickly, but the query will not return any documents that are yet to be indexed.
+* A {sqlpp} query using the default `not_bounded` scan consistency will not wait for any indexes to finish updating before running the query and returning results, meaning that results are returned quickly, but the query will not return any documents that are yet to be indexed.
 
-* With scan consistency set to `RequestPlus`, all outstanding document changes and index updates are processed before the query is run.
+* With scan consistency set to `request_plus`, all outstanding document changes and index updates are processed before the query is run.
 Select this when consistency is always more important than performance.
 
-* For a middle ground, `AtPlus` is a "read your own write" (RYOW) option, which means it just waits for the documents that you specify to be indexed.
+* For a middle ground, `at_plus` is a "read your own write" (RYOW) option, which means it just waits for the documents that you specify to be indexed.
 
-Here's how to specify the `RequestPlus` scan consistency level:
+Here's how to specify the `request_plus` scan consistency level:
 
 [source,{example-source-lang}]
 ----
-include::{example-source}[tag=request-plus]
+include::{example-source}[tag=request-plus,indent=0]
 ----

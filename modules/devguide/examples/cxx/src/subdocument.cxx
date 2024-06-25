@@ -47,7 +47,7 @@ main() -> int
         if (err) {
             std::cout << fmt::format("Error: {}\n", err);
         } else {
-            auto country = result.content_as<std::string>(0);
+            auto country = result.template content_as<std::string>(0);
             std::cout << fmt::format("Country: {}\n", country);
         }
 
@@ -66,7 +66,7 @@ main() -> int
               if (err) {
                   std::cout << fmt::format("Error: {}\n", err);
               } else {
-                  auto country = result.content_as<std::string>(0);
+                  auto country = result.template content_as<std::string>(0);
                   std::cout << fmt::format("Country: {}\n", country);
               }
           }
@@ -232,7 +232,7 @@ main() -> int
             .get();
 
         // Just for demo, a production app should check the result properly
-        assert(!err1.ec());
+        assert(!err1);
 
         auto [err2, result2] = collection
                                  .mutate_in(
@@ -305,7 +305,7 @@ main() -> int
     {
         // #tag::counter-dec[]
         auto [err1, result1] = collection.upsert("player432", tao::json::value{ { "gold", 1000 } }).get();
-        assert(!err1.ec());
+        assert(!err1);
 
         auto [err2, result2] = collection
                                  .mutate_in(
@@ -369,7 +369,7 @@ main() -> int
         // #tag::cas[]
         auto [err1, result1] = collection.get("player432").get();
 
-        assert(!err1.ec());
+        assert(!err1);
 
         auto [err2, result2] = collection
                                  .mutate_in(
