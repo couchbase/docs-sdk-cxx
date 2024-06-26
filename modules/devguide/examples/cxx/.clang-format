@@ -8,7 +8,7 @@ BasedOnStyle: Mozilla
 Standard: c++17
 UseTab: Never
 IndentWidth: 4
-ColumnLimit: 140
+ColumnLimit: 100
 AllowShortFunctionsOnASingleLine: None
 AllowShortBlocksOnASingleLine: Never
 AllowShortCaseLabelsOnASingleLine: false
