@@ -3,6 +3,9 @@
 // :page-aliases: durability-replication-failure-considerations.adoc
 :description: Performance, availability, consistency -- balance your priorities, and model your data to achieve these goals.
 :page-toclevels: 2
+:lang: C++
+:example-source: devguide:example$cxx/src/kv_operations.cxx
+:example-source-lang: c++
 
 
 // Note to editors
@@ -21,18 +24,9 @@ You want to query your data, but does that always mean a {sqlpp} query to the Da
 The CRUD API of the {sqlpp} Query service is mirrored by the Data Service's API, but without the need for indexes, and using a binary protocol gives faster access than streaming JSON from the Query Service.
 
 
-[source,cxx]
+[source,{example-source-lang}]
 ----
-  {
-    std::scoped_lock lock(mutex_);
-    auto options =
-      couchbase::get_and_lock_options{}.retry_strategy(retry_strategy_).timeout(timeout_);
-    auto [err, resp] = collection_.get_and_lock(document_id_, lock_duration_, options).get();
-    auto ctx = err.ctx().as<tao::json::value>();
-    std::size_t retry_attempts = 0;
-    if (const auto* attempts = ctx.find("retry_attempts"); attempts != nullptr) {
-      retry_attempts = attempts->get_unsigned();
-    }
+include::{example-source}[indent=0,tag=remove_with_durability]
 ----
 
 At its heart, a database is in the business of storing data and letting you query and retrieve it.
