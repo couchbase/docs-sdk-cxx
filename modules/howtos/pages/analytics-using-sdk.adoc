@@ -40,9 +40,11 @@ Here's a complete example of doing an analytics query and handling the results:
 include::{example-source}[indent=0,tag=analytics_query]
 ----
 
-Let's break this down.  First, we get the results in the form of a `std::pair<couchbase::error, couchbase::analytics_result>`.
+Let's break this down.
+First, we get the results in the form of a `std::pair<couchbase::error, couchbase::analytics_result>`.
 
-An `analytics_result` contains various things of interest, such as metrics, but the main thing we're interested in are the rows (results).  They're fetched with a  `rows_as_json` call.
+An `analytics_result` contains various things of interest, such as metrics, but the main thing we're interested in are the rows (results).
+They're fetched with a  `rows_as_json` call.
 
 We check explicitly for an `error` which indicates something went wrong during the analytics query call.
 Please see xref:howtos:error-handling.adoc[Error Handling] for details.
