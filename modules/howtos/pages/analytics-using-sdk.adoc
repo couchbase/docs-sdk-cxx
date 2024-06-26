@@ -23,7 +23,7 @@ A separate, as-a-service offering -- Capella Columnar -- is available as a https
 
 After familiarizing yourself with our xref:{version-server}@server:analytics:primer-beer.adoc[introductory primer],
 in particular creating a dataset and linking it to a bucket to shadow the operational data,
-try Couchbase Analytics using the C++ SDK.
+try Couchbase Analytics using the {cpp} SDK.
 Intentionally, the API for analytics is very similar to that of the query service.
 
 Before starting, here's all imports used in the following examples:
@@ -48,7 +48,7 @@ We check explicitly for an `error` which indicates something went wrong during t
 Please see xref:howtos:error-handling.adoc[Error Handling] for details.
 
 Here we're fetching rows converted into JSON, but as with {sqlpp} (formerly N1QL) there's many more options available.
-Rows can be returned as JSON representations from multiple third party C++ libraries, directly as a user defined class, and more.
+Rows can be returned as JSON representations from multiple third party {cpp} libraries, directly as a user defined class, and more.
 Please see xref:howtos:json.adoc[JSON Libraries] for full details.
 
 Finally, we iterate through the `rows`.
@@ -90,6 +90,6 @@ include::{example-source}[indent=0,tag=metadata]
 ////
 == Additional Resources
 
-To learn more about using {sqlpp} for Analytics -- the first commercial implementation of SQL++ -- see our https://sqlplusplus-tutorial.couchbase.com/tutorial/#1[Tutorial Introduction to SQL++ for SQL users].
+To learn more about using {sqlpp} for Analytics -- the first commercial implementation of {sqlpp} -- see our https://sqlplusplus-tutorial.couchbase.com/tutorial/#1[Tutorial Introduction to SQL++ for SQL users].
 
 ////
