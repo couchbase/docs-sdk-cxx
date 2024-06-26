@@ -1,5 +1,5 @@
 = Full Installation of the {cpp} SDK
-:description: Installation instructions for the Couchbase Scala Client.
+:description: Installation instructions for the Couchbase C++ Client.
 :navtitle: Full Installation
 :page-partial:
 :page-toclevels: 2
@@ -15,76 +15,34 @@
 [abstract]
 {description}
 
-
-
-
 This page gives full installation instructions for the {name-sdk}.
 In most cases, the xref:hello-world:start-using-sdk.adoc[Quickstart Guide] should be enough to get you up and running if you're in a hurry.
 
-
 == Prerequisites
 
+A C++ 17 compiler and https://cmake.org/[CMake] version 3.19 or newer is required. See the xref:project-docs:compatibility.adoc[Compatibility] section for details on supported platforms.
 
+== Installing the SDK
 
-=== Getting the Source Code
+=== With CPM.cmake
 
-This repo uses several git submodules. If you are fetching the repo for the first time by command line, the `--recurse-submodules` option will init the submodules recursively as well:
+https://github.com/cpm-cmake/CPM.cmake[CPM.cmake] makes it really easy to include the library in your project. You only need to include the following command in your `CMakeLists.txt`.
 
-[source,console]
+[source,cmake]
 ----
-git clone --recurse-submodules https://github.com/couchbaselabs/couchbase-cxx-client.git
-----
-
-However, if you fetched using a simple clone command (or another IDE or tool) you must also perform the following command to recursively update and initialize the submodules:
-
-[source,console]
-----
-git submodule update --init --recursive
-----
-
-=== Building with CMake
-
-This repo is being built with CMake so everything should build easily once the basic dev dependencies are satisfied.
-
-=== Dev Dependencies
-
-The following dependencies must be installed before the project can be built. We recommend using OS specific utilities such as brew, apt-get, and similar package management utilities (depending on your environment).
-
-====
-cmake >= 3.20.0+ (e.g., brew install cmake)
-c++ compiler >= std_17 (e.g., xcode-select --install)
-openssl >= 1.1+ (e.g., brew install openssl)
-====
-
-IMPORTANT: On macOS, the OpenSSL brew install command mentioned above is not sufficient to be able to build. 
-The easiest way to fix this is to add the `OPENSSL_ROOT_DIR` env variable to your exports (e.g., .zshenv). 
-If this is not sufficient, see the other tips mentioned when you run brew info openssl.
-
-[source,console]
-----
-export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/ 
+CPMAddPackage(
+  NAME
+  couchbase_cxx_client
+  GIT_TAG
+  1.0.0
+  VERSION
+  1.0.0
+  GITHUB_REPOSITORY
+  "couchbase/couchbase-cxx-client"
+  OPTIONS
+  "COUCHBASE_CXX_CLIENT_STATIC_BORINGSSL ON")
 ----
 
-=== Building (command-line)
+=== Building from source
 
-[source,console]
-----
-$ cd couchbase-cxx-client
-----
-
-[source,console]
-----
-$ mkdir build; cd build
-----
-
-[source,console]
-----
-$ cmake ..
-----
-
-[source,console]
-----
-$ cmake --build
-----
-
-// Node - https://www.couchbase.com/forums/t/build-of-node-js-sdk-4-2-6-fail-on-debian-11-bullseye/36792/6 
+Full instructions to build the SDK from source are given in the README of our https://github.com/couchbase/couchbase-cxx-client[GitHub repository].
