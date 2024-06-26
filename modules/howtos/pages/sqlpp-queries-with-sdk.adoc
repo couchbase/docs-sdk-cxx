@@ -66,7 +66,7 @@ include::{example-source}/[tag=get-rows,indent=0]
 
 [NOTE]
 =====
-Most of the examples here use the simplest of the two asynchronous APIs provided by the C++ SDK, which returns an `std::future`.  There's also a callback-based asynchronous, for which we'll see an example later.
+All of the examples here use the simplest of the two asynchronous APIs provided by the C++ SDK, which returns an `std::future`.  There's also a callback-based asynchronous API. See xref:concurrent-async-apis[Choosing an API] for more details.
 =====
 
 include::howtos:partial$n1ql-placeholders.adoc[indent=0]
