@@ -43,10 +43,13 @@ In addition to its use as a monitoring tool, a regular `Ping` can be used in an 
 include::cxx-sdk:devguide:example$cxx/src/health_check.cxx[tag=ping]
 ----
 
+////
 === More Information
 
 For further use of `ping()`, refer to https://docs.couchbase.com/sdk-api/couchbase-scala-client/com/couchbase/client/scala/Cluster.html#ping(options:com.couchbase.client.scala.diagnostics.PingOptions):scala.util.Try%5Bcom.couchbase.client.core.diagnostics.PingResult%5D[the API docs] --
 including https://docs.couchbase.com/sdk-api/couchbase-scala-client/com/couchbase/client/scala/diagnostics/PingOptions.html[PingOptions].
+////
+
 
 == Diagnostics
 
@@ -62,11 +65,12 @@ If you want the _current_ status, then use xref:#ping[Ping].
 include::{example-source}[indent=0,tag=diagnostics]
 ----
 
+////
 === More Information
 
 For specifics, refer to the https://docs.couchbase.com/sdk-api/couchbase-scala-client/com/couchbase/client/scala/Cluster.html#diagnostics(options:com.couchbase.client.scala.diagnostics.DiagnosticsOptions):scala.util.Try%5Bcom.couchbase.client.core.diagnostics.DiagnosticsResult%5D[API docs] -- 
 including https://docs.couchbase.com/sdk-api/couchbase-scala-client/com/couchbase/client/scala/diagnostics/DiagnosticsOptions.html[DiagnosticsOptions].
-
+////
 
 
 
