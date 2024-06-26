@@ -2,6 +2,9 @@
 :description: Errors are inevitable. Scala offers several flexible approaches to handling them.
 :page-toclevels: 2
 :page-aliases: handling-error-conditions.adoc
+:lang: C++
+:example-source: devguide:example$cxx/src/error_handling.cxx
+:example-source-lang: c++
 
 [abstract]
 {description}
@@ -12,30 +15,34 @@ The developer’s job is to be prepared for whatever is likely to come up -- and
 Couchbase gives you a lot of flexibility, but it is recommended that you equip yourself with an understanding of the possibilities.
 
 
-As covered xref:concurrent-async-apis.adoc[here], the Scala SDK ships with three different APIs, allowing you to structure your application the way you want.
-That guide also covers how errors are actually returned (e.g. via `Try`, `Future`, or `Mono`) and handled, so this document will focus instead on specific errors, along with a broader look at error handling strategies.
+As covered xref:concurrent-async-apis.adoc[here], the {cpp} SDK ships with two different APIs, allowing you to structure your application the way you want.
+That guide also covers how errors are actually returned and handled, so this document will focus instead on specific errors, along with a broader look at error handling strategies.
+
+Operations in the {cpp} SDK do not throw exceptions, instead, every operation returns a `couchbase::error`, that evaluates to `true` if an error occurred.
+
+Each error contains a `std::error_code`, that can be fetched using `couchbase::error::ec()`, providing an easy way to handle anything that goes wrong.
 
 == Key-Value Errors
 
-The KV Service exposes several common errors that can be encountered - both during development, and to be handled by the production app. Here we will cover some of the most common errors.
+The KV Service exposes several common error codes that can be encountered - both during development, and to be handled by the production app. Here we will cover some of the most common errors.
 
-If a particular key cannot be found it is raised as an `DocumentNotFoundException`:
+If a particular key cannot be found it returns a `couchbase::errc::key_value::document_not_found` error code:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/ErrorHandling.scala[tag=key-not-found,indent=0]
-----
-
-[source,scala]
-----
-include::devguide:example$scala/ErrorHandling.scala[tag=get,indent=0]
+include::{example-source}[indent=0,tag=replace]
 ----
 
-On the other hand if the key already exists and should not (e.g. on an insert) then it is raised as a `DocumentExistsException`:
-
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/ErrorHandling.scala[tag=key-exists,indent=0]
+include::{example-source}[indent=0,tag=get]
+----
+
+On the other hand if the key already exists and should not (e.g. on an insert) then it returns a `couchbase::errc::key_value::document_exists` error code:
+
+[source,{example-source-lang}]
+----
+include::{example-source}[indent=0,tag=get]
 ----
 
 === Concurrency
@@ -45,11 +52,11 @@ Each document gets a CAS value on the server, which is changed on each mutation.
 When you get a document you automatically receive its CAS value.
 When replacing the document, 
 if you provide that CAS the server can check that the document has not been concurrently modified by another agent in-between.
-If it has, it returns `CasMismatchException`, and the most appropriate response is to simply retry it:
+If it has, it returns a `couchbase::errc::common::cas_mismatch` error code, and the most appropriate response is to simply retry it:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/ErrorHandling.scala[tag=cas,indent=0]
+include::{example-source}[indent=0,tag=cas]
 ----
 
 === Ambiguity
@@ -57,9 +64,9 @@ include::devguide:example$scala/ErrorHandling.scala[tag=cas,indent=0]
 There are situations with any distributed system in which it is simply impossible to know for sure if the operation completed successfully or not.
 Take this as an example: your application requests that a new document be created on Couchbase Server.
 This completes, but, just before the server can notify the client that it was successful, a network switch dies and the application's connection to the server is lost.
-The client will timeout waiting for a response and will raise a `TimeoutException`, but it's ambiguous to the app whether the operation succeeded or not.
+The client will timeout waiting for a response and will return a `couchbase::errc::common::ambiguous_timeout` error code, but it's ambiguous to the app whether the operation succeeded or not.
 
-Another ambiguous error is `DurabilityAmbiguousException`, which can returned when performing a durable operation.
+Another ambiguous error code is `couchbase::errc::key_value::durability_ambiguous`, which can returned when performing a durable operation.
 This similarly indicates that the operation may or may not have succeeded --
 though when using durability you are guaranteed that the operation will either have been applied to all replicas, or none.
 
@@ -67,11 +74,11 @@ Given the inevitability of ambiguity, how is the application supposed to handle 
 
 It really needs to be considered case-by-case, but the general strategy is to become certain if the operation succeeded or not, and to retry it if required.
 
-For instance, for inserts, they can simply be retried to see if they fail on `DocumentExistsException`, in which case the operation was successful:
+For instance, for inserts, they can simply be retried to see if they fail with `couchbase::errc::key_value::document_exists`, in which case the operation was successful:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/ErrorHandling.scala[tag=insert,indent=0]
+include::{example-source}[indent=0,tag=do_insert]
 ----
 
 That example is much closer to what an application will want to be doing.
@@ -81,20 +88,20 @@ Let's flesh it out further.
 
 The application can write wrappers so that it can easily do operations without having to duplicate the error handling each time.  Something like this:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/ErrorHandling.scala[tag=insert-real,indent=0]
+include::{example-source}[indent=0,tag=do_insert_real]
 ----
 
 This will make a 'best effort' to do the insert (though its retry strategy is rather naïve, and applications may want to implement a more sophisticated approach involving exponential backoff and circuit breaking.)
 
-If that best effort fails, and the `doInsert` call still returns a `Failure`, then it's highly context-dependent how to handle that.
+If that best effort fails, and the `do_insert` call still returns a "failure", then it's highly context-dependent how to handle that.
 Examples would include displaying a "please try again later" error to a user, if there is one, and logging it for manual human review.
 The application must make a suitable call for each case.
 
 The application can write similar wrappers for the other operations -- replace, upsert, _et al_.
 Note that the logic is a little different in each case:
-for inserts, we confirm if the operation has already been successful on an ambiguous result by checking for `DocumentExistsException`
+for inserts, we confirm if the operation has already been successful on an ambiguous result by checking for `couchbase::errc::key_value::document_exists`
 But this wouldn't make sense for an upsert.
 
 === Idempotent and Non-Idempotent Operations
@@ -104,38 +111,25 @@ Repeatedly setting an email field is idempotent -- increasing a counter by one i
 
 Some operations we can view as idempotent as they will fail with no effect after the first success -- such as inserts.
 
-Idempotent operations are much easier to handle, as on ambiguous error results (`DurabilityAmbiguousException` and `TimeoutException`) the operation can simply be retried.
+Idempotent operations are much easier to handle, as on ambiguous error results (`couchbase::errc::key_value::durability_ambiguous` and `couchbase::errc::common::ambiguous_timeout`) the operation can simply be retried.
 
-Most key-value operations are idempotent.  For those that aren't, such as a Sub-Document `arrayAppend` call, or a counter increment, the application should, on an ambiguous result, first read the document to see if that change was applied.
+Most key-value operations are idempotent.  For those that aren't, such as a Sub-Document `array_append` call, or a counter increment, the application should, on an ambiguous result, first read the document to see if that change was applied.
 
 == Query and Analytics Errors
 
-A {sqlpp} (formerly N1QL) query either returns results or `QueryError`, like so:
+A {sqlpp} (formerly N1QL) query returns a `couchbase::error` and `couchbase::query_result`, like so:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/ErrorHandling.scala[tag=query,indent=0]
+include::{example-source}[indent=0,tag=query]
 ----
 
-Analytics works in an identical fashion, raising an `AnalyticsError`.
-
-
-
-
-
-== Cloud Native Gateway
-
-If you connect to the Kubernetes or OpenShift over our xref:howtos:managing-connections.adoc#cloud-native-gateway[CloudNative Gateway], using the new `couchbase2://` endpoints, there are a few changes in the error messages returned.
-
-Some error codes are more generic -- in cases where the client would not be expected to need to take specific action -- but should cause no problem, unless you have written code looking at individual strings within the error messages.
-
-
-
+Analytics works in an identical fashion, returning a `couchbase::error` and `couchbase::analytics_result`.
 
 
 == Additional Resources
 
-Errors & Exception handling is an expansive topic.
+Error handling is an expansive topic.
 Here, we have covered examples of the kinds of exception scenarios that you are most likely to face.
 More fundamentally, you also need to weigh up xref:concept-docs:durability-replication-failure-considerations.adoc[concepts of durability].
 

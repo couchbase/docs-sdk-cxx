@@ -22,13 +22,15 @@ main()
     auto scope = cluster.bucket(bucket_name).scope(scope_name);
     auto collection = scope.collection(collection_name);
 
-    // #tag::vector_search[]
+
     {
+        // #tag::vector_search[]
         couchbase::search_request request(couchbase::vector_search(couchbase::vector_query("vector_field", vector_query)));
 
         auto [err, res] = scope.search("vector-index", request).get();
+        // #end::vector_search[]
     }
-    // #end::vector_search[]
+
     {
         // #tag::multiple_vector_queries[]
         std::vector<couchbase::vector_query> vector_queries{
