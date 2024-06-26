@@ -55,7 +55,7 @@ M1 ARM  architecture is fully supported in the Scala SDK.
 ARM64: support for ARMv8 CPUs, such as the Amazon Graviton series and Apple M1 ARM processors.
 ****
 
-The SDK should also be expected to run on other commonly-available GNU/Linux distributions which support an appropriate JDK, but not all combinations can be tested.
+The SDK should also be expected to run on other commonly-available GNU/Linux distributions which support an appropriate compiler, but not all combinations can be tested.
 
 
 ////
