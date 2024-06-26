@@ -10,39 +10,17 @@ Plus notes on Cloud, networks, and AWS Lambda.
 {description}
 
 
-The Couchbase Scala SDK {sdk_dot_minor} Client supports Scala 2.12 and 2.13.
+The Couchbase {cpp} SDK {sdk_dot_minor} Client supports {cpp} 17, or more recent versions.
 
 
 == Platform Compatibility
 
 
 
-
-
-
-=== JDK Version Compatibility
-
-The {name-sdk} is tested with Oracle JDK and OpenJDK.
-Other JDK implementations might work but are not tested and are unsupported.
-We recommend running the latest LTS version (i.e. at the time of writing JDK 21) with the highest patch version available.
-
-The following JDK releases are supported:
-
-* https://adoptium.net/[OpenJDK 21 with HotSpot JVM] (recommended)
-* https://adoptium.net/[OpenJDK 17 with HotSpot JVM]
-* https://www.oracle.com/java/technologies/downloads/#jdk17[Oracle JDK 17]
-* https://adoptium.net/[OpenJDK 11] (Hotspot recommended) or https://www.oracle.com/java/technologies/downloads/#jdk11[Oracle JDK 11]
-* https://adoptium.net/[OpenJDK 1.8 with HotSpot JVM]
-* https://www.oracle.com/java/technologies/downloads/#java8[Oracle JDK 1.8]
-
-Please make sure you run on one of the latest patch releases, since they provide stability improvements and security fixes in general.
-
-
-
 === OS Compatibility
 
-In general, the JVM eliminates concerns about underlying OS compatibility, 
-and Couchbase JVM SDKs can be expected to run on all of the Operating Systems supported by xref:{version-server}@server:install:install-platforms.adoc[Couchbase Server].
+In general, the SDK should run on any modern platform with the correct compiler and version of `cmake`,
+and the Couchbase {cpp} SDK can be expected to run on all of the Operating Systems supported by xref:{version-server}@server:install:install-platforms.adoc[Couchbase Server].
 
 The {name-sdk} is tested and supported on the following OSs and platforms:
 
@@ -68,7 +46,7 @@ The {name-sdk} is tested and supported on the following OSs and platforms:
 === Mac OS X
 
 The current and previous two releases of OS X.
-At time of writing (March 2024): 14 (Sonoma), 13 (Ventura), and 12 (Monterey).
+At time of writing (June 2024): 14 (Sonoma), 13 (Ventura), and 12 (Monterey).
 M1 ARM  architecture is fully supported in the Scala SDK.
 
 [discrete]
@@ -77,7 +55,11 @@ M1 ARM  architecture is fully supported in the Scala SDK.
 ARM64: support for ARMv8 CPUs, such as the Amazon Graviton series and Apple M1 ARM processors.
 ****
 
-The JVM SDKs should also be expected to run on other commonly-available GNU/Linux distributions which support an appropriate JDK, but not all combinations can be tested -- notable exceptions are listed below.
+The SDK should also be expected to run on other commonly-available GNU/Linux distributions which support an appropriate JDK, but not all combinations can be tested.
+
+
+////
+ -- notable exceptions are listed below.
 
 ==== Alpine Linux Compatibility
 
@@ -101,7 +83,7 @@ ClusterEnvironment env = ClusterEnvironment.builder().ioEnvironment(IoEnvironmen
 `-Dcom.couchbase.client.core.deps.io.netty.transport.noNative=true`
 
 The downside of these workarounds is potentially reduced performance, which can be determined through benchmarking and profiling.
-
+////
 
 
 
@@ -131,24 +113,14 @@ It is best to upgrade either the SDK or the Couchbase version you are using.
 .Recommended SDK per Server Version Matrix
 [#table_sdk_versions]
 |===
-| | 1.3 | 1.4, 1.5 | 1.6
+| | 1.0
 
 | *Server 7.0 - 7.2*
 | *✔*
-| *✔*
-| *✔*
 
-| *Server 7.6* ①
-| *✔*
-| *✔*
+| *Server 7.6*
 | *✔*
 |===
-
-① Server 7.6 is compatible with all supported (not yet End-of-Life) versions of the {name-sdk}, but for full support of the latest features you need to upgrade to a recent version of the SDK.
-See the <<#couchbase-new-feature-availability-matrix,Feature Availablity matrix below>> and the xref:sdk-release-notes.adoc[Release Notes page].
-
-Note the https://www.couchbase.com/support-policy[End of Life dates^] for Couchbase Server and SDK versions.
-See the notes there for Support details.
 
 === Capella Compatibility
 
@@ -171,56 +143,17 @@ include::{version-common}@sdk:shared:partial$capella.adoc[tag=cloud]
 | Enhanced Durability
 3+| All SDK versions
 
-| Durable Writes
-3+| Since 1.0
-
-| Analytics
-3+| Since 1.0
-
-| Collections
-3+| Since 1.0.10
-
-| Scope-Level {sqlpp} (formerly N1QL) Queries & all Collections features
-3+| Since SDK 1.2.0
-
-| Request Tracing
-3+| Since SDK 1.2.0
-
 | Cloud Native Gateway
 | Not Supported
-2+| From SDK 1.5.0 (with xref:operator::overview.adoc[Couchbase Autonomous Operator] 2.6.1+)
+2+| From SDK 1.0 (with xref:operator::overview.adoc[Couchbase Autonomous Operator] 2.6.1+)
 
 | Vector Search
 2+| N/A
-| From SDK 1.6.0
+| From SDK 1.0.0
 |===
 
 This table is not an exhaustive list -- just a few highlights -- provided to help assess compatibility of older versions in particular.
 For alignment of SDKs and new Server features, scroll down to the information below the <<api-version,API Version table>>.
-
-
-=== Spring Data Couchbase Compatibility
-
-https://projects.spring.io/spring-data-couchbase/[Spring Data Couchbase^] uses the Java SDK underneath and as a result it also provides different compatibilities with Couchbase Server.
-The following table provides an overview.
-
-.Recommended Spring Data Couchbase per Server Version Matrix
-[#table_spring_versions]
-|===
-|  | SDC 4.3 - 4.4 | SDC 5.0 - 5.2
-
-| _Status ->_
-| _Maintenance Support_
-| _New Features, Active Development_
-
-| *Server 7.0 - 7.6*
-| *Compatible*
-| *Recommended*
-|===
-
-NOTE: Check the Spring Data Couchbase's compile dependencies -- older versions may link an out-of-date version of the SDK in their dependencies list, although a supported version should be in the `updates`.
-Please make sure that you are using a supported version of the Couchbase Scala SDK, prefereably the latest version, which will contain any available bug fixes.
-Using the latest Spring Data Couchbase should ensure that this is so.
 
 
 === API Version
