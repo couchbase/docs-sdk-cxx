@@ -11,15 +11,18 @@
 [abstract]
 {description}
 
-Almost all configuration for the SDK can be specified through the `cluster_options` which are passed to the `cluster::connect` call in the SDK. In addition to this, some of these options can also be specified through the connection string.
+Almost all configuration for the SDK can be specified through the `cluster_options` which are passed to the `cluster::connect` call in the SDK.
+In addition to this, some of these options can also be specified through the connection string.
 
-Cluster options are grouped into categories. For example, timeout options are configured using an instance of the `timeout_options` class, accessed via the `cluster_options` instance's `timeouts()` getter.
+Cluster options are grouped into categories.
+For example, timeout options are configured using an instance of the `timeout_options` class, accessed via the `cluster_options` instance's `timeouts()` getter.
 
 .Configuring timeout options
 [source,{example-source-lang}]
 ----
 include::{example-source}[tag=timeout,indent=0]
 ----
+
 
 == General Options
 
@@ -28,7 +31,8 @@ These options specify the general configuration options for the client.
 Name: *Authenticator*::
 Options Method: `cluster_options` constructor parameter
 +
-Set this to the authenticator you wish to use to authenticate with the server. Possible options which are included in the SDK include the `password_authenticator` and `certificate_authenticator`.
+Set this to the authenticator you wish to use to authenticate with the server.
+Possible options which are included in the SDK include the `password_authenticator` and `certificate_authenticator`.
 
 Name: *Username / Password*::
 Options Method: `cluster_options` constructor parameters
@@ -42,12 +46,16 @@ Default: `best_effort_retry_strategy{ controlled_backoff }`
 +
 The retry strategy decides if an operation should be retried or canceled. While implementing a custom strategy is fairly advanced, the SDK ships with a best effort retry strategy out of the box (`best_effort_retry_strategy`). This default will retry the operation (when the error is retriable) until it either succeeds or the maximum request lifetime is reached.
 
+
 == Security Options
 
-By default, the client will connect to Couchbase Server using an unencrypted connection.
-If you are using the Enterprise Edition, it's possible to secure the connection using TLS.
+By default, the client will connect to (self-managed) Couchbase Server using an unencrypted connection.
+If you are using the Enterprise Edition of self-managed Couchbase Server,
+it's possible to secure the connection using TLS.
 
 NOTE: Unless you use the `couchbases://` connection string scheme, none of the other security settings in this section have any effect.
+If you are using Capella, secure connection is the only option.
+
 
 Name: *TLS Certificate Location*::
 Options Method: `security().trust_certificate(std::string)`
@@ -179,7 +187,8 @@ Connection String Parameter: `enable_mutation_tokens=<true|false>`
 +
 Default: `true`
 +
-Mutation tokens allow enhanced durability requirements as well as advanced SQL++ querying capabilities. Set this to false if you do not require these features and wish to avoid the associated overhead.
+Mutation tokens allow enhanced durability requirements as well as advanced SQL++ querying capabilities.
+Set this to false if you do not require these features and wish to avoid the associated overhead.
 
 Name: *Network Resolution*::
 Options Method: `behavior().network(std::string)`
