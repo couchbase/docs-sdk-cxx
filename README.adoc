@@ -1,6 +1,6 @@
 = Couchbase C++ SDK Documentation
 
-This repository hosts the documentation source for the https://docs.couchbase.com/cxx-sdk/1.0/hello-world/overview.html[Couchbase Scala SDK].
+This repository hosts the documentation source for the https://docs.couchbase.com/cxx-sdk/1.0/hello-world/overview.html[Couchbase {cpp} SDK].
 
 This branch documents the 1.0 release of the SDK.
 It follows the https://docs.couchbase.com/cxx-sdk/1.0/project-docs/compatibility.html#api-version[SDK 3.6 API].
