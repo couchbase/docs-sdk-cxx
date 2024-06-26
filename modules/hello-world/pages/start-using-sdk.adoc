@@ -206,7 +206,7 @@ TIP: There's a *View* link to the complete sample code on GitHub above each of t
 Connect to your Couchbase Capella database (or your local Couchbase Cluster, if you are trying out self-managed Couchbase).
 
 
-[tabs,sync-group-id="Couchbase Capella|Self-Managed Couchbase Server"]
+[tabs]
 ==== 
 Couchbase Capella::
 +
