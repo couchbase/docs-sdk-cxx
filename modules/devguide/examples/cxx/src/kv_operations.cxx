@@ -309,6 +309,23 @@ main() -> int
         // #end::counters[]
     }
 
+    {
+        // #tag::remove_with_durability[]
+        std::string document_id{ "document_key" };
+        auto options = couchbase::remove_options().durability(couchbase::durability_level::majority);
+
+        auto [err, res] = collection.remove(document_id, options).get();
+
+        if (err.ec() == couchbase::errc::key_value::document_not_found) {
+            fmt::println("The document does not exist");
+        } else if (err) {
+            fmt::println("Got error: {}", err);
+        } else {
+            fmt::println("id: {}, CAS: {}", document_id, res.cas().value());
+        }
+        // #end::remove_with_durability[]
+    }
+
     cluster.close().get();
     return 0;
 }

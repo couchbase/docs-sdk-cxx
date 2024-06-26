@@ -1,7 +1,9 @@
 = Vector Search
 :page-toclevels: 2
 :description: Vector Search from the SDK, to enable AI integration, semantic search, and the RAG framework.
-
+:lang: C++
+:example-source: devguide:example$cxx/src/search.cxx
+:example-source-lang: c++
 
 // Note to editors
 // 
@@ -53,49 +55,47 @@ This is currently implemented using xref:
 
 ==== Single vector query
 In this first example we are performing a single vector query:
-[source,java]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/Search.java[tag=vector1,indent=0]
+include::{example-source}[indent=0,tag=vector_search]
 ----
 
 Let's break this down.
-We create a `SearchRequest`, which can contain a traditional FTS query `SearchQuery` and/or the new `VectorSearch`.
+We create a `search_request`, which can contain a traditional FTS query `search_query` and/or the new `vector_search`.
 Here we are just using the latter.
 
-The `VectorSearch` allows us to perform one or more `VectorQuery` s.
+The `vector_search` allows us to perform one or more `vector_query` s.
 
-The `VectorQuery` itself takes the name of the document field that contains embedded vectors ("vector_field" here), plus actual vector query in the form of a `float[]`.
+The `vector_query` itself takes the name of the document field that contains embedded vectors ("vector_field" here), plus actual vector query in the form of a `std::vector<double>`.
 
 (Note that Couchbase itself is not involved in generating the vectors, and these will come from an external source such as an embeddings API.)
 
-Finally we execute the `SearchRequest` against the FTS index "travel-sample-index", which has previously been setup to vector index the "vector_field" field.
+Finally we execute the `search_request` against the FTS index "vector-index", which has previously been setup to vector index the "vector_field" field.
 
 This happens to be a scoped index so we are using `scope.search()`.
 If it was a global index we would use `cluster.search()` instead - see <<Scoped vs Global Indexes>>.
 
-It returns the same `SearchResult` detailed earlier.
+It returns the same `search_result` detailed earlier.
 
 ==== Multiple vector queries
 You can run multiple vector queries together:
 
-[source,java]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/Search.java[tag=vector3,indent=0]
+include::{example-source}[indent=0,tag=multiple_vector_queries]
 ----
 
-How the results are combined (ANDed or ORed) can be controlled with `vectorSearchOptions().vectorQueryCombination()`.
+How the results are combined (ANDed or ORed) can be controlled with `vector_search_options.query_combination()`.
 
 ==== Combining FTS and vector queries
 You can combine a traditional FTS query with vector queries:
 
-[source,java]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/Search.java[tag=vector2,indent=0]
+include::{example-source}[indent=0,tag=combined_search_request]
 ----
 
-How the results are combined (ANDed or ORed) can be controlled with `vectorSearchOptions().vectorQueryCombination()`.
-
-
+How the results are combined (ANDed or ORed) can be controlled with `vector_search_options.query_combination()`.
 
 ////
 ==== FTS queries

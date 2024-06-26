@@ -1,25 +1,24 @@
 :cert-link: project-docs:sdk-release-notes.adoc#version-1-3-0-26-april-2022
+:lang: C++
+:example-source: devguide:example$cxx/src/connect.cxx
+:example-source-lang: c++
 include::{version-common}@sdk:pages:partial$troubleshooting-cloud-connections.adoc[]
 
 
-// Additions to additional steps - scala-specific:
+// Additions to additional steps - c++ specific:
 
 * The SDK logging should give some indication as to what's failing. 
-  In particular, check if the DNS SRV lookup is successful. 
+  In particular, check if the DNS SRV lookup is unsuccessful.
   It will look something like:
 +
 ----
-[ INFO] (cb-events) [com.couchbase.core][DnsSrvRecordsLoadedEvent][2086ms] Loaded seed hosts from DNS SRV: [cb-0000.<hostname>, cb-0001.<hostname>, cb-0002.<hostname>]
+[2024-06-20 16:41:59.249]    0ms [warn] [43723,5992021] failed to fetch DNS SRV records for "<hostname>" (<error>), assuming that cluster is listening this address
 ----
-* You can determine if the certificate is the cause of the connection issues by *temporarily* disabling certificate validation with this alternative `ClusterEnvironment` configuration:
+* You can determine if the certificate is the cause of the connection issues by *temporarily* disabling certificate validation with this alternative `cluster_options::security()` configuration:
 +
-[source,scala]
+[source,{example-source-lang}]
 ----
-    val env: ClusterEnvironment = ClusterEnvironment.builder
-      .securityConfig(SecurityConfig()
-        .trustManagerFactory(InsecureTrustManagerFactory.INSTANCE))
-      .build
-      .get
+include::{example-source}[indent=0,tag=tls_skip_verify]
 ----
 +
 _This is not a secure connection._

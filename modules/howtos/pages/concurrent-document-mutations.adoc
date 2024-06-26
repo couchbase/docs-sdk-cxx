@@ -1,5 +1,8 @@
 = Concurrent Document Mutations
 // :page-aliases: ROOT:concurrent-document-mutations.adoc
+:lang: C++
+:example-source: devguide:example$cxx/src/cas.cxx
+:example-source-lang: c++
 
 include::{version-common}@sdk:shared:partial$cas.adoc[tag=intro]
 
@@ -9,9 +12,9 @@ include::{version-common}@sdk:shared:partial$cas.adoc[tag=example]
 
 include::{version-common}@sdk:shared:partial$cas.adoc[tag=errors]
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/CAS.scala[tag=loop,indent=0]
+include::{example-source}[indent=0,tag=loop]
 ----
 
 Sometimes more logic is needed when performing updates, for example, if a property is mutually exclusive with another property; only one or the other can exist, but not both.
@@ -23,10 +26,10 @@ include::{version-common}@sdk:shared:partial$cas.adoc[tag=format]
 
 include::{version-common}@sdk:shared:partial$cas.adoc[tag=locking]
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/CAS.scala[tag=locking,indent=0]
+include::{example-source}[indent=0,tag=lockAndUnlock]
 ----
 
-If the item has already been locked, the server will respond with `CasMismatchException` which means that the operation could not be executed temporarily, but may succeed later on.
+If the item has already been locked, the SDK will return a `couchbase::errc::common::cas_mismatch` error code, which means that the operation could not be executed temporarily, but may succeed later on.
 

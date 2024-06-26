@@ -2,6 +2,9 @@
 :description: This section describes how to connect the {name-sdk} to a Couchbase cluster.
 // :page-aliases: ROOT:managing-connections,howtos:multi-network,ROOT:connecting,ROOT:connection-advanced
 :page-toclevels: 2
+:lang: C++
+:example-source: devguide:example$cxx/src/managing_connections.cxx
+:example-source-lang: c++
 
 
 // Note to editors
@@ -28,67 +31,18 @@ A connection to a Couchbase cluster -- on Capella, or self-managed -- is represe
 A cluster provides access to buckets, scopes, and collections, as well as various Couchbase services and management interfaces. 
 The simplest way to create a `cluster` object is to call `couchbase::cluster::connect()` with a connection string, username, and password:
 
-[source,C++]
+[source,{example-source-lang}]
 ----
-auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options).get();
+include::{example-source}[indent=0,tag=connect_line]
 ----
 
 
 And here it is in the context of a full connection lifecycle:
 
-[source,C++]
+[source,{example-source-lang}]
 ----
-#include <couchbase/cluster.hxx>
- 
-int
-main(int argc, const char* argv[])
-{
-    if (argc != 4) {
-        fmt::print("USAGE: ./start_using couchbase://127.0.0.1 Administrator password\n");
-        return 1;
-    }
- 
-    std::string connection_string{ argv[1] }; // "couchbase://127.0.0.1"
-    std::string username{ argv[2] };          // "Administrator"
-    std::string password{ argv[3] };          // "password"
-    std::string bucket_name{ "travel-sample" };
-
-    // run IO context on separate thread
-    asio::io_context io;
-    auto guard = asio::make_work_guard(io);
-    std::thread io_thread([&io]() { io.run(); });
- 
-    auto options = couchbase::cluster_options(username, password);
-    // customize through the 'options'.
-    // For example, optimize timeouts for WAN
-    options.apply_profile("wan_development");
- 
-    // [1] connect to cluster using the given connection string and the options
-    auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options).get();
-    if (ec) {
-        fmt::print("unable to connect to the cluster: {}\n", ec.message());
-        return 1;
-    }
- 
-    // get a bucket reference
-    auto bucket = cluster.bucket(bucket_name);
- 
-    // get a user-defined collection reference
-    auto scope = bucket.scope("tenant_agent_00");
-    auto collection = scope.collection("users");
-
-    { // your database interactions here
-    }
-  
-    // close cluster connection
-    cluster.close();
-    guard.reset();
- 
-    io_thread.join();
-    return 0;
-}
----- 
-
+include::{example-source}[indent=0,tag=connection_lifecycle]
+----
 
 If this were compiled as `start_using`, then the connection string and authentication credentials would be passed as arguments to the command like so:
 
@@ -123,10 +77,10 @@ nodeA.example.com,nodeB.example.com
 
 .Connection string with two parameters
 ----
-127.0.0.1?io.networkResolution=external&timeout.kvTimeout=10s
+127.0.0.1?network=external&key_value_timeout=10s
 ----
 
-For the {cpp} SDK and its wrapper SDKs, this is the main method of passing client options, such as timout options or I/O options.
+For the {cpp} SDK and its wrapper SDKs, this is the main method of passing client options, such as timeout options or I/O options.
 For more details see xref:ref:client-settings.adoc[], or the latest, complete listing in the 
 // ###
 [API Reference].
@@ -146,43 +100,6 @@ Couchbase Server Enterprise Edition and Couchbase Capella support full encryptio
 // tls-no-verify vs ?
 
 // auth page.
-
-
-
-
-
-
-== Cloud Native Gateway
-
-
-Couchbase's next generation connection protocol, introduced in Scala SDK 1.5 and Couchbase Autonomous Operator 2.6.1, can be enabled simply by changing the connection string to `couchbase2://` but there are a few differences to be aware of, described <<#limitations,below>>.
-// Couchbase's next generation connection protocol, introduced in Scala SDK 1.5 and Couchbase Autonomous Operator 2.6.1, can be enabled simply by changing the connection string to `couchbase2://` but there are a few differences to be aware of, described <<#limitations,below>>.
-
-The protocol implements a gRPC-style interface between the SDK and Couchbase Server (in this case, only available in the Server running on Kubernetes or OpenShift, with a forthcoming release of xref:operator::overview.adoc[Couchbase Autonomous Operator].
-
-
-
-=== Limitations
-
-The underlying protocol will not work with certain legacy features: MapReduce Views (a deprecated Service -- 
-use xref:howtos:sqlpp-queries-with-sdk.adoc[Query] instead) and 
-Memcached buckets (superseded by the improved xref:{server_version}@server:learn:buckets-memory-and-storage/buckets.adoc#bucket-types[Ephemeral Buckets]).
-
-The following are not currently implemented over the `couchbase2://` protocol:
-
-* Authentication by client certificate.
-* Multi-document ACID transactions.
-* Analytics service.
-* Health Check.
-
-There are some different behaviors seen with this protocol:
-
-* Some config options are unsupported -- see the xref:ref:client-settings.adoc#cloud-native-gateway[Settings page].
-* The SDK will poll the gRPC channels until they are in a good state, or return an error, or timeout while waiting -- in our standard protocol there is an option of setting `waitUntilReady()` for just certain services to become available.
-* Some error codes are more generic -- in cases where the client would not be expected to need to take specific action -- but should cause no problem, unless you have written code looking at individual strings within the error messages.
-* Although documents continue to be stored compressed by Couchbase Server, they will not be transmitted in compressed form (to and from the client) over the wire, using `couchbase2://`.
-
-
 
 
 == Dealing With Network Latency
