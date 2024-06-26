@@ -1,5 +1,8 @@
 = Logging
-:description: 
+:description:
+:lang: C++
+:example-source: devguide:example$cxx/src/logging.cxx
+:example-source-lang: c++
 
 
 // Note to editors
@@ -16,9 +19,10 @@
 include::project-docs:partial$preview-warning.adoc[]
 
 
-The Couchbase {cpp} SDK has no hard dependency on a specific logger implementation.
-By default it uses built-in means to report events.
-The default log level is `warning`.
+The Couchbase {cpp} SDK allows logging to be configured programmatically. Internally, the SDK uses the
+https://github.com/gabime/spdlog[spdlog] logging library.
+
+Once the logger has been initialized, The default log level is `info`.
 
 The following log levels are supported (in order of increasing amount of information logged):
 
@@ -30,7 +34,13 @@ The following log levels are supported (in order of increasing amount of informa
 . debug
 . trace
 
-The {cpp} SDK is configured to send logs to standard output.
-The logging level can be changed using the environment variable `COUCHBASE_BACKEND_LOG_LEVEL`.
+The {cpp} SDK can be configured to send logs to standard output, or to a file.
+The logger can be initialized and logging level changed like so:
+
+[source,{example-source-lang}]
+----
+include::{example-source}[indent=0,tag=logging]
+----
+
 
 // ?? or can it ??
