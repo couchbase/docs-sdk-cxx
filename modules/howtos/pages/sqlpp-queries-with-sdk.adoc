@@ -12,7 +12,8 @@
 
 
 On this page we dive straight into using the Query Service API from the {name-sdk}.
-For a deeper look at the concepts, to help you better understand the Query Service, the {sqlpp} language, and the Index Service, see the links in the <<further-information,Further Information>> section at the end of this page.
+For a deeper look at the concepts, to help you better understand the Query Service, the {sqlpp} language, and the Index Service,
+see the links in the <<further-information,Further Information>> section at the end of this page.
 
 
 
@@ -43,15 +44,16 @@ include::{example-source}/[tag=simple,indent=0]
 
 (Note that we won't be covering the {sqlpp} language itself in any detail here, but if you're familiar with SQL you'll see it's very similar.)
 
-The C++ SDK returns a `couchbase::error` instance that wraps an `std::error_code` rather than throwing exceptions. You can check whether an error occurred like this:
+The {cpp} SDK returns a `couchbase::error` instance that wraps an `std::error_code` rather than throwing exceptions.
+You can check whether an error occurred like this:
 
 [source,c++]
 ----
 include::{example-source}/[tag=simple-results,indent=0]
 ----
 
-The returned `query_result` contains an `rows_as<S,T>` method, allowing the results to be converted into something useful.  The above
-example demonstrates returning the results as a `tao::json::value` using the serializer `couchbase::codec::tao_json_serializer`, that uses the _taoJSON_ library.
+The returned `query_result` contains an `rows_as<S,T>` method, allowing the results to be converted into something useful.
+The above example demonstrates returning the results as a `tao::json::value` using the serializer `couchbase::codec::tao_json_serializer`, that uses the _taoJSON_ library.
 
 In addition to `rows_as<S,T>` we provide accessors for common use cases like `rows_as_json` and `rows_as_binary`.
 
@@ -66,7 +68,8 @@ include::{example-source}/[tag=get-rows,indent=0]
 
 [NOTE]
 =====
-Most of the examples here use the simplest of the two asynchronous APIs provided by the C++ SDK, which returns an `std::future`.  There's also a callback-based asynchronous, for which we'll see an example later.
+All of the examples here use the simplest of the two asynchronous APIs provided by the {cpp} SDK, which returns an `std::future`.  
+There's also a callback-based asynchronous API. See xref:concurrent-async-apis[Choosing an API] for more details.
 =====
 
 include::howtos:partial$n1ql-placeholders.adoc[indent=0]
