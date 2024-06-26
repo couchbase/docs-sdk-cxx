@@ -2,6 +2,9 @@
 :description: You can use the Full Text Search service (FTS) to create queryable full-text indexes in Couchbase Server.
 :page-pagination: full
 :page-toclevels: 2
+:lang: C++
+:example-source: devguide:example$cxx/src/search.cxx
+:example-source-lang: c++
 
 
 [abstract]
@@ -20,17 +23,17 @@ The Scala SDK exposes an API for performing FTS queries which abstracts some of 
 == Examples
 The examples below use these imports:
 
-[source.scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/FTS.scala[tag=imports,indent=0]
+include::{example-source}[indent=0,tag=imports]
 ----
 
 Search queries are executed at Cluster level (not bucket or collection).
-Here is a simple MatchQuery that looks for the text “swanky” using a defined index:
+Here is a simple match_query that looks for the text “swanky” using a defined index:
 
-[source.scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/FTS.scala[tag=basic,indent=0]
+include::{example-source}[indent=0,tag=match_query]
 ----
 
 All simple query types are created in the same manner.
@@ -44,9 +47,9 @@ Rows are the documents that match the query.
 Facets allow the aggregation of information collected on a particular result set.
 Metadata holds additional information not directly related to your query, such as total rows and how long the query took to execute in the cluster.
 
-[source.scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/FTS.scala[tag=results,indent=0]
+include::{example-source}[indent=0,tag=working_with_results]
 ----
 
 
@@ -54,8 +57,7 @@ include::devguide:example$scala/FTS.scala[tag=results,indent=0]
 
 Like the Couchbase Query Service, FTS allows provides optional _Read-Your-Own-Writes (RYOW)_ consistency, ensuring results contain information from updated indexes:
 
-[source.scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/FTS.scala[tag=consistency,indent=0]
+include::{example-source}[indent=0,tag=consistency]
 ----
-
