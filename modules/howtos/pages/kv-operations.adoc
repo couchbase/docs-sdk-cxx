@@ -27,33 +27,11 @@ include::{example-source}[indent=0,tag=imports]
 ----
 
 [TIP]
-The Query Service can also be used to perform many single-document operations, but we very strongly recommend using the key-value API for this instead.  It can be much more efficient as the request can go directly to the correct node, there's no query parsing overhead, and it's over the highly optimized memcached binary protocol.
+The Query Service can also be used to perform many single-document operations, but we very strongly recommend using the key-value API for this instead.
+It can be much more efficient as the request can go directly to the correct node, there's no query parsing overhead, and it's over the highly optimized memcached binary protocol.
+
 
 == JSON
-
-////
-
-
-=== JSON
-
-Now we can do some simple Key Value operations.  First, let's create some JSON.
-
-The Scala SDK directly supports several popular JSON libraries, including https://github.com/lihaoyi/upickle[uPickle/uJson], https://circe.github.io/circe/[Circe], https://github.com/playframework/play-json[Play Json], https://github.com/typelevel/jawn[Jawn], and https://github.com/json4s/json4s[Json4s] (if you'd like to see your favorite supported, please let us know).
-In addition you can supply JSON encoded into a `String` or `Array[Byte]`, opening the door to any JSON library; https://jsoniter.com/[Jsoniter] and https://github.com/FasterXML/jackson[Jackson] have been tested this way, but any should work.
-
-You can also directly encode and decode Scala case classes to and from the SDK.
-
-To make things easy and to help get you started, the Scala SDK also bundles a home-grown small JSON library, which you are free to use instead of or alongside any of the other supported JSON libraries.
-The philosophy behind this library is to provide a very easy-to-use API and the fastest JSON implementation possible.
-
-These options are described in detail xref:howtos:json.adoc[here], but to get us started let's created some simple JSON using the built-in JsonObject library:
-
-[source,scala]
-----
-include::devguide:example$scala/Cloud.scala[tag=json,indent=0]
-----
-
-////
 
 The Couchbase Server is a key-value store that's agnostic to what's stored, but it's very common to store JSON so most of the examples below will focus on that use-case.
 
@@ -63,7 +41,9 @@ In addition you can supply and receive JSON as a `std::string` or `std::vector<s
 
 Support for other JSON libraries can also be added by defining your own custom JSON serializers, which is described in more detail in xref:json.adoc[this guide].
 
+
 == Upsert
+
 Here is a simple upsert operation, which will insert the document if it does not exist, or replace it if it does.
 
 [source,{example-source-lang}]
@@ -73,10 +53,10 @@ include::{example-source}[indent=0,tag=upsert]
 
 [NOTE]
 =====
-All of the examples here use the simplest of the two asynchronous APIs provided by the C++ SDK, which returns an `std::future`.  There's also a callback-based asynchronous API. See xref:concurrent-async-apis[Choosing an API] for more details.
+All of the examples here use the simplest of the two asynchronous APIs provided by the {cpp} SDK, which returns an `std::future`.  There's also a callback-based asynchronous API. See xref:concurrent-async-apis[Choosing an API] for more details.
 =====
 
-The C++ SDK returns a `couchbase::error` instance that wraps an `std::error_code` rather than throwing exceptions. You can check whether an error occurred like this:
+The {cpp} SDK returns a `couchbase::error` instance that wraps an `std::error_code` rather than throwing exceptions. You can check whether an error occurred like this:
 
 [source,{example-source-lang}]
 ----
@@ -86,7 +66,9 @@ include::{example-source}[indent=0,tag=upsert-error]
 [NOTE]
 We will use `fmt::println` to simply print any errors in these samples, but the application will of course want to perform better error handling.
 
+
 == Insert
+
 Insert works very similarly to upsert, but will fail if the document already exists:
 
 [source,{example-source-lang}]
@@ -112,7 +94,9 @@ Of course if we're getting a document we probably want to do something with the 
 include::{example-source}[indent=0,tag=get]
 ----
 
+
 == Replace
+
 A very common operation is to `get` a document, modify its contents, and `replace` it:
 
 [source,{example-source-lang}]
@@ -122,13 +106,18 @@ include::{example-source}[indent=0,tag=replace]
 
 There's a couple of things to cover with the `replace` line.
 
-First, most of the methods in the C++ SDK take an 'options' parameter that contains optional parameters that have sensible defaults.  One of them, `cas`, is provided here.  We'll see more throughout this document.
+First, most of the methods in the {cpp} SDK take an 'options' parameter that contains optional parameters that have sensible defaults.  One of them, `cas`, is provided here.  We'll see more throughout this document.
 
 
 [#optimistic-locking]
 === What is CAS?
 
-CAS, or Compare and Swap, is a form of optimistic locking.  Every document in Couchbase has a CAS value, and it's changed on every mutation.  When you `get` a document you also get the document's CAS, and then when it's time to write the document, you send the same CAS back.  If another agent has modified that document, the Couchbase Server can detect you've provided a now-outdated CAS, and return an error instead of mutating the document.  This provides cheap, safe concurrency.  See xref:concurrent-document-mutations.adoc[this detailed description of CAS] for further details.
+CAS, or Compare and Swap, is a form of optimistic locking.
+Every document in Couchbase has a CAS value, and it's changed on every mutation.
+When you `get` a document you also get the document's CAS, and then when it's time to write the document, you send the same CAS back.
+If another agent has modified that document, the Couchbase Server can detect you've provided a now-outdated CAS, and return an error instead of mutating the document.
+This provides cheap, safe concurrency.
+See xref:concurrent-document-mutations.adoc[this detailed description of CAS] for further details.
 
 In general, you'll want to provide a CAS value whenever you `replace` a document, to prevent overwriting another agent's mutations.
 
@@ -151,10 +140,13 @@ Removing a document is straightforward:
 include::{example-source}[indent=0,tag=remove]
 ----
 
+
 == Sub-Document Operations
+
 All of the operations seen so far involve fetching the complete document.
 
 As an optimization the application may consider using the xref:subdocument-operations.adoc[Sub-Document API] to access or mutate specific parts of a document.
+
 
 == Durability
 
@@ -197,11 +189,6 @@ To stress, durability is a useful feature but should not be the default for most
 
 
 == Expiration/TTL
-
-
-
-
-
 
 
 
