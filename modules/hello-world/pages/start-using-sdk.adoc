@@ -4,6 +4,9 @@
 :description: Install, connect, try. A quick start guide to get you up and running with Couchbase and the {name-sdk}.
 // :forum-link: https://www.couchbase.com/forums/c/c-sdk/7
 :page-partial:
+:lang: C++
+:example-source: devguide:example$cxx/src/start_using.cxx
+:example-source-lang: c++
 
 // Note to editors
 // 
@@ -30,20 +33,9 @@ but first let's look at those data operations, and installing the {name-sdk}.
 // remember to add a nomenclature note to the next version of this page for LCB.
 
 .Creating a new database entry with the {cpp} SDK, using `upsert()`
-[source,cxx]
+[source,{example-source-lang}]
 ----
-    {
-        auto collection = cluster.bucket(bucket_name).scope(scope_name).collection(collection_name);
- 
-        const std::string document_id{ "minimal_example" };
-        const tao::json::value basic_doc{
-            { "a", 1.0 },
-            { "b", 2.0 },
-        };
- 
-        auto [ctx, resp] = collection.upsert(document_id, basic_doc, {}).get();
-        std::cout << "ec: " << ctx.ec().message() << ", id: " << document_id << ", CAS: " << resp.cas().value() << "\n";
-    }
+include::{example-source}[indent=0,tag=upsert]
 ----
 
 `upsert` inserts (creates) the document if it does not exist, or replaces it if it does.
@@ -219,16 +211,9 @@ Connect to your Couchbase Capella database (or your local Couchbase Cluster, if 
 Couchbase Capella::
 +
 --
-[source,cxx]
+[source,{example-source-lang}]
 ----
-    auto options = couchbase::cluster_options(username, password);
-    options.apply_profile("wan_development");
-    auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options).get();
-    if (ec) {
-        std::cout << "Unable to connect to the cluster. ec: " << ec.message() << "\n";
-    } else {
-        // Application code here
-    }
+include::{example-source}[indent=0,tag=connect_capella]
 ----
 
 Note, the client certificate for connecting to a Capella database is included in the SDK installation.
@@ -237,43 +222,12 @@ Note, the client certificate for connecting to a Capella database is included in
 Self-Managed Couchbase Server::
 + 
 -- 
-[source,cxx]
+[source,{example-source-lang}]
 ----
-    std::string connection_string{ argv[1] }; // "couchbase://127.0.0.1"
-    std::string username{ argv[2] };          // "Administrator"
-    std::string password{ argv[3] };          // "password"
-    std::string bucket_name{ "travel-sample" };
- 
-    auto [cluster, ec] = couchbase::cluster::connect(io, connection_string, options).get();
-    if (ec) {
-        fmt::print("unable to connect to the cluster: {}\n", ec.message());
-        return 1;
-    }
+include::{example-source}[indent=0,tag=connect_onprem]
 ----
-////
---
-
-Cloud Native Gateway (CNG)::
-+
---
-Couchbase's large number of ports across the URLs of many services can be proxied by using a `couchbase2://` endpoint as the connection string --
-currently only compatible with recent versions of xref:operator:ROOT:concept-cloud-native-gateway.adoc[Couchbase Autonomous Operator]:
-
-[source,scala]
-----
-.connect(
-  "couchbase2://10.12.14.16",
-  ClusterOptions
-    .create(username, password)
-    .environment(env)
-)
-----
-
-Read more on the xref:howtos:managing-connections.adoc#cloud-native-gateway[Connections] page.
-////
 --
 ====
-
 
 For a deeper look at connection options, read xref:howtos:managing-connections.adoc[].
 
@@ -326,27 +280,27 @@ https://en.wikipedia.org/wiki/CRUD[CRUD operations^] -- Create, Read, Update, De
 
 `insert` and `upsert` will both create a new document.
 The difference between the two is that if a document with that key already exists, the `insert` operation will fail,
-throwing `DocumentExistsException` --
+returning a  `document_exists` error --
 while the `upsert` operation will succeed, replacing the content.
 
 
 === Get (Read)
 
 The `get` method reads a document from a collection.
-If the collection does not have a document with this ID, the `get` method also throws `DocumentNotFoundException`.
+If the collection does not have a document with this ID, the `get` method also returns a `document_not_found` error.
 
-[source,cxx]
+[source,{example-source-lang}]
 ----
-// get()
+include::{example-source}[indent=0,tag=get]
 ----
 
 
 === Replace (Update) and Overloads
 
 .The replace method updates the value of an existing document
-[source,cxx]
+[source,{example-source-lang}]
 ----
-// replace()
+include::{example-source}[indent=0,tag=replace]
 ----
 
 CAUTION: When you replace a document, it's usually good practice to use xref:howtos:kv-operations.adoc#optimistic-locking[optimistic locking].
@@ -357,8 +311,9 @@ Otherwise, changes might get lost if two people change the same document at the 
 The remove method deletes a document from a collection:
 
 [source,cxx]
+[source,{example-source-lang}]
 ----
-// delete()
+include::{example-source}[indent=0,tag=remove]
 ----
 
 
