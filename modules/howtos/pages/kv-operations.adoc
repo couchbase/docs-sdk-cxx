@@ -2,6 +2,9 @@
 :description: Data service offers the simplest way to retrieve or mutate data where the key is known. Here we cover CRUD operations, document expiration, and optimistic locking with CAS.
 :page-aliases: document-operations.adoc
 :page-toclevels: 2
+:lang: C++
+:example-source: devguide:example$cxx/src/kv_operations.cxx
+:example-source-lang: c++
 
 [abstract]
 {description}
@@ -18,205 +21,103 @@ Before proceeding, make sure you're familiar with the basics of authorization an
 
 The code samples below will use these imports:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=imports]
+include::{example-source}[indent=0,tag=imports]
 ----
 
 [TIP]
-The Query Service can also be used to perform many single-document operations, but we very strongly recommend using the key-value API for this instead.  It can be much more efficient as the request can go directly to the correct node, there's no query parsing overhead, and it's over the highly optimized memcached binary protocol.
+The Query Service can also be used to perform many single-document operations, but we very strongly recommend using the key-value API for this instead.
+It can be much more efficient as the request can go directly to the correct node, there's no query parsing overhead, and it's over the highly optimized memcached binary protocol.
+
 
 == JSON
 
-////
-
-
-=== JSON
-
-Now we can do some simple Key Value operations.  First, let's create some JSON.
-
-The Scala SDK directly supports several popular JSON libraries, including https://github.com/lihaoyi/upickle[uPickle/uJson], https://circe.github.io/circe/[Circe], https://github.com/playframework/play-json[Play Json], https://github.com/typelevel/jawn[Jawn], and https://github.com/json4s/json4s[Json4s] (if you'd like to see your favorite supported, please let us know).
-In addition you can supply JSON encoded into a `String` or `Array[Byte]`, opening the door to any JSON library; https://jsoniter.com/[Jsoniter] and https://github.com/FasterXML/jackson[Jackson] have been tested this way, but any should work.
-
-You can also directly encode and decode Scala case classes to and from the SDK.
-
-To make things easy and to help get you started, the Scala SDK also bundles a home-grown small JSON library, which you are free to use instead of or alongside any of the other supported JSON libraries.
-The philosophy behind this library is to provide a very easy-to-use API and the fastest JSON implementation possible.
-
-These options are described in detail xref:howtos:json.adoc[here], but to get us started let's created some simple JSON using the built-in JsonObject library:
-
-[source,scala]
-----
-include::devguide:example$scala/Cloud.scala[tag=json,indent=0]
-----
-
-////
-
 The Couchbase Server is a key-value store that's agnostic to what's stored, but it's very common to store JSON so most of the examples below will focus on that use-case.
 
-The Scala SDK provides you with several options for working with JSON.  They are described in more detail in xref:json.adoc[this guide], and the information below is just a summary of that.
+The SDK directly supports the https://github.com/taocpp/json[taoJSON] library, which we'll be using for these examples. taoJSON also provides the ability to encode or decode user-defined types.
 
-The SDK directly supports several popular JSON libraries: https://github.com/lihaoyi/upickle[uPickle/uJson], https://circe.github.io/circe/[Circe], https://github.com/playframework/play-json[Play Json], https://github.com/typelevel/jawn[Jawn], and https://github.com/json4s/json4s[Json4s].
+In addition you can supply and receive JSON as a `std::string` or `std::vector<std::byte>`, opening the door to any JSON library.
 
-In addition you can supply and receive JSON as a `String` or `Array[Byte]`, opening the door to any JSON library; https://jsoniter.com/[Jsoniter] and https://github.com/FasterXML/jackson[Jackson] have been tested, but any should work.
+Support for other JSON libraries can also be added by defining your own custom JSON serializers, which is described in more detail in xref:json.adoc[this guide].
 
-You can also directly encode and decode Scala case classes to and from the SDK.
-
-To make things easy and to help get you started, the Scala SDK also bundles a home-grown small JSON library, which you are free to use instead of or alongside any of the other supported JSON libraries.
-The philosophy behind this library is to provide a very easy-to-use API and the fastest JSON implementation possible.
-
-=== Using JsonObject and JsonArray
-Using the built-in JSON library here's how to create some simple JSON:
-
-[source,scala]
-----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=json1]
-----
-
-`JsonObject` and `JsonArray` are both mutable, so they can also be created this way:
-
-[source,scala]
-----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=json-mutable]
-----
-
-
-It's easy to retrieve data:
-
-[source,scala]
-----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=json2]
-----
-
-Or, using a feature of Scala called `Dynamic`, you can use an alternative syntax like this:
-
-[source,scala]
-----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=json3]
-----
-
-The majority of the Scala SDK will not throw exceptions.  Methods on `JsonObject` are one of the few cases where they are thrown.
-
-If you'd rather not deal with exceptions, `JsonObject` comes with a counterpart `JsonObjectSafe` that provides an alternative interface, in which all methods return Scala `Try` results rather than throwing:
-
-[source,scala]
-----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=json4]
-----
-
-(Don't worry if `Try` is unfamiliar, you'll see plenty of examples of how to use it and combine it with other `Try` in the examples below.)
-
-A `JsonArraySafe` counterpart for `JsonArray` also exists.  Note that `JsonObjectSafe`, though presenting a more functional interface, is still mutable.
-
-[NOTE]
-Using JsonObject and JsonArray is 100% optional.  If you would rather use a purely functional JSON library, with immutable
-data, lenses, cursors and other functional goodies, then the Scala SDK includes full support
-for the excellent https://circe.github.io/circe/[Circe], among other great JSON libraries.
 
 == Upsert
+
 Here is a simple upsert operation, which will insert the document if it does not exist, or replace it if it does.
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=upsert]
+include::{example-source}[indent=0,tag=upsert]
 ----
 
 [NOTE]
 =====
-All the examples here use the Scala SDK's simplest API, which blocks until the operation is performed.  There's also an asynchronous API that is based around Scala `Future`, and a
-reactive API.  See xref:concurrent-async-apis[Choosing an API] for more details.
+All of the examples here use the simplest of the two asynchronous APIs provided by the {cpp} SDK, which returns an `std::future`.  There's also a callback-based asynchronous API. See xref:concurrent-async-apis[Choosing an API] for more details.
 =====
 
-== Handling Single Errors
-A note on error handling: the Scala SDK will not throw exceptions.
+The {cpp} SDK returns a `couchbase::error` instance that wraps an `std::error_code` rather than throwing exceptions. You can check whether an error occurred like this:
 
-Instead, methods that can error will return a Scala `Try` object, which can either be a `Success` containing the result, or a `Failure` containing a _Throwable_ exception.
-
-Pattern matching can be used to handle a `Try`, as above.
-
-Don't worry about cluttering up your code with explicit error handling for every operation: Scala provides useful methods to chain multiple `Try` together, and we'll go into these later.
+[source,{example-source-lang}]
+----
+include::{example-source}[indent=0,tag=upsert-error]
+----
 
 [NOTE]
-We will use `println` to simply print any errors in these samples, but the application will of course want to perform better error handling.
+We will use `fmt::println` to simply print any errors in these samples, but the application will of course want to perform better error handling.
+
 
 == Insert
+
 Insert works very similarly to upsert, but will fail if the document already exists:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=insert]
+include::{example-source}[indent=0,tag=insert]
 ----
 
-Note that a `Try` lets us check for a particular sort of error.  The case clauses are tried in order from the top: if it is not a `Success`, and not a `Failure` containing a `DocumentExistsException`, it will drop to the default `Failure(err)` case.
 
 == Retrieving Documents
 
 We've tried upserting and inserting documents into Couchbase Server, let's get them back:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=get-simple]
+include::{example-source}[indent=0,tag=get-simple]
 ----
+
 
 Of course if we're getting a document we probably want to do something with the content:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=get]
-----
-
-Woah, this looks messy!  Don't worry, this is the ugliest possible way of handling multiple `Try` results and we'll see ways of tidying this up very soon.
-
-For now, let's break down what's going on here.
-
-First, we create some JSON and insert it.
-
-Then, we get the document.
-
-If it's successful, we convert the document's content into a `JsonObjectSafe`.
-
-We can use `contentAs` to return the document's
-content in all sorts of ways: as a String, as an Array[Byte], as a `org.json4s.JValue` from the https://github.com/json4s/json4s[json4s library]... it's very flexible (see xref:json.adoc[the JSON docs] for details).  Here,
-we've asked for it to be returned as a `JsonObjectSafe` - a 'safe' interface to the `JsonObject` that doesn't throw exceptions.
-
-Finally, if the conversion to a `JsonObjectSafe` was successful, we try to get the "status" field (which returns a `Try` with `JsonObjectSafe`), and print it if we were successful.
-
-== Handling Multiple Errors
-Nesting multiple `Try` in that way quickly gets very hard to parse.  Luckily, Scala provides functional tools to easily combine `Try` and handle them in one place.
-
-First there's `flatMap`, which can be used to rewrite the previous example like this:
-
-[source,scala]
-----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=get-map]
+include::{example-source}[indent=0,tag=get]
 ----
 
-Here, if the `get` is successful then the `contentAs` is tried, and if that is successful then the `str` call is tried.  The end result is a single `Try[String]` that will be `Success` if all three operations succeeded, or otherwise `Failure`.
-
-Some may prefer a for-comprehension, which is simply syntactic sugar around the `flatMap` example:
-
-[source,scala]
-----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=get-for]
-----
 
 == Replace
-A very common operation is to `get` a document, modify its contents, and `replace` it.  Let's use a for-comprehension:
 
-[source,scala]
+A very common operation is to `get` a document, modify its contents, and `replace` it:
+
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=replace]
+include::{example-source}[indent=0,tag=replace]
 ----
 
 There's a couple of things to cover with the `replace` line.
 
-First, most of the methods in the Scala SDK take optional parameters that have sensible defaults.  One of them, `cas`, is provided here.  We'll see more throughout this document.
+First, most of the methods in the {cpp} SDK take an 'options' parameter that contains optional parameters that have sensible defaults.  One of them, `cas`, is provided here.  We'll see more throughout this document.
 
 
 [#optimistic-locking]
 === What is CAS?
 
-CAS, or Compare and Swap, is a form of optimistic locking.  Every document in Couchbase has a CAS value, and it's changed on every mutation.  When you `get` a document you also get the document's CAS, and then when it's time to write the document, you send the same CAS back.  If another agent has modified that document, the Couchbase Server can detect you've provided a now-outdated CAS, and return an error instead of mutating the document.  This provides cheap, safe concurrency.  See xref:concurrent-document-mutations.adoc[this detailed description of CAS] for further details.
+CAS, or Compare and Swap, is a form of optimistic locking.
+Every document in Couchbase has a CAS value, and it's changed on every mutation.
+When you `get` a document you also get the document's CAS, and then when it's time to write the document, you send the same CAS back.
+If another agent has modified that document, the Couchbase Server can detect you've provided a now-outdated CAS, and return an error instead of mutating the document.
+This provides cheap, safe concurrency.
+See xref:concurrent-document-mutations.adoc[this detailed description of CAS] for further details.
 
 In general, you'll want to provide a CAS value whenever you `replace` a document, to prevent overwriting another agent's mutations.
 
@@ -224,9 +125,9 @@ In general, you'll want to provide a CAS value whenever you `replace` a document
 
 But if we get a CAS mismatch, we usually just want to retry the operation.  Let's see a more advanced `replace` example that shows one way to handle this:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=replace-retry]
+include::{example-source}[indent=0,tag=replace-retry]
 ----
 
 
@@ -234,46 +135,43 @@ include::devguide:example$scala/KvOperations.scala[indent=0,tag=replace-retry]
 
 Removing a document is straightforward:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=remove]
+include::{example-source}[indent=0,tag=remove]
 ----
 
+
 == Sub-Document Operations
+
 All of the operations seen so far involve fetching the complete document.
 
 As an optimization the application may consider using the xref:subdocument-operations.adoc[Sub-Document API] to access or mutate specific parts of a document.
-
-== Case Classes
-So far we've used JSON directly with `JsonObject` and `JsonObjectSafe`, but it can be very useful to deal with Scala case classes instead.
-
-See xref:json.adoc#case-classes[this guide] for details.
 
 
 == Durability
 
 Writes in Couchbase are written initially to a single active node, and from there the Couchbase Server will take care of sending that mutation to any configured replicas.
 
-The optional `durability` parameter, which all mutating operations accept, allows the application to wait until this replication is successful before proceeding.
+The `durability` option, which all mutating operations accept, allows the application to wait until this replication is successful before proceeding.
 
 It can be used like this:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=durability]
+include::{example-source}[indent=0,tag=durability]
 ----
 
-The default is `Durability.Disabled`, in which the SDK will return as soon as Couchbase Server has the mutation available in-memory on the active node.  This is the default for a reason: it's the fastest mode, and the majority of the time is all the application needs.
+The default is `durability_level::none`, in which the SDK will return as soon as Couchbase Server has the mutation available in-memory on the active node.  This is the default for a reason: it's the fastest mode, and the majority of the time is all the application needs.
 
 However, we recognize that there are times when the application needs that extra certainty that especially vital mutations have been successfully replicated, and the other durability options provide the means to achieve this.
 
 The options differ depend on what Couchbase Server version is in use.  If 6.5 or above is being used, you can take advantage of the xref:concept-docs:durability-replication-failure-considerations.adoc#durable-writes[Durable Write] feature, in which Couchbase Server will only return success to the SDK after the requested replication level has been achieved.  The three replication levels are:
 
-`Majority` - The server will ensure that the change is available in memory on the majority of configured replicas.
+`majority` - The server will ensure that the change is available in memory on the majority of configured replicas.
 
-`MajorityAndPersistToActive` - Majority level, plus persisted to disk on the active node.
+`majority_and_persist_to_active` - Majority level, plus persisted to disk on the active node.
 
-`PersistToMajority` - Majority level, plus persisted to disk on the majority of configured replicas.
+`persist_to_majority` - Majority level, plus persisted to disk on the majority of configured replicas.
 
 The options are in increasing levels of failure-resistance.  Note that nothing comes for free - for a given node, waiting for writes to storage is considerably slower than waiting for it to be available in-memory.
 These trade offs, as well as which settings may be tuned, are discussed in the xref:concept-docs:durability-replication-failure-considerations.adoc#durable-writes[durability page].
@@ -282,20 +180,15 @@ These trade offs, as well as which settings may be tuned, are discussed in the x
 If a version of Couchbase Server lower than 6.5 is being used then the application can fall-back to xref:concept-docs:durability-replication-failure-considerations.adoc#older-server-versions['client verified' durability].
 Here the SDK will do a simple poll of the replicas and only return once the requested durability level is achieved.  This can be achieved like this:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=durability-observed]
+include::{example-source}/[indent=0,tag=durability-observed]
 ----
 
 To stress, durability is a useful feature but should not be the default for most applications, as there is a performance consideration, and the default level of safety provided by Couchbase will be resaonable for the majority of situations.
 
 
 == Expiration/TTL
-
-
-
-
-
 
 
 
@@ -310,30 +203,30 @@ This can be useful for some use-cases, such as user sessions, caches, or other t
 
 You can set an expiration value when creating a document:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=expiry-insert]
+include::{example-source}[indent=0,tag=expiry-insert]
 ----
 
 When getting a document, the expiry is not provided automatically by Couchbase Server but it can be requested:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=expiry-get]
+include::{example-source}[indent=0,tag=expiry-get]
 ----
 
 Note that when updating the document, special care must be taken to avoid resetting the expiry to zero.  Here's how:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=expiry-replace]
+include::{example-source}[indent=0,tag=expiry-replace]
 ----
 
 Some applications may find `getAndTouch` useful, which fetches a document while updating its expiry field.  It can be used like this:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=expiry-touch]
+include::{example-source}[indent=0,tag=expiry-get-and-touch]
 ----
 
 include::{version-common}@sdk:shared:partial$documents.adoc[tag=exp-note]
@@ -349,9 +242,9 @@ include::{version-common}@sdk:shared:partial$documents.adoc[tag=exp-note]
 
 To support counter use-cases, a Couchbase document can be treated as an integer counter and adjusted or created atomically like this:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=counter-increment]
+include::{example-source}[indent=0,tag=counters]
 ----
 
 Note that a counter cannot be below 0.
@@ -365,17 +258,6 @@ TIP: Setting the document expiry time only works when a document is created, and
 
 include::{version-common}@sdk:shared:partial$atomic.adoc[tag=xdcr]
 
-
-== Scoped KV Operations
-
-It is possible to perform scoped key value operations on named xref:{version-server}@server:learn:data/scopes-and-collections.adoc[`Collections`] _with Couchbase Server release, 7.0_.
-
-Here is an example showing an upsert in the `users` collection, which lives in the `travel-sample.tenant_agent_00` keyspace:
-
-[source,scala]
-----
-include::devguide:example$scala/KvOperations.scala[indent=0,tag=named-collection-upsert]
-----
 
 == Additional Resources
 
