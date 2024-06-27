@@ -26,7 +26,7 @@ This makes it possible to quickly pinpoint slow operation types (like a `get` op
 == Request Tracing
 
 Tracing provides granular timing information down the individual phases of a request/operation.
-For a simple overview, consider the following output for an individual request -- which is logged from the default tracer that ships with the SDK, and is easily enabled and configured via `couchbase::cluster_options::tracing()`.
+For a simple overview, consider the following output for an individual request -- which is logged from the default tracer that ships with the SDK, and is easily enabled and configured in the cluster options.
 
 [source,json]
 ----

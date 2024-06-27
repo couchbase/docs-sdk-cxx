@@ -7,7 +7,7 @@
 Change the settings to alter how much information you collect
 
 To improve debuggability certain metrics are automatically measured and logged.
-These include slow queries, responses taking beyond a certain threshold.
+These include slow queries, responses taking beyond a certain threshold, and orphaned responses.
 
 
 == Threshold Logging Reporting
