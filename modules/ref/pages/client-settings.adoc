@@ -247,6 +247,57 @@ If the compressed document size divided by the uncompressed document size is gre
 +
 For example, with a `min_ratio` of `0.83`, compression will only be used if the size of the compressed document is less than 83% of the uncompressed document size.
 
+== Tracing Options
+
+These options affect the client's tracing behaviour.
+
+Name: *Enabling Tracing*::
+Options Method: `tracing().enable(bool)`
++
+Connection String Parameter: `enable_tracing=<true|false>`
++
+Default: `true`
++
+If enabled, the client will use the `treshold_logging_tracer` to log operations over threshold.
+If this is set to `false`, the SDK will use the `noop_tracer`.
+
+NOTE:  Ensure you have xref:howtos:collecting-information-and-logging.adoc[logging] enabled to at least `warning` level for tracing to be logged.
+
+Name: *Threshold Emit Interval*::
+Options Method: `tracing().threshold_emit_interval(std::chrono::duration)`
++
+Connection String: N/A
++
+Default: `10s`
++
+The Threshold Emit Interval determines how often the operations-over-threshold report is emitted.
+
+Name: *Threshold Sample Size*::
+Options Method: `tracing().threshold_sample_size(std::size_t)`
++
+Connection String: N/A
++
+Default: `64`
++
+The Threshold Sample Size defines the maximum number of items to log in the operations-over-threshold report.
+
+Name: *Orphaned Emit Interval*::
+Options Method: `tracing().threshold_emit_interval(std::chrono::duration)`
++
+Connection String: N/A
++
+Default: `10s`
++
+The Orphaned Emit Interval determines how often the orphan report is emitted.
+
+Name: *Orphaned Sample Size*::
+Options Method: `tracing().orphaned_sample_size(std::size_t)`
++
+Connection String: N/A
++
+Default: `64`
++
+The Orphaned Sample Size define the maximum number of items to log in the orphan report.
 
 == Configuration Profiles
 
