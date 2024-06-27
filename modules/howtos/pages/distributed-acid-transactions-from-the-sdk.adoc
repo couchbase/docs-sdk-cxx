@@ -1,7 +1,8 @@
 = Using Couchbase Transactions
 :description: A practical guide on using Couchbase Distributed ACID transactions, via the {cpp} SDK.
 :page-partial:
-:page-aliases: acid-transactions
+:page-aliases: cxx-txns:ROOT:distributed-acid-transactions-from-the-sdk.adoc,cxx-txns:ROOT:distributed-transactions-cxx-release-notes.adoc
+// :page-aliases: acid-transactions
 :page-toclevels: 2
 // :page-pagination: next
 
