@@ -542,7 +542,7 @@ main() -> int
     }
 
     {
-        // tag::config[]
+        // #tag::config[]
         auto opts =
           couchbase::cluster_options(username, password)
             .transactions()
@@ -550,7 +550,41 @@ main() -> int
             .cleanup_config(couchbase::transactions::transactions_cleanup_config().cleanup_window(
               std::chrono::seconds(30)
             ));
-        // end::config[]
+        // #end::config[]
+    }
+
+    {
+        tao::json::value doc1_content{ { "foo", "bar" } };
+        tao::json::value doc2_content{ { "foo", "baz" } };
+        // #tag::create-simple[]
+        cluster.transactions()->run([&](auto ctx) -> couchbase::error {
+            ctx->insert(collection, "doc1", doc1_content);
+            auto [err, doc2] = ctx->get(collection, "doc2");
+            ctx->replace(doc2, doc2_content);
+            return {};
+        });
+        // #end::create-simple[]
+    }
+
+    {
+        // #tag::custom-metadata[]
+        auto opts = couchbase::cluster_options(username, password)
+                      .transactions()
+                      .metadata_collection(couchbase::transactions::transaction_keyspace{
+                        "bucketName",
+                        "scopeName",
+                        "collectionName",
+                      });
+        // #end::custom-metadata[]
+    }
+
+    {
+        // #tag::custom-metadata-per[]
+        cluster.transactions()->run(
+          [&](auto ctx) -> couchbase::error { return {}; },
+          couchbase::transactions::transaction_options().metadata_collection(collection)
+        );
+        // #end::custom-metadata-per[]
     }
 
     cluster.close().get();

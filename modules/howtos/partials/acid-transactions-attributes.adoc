@@ -16,11 +16,11 @@
 
 
 // txnfailed
-:transaction-failed: TransactionFailedException
-:transaction-expired: TransactionExpiredException
-:transaction-config: TransactionsConfig
-:transaction-commit-ambiguous: TransactionCommitAmbiguousException
-:txnfailed-unstaging-complete: TransactionResult.unstagingComplete()
+:transaction-failed: errc::transaction::failed
+:transaction-expired: errc::transaction::expired
+:transaction-config: transactions_config
+:transaction-commit-ambiguous: errc::transaction::ambiguous
+:txnfailed-unstaging-complete: transaction_result.unstaging_complete
 
 // lambda
 :lambda: lambda
