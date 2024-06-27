@@ -19,17 +19,16 @@ See the xref:compatibility.html#couchbase-feature-availability-matrix[compatibil
 
 Check that you have the dependencies installed:
 
-* cmake >= 3.20.0+ (e.g., `brew install cmake`)
-* c++ compiler >= std_17 (e.g., `xcode-select --install`)
-* openssl >= 1.1+ (e.g., `brew install openssl`)
+* {cpp} 17 compiler
+* https://cmake.org/[CMake] version 3.19 or newer
 
 Supprted Operating Systems are listed on the xref:project-docs:compatibility.adoc#platform-compatibility[compatibility page].
 
-
+////
 === Installing with CPM.cmake
-
-include::project-docs:sdk-full-installation.adoc[tag=install-cmake]
-
+////
+// include::project-docs:sdk-full-installation.adoc[tag=install-cmake]
+include::hello-world:start-using-sdk.adoc[tag=quick-install]
 
 
 ////
