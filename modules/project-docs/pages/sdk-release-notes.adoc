@@ -26,6 +26,13 @@ Check that you have the dependencies installed:
 Supprted Operating Systems are listed on the xref:project-docs:compatibility.adoc#platform-compatibility[compatibility page].
 
 
+=== Installing with CPM.cmake
+
+include::project-docs:sdk-full-installation.adoc[tag=install-cmake]
+
+
+
+////
 === GNU/Linux Installation
 
 More details of the installation process, and extra steps required for openssl build, can be found in the xref:project-docs:sdk-full-installation.adoc[full installation guide].
@@ -62,7 +69,7 @@ $ cmake ..
 $ cmake --build .
 ----
 
-
+////
 
 
 
@@ -78,6 +85,113 @@ All patch releases for each dot minor release should be API compatible, and safe
 any changes to expected behavior are noted in the release notes that follow.
 
 
+=== Version 1.0.0 (26 June 2024)
+
+This is the first GA release of the {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.0[API reference] |
+https://github.com/couchbase/couchbase-cxx-client/compare/1.0.0-dp.15...1.0.0[Full Changelog]
+
+==== Enhancements
+
+* https://issues.couchbase.com/browse/CXXCBC-509[CXXCBC-509]:
+Allow to restrict replica set to selected server group.
+This feature allows to implement network optimization when traffic cost between server groups is higher than in the local group.
+In this case the application might select preferred server group in the connection options, and later opt-in for local operations during replica reads.
+Related tickets:
+https://issues.couchbase.com/browse/CXXCBC-546[CXXCBC-546],
+https://issues.couchbase.com/browse/CXXCBC-513[CXXCBC-513],
+(
+https://github.com/couchbase/couchbase-cxx-client/pull/614[#614],
+https://github.com/couchbase/couchbase-cxx-client/pull/593[#593],
+https://github.com/couchbase/couchbase-cxx-client/pull/587[#587],
+https://github.com/couchbase/couchbase-cxx-client/pull/571[#571],
+https://github.com/couchbase/couchbase-cxx-client/pull/566[#566]).
+
+* https://issues.couchbase.com/browse/CXXCBC-530[CXXCBC-530]:
+Include 'min' parameter when encoding disjunction FTS queries (https://github.com/couchbase/couchbase-cxx-client/pull/604[#604]).
+
+* https://issues.couchbase.com/browse/CXXCBC-394[CXXCBC-394]:
+Hide `tao::json` where it is possible.
+We still have taocpp/json headers in places where default JSON transcoder is being used.
+
+* https://issues.couchbase.com/browse/CXXCBC-449[CXXCBC-449]:
+Do not expose ASIO in public API.
+
+* https://issues.couchbase.com/browse/CXXCBC-381[CXXCBC-381]:
+Use `std::shared_ptr` for `transactions_context` and `attempt_context` (https://github.com/couchbase/couchbase-cxx-client/pull/590[#590]).
+
+*https://issues.couchbase.com/browse/CXXCBC-510[CXXCBC-510]:
+Support binary objects in transactions.
+This changes allows to use transcoders in transactions API (https://github.com/couchbase/couchbase-cxx-client/pull/576[#576]).
+
+* Improvements in Vector Search:
+** Add invalid argument check (https://github.com/couchbase/couchbase-cxx-client/pull/578[#578]).
+** https://issues.couchbase.com/browse/CXXCBC-514[CXXCBC-514]: Support for base64 encoded vector types ([https://github.com/couchbase/couchbase-cxx-client/pull/575#575]).
+** https://issues.couchbase.com/browse/CXXCBC-516[CXXCBC-516]: Return `feature_not_available` when upserting vector search index to incompatible cluster (https://github.com/couchbase/couchbase-cxx-client/pull/572[#572]).
+
+* https://issues.couchbase.com/browse/CXXCBC-407[CXXCBC-407]:
+Allow to use 0 as a max expiry for new collections (https://github.com/couchbase/couchbase-cxx-client/pull/569[#569]).
+
+* https://issues.couchbase.com/browse/CXXCBC-496[CXXCBC-496]:
+Convert {cpp} Public API Error handling to use `couchbase::error`.
+Related tickets: 
+https://issues.couchbase.com/browse/CXXCBC-492[CXXCBC-492],
+https://issues.couchbase.com/browse/CXXCBC-498[CXXCBC-498],
+https://issues.couchbase.com/browse/CXXCBC-499[CXXCBC-499],
+https://issues.couchbase.com/browse/CXXCBC-500[CXXCBC-500],
+https://issues.couchbase.com/browse/CXXCBC-508[CXXCBC-508],
+https://issues.couchbase.com/browse/CXXCBC-526[CXXCBC-526] (
+https://github.com/couchbase/couchbase-cxx-client/pull/570[#570],
+https://github.com/couchbase/couchbase-cxx-client/pull/557[#557],
+https://github.com/couchbase/couchbase-cxx-client/pull/562[#562],
+https://github.com/couchbase/couchbase-cxx-client/pull/560[#560],
+https://github.com/couchbase/couchbase-cxx-client/pull/564[#564],
+https://github.com/couchbase/couchbase-cxx-client/pull/567[#567],
+https://github.com/couchbase/couchbase-cxx-client/pull/603[#603],
+https://github.com/couchbase/couchbase-cxx-client/pull/597[#597],
+https://github.com/couchbase/couchbase-cxx-client/pull/595[#595],
+https://github.com/couchbase/couchbase-cxx-client/pull/594[#594]).
+
+* Update stability levels for API 3.6 level.
+Remove deprecated `search_query` (https://github.com/couchbase/couchbase-cxx-client/pull/602[#602]).
+
+==== Fixes
+
+* https://issues.couchbase.com/browse/CXXCBC-517[CXXCBC-517]:
+Add HTTP session retries when SDK fails to resolve hostnames (https://github.com/couchbase/couchbase-cxx-client/pull/589[#589]).
+
+* https://issues.couchbase.com/browse/CXXCBC-445[CXXCBC-445]:
+Return `request_canceled` on IO error in HTTP session (https://github.com/couchbase/couchbase-cxx-client/pull/568[#568]).
+
+* https://issues.couchbase.com/browse/CXXCBC-511[CXXCBC-511]:
+Prevent use of HTTP session if idle timer has expired (https://github.com/couchbase/couchbase-cxx-client/pull/565[#565]).
+
+* https://issues.couchbase.com/browse/CXXCBC-523[CXXCBC-523]:
+Clean up `dump_configuration` config output (https://github.com/couchbase/couchbase-cxx-client/pull/577[#577]).
+
+* https://issues.couchbase.com/browse/CXXCBC-531[CXXCBC-531]:
+Fix deadlock in cluster destructor (public API) (https://github.com/couchbase/couchbase-cxx-client/pull/608[#608]).
+
+* https://issues.couchbase.com/browse/CXXCBC-534[CXXCBC-534]:
+Fix callbacks to avoid `bad_function_call` exception (https://github.com/couchbase/couchbase-cxx-client/pull/606[#606]).
+
+* https://issues.couchbase.com/browse/CXXCBC-518[CXXCBC-518]:
+Handle alternate addresses when locating `preferred_node` (https://github.com/couchbase/couchbase-cxx-client/pull/574[#574]).
+
+==== Build and Tests Fixes
+
+* Add cmake task to generate tarball (https://github.com/couchbase/couchbase-cxx-client/pull/596[#596]).
+
+* Do not refer to core headers in public API (https://github.com/couchbase/couchbase-cxx-client/pull/599[#599]).
+
+* Cleanup `attempt_context` implementation (https://github.com/couchbase/couchbase-cxx-client/pull/586[#586]).
+
+* Do not use default parameters for virtual functions in transactions (https://github.com/couchbase/couchbase-cxx-client/pull/588[#588]).
+
+* Do not fetch config if no sessions in the bucket (https://github.com/couchbase/couchbase-cxx-client/pull/573[#573]).
+
+* Improve test stability (https://github.com/couchbase/couchbase-cxx-client/pull/563[#563], https://github.com/couchbase/couchbase-cxx-client/pull/613[#613]).
 
 
 
