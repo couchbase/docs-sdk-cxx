@@ -587,6 +587,19 @@ main() -> int
         // #end::custom-metadata-per[]
     }
 
+    {
+        // #tag::config-cleanup[]
+        auto opts = couchbase::cluster_options(username, password)
+                      .transactions()
+                      .cleanup_config(couchbase::transactions::transactions_cleanup_config()
+                        .cleanup_client_attempts(true)
+                        .cleanup_lost_attempts(true)
+                        .cleanup_window(std::chrono::seconds(120))
+                        .add_collection({ "bucketName", "scopeName", "collectionName" })
+                      );
+        // #end::config-cleanup[]
+    }
+
     cluster.close().get();
     return 0;
 }
