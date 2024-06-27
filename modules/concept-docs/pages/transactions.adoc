@@ -4,6 +4,10 @@
 
 include::howtos:partial$acid-transactions-attributes.adoc[]
 
+:lang: C++
+:example-source: devguide:example$cxx/src/transactions.cxx
+:example-source-lang: c++
+
 [abstract]
 {description}
 
@@ -15,9 +19,9 @@ include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tags=intro]
 
 == Transaction Mechanics
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/TransactionsExample.scala[tag=create-simple,indent=0]
+include::{example-source}[tag=create-simple,indent=0]
 ----
 
 include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tags=mechanics;!library-cleanup-process]
@@ -31,14 +35,15 @@ The general rule for retrying is whether the transaction is likely to succeed on
 For example, if this transaction is trying to write a document that is currently involved in another transaction (a write-write conflict), this will lead to a retry as that is likely a transient state.
 But if the transaction is trying to get a document that does not exist, it will not retry.
 
-If the transaction is not retried then it will throw a `{transaction-failed}`, and its `getCause` method can be used for more details on the failure.
+If the transaction is not retried then it will return a `couchbase::error` wrapping an `{transaction-failed}` error code, and its `cause()` method can be used for more details on the failure.
 
-The application can use this to signal why it triggered a rollback, as so:
-
-[source,scala]
-----
-include::devguide:example$scala/TransactionsExample.scala[tag=rollback-cause,indent=0]
-----
+// TODO: Investigate how this can be achieved in C++. This should be possible with custom error codes, but could be improved. We might have an improvement related to this in a future release.
+// The application can use this to signal why it triggered a rollback, by returning custom error codes, as so:
+//
+// [source,scala]
+// ----
+// include::devguide:example$scala/TransactionsExample.scala[tag=rollback-cause,indent=0]
+// ----
 
 After a transaction is rolled back, it cannot be committed, no further operations are allowed on it, and the SDK will not try to automatically commit it at the end of the code block.
 
@@ -54,16 +59,16 @@ include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=concurre
 
 include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=custom-metadata-1,indent=0]
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/TransactionsExample.scala[tag=custom-metadata,indent=0]
+include::{example-source}[tag=custom-metadata,indent=0]
 ----
 
 or at an individual transaction level with:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/TransactionsExample.scala[tag=custom-metadata-per,indent=0]
+include::{example-source}[tag=custom-metadata-per,indent=0]
 ----
 
 include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=integrated-sdk-custom-metadata-2,indent=0]
