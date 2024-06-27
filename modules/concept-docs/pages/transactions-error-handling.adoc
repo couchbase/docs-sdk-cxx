@@ -2,6 +2,10 @@
 :description:  Handling transaction errors with Couchbase.
 :page-toclevels: 2
 
+:lang: C++
+:example-source: devguide:example$cxx/src/transactions.cxx
+:example-source-lang: c++
+
 [abstract]
 {description}
 
@@ -15,16 +19,16 @@ include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=error]
 
 include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=txnfailed]
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/TransactionsExample.scala[tag=config-expiration,indent=0]
+include::{example-source}[tag=config-expiration,indent=0]
 ----
 
 Alternatively it can be configured at the per-transaction level:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/TransactionsExample.scala[tag=config-expiration-per,indent=0]
+include::{example-source}[tag=config-expiration-per,indent=0]
 ----
 
 include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=txnfailed1]
@@ -33,7 +37,7 @@ include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=txnfaile
 
 Pulling all of the above together into a complete error-handling example:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/TransactionsExample.scala[tag=full-error-handling,indent=0]
+include::{example-source}[tag=full-error-handling,indent=0]
 ----
