@@ -88,9 +88,8 @@ For the example code below to run, you'll need the username and password of the 
 
 Check that you have the dependencies installed:
 
-* `cmake` >= 3.20.0+ (e.g., `brew install cmake`)
-* c++ compiler >= std_17 (e.g., `xcode-select --install`)
-* `openssl` >= 1.1+ (e.g., `brew install openssl`)
+* {cpp} 17 compiler
+* https://cmake.org/[CMake] version 3.19 or newer
 
 Supprted Operating Systems are listed on the xref:project-docs:compatibility.adoc#platform-compatibility[compatibility page].
 
@@ -136,39 +135,24 @@ In production, Couchbase strongly recommends setting up users with more granular
 // tag::quick-install[]
 More details of the installation process are in the 
 xref:project-docs:sdk-full-installation.adoc[full installation guide].
-On most GNU/Linux platforms at least, installation is a matter of:
 
+https://github.com/cpm-cmake/CPM.cmake[CPM.cmake] makes it really easy to include the library in your project. You only need to include the following command in your `CMakeLists.txt`.
 
-[source,console]
+[source,cmake]
 ----
-$ git clone --recurse-submodules https://github.com/couchbaselabs/couchbase-cxx-client.git
-----
-
-[source,console]
-----
-$ export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/ 
-----
-
-.Building (command-line)
-[source,console]
-----
-$ cd couchbase-cxx-client
-----
-
-[source,console]
-----
-$ mkdir build; cd build
+CPMAddPackage(
+  NAME
+  couchbase_cxx_client
+  GIT_TAG
+  1.0.0
+  VERSION
+  1.0.0
+  GITHUB_REPOSITORY
+  "couchbase/couchbase-cxx-client"
+  OPTIONS
+  "COUCHBASE_CXX_CLIENT_STATIC_BORINGSSL ON")
 ----
 
-[source,console]
-----
-$ cmake ..
-----
-
-[source,console]
-----
-$ cmake --build .
-----
 // end::quick-install[]
 
 === IDE Plugins
