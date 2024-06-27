@@ -27,6 +27,6 @@ Any dependencies may have their https://www.couchbase.com/legal/agreements#Third
 
 This documentation is copyright Couchbase Inc.
 The docs' source is licensed under the Creative Commons https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en[CC-by-NC-SA^] license,
-see https://github.com/couchbase/docs-sdk-scala/blob/release/{sdk_dot_minor}/LICENSE[https://github.com/couchbase/docs-sdk-scala/blob/release/{sdk_dot_minor}/LICENSE].
+see https://github.com/couchbase/docs-sdk-cxx/blob/release/{sdk_dot_minor}/LICENSE[https://github.com/couchbase/docs-sdk-cxx/blob/release/{sdk_dot_minor}/LICENSE].
 
 // It's painful to keep mis-spelling licence!
