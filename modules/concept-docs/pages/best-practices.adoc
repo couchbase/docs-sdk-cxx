@@ -46,7 +46,7 @@ Data security depends in part on only giving access to
 
 RBAC restrict resources on a Couchbase cluster to an identified user, allocated by role.
 
-*TODO* update and add Capella here
+// *TODO* update and add Capella here
 
 
 ==== Users, Resources, Roles, and Privileges
@@ -80,8 +80,6 @@ If you need pessimistic logging, in particular if you need to lock documents for
 // https://couchbasecloud.atlassian.net/wiki/spaces/CST/pages/1993769712/Java+-+Debugging+KV+Timeouts
 // in Support wiki
 
-
-* `waitUntilReady` should be the default setting for `Cluster.connect` and `Cluster.bucket` in most cases, so that resources are fully loaded before the client proceeds with CRUD calls to the database.
 * LAN-type connection of client and server is recommended in production, but WAN development is a reality pre-production.
 Ensure that you're familiar with the 
 xref:ref:client-settings.adoc#constrained-network-environments[best timeout options for WAN environments],
@@ -114,20 +112,18 @@ and will provide full back pressure for streaming results from large {sqlpp} or 
 
 See the xref:howtos:concurrent-async-apis.adoc[Async & Reactive APIs page] for practical examples.
 
-
-
 == Error Handling
 
-Best practices for error handling in Scala depend somewhat upon your choice of API: 
-blocking, asynchronous, or reactive, as covered in the xref:concurrent-async-apis.adoc[async and reactive API guide].
-That guide also covers how errors are actually returned (e.g. via `Try`, `Future`, or `Mono`) and handled.
+Best practices for error handling in {cpp} depend somewhat upon your choice of API:
+future, or callback based, as covered in the xref:concurrent-async-apis.adoc[async and reactive API guide].
+That guide also covers how errors are actually returned and handled.
+Your application should always check if an operation returned an error, and potentially handle any specific error codes that may have returned.
 See also the xref:howtos:error-handling.adoc[error handling guide],
 which covers specific errors, along with a broader look at error handling strategies.
 
-
-== Testing
-
-Integrate developing with the {name-sdk} into your accustomed test framework.
+// == Testing
+//
+// Integrate developing with the {name-sdk} into your accustomed test framework.
 
 
 
@@ -219,7 +215,7 @@ Read up on security and performance considerations relevant to your use case.
 
 === Role-Based Access Control
 
-*TODO* add Capella info
+// *TODO* add Capella info
 
 All aspects of the Couchbase RBAC system are covered in the section xref:{version-server}@server:learn:security/authorization-overview.adoc[Authorization].
 Specifically, for information on:

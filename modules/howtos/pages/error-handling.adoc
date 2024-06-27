@@ -1,5 +1,5 @@
 = Handling Errors
-:description: Errors are inevitable. Scala offers several flexible approaches to handling them.
+:description: Errors are inevitable. {cpp} offers several flexible approaches to handling them.
 :page-toclevels: 2
 :page-aliases: handling-error-conditions.adoc
 :lang: C++
