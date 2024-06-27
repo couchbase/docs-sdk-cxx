@@ -136,7 +136,8 @@ In production, Couchbase strongly recommends setting up users with more granular
 More details of the installation process are in the 
 xref:project-docs:sdk-full-installation.adoc[full installation guide].
 
-https://github.com/cpm-cmake/CPM.cmake[CPM.cmake] makes it really easy to include the library in your project. You only need to include the following command in your `CMakeLists.txt`.
+https://github.com/cpm-cmake/CPM.cmake[CPM.cmake] is the  recommended way to include the library in your project.
+You need to include the following command in your `CMakeLists.txt`.
 
 [source,cmake]
 ----
@@ -152,7 +153,6 @@ CPMAddPackage(
   OPTIONS
   "COUCHBASE_CXX_CLIENT_STATIC_BORINGSSL ON")
 ----
-
 // end::quick-install[]
 
 === IDE Plugins

@@ -19,17 +19,16 @@ See the xref:compatibility.html#couchbase-feature-availability-matrix[compatibil
 
 Check that you have the dependencies installed:
 
-* cmake >= 3.20.0+ (e.g., `brew install cmake`)
-* c++ compiler >= std_17 (e.g., `xcode-select --install`)
-* openssl >= 1.1+ (e.g., `brew install openssl`)
+* {cpp} 17 compiler
+* https://cmake.org/[CMake] version 3.19 or newer
 
 Supprted Operating Systems are listed on the xref:project-docs:compatibility.adoc#platform-compatibility[compatibility page].
 
-
+////
 === Installing with CPM.cmake
-
-include::project-docs:sdk-full-installation.adoc[tag=install-cmake]
-
+////
+// include::project-docs:sdk-full-installation.adoc[tag=install-cmake]
+include::hello-world:start-using-sdk.adoc[tag=quick-install]
 
 
 ////
@@ -101,8 +100,7 @@ In this case the application might select preferred server group in the connecti
 Related tickets:
 https://issues.couchbase.com/browse/CXXCBC-546[CXXCBC-546],
 https://issues.couchbase.com/browse/CXXCBC-513[CXXCBC-513],
-(
-https://github.com/couchbase/couchbase-cxx-client/pull/614[#614],
+(https://github.com/couchbase/couchbase-cxx-client/pull/614[#614],
 https://github.com/couchbase/couchbase-cxx-client/pull/593[#593],
 https://github.com/couchbase/couchbase-cxx-client/pull/587[#587],
 https://github.com/couchbase/couchbase-cxx-client/pull/571[#571],
@@ -127,7 +125,7 @@ This changes allows to use transcoders in transactions API (https://github.com/c
 
 * Improvements in Vector Search:
 ** Add invalid argument check (https://github.com/couchbase/couchbase-cxx-client/pull/578[#578]).
-** https://issues.couchbase.com/browse/CXXCBC-514[CXXCBC-514]: Support for base64 encoded vector types ([https://github.com/couchbase/couchbase-cxx-client/pull/575#575]).
+** https://issues.couchbase.com/browse/CXXCBC-514[CXXCBC-514]: Support for base64 encoded vector types ([https://github.com/couchbase/couchbase-cxx-client/pull/575[#575]).
 ** https://issues.couchbase.com/browse/CXXCBC-516[CXXCBC-516]: Return `feature_not_available` when upserting vector search index to incompatible cluster (https://github.com/couchbase/couchbase-cxx-client/pull/572[#572]).
 
 * https://issues.couchbase.com/browse/CXXCBC-407[CXXCBC-407]:
@@ -141,8 +139,8 @@ https://issues.couchbase.com/browse/CXXCBC-498[CXXCBC-498],
 https://issues.couchbase.com/browse/CXXCBC-499[CXXCBC-499],
 https://issues.couchbase.com/browse/CXXCBC-500[CXXCBC-500],
 https://issues.couchbase.com/browse/CXXCBC-508[CXXCBC-508],
-https://issues.couchbase.com/browse/CXXCBC-526[CXXCBC-526] (
-https://github.com/couchbase/couchbase-cxx-client/pull/570[#570],
+https://issues.couchbase.com/browse/CXXCBC-526[CXXCBC-526]
+(https://github.com/couchbase/couchbase-cxx-client/pull/570[#570],
 https://github.com/couchbase/couchbase-cxx-client/pull/557[#557],
 https://github.com/couchbase/couchbase-cxx-client/pull/562[#562],
 https://github.com/couchbase/couchbase-cxx-client/pull/560[#560],

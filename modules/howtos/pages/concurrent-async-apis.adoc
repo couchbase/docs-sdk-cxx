@@ -1,5 +1,6 @@
 = Async & Reactive APIs
-:description: The Couchbase Scala SDK allows the use, and mixing, of three distinct APIs: blocking, asynchronous, and reactive.
+:description: The Couchbase {cpp} SDK allows the use, and mixing, of blocking and asynchronous APIs.
+// :description: The Couchbase Scala SDK allows the use, and mixing, of three distinct APIs: blocking, asynchronous, and reactive.
 :page-toclevels: 2
 // :page-aliases: ROOT:async-programming,multiple-apis,ROOT:batching-operations
 
