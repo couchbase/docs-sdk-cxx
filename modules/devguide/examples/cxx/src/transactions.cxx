@@ -600,6 +600,48 @@ main() -> int
         // #end::config-cleanup[]
     }
 
+    {
+        // #tag::config-expiration[]
+        auto opts = couchbase::cluster_options(username, password)
+                      .transactions()
+                      .timeout(std::chrono::seconds(120));
+        // #end::config-expiration[]
+    }
+
+    {
+        // #tag::config-expiration-per[]
+        cluster.transactions()->run(
+          [&](auto ctx) -> couchbase::error { return {}; },
+          couchbase::transactions::transaction_options().timeout(std::chrono::seconds(60))
+        );
+        // #end::config-expiration-per[]
+    }
+
+    {
+        // #tag::full-error-handling[]
+        auto [err, result] =
+          cluster.transactions()->run([&](auto ctx) -> couchbase::error { return {}; });
+        if (err) {
+            if (err.ec() == couchbase::errc::transaction::ambiguous) {
+                fmt::println("Transaction possibly reached the commit point");
+            } else if (err.ec() == couchbase::errc::transaction::failed) {
+                fmt::println("Transaction failed before reaching the commit point");
+            } else {
+                fmt::println("Error: {}", err);
+            }
+        } else {
+            // The transaction definitely reached the commit point.
+            // Unstaging the individual documents may or may not have completed.
+            if (!result.unstaging_complete) {
+                fmt::println("Transaction succeeded but may not have completed the commit process. "
+                             " Cleanup will finish the process asynchronously.");
+            } else {
+                fmt::println("Transaction succeeded");
+            }
+        }
+        // #end::full-error-handling[]
+    }
+
     cluster.close().get();
     return 0;
 }
