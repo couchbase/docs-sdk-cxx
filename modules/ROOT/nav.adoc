@@ -57,7 +57,7 @@
 // *** xref:project-docs:distributed-acid-transactions-migration-guide.adoc[]
 // *** xref:project-docs:third-party-integrations.adoc[]
 ** xref:project-docs:sdk-full-installation.adoc[]
-*** xref:hello-world:platform-help.adoc[]
+// *** xref:hello-world:platform-help.adoc[]
 ** xref:project-docs:get-involved.adoc[]
 *** xref:project-docs:sdk-licenses.adoc[]
 *** xref:home:contribute:index.adoc[Improve the Docs]
