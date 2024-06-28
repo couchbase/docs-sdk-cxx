@@ -98,7 +98,8 @@ Building deferred indexes can also be done via the SDK:
 include::{example-source}[tag=build-index,indent=0]
 ----
 
-Note that the build step is still asynchronous, so `watch_indexes` is used to wait for the indexes to be completed. To watch the primary index, the `watch_primary` option can be set.
+Note that the build step is still asynchronous, so `watch_indexes` is used to wait for the indexes to be completed.
+To watch the primary index, the `watch_primary` option can be set.
 
 
 // Index Consistency
@@ -108,7 +109,8 @@ The following options are available:
 
 include::{version-server}@server:learn:page$services-and-indexes/indexes/index-replication.adoc[tag=scan_consistency]
 
-* A {sqlpp} query using the default `NotBounded` scan consistency will not wait for any indexes to finish updating before running the query and returning results, meaning that results are returned quickly, but the query will not return any documents that are yet to be indexed.
+* A {sqlpp} query using the default `NotBounded` scan consistency will not wait for any indexes to finish updating before running the query and returning results,
+meaning that results are returned quickly, but the query will not return any documents that are yet to be indexed.
 
 * With scan consistency set to `request_plus`, all outstanding document changes and index updates are processed before the query is run.
 Select this when consistency is always more important than performance.
