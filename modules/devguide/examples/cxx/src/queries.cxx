@@ -70,7 +70,12 @@ main() -> int
                             FROM `travel-sample`.inventory.airport
                             WHERE country=$1;
                             )"""";
-        auto [err, result] = cluster.query(stmt, couchbase::query_options().adhoc(false).positional_parameters("United States")).get();
+        auto [err, result] =
+          cluster
+            .query(
+              stmt, couchbase::query_options().adhoc(false).positional_parameters("United States")
+            )
+            .get();
         // end::positional[]
         std::cout << fmt::format("{}", tao::json::to_string(result.rows_as_json().at(0))) << "\n";
     }
@@ -128,6 +133,58 @@ main() -> int
             }
         }
         // end::scope-level[]
+    }
+
+    {
+        // #tag::create-index[]
+        auto err = cluster.query_indexes().create_primary_index("users", {}).get();
+        if (err) {
+            fmt::println("Error creating primary index: {}", err);
+        }
+        // Fore brevity, skipping error handling in the rest for the examples
+        cluster.query_indexes().create_index("users", "index_name", { "name" }, {}).get();
+        cluster.query_indexes().create_index("users", "index_email", { "email" }, {}).get();
+        // #end::create-index[]
+    }
+
+    {
+        // #tag::build-index[]
+        cluster.query_indexes()
+          .create_primary_index(
+            "users", couchbase::create_primary_query_index_options().build_deferred(true)
+          )
+          .get();
+        cluster.query_indexes()
+          .create_index(
+            "users",
+            "index_name",
+            { "name" },
+            couchbase::create_query_index_options().build_deferred(true)
+          )
+          .get();
+        cluster.query_indexes()
+          .create_index(
+            "users",
+            "index_email",
+            { "email" },
+            couchbase::create_query_index_options().build_deferred(true)
+          )
+          .get();
+
+        // Build the indexes
+        cluster.query_indexes().build_deferred_indexes("users", {}).get();
+
+        // Wait for the indexes to build
+        cluster.query_indexes()
+          .watch_indexes(
+            "users",
+            { "index_name", "index_email" },
+            couchbase::watch_query_indexes_options().watch_primary(true).timeout(
+              std::chrono::seconds(30)
+            )
+          )
+          .get();
+        // #end::build-index[]
     }
 
     cluster.close().get();

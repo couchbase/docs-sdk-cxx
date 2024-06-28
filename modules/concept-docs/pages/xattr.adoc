@@ -2,7 +2,9 @@
 :description: Extended Attributes (XATTR) are metadata that can be provided on a per-application basis.
 // :page-aliases: sdk-xattr-overview,ROOT:sdk-xattr-overview
 
-
+:lang: C++
+:example-source: devguide:example$cxx/src/data_model.cxx
+:example-source-lang: c++
 
 [abstract]
 {description}
@@ -13,9 +15,9 @@ include::{version-common}@sdk:shared:partial$sdk-xattr-overview.adoc[tag=using_e
 
 include::{version-common}@sdk:shared:partial$sdk-xattr-overview.adoc[tag=virtual_extended_attributes]
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/Examples.scala[tag=lookup,indent=0]
+include::{example-source}[tag=xattr,indent=0]
 ----
 
 // See the xref:howtos:sdk-xattr-example.adoc#virtual-extended-attributes-example[example page] for a complete code sample.

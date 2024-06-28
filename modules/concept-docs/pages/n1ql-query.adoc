@@ -3,7 +3,9 @@
 :nav-title: Querying with {sqlpp}
 // :page-aliases: ROOT:n1ql-query,
 
-
+:lang: C++
+:example-source: devguide:example$cxx/src/queries.cxx
+:example-source-lang: c++
 
 [abstract]
 {description}
@@ -14,12 +16,11 @@ include::{version-common}@sdk:shared:partial$n1ql-queries.adoc[tag=intro]
 // Prepared Statements for Query Optimization
 include::{version-common}@sdk:shared:partial$n1ql-queries.adoc[tag=prepared]
 
-For the Scala SDK, the `adhoc` parameter should be set to `false` for a plan to be prepared, or a prepared plan to be reused.
-Do not turn off the `adhoc` flag for _every_ query to Server 6.0 and earlier, since only a finite number of query plans (currently 5000) can be stored in the SDK.
+For the C++ SDK, the `adhoc` parameter should be set to `false` for a plan to be prepared, or a prepared plan to be reused.
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/Queries.scala[tag=positional,indent=0]
+include::{example-source}[tag=positional,indent=0]
 ----
 
 
@@ -67,9 +68,9 @@ For more information, see xref:{version-server}@server:n1ql:n1ql-language-refere
 
 You can also create and define indexes in the SDK using:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::example$N1qlQuery.scala[tag=create-index,indent=0]
+include::{example-source}[tag=create-index,indent=0]
 ----
 
 == Index Building
@@ -92,13 +93,13 @@ and indexes it for all of the applicable indexes (in this case, those that have 
 
 Building deferred indexes can also be done via the SDK:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::example$N1qlQuery.scala[tag=build-index,indent=0]
+include::{example-source}[tag=build-index,indent=0]
 ----
 
-Note that the build step is still asynchronous, so `watchIndexes` is used to wait for the indexes to be completed.
-"#primary" is the primary index.
+Note that the build step is still asynchronous, so `watch_indexes` is used to wait for the indexes to be completed.
+To watch the primary index, the `watch_primary` option can be set.
 
 
 // Index Consistency
@@ -108,25 +109,26 @@ The following options are available:
 
 include::{version-server}@server:learn:page$services-and-indexes/indexes/index-replication.adoc[tag=scan_consistency]
 
-* A {sqlpp} query using the default `NotBounded` scan consistency will not wait for any indexes to finish updating before running the query and returning results, meaning that results are returned quickly, but the query will not return any documents that are yet to be indexed.
+* A {sqlpp} query using the default `NotBounded` scan consistency will not wait for any indexes to finish updating before running the query and returning results,
+meaning that results are returned quickly, but the query will not return any documents that are yet to be indexed.
 
-* With scan consistency set to `RequestPlus`, all outstanding document changes and index updates are processed before the query is run.
+* With scan consistency set to `request_plus`, all outstanding document changes and index updates are processed before the query is run.
 Select this when consistency is always more important than performance.
 
-* For a middle ground, `AtPlus` is a "read your own write" (RYOW) option, which means it just waits for the documents that you specify to be indexed.
+* For a middle ground, `at_plus` is a "read your own write" (RYOW) option, which means it just waits for the documents that you specify to be indexed.
 
 For {sqlpp}, the default consistency is `not_bounded`.
 
-Here's how to specify the `RequestPlus` scan consistency level:
+Here's how to specify the `request_plus` scan consistency level:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/Queries.scala[tag=request-plus,indent=0]
+include::{example-source}[tag=request-plus,indent=0]
 ----
 
-And the `AtPlus` level is represented with `QueryScanConsistency.ConsistentWith`:
+And the `at_plus` level is represented with `query_options.consistent_with`:
 
-[source,scala]
+[source,{example-source-lang}]
 ----
-include::devguide:example$scala/Queries.scala[tag=at-plus,indent=0]
+include::{example-source}[tag=at-plus,indent=0]
 ----
