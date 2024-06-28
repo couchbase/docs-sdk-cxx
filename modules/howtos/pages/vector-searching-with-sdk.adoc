@@ -118,8 +118,8 @@ include::devguide:example$scala/Search.java[tag=vector4,indent=0]
 
 
 
-== Further Reading
+// == Further Reading
 
-* // Server Links
+// * Server Links
 
 // https://developer.couchbase.com/tutorial-python-langchain-pdf-chat
