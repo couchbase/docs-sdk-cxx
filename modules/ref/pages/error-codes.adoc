@@ -1,12 +1,32 @@
 = Error Messages
-:description: The standardized error codes returned by the Couchbase Scala SDK, from cloud connection to sub-document.
+:description: The standardized error codes returned by the Couchbase {cpp} SDK, from cloud connection to sub-document.
 :page-toclevels: 2
 
 
 [abstract]
 {description}
 
-include::{version-common}@sdk:shared:partial$error-ref.adoc[tag=intro]
+All errors are returned in the form of a common Couchbase error.
+
+The base error, `couchbase::error`, has four properties -- an error code, a message, an `error_context`, and an optional _cause_.
+The `error_context` provides extensive debugging information in JSON format.
+
+The error code specifies what went wrong during the operation.
+The error codes returned by the SDK are split into distinct error categories. Here are the common ones you may encounter:
+
+* `couchbase::errc::common` -- error codes common to multiple services.
+* `couchbase::errc::key_value` -- error codes related to the  key-value service.
+* `couchbase::errc::query` -- error codes related to the query service
+* `couchbase::errc::analytics` -- error codes related to the analytics service
+* `couchbase::errc::search` -- error codes related to the FTS service
+* `couchbase::errc::management` -- error codes related to the management service
+* `couchbase::errc::transaction_op` -- error codes related to failed transaction operation
+* `couchbase::errc::transaction` -- error codes related to a failed transaction
+
+See the https://docs.couchbase.com/sdk-api/couchbase-cxx-client/error__codes_8hxx.html[API docs] for a full list of
+error categories and the error codes they contain.
+
+Below are the errors, categorised by service.
 
 == Shared Error Definitions
 
