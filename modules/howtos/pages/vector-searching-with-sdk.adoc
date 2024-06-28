@@ -48,8 +48,8 @@ This is currently implemented using xref:
 
 == Prerequisites
 
-7.6
-?
+Couchbase Server 7.6.0 (7.6.2 for base64-encoded vectors) — or recent Capella instance.
+
 
 // examples
 
