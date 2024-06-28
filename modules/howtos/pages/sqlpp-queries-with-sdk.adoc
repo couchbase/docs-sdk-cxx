@@ -99,7 +99,7 @@ include::{example-source}[tag=scope-level,indent=0]
 ----
 
 // TODO: Insert link to API docs.
-A complete list of `query_options` can be found in the https://docs.couchbase.com/sdk-api/couchbase-scala-client/com/couchbase/client/scala/query/QueryOptions.html[API docs].
+A complete list of `query_options` can be found in the https://docs.couchbase.com/sdk-api/couchbase-cxx-client/structcouchbase_1_1query__options.html[API docs].
 
 
 include::howtos:partial$n1ql-additional-resources.adoc[]
