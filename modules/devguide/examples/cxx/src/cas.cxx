@@ -44,7 +44,7 @@ casLoop(const couchbase::collection& collection, const std::string& doc_id, int 
         // Succeeded - we're done
         return 0;
     }
-    std::cout << "Maxed out our retries\n";
+    fmt::println("Maxed out our retries");
     return 1;
 }
 // #end::loop[]

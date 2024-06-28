@@ -26,7 +26,7 @@ main() -> int
     options.apply_profile("wan_development");
     auto [connect_err, cluster] = couchbase::cluster::connect(connection_string, options).get();
     if (connect_err) {
-        std::cout << "Unable to connect to the cluster: " << fmt::format("{}", connect_err) << "\n";
+        fmt::println("Unable to connect to the cluster: {}", connect_err);
         return 1;
     }
     auto bucket = cluster.bucket(bucket_name);
@@ -45,10 +45,10 @@ main() -> int
                                )
                                .get();
         if (err) {
-            std::cout << fmt::format("Error: {}\n", err);
+            fmt::println("Error: {}", err);
         } else {
             auto country = result.template content_as<std::string>(0);
-            std::cout << fmt::format("Country: {}\n", country);
+            fmt::println("Country: {}", country);
         }
 
         // #end::get[]
@@ -64,10 +64,10 @@ main() -> int
           {},
           [](auto err, auto result) {
               if (err) {
-                  std::cout << fmt::format("Error: {}\n", err);
+                  fmt::println("Error: {}", err);
               } else {
                   auto country = result.template content_as<std::string>(0);
-                  std::cout << fmt::format("Country: {}\n", country);
+                  fmt::println("Country: {}", country);
               }
           }
         );
@@ -86,9 +86,9 @@ main() -> int
                                )
                                .get();
         if (err) {
-            std::cout << fmt::format("Error: {}\n", err) << "\n";
+            fmt::println("Error: {}", err);
         } else {
-            std::cout << fmt::format("Does the field exist? {}\n", result.exists(0));
+            fmt::println("Does the field exist? {}", result.exists(0));
         }
         // #end::exists[]
     }
@@ -105,9 +105,9 @@ main() -> int
                                )
                                .get();
         if (err) {
-            std::cout << fmt::format("Error: {}\n", err);
+            fmt::println("Error: {}", err);
         } else {
-            std::cout << fmt::format("Country: {}, Exists: {}\n", result.content_as<std::string>(0), result.exists(1));
+            fmt::println("Country: {}, Exists: {}", result.content_as<std::string>(0), result.exists(1));
         }
         // #end::combine[]
     }
@@ -123,9 +123,9 @@ main() -> int
                                )
                                .get();
         if (err) {
-            std::cout << fmt::format("Error: {}\n", err);
+            fmt::println("Error: {}", err);
         } else {
-            std::cout << fmt::format("Success! (CAS: {})\n", result.cas());
+            fmt::println("Success! (CAS: {})", result.cas());
         }
         // #end::upsert[]
     }
@@ -141,11 +141,11 @@ main() -> int
                                )
                                .get();
         if (err.ec() == couchbase::errc::key_value::path_exists) {
-            std::cout << "Error, path already exists" << "\n";
+            fmt::println("Error, path already exists");
         } else if (err) {
-            std::cout << fmt::format("Error: {}\n", err);
+            fmt::println("Error: {}", err);
         } else {
-            std::cout << "Unexpected success..." << "\n";
+            fmt::println("Unexpected success...");
         }
         // #end::insert[]
     }
@@ -243,11 +243,11 @@ main() -> int
                                  )
                                  .get();
         if (err2.ec() == couchbase::errc::key_value::path_exists) {
-            std::cout << "Error, path already exists" << "\n";
+            fmt::println("Error, path already exists");
         } else if (err2) {
-            std::cout << fmt::format("Error: {}\n", err2);
+            fmt::println("Error: {}", err2);
         } else {
-            std::cout << "Unexpected success..." << "\n";
+            fmt::println("Unexpected success...");
         }
         // #end::array-unique[]
 
@@ -294,10 +294,10 @@ main() -> int
                                .get();
 
         if (err) {
-            std::cout << fmt::format("Error: {}\n", err);
+            fmt::println("Error: {}", err);
         } else {
             auto count = result.content_as<std::int32_t>(0);
-            std::cout << fmt::format("After increment, counter is {}\n", count);
+            fmt::println("After increment, counter is {}", count);
         }
         // #end::counter-inc[]
     }
@@ -317,10 +317,10 @@ main() -> int
                                  .get();
 
         if (err2) {
-            std::cout << fmt::format("Error: {}\n", err2);
+            fmt::println("Error: {}", err2);
         } else {
             auto count = result2.content_as<std::int32_t>(0);
-            std::cout << fmt::format("After decerement, counter is {}\n", count);
+            fmt::println("After decrement, counter is {}", count);
         }
         // #end::counter-dec[]
     }

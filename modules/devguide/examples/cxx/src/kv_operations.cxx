@@ -79,7 +79,7 @@ main() -> int
     cluster_options.apply_profile("wan_development");
     auto [connect_err, cluster] = couchbase::cluster::connect(connection_string, cluster_options).get();
     if (connect_err) {
-        std::cout << "Unable to connect to the cluster: " << fmt::format("{}", connect_err) << "\n";
+        fmt::println("Unable to connect to the cluster: {}", connect_err);
         return 1;
     }
     auto bucket = cluster.bucket(bucket_name);
