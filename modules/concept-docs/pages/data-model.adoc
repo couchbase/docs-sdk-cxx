@@ -10,7 +10,7 @@ Several data structures are supported by the SDK, including map, list, queue, an
 
 include::{version-common}@sdk:shared:partial$data-model.adoc[tag=intro]
 
-include::{version-common}@sdk:shared:partial$data-model.adoc[tag=structures]
+// include::{version-common}@sdk:shared:partial$data-model.adoc[tag=structures]
 
 
 
