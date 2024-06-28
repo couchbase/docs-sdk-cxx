@@ -8,7 +8,7 @@ int
 main(int argc, const char* argv[])
 {
     if (argc != 4) {
-        std::cout << "USAGE: ./start_using couchbase://127.0.0.1 Administrator password\n";
+        fmt::println("USAGE: ./start_using couchbase://127.0.0.1 Administrator password");
         return 1;
     }
 

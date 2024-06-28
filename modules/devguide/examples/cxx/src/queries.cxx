@@ -27,7 +27,7 @@ main() -> int
     options.apply_profile("wan_development");
     auto [connect_err, cluster] = couchbase::cluster::connect(connection_string, options).get();
     if (connect_err) {
-        std::cout << "Unable to connect to the cluster: " << fmt::format("{}", connect_err) << "\n";
+        fmt::println("Unable to connect to the cluster: {}", connect_err);
         return 1;
     }
     auto bucket = cluster.bucket(bucket_name);
@@ -43,9 +43,9 @@ main() -> int
 
         // tag::simple-results[]
         if (err) {
-            std::cout << fmt::format("Error: {}\n", err);
+            fmt::println("Error: {}", err);
         } else {
-            std::cout << fmt::format("Got {} rows\n", result.rows_as<couchbase::codec::tao_json_serializer, tao::json::value>().size());
+            fmt::println("Got {} rows", result.rows_as<couchbase::codec::tao_json_serializer, tao::json::value>().size());
         }
         // end::simple-results[]
     }
@@ -54,10 +54,10 @@ main() -> int
         // tag::get-rows[]
         auto [err, result] = cluster.query("SELECT * FROM `travel-sample` LIMIT 10;", {}).get();
         if (err) {
-            std::cout << fmt::format("Error: {}\n", err);
+            fmt::println("Error: {}", err);
         } else {
             for (const auto& row : result.rows_as_json()) {
-                std::cout << tao::json::to_string(row) << "\n";
+                fmt::println("{}", tao::json::to_string(row));
             }
         }
         // end::get-rows[]
@@ -77,7 +77,7 @@ main() -> int
             )
             .get();
         // end::positional[]
-        std::cout << fmt::format("{}", tao::json::to_string(result.rows_as_json().at(0))) << "\n";
+        fmt::println("{}", tao::json::to_string(result.rows_as_json().at(0)));
     }
 
     {
@@ -92,7 +92,7 @@ main() -> int
             .query(stmt, couchbase::query_options().named_parameters(std::make_pair<std::string, std::string>("country", "United States")))
             .get();
         // end::named[]
-        std::cout << fmt::format("{}", tao::json::to_string(result.rows_as_json().at(0))) << "\n";
+        fmt::println("{}", tao::json::to_string(result.rows_as_json().at(0)));
     }
 
     {
@@ -117,7 +117,7 @@ main() -> int
         auto [err, result] =
           cluster.query("SELECT * FROM `travel-sample` LIMIT 10;", couchbase::query_options().consistent_with(state)).get();
         if (err) {
-            std::cout << fmt::format("Error: {}\n", err);
+            fmt::println("Error: {}", err);
         }
         // end::at-plus[]
     }
@@ -126,10 +126,10 @@ main() -> int
         // tag::scope-level[]
         auto [err, result] = scope.query("SELECT * FROM airline LIMIT 10;", {}).get();
         if (err) {
-            std::cout << fmt::format("Error: {}\n", err);
+            fmt::println("Error: {}", err);
         } else {
             for (const auto& row : result.rows_as_json()) {
-                std::cout << tao::json::to_string(row) << "\n";
+                fmt::println("{}", tao::json::to_string(row));
             }
         }
         // end::scope-level[]

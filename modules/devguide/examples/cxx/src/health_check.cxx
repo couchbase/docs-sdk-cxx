@@ -22,7 +22,7 @@ main()
         if (err) {
             fmt::println("Got an error doing ping: {}", err);
         } else {
-            std::cout << res.as_json();
+            fmt::println("{}", res.as_json());
         }
         /*
         {
@@ -62,7 +62,7 @@ main()
         if (err) {
             fmt::println("Got an error doing diagnostics: {}", err);
         } else {
-            std::cout << res.as_json();
+            fmt::println(res.as_json());
         }
         /*
         {

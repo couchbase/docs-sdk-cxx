@@ -35,20 +35,19 @@ The {name-sdk} also comes with some convenience functionality for common Couchba
 
 Management operations in the SDK may be performed through several interfaces depending on the object:
 
-* BucketManager -- `Couchbase::Management::BucketManager`
--- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.0-dp.9/classcouchbase_1_1bucket__manager.html[API docs].
-// * UserManager -- `Couchbase::Management::UserManager`
-// -- see https://docs.couchbase.com/sdk-api/couchbase-ruby-client/Couchbase/Management/UserManager.html[API docs].
-* QueryIndexManager -- `Couchbase::Management::QueryIndexManager`
--- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.0-dp.9/structcouchbase_1_1management_1_1query_1_1index.html[API docs].
-// * AnalyticsIndexManager -- `Couchbase::Management::AnalyticsIndexManager`
-// -- see https://docs.couchbase.com/sdk-api/couchbase-ruby-client/Couchbase/Management/AnalyticsIndexManager.html[API docs].
-// * SearchIndexManager -- `Couchbase::Management::SearchIndexManager`
-// -- see https://docs.couchbase.com/sdk-api/couchbase-ruby-client/Couchbase/Management/SearchIndexManager.html[API docs].
-* CollectionManager -- `Couchbase::Management::CollectionManager`
--- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.0-dp.9/classcouchbase_1_1collection__manager.html[API docs].
-// * ViewIndexManager -- `Couchbase::Management::ViewIndexManager`
-// -- see https://docs.couchbase.com/sdk-api/couchbase-ruby-client/Couchbase/Management/ViewIndexManager.html[API docs].
+* BucketManager -- `couchbase::bucket_manager`
+-- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1bucket__manager.html[API docs].
+* QueryIndexManager -- `couchbase::query_index_manager`
+-- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1query__index__manager.html[API docs].
+* CollectionManager -- `couchbase::collection_manager`
+-- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1collection__manager.html[API docs].
+* AnalyticsIndexManager -- `couchbase::analytics_index_manager`
+-- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1analytics__index__manager.html[API docs].
+* SearchIndexManager -- `couchbase::search_index_manager`
+-- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1search__index__manager.html[API docs].
+
+
+
 
 
 

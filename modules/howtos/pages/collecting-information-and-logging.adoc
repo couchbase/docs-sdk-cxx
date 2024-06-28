@@ -16,9 +16,6 @@
 [abstract]
 {description}
 
-include::project-docs:partial$preview-warning.adoc[]
-
-
 The Couchbase {cpp} SDK allows logging to be configured programmatically. Internally, the SDK uses the
 https://github.com/gabime/spdlog[spdlog] logging library.
 
