@@ -411,6 +411,52 @@ main() -> int
         // #end::sync-durability[]
     }
 
+    {
+        // #tag::any-replica[]
+        auto [err, result] = collection
+                .lookup_in_any_replica(
+                        "customer123",
+                        couchbase::lookup_in_specs{
+                                couchbase::lookup_in_specs::get("addresses.delivery.country"),
+                        }
+                )
+                .get();
+
+        if (err) {
+            fmt::println("Err: {}", err);
+        } else {
+            auto country = result.template content_as<std::string>(0);
+            auto is_replica = result.is_replica();
+            fmt::println("Country: {} Is replica: {}", country, is_replica);
+        }
+        // #end::any-replica[]
+    }
+
+    {
+        // #tag::all-replicas[]
+        auto [err, result] = collection
+                .lookup_in_all_replicas(
+                        "customer123",
+                        couchbase::lookup_in_specs{
+                                couchbase::lookup_in_specs::get("addresses.delivery.country"),
+                        }
+                )
+                .get();
+
+        if (err) {
+            fmt::println("Err: {}", err);
+        } else {
+            for (const auto& replica : result) {
+                auto country = replica.template content_as<std::string>(0);
+                auto is_replica = replica.is_replica();
+                fmt::println("Country: {} Is replica: {}", country, is_replica);
+            }
+        }
+        // #end::all-replicas[]
+
+
+    }
+
     cluster.close().get();
     return 0;
 }
