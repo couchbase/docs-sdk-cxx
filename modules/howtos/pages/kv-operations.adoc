@@ -265,10 +265,6 @@ include::{version-common}@sdk:shared:partial$atomic.adoc[tag=xdcr]
 //
 
 
-
-
-// KV Range Scan
-////
 [#kv-range-scan]
 == KV Range Scan
 
@@ -285,9 +281,9 @@ If your application does many scans at once, or requires low latency results, we
 Here's an example of a KV range scan that gets all documents in a collection:
 
 .KV Range Scan for all documents in a collection
-[source,java]
+[source,{example-source-lang}]
 ----
-include::example$KvOperations.java[tag=rangeScanAllDocuments,indent=0]
+include::{example-source}[indent=0,tag=scan-all-docs]
 ----
 <1> The `ScanType.rangeScan()` method has two nullable parameters: `from` and `to`.
 If you pass null like in this example, you'll get all documents in the collection.
@@ -306,11 +302,11 @@ If you use this document naming scheme, you can use a prefix range scan to get a
 For example, to get all documents associated with user "alice", you would write:
 
 .KV Range Scan for all documents in a collection whose IDs start with "alice::"
-[source,java]
+[source,{example-source-lang}]
 ----
-include::example$KvOperations.java[tag=rangeScanPrefix,indent=0]
+include::{example-source}[indent=0,tag=scan-alice]
 ----
-<1> Note the scan type is *prefixScan*.
+<1> Note the scan type is *prefix_scan*.
 
 [#kv-range-scan-sample]
 === Sample scan
@@ -318,28 +314,26 @@ include::example$KvOperations.java[tag=rangeScanPrefix,indent=0]
 If you want to get random documents from a collection, use a sample scan.
 
 .KV Range Scan for 100 random documents
-[source,java]
+[source,{example-source-lang}]
 ----
-include::example$KvOperations.java[tag=rangeScanSample,indent=0]
+include::{example-source}[indent=0,tag=scan-sample]
 ----
 <1> In this example, no more than `100` documents are returned.
 
 [#kv-range-scan-only-ids]
 === Get IDs instead of full document
 
-If you only want the document IDs, set the `idsOnly` option to true, like this:
+If you only want the document IDs, set the `ids_only()` option to true, like this:
 
 .KV Range Scan for all document IDs in a collection
 [source,java]
+[source,{example-source-lang}]
 ----
-include::example$KvOperations.java[tag=rangeScanAllDocumentIds,indent=0]
+include::{example-source}[indent=0,tag=scan-ids-only]
 ----
-<1> The returned `ScanResult` objects throw `NoSuchElementException` if you try to access any property other than `id`.
+<1> The returned `scan_result` objects' content will be empty.
 
-Setting `idsOnly` to true also works with the other scan types described above.
-////
-
-
+Setting `ids_only()` to true also works with the other scan types described above.
 
 
 == Additional Resources

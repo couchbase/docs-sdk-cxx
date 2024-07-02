@@ -7,7 +7,7 @@
 
 #include <fmt/chrono.h>
 #include <fmt/format.h>
-#include <tao/json/value.hpp>
+#include <tao/json.hpp>
 
 #include <functional>
 #include <iostream>
@@ -324,6 +324,79 @@ main() -> int
             fmt::println("id: {}, CAS: {}", document_id, res.cas().value());
         }
         // #end::remove_with_durability[]
+    }
+
+    {
+        // #tag::scan-all-docs[]
+        auto [err, res] = collection.scan(couchbase::range_scan()).get();
+
+        if (err) {
+            fmt::println("Error during scan: {}", err);
+        } else {
+            for (auto [iter_err, item] : res) {
+                if (iter_err) {
+                    fmt::println("Error during iteration: {}", iter_err);
+                } else {
+                    std::cout << "Id: " << item.id() << " Content: " << item.content_as<tao::json::value>() << "\n";
+                }
+            }
+        }
+        // #end::scan-all-docs[]
+    }
+
+    {
+        // #tag::scan-alice[]
+        auto [err, res] = collection.scan(couchbase::prefix_scan("alice")).get();
+
+        if (err) {
+            fmt::println("Error during scan: {}", err);
+        } else {
+            for (auto [iter_err, item] : res) {
+                if (iter_err) {
+                    fmt::println("Error during iteration: {}", iter_err);
+                } else {
+                    std::cout << "Id: " << item.id() << " Content: " << item.content_as<tao::json::value>() << "\n";
+                }
+            }
+        }
+        // #end::scan-alice[]
+    }
+
+    {
+        // #tag::scan-sample[]
+        auto [err, res] = collection.scan(couchbase::sampling_scan(100)).get();
+
+        if (err) {
+            fmt::println("Error during scan: {}", err);
+        } else {
+            for (auto [iter_err, item] : res) {
+                if (iter_err) {
+                    fmt::println("Error during iteration: {}", iter_err);
+                } else {
+                    std::cout << "Id: " << item.id() << " Content: " << item.content_as<tao::json::value>() << "\n";
+                }
+            }
+        }
+        // #end::scan-sample[]
+    }
+
+    {
+        // #tag::scan-ids-only[]
+        auto opts = couchbase::scan_options().ids_only(true);
+        auto [err, res] = collection.scan(couchbase::range_scan(), opts).get();
+
+        if (err) {
+            fmt::println("Error during scan: {}", err);
+        } else {
+            for (auto [iter_err, item] : res) {
+                if (iter_err) {
+                    fmt::println("Error during iteration: {}", iter_err);
+                } else {
+                    fmt::println("Id: {}", item.id());
+                }
+            }
+        }
+        // #end::scan-ids-only[]
     }
 
     cluster.close().get();
