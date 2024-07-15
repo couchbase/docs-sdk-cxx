@@ -119,7 +119,7 @@ Do not expose ASIO in public API.
 * https://issues.couchbase.com/browse/CXXCBC-381[CXXCBC-381]:
 Use `std::shared_ptr` for `transactions_context` and `attempt_context` (https://github.com/couchbase/couchbase-cxx-client/pull/590[#590]).
 
-*https://issues.couchbase.com/browse/CXXCBC-510[CXXCBC-510]:
+* https://issues.couchbase.com/browse/CXXCBC-510[CXXCBC-510]:
 Support binary objects in transactions.
 This changes allows to use transcoders in transactions API (https://github.com/couchbase/couchbase-cxx-client/pull/576[#576]).
 
