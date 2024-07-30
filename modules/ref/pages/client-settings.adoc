@@ -46,6 +46,11 @@ Default: `best_effort_retry_strategy{ controlled_backoff }`
 +
 The retry strategy decides if an operation should be retried or canceled. While implementing a custom strategy is fairly advanced, the SDK ships with a best effort retry strategy out of the box (`best_effort_retry_strategy`). This default will retry the operation (when the error is retriable) until it either succeeds or the maximum request lifetime is reached.
 
+Name: *Zone Aware Replica Reads*::
+Options Method: `cluster_options read_preference preference`
++
+By default it has no preference and will select any available replica, but it is possible to prioritize or restrict to only nodes in local server group.
+
 
 == Security Options
 
