@@ -165,7 +165,7 @@ This durability is enforced by the database,
 == Reading from Replicas
 
 By default, read requests from the SDK are directed to the node with the active vbucket.
-This bucket will usually be updated before any replicas (see <#durability,Durability> above),
+This bucket will usually be updated before any replicas (see <<durability,Durability>> above),
 and is best for consistency.
 
 Some use cases benefit -- for consistency or availability -- from accessing both the active copy of the document, and/or one or all replicas.
@@ -205,7 +205,7 @@ Implicit in the rules for durability, and the process of setting up Server Group
 
 * Moving servers between Server Groups updates the `clustermap` immediately, but to move the data, an administrator *must* perform rebalance. Until the rebalance is complete, the SDK will see and be able to 'use' the new server groups, but the `vBucketMap` may still refer to data in the previous locations.
 
-* The cluster should have enough nodes and group to make sure that copies of the same document are not stored on the same node, and each group has nodes that cover all 1024 vbuckets (in other words, the number of the groups does not exceeds number of the copies (`active+num_replicas`)). The Admin UI should emit small yellow warning if the configuration is considered unbalanced.
+* The cluster should have enough nodes and group to make sure that copies of the same document are not stored on the same node, and each group has nodes that cover all 1024 vbuckets (in other words, the number of the groups does not exceeds number of the copies: `active+num_replicas`). The Admin UI should emit small yellow warning if the configuration is considered unbalanced.
 
 * Setting *three* replicas for the bucket xref:server:learn:data/durability.adoc#majority[disables durability for sync writes], also precluding the use of
 xref:concept-docs:transactions.adoc[multi-document ACID transactions].
