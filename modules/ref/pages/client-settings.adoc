@@ -49,7 +49,8 @@ The retry strategy decides if an operation should be retried or canceled. While 
 Name: *Preferred Server Group Replica Reads*::
 Options Method: `cluster_options read_preference preference`
 +
-By default it has no preference and will select any available replica, but it is possible to prioritize or restrict to only nodes in local server group.
+By default it has no preference set, and will select any available replica.
+This can be set to prioritize or restrict reads to only nodes in a chosen server group, such as one in the local Availability Zone.
 
 
 == Security Options
