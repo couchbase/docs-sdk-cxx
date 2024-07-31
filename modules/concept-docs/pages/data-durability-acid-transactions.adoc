@@ -175,13 +175,18 @@ The method can either be one to return either the first result returned -- activ
 which is useful if a node is timing out;
 or to return _all_ of the results, for client code to handle any inconsistency, or to build a consensus answer.
 
-=== Local Availability Zone Reads
+=== Preferred Server Group Replica Reads
 
-IMPORTANT: Zone Aware Replica Reads are only accessible with the {name-sdk} working with Couchbase Server 7.6.2 or newer (Capella or self-managed).
+IMPORTANT: Preferred Server Group Replica Reads are only accessible with the {name-sdk} working with Couchbase Server 7.6.2 or newer (Capella or self-managed).
+
+xref:server:learn:clusters-and-availability/groups.adoc#understanding-server-group-awareness[Server Groups]
+can be used to define subsets of nodes within a Couchbase cluster, which contain a complete set of vbuckets (active or replica).
+As well as high availability use cases, Servre Groups can also be used to keep much traffic within the same cloud Availability Zone.
 
 For Capella users with high data volumes, egress charges for reads from other Availability Zones (AZ) in AWS can be a significant cost.
-The {name-sdk}, when making read replica requests, can be zone aware --
-and set to always read from a copy of the document in the local zone.
+The {name-sdk}, when making read replica requests, can make a request to a preferred Server Group --
+in this case the local AZ --
+and set to always read from a copy of the document in this local zone.
 This is done by putting cluster nodes in the same AZ into the same 
 xref:server:learn:clusters-and-availability/groups.adoc#server-groups-and-vbuckets[Server Group], too.
 
@@ -190,7 +195,8 @@ until the local replica catches up.
 Alternatively, it may demand a stronger level of durability, to ensure that all copies of a document are consistent before they are accessible --
 provided that this is `persistToMajority` with xref:server:learn:data/durability.adoc#majority[no more than one replica].
 
-In any case, Couchbase does not recommend this feature where read consistency is critical.
+Couchbase does not recommend this feature where read consistency is critical,
+but with the appropriate durability settings consistency can be favored ahead of availability.
 
 [CAUTION]
 .Replicas, Nodes, and Server Groups
@@ -201,7 +207,8 @@ Implicit in the rules for durability, and the process of setting up Server Group
 
 * The cluster should have enough nodes and group to make sure that copies of the same document are not stored on the same node, and each group has nodes that cover all 1024 vbuckets (in other words, the number of the groups does not exceeds number of the copies (`active+num_replicas`)). The Admin UI should emit small yellow warning if the configuration is considered unbalanced.
 
-* Setting three replicas for the bucket disables durability for sync writes, also affecting transactions.
+* Setting *three* replicas for the bucket xref:server:learn:data/durability.adoc#majority[disables durability for sync writes], also precluding the use of
+xref:concept-docs:transactions.adoc[multi-document ACID transactions].
 ====
 
 
