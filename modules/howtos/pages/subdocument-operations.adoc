@@ -298,7 +298,8 @@ To perform sub-document operations on a (bulk) list of documents, follow the bul
 [#subdoc-from-replica]
 == Reading Sub-Documents From Replicas
 
-Couchbase Server 7.6 and later support Sub-Doc lookup from replicas.
+Couchbase Server 7.6 and later support Sub-Doc xref:concept-docs:data-durability-acid-transactions.adoc#reading-from-replicas[lookup from replicas].
+With 7.6.2 onwards supporting xref:concept-docs:data-durability-acid-transactions.adoc#preferred-server-group-replica-reads[reading from preferred Server Group].
 
 The `collection.lookup_in_any_replica()` method returns the first response -- from active or replica:
 
