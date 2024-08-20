@@ -136,7 +136,7 @@ include::{version-common}@sdk:shared:partial$capella.adoc[tag=cloud]
 
 .Couchbase Server and SDK Supported Version Matrix
 [.table-merge-cells]
-[cols="7,6,6,6"]
+[cols="5,4,4,10"]
 |===
 | | Server 7.0 & 7.1 | Server 7.2 | Server 7.6
 
@@ -150,6 +150,10 @@ include::{version-common}@sdk:shared:partial$capella.adoc[tag=cloud]
 | Vector Search
 2+| N/A
 | From SDK 1.0.0
+
+| Replica Reads
+2+| N/A
+| From SDK 1.0.0 -- _Preferred Server Group Replica Reads_ from Server 7.6.2 and SDK 1.0.0
 |===
 
 This table is not an exhaustive list -- just a few highlights -- provided to help assess compatibility of older versions in particular.
