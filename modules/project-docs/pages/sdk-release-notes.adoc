@@ -44,7 +44,7 @@ $ git clone --recurse-submodules https://github.com/couchbaselabs/couchbase-cxx-
 
 [source,console]
 ----
-$ export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/ 
+$ export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/
 ----
 
 .Building (command-line)
@@ -82,6 +82,102 @@ $ cmake --build .
 We always recommend using the latest version of the SDK -- it contains all of the latest security patches and support for new and upcoming features.
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
 any changes to expected behavior are noted in the release notes that follow.
+
+
+=== Version 1.0.1 (22 August 2024)
+
+This is the second GA release of the {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.1[API reference] |
+https://github.com/couchbase/couchbase-cxx-client/compare/1.0.0...1.0.1[Full Changelog]
+
+==== Enhancements
+
+* https://issues.couchbase.com/browse/CXXCBC-564/[CXXCBC-564]:
+Allow to specify all operations (Get, Replace, Delete, Insert and Query) in
+pillowfight workload
+(https://github.com/couchbase/couchbase-cxx-client/pull/640[#640]).
+
+* Improve logging of DNS client
+  (https://github.com/couchbase/couchbase-cxx-client/pull/634[#634]).
+
+* https://issues.couchbase.com/browse/CXXCBC-568/[CXXCBC-568]:
+Cancel deferred operations when closing HTTP session manager
+(https://github.com/couchbase/couchbase-cxx-client/pull/643[#643]).
+
+==== Fixes
+
+* https://issues.couchbase.com/browse/CXXCBC-531/[CXXCBC-531]:
+Fix memory leak in range scan implementation
+(https://github.com/couchbase/couchbase-cxx-client/pull/645[#645],
+https://github.com/couchbase/couchbase-cxx-client/pull/610[#610]).
+
+* https://issues.couchbase.com/browse/CXXCBC-573/[CXXCBC-573]:
+Avoid uninitialized reads in the logger test
+(https://github.com/couchbase/couchbase-cxx-client/pull/610[#610]).
+
+* https://issues.couchbase.com/browse/CXXCBC-572/[CXXCBC-572]:
+Always initialize service_type
+(https://github.com/couchbase/couchbase-cxx-client/pull/610[#610]).
+
+* https://issues.couchbase.com/browse/CXXCBC-569/[CXXCBC-569]:
+Resolve cycle in shared pointers for `transaction_context`
+(https://github.com/couchbase/couchbase-cxx-client/pull/641[#641]).
+
+* https://issues.couchbase.com/browse/CXXCBC-550/[CXXCBC-550]: Fixed
+use-after-move issue in command handler
+(https://github.com/couchbase/couchbase-cxx-client/pull/628[#628])
+
+* Fix build of Ruby wrapper on Windows
+(https://github.com/couchbase/couchbase-cxx-client/pull/636[#636]).
+
+* Fix behaviour when reading is complete before returning HTTP streaming resp
+(https://github.com/couchbase/couchbase-cxx-client/pull/624[#624]).
+
+==== Columnar changes
+
+In this release new build mode for Columnar has been introduced. The CMake flag
+`-DCOUCHBASE_CXX_CLIENT_COLUMNAR` would produce special version of the library
+that is optimized for usage with Columnar deployments.
+
+* Add initial Columnar core implementation
+(https://github.com/couchbase/couchbase-cxx-client/pull/616[#616]).
+
+* https://issues.couchbase.com/browse/CXXCBC-525/[CXXCBC-525]:
+Open cluster connection in background
+(https://github.com/couchbase/couchbase-cxx-client/pull/621[#621]).
+
+* Use `open_in_background` when creating test cluster in Columnar mode
+(https://github.com/couchbase/couchbase-cxx-client/pull/625[#625]).
+
+* https://issues.couchbase.com/browse/CXXCBC-542/[CXXCBC-542]:
+Richer error information from columnar core
+(https://github.com/couchbase/couchbase-cxx-client/pull/626[#626]).
+
+* Update columnar log message, enable `dispatch_timeout` if in connection string
+(https://github.com/couchbase/couchbase-cxx-client/pull/627[#627]).
+
+* Add helper method for serializing ctx into columnar error message
+(https://github.com/couchbase/couchbase-cxx-client/pull/632[#632]).
+
+* Add columnar query positional params
+(https://github.com/couchbase/couchbase-cxx-client/pull/635[#635]).
+
+* https://issues.couchbase.com/browse/CXXCBC-543/[CXXCBC-543]:
+Add retries for columnar query
+(https://github.com/couchbase/couchbase-cxx-client/pull/637[#637]).
+
+* https://issues.couchbase.com/browse/CXXCBC-562/[CXXCBC-562]:
+Provide HTTP session manager with updated cluster
+(https://github.com/couchbase/couchbase-cxx-client/pull/638[#638]).
+
+* https://issues.couchbase.com/browse/CXXCBC-556/[CXXCBC-556]:
+Use versioned columnar query endpoint
+(https://github.com/couchbase/couchbase-cxx-client/pull/639[#639]).
+
+* https://issues.couchbase.com/browse/CXXCBC-557/[CXXCBC-557]:
+Add global columnar timeout config
+(https://github.com/couchbase/couchbase-cxx-client/pull/642[#642]).
 
 
 === Version 1.0.0 (26 June 2024)
@@ -133,7 +229,7 @@ Allow to use 0 as a max expiry for new collections (https://github.com/couchbase
 
 * https://issues.couchbase.com/browse/CXXCBC-496[CXXCBC-496]:
 Convert {cpp} Public API Error handling to use `couchbase::error`.
-Related tickets: 
+Related tickets:
 https://issues.couchbase.com/browse/CXXCBC-492[CXXCBC-492],
 https://issues.couchbase.com/browse/CXXCBC-498[CXXCBC-498],
 https://issues.couchbase.com/browse/CXXCBC-499[CXXCBC-499],

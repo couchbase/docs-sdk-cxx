@@ -9,13 +9,13 @@
 :example-source-lang: c++
 
 // Note to editors
-// 
+//
 // This page pulls in content from
 // https://github.com/couchbase/docs-sdk-common/blob/release/7.6/modules/shared/partials/start-using-sdk.adoc
 //
 // and code samples from
 // https://github.com/couchbase/docs-sdk-scala/tree/release/1.6/modules/devguide/examples/scala
-// 
+//
 // It can be seen built at
 // https://docs.couchbase.com/scala-sdk/1.6/hello-world/start-using-sdk.html
 
@@ -25,9 +25,9 @@
 
 
 
-Couchbase has a simple interface for creating and modifying records in a document, 
+Couchbase has a simple interface for creating and modifying records in a document,
 based upon the *collection* into which the documents are organized.
-You can read more about data modeling <<data-modeling,below>>, 
+You can read more about data modeling <<data-modeling,below>>,
 but first let's look at those data operations, and installing the {name-sdk}.
 
 // remember to add a nomenclature note to the next version of this page for LCB.
@@ -46,18 +46,18 @@ after walking through a quick installation.
 == Before You Start
 
 Couchbase Capella, our Database-as-a-Service, lets you get on with what matters, while we take care of the administration for you.
-Alternately, if you need to control every aspect of deployment -- 
-or just want to run the Server in a VM on your laptop -- 
+Alternately, if you need to control every aspect of deployment --
+or just want to run the Server in a VM on your laptop --
 there are several self-managed options available:
 
 [tabs]
-==== 
+====
 Couchbase Capella::
 +
 --
-If you haven't already got a database set up, the easiest route is to https://cloud.couchbase.com/sign-up[sign up to a trial of Couchbase Capella^], 
+If you haven't already got a database set up, the easiest route is to https://cloud.couchbase.com/sign-up[sign up to a trial of Couchbase Capella^],
 then come back to this page.
-Make a note of the xref:cloud:get-started:connect.adoc[endpoint] to connect to, 
+Make a note of the xref:cloud:get-started:connect.adoc[endpoint] to connect to,
 and remember the credentials for the user that you set up.
 --
 
@@ -133,21 +133,21 @@ In production, Couchbase strongly recommends setting up users with more granular
 == Installation
 
 // tag::quick-install[]
-More details of the installation process are in the 
+More details of the installation process are in the
 xref:project-docs:sdk-full-installation.adoc[full installation guide].
 
 https://github.com/cpm-cmake/CPM.cmake[CPM.cmake] is the  recommended way to include the library in your project.
 You need to include the following command in your `CMakeLists.txt`.
 
-[source,cmake]
+[source,cmake,subs="+attributes"]
 ----
 CPMAddPackage(
   NAME
   couchbase_cxx_client
   GIT_TAG
-  1.0.0
+  {sdk_current_version}
   VERSION
-  1.0.0
+  {sdk_current_version}
   GITHUB_REPOSITORY
   "couchbase/couchbase-cxx-client"
   OPTIONS
@@ -158,7 +158,7 @@ CPMAddPackage(
 === IDE Plugins
 
 To make development easier, Couchbase plugins are available for VSCode and the IntelliJ family of IDEs and editors.
-For links and more information on these and other integrations across the {name_platform} ecosystem, 
+For links and more information on these and other integrations across the {name_platform} ecosystem,
 check out the xref:project-docs:third-party-integrations.adoc[] page.
 
 
@@ -191,7 +191,7 @@ Connect to your Couchbase Capella database (or your local Couchbase Cluster, if 
 
 
 [tabs]
-==== 
+====
 Couchbase Capella::
 +
 --
@@ -204,8 +204,8 @@ Note, the client certificate for connecting to a Capella database is included in
 --
 
 Self-Managed Couchbase Server::
-+ 
--- 
++
+--
 [source,{example-source-lang}]
 ----
 include::{example-source}[indent=0,tag=connect_onprem]
@@ -216,7 +216,7 @@ include::{example-source}[indent=0,tag=connect_onprem]
 For a deeper look at connection options, read xref:howtos:managing-connections.adoc[].
 
 TIP: The connection code for getting started uses the Administrator password that you were given during set up.
-In any production app you should create a role restricted to the permissions needed for your app -- 
+In any production app you should create a role restricted to the permissions needed for your app --
 more on this in xref:concept-docs:best-practices.adoc#roles-and-rbac[the Security documentation].
 
 ////
@@ -304,16 +304,16 @@ include::{example-source}[indent=0,tag=remove]
 == Data Modeling
 
 Documents are organized into collections -- collections of documents that belong together.
-You get to decide what it means to "belong." 
+You get to decide what it means to "belong."
 Developers usually put documents of the same type in the same collection.
 
-For example, imagine you have two types of documents: customers and invoices. 
+For example, imagine you have two types of documents: customers and invoices.
 You could put the customer documents in a collection called `customers`, and the invoice documents in a collection called `invoices`.
 
-Each document belongs to exactly one collection. 
+Each document belongs to exactly one collection.
 A document’s ID is unique _within_ the collection.
 
-Different scopes can hold collections with different names. 
+Different scopes can hold collections with different names.
 There is no relationship between collections in different scopes.
 Each collection belongs to just one scope and
 a collection’s name is unique within the scope.
@@ -363,7 +363,7 @@ Now you're up and running, try one of the following:
 
 === Additional Resources
 
-The Scala SDK includes three APIs.  
+The Scala SDK includes three APIs.
 The examples above show the simple blocking API, for simplicity, but you can also perform all operations in an async style using Scala `Future`, and a reactive style using Project Reactor `SMono` and `SFlux`.
 Please see xref:howtos:concurrent-async-apis.adoc[Choosing an API] for more details.
 
