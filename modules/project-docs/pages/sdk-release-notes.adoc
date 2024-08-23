@@ -108,7 +108,7 @@ Cancel deferred operations when closing HTTP session manager
 ==== Fixes
 
 * https://issues.couchbase.com/browse/CXXCBC-531/[CXXCBC-531]:
-Fix memory leak in range scan implementation
+Fixed memory leak in range scan implementation
 (https://github.com/couchbase/couchbase-cxx-client/pull/645[#645],
 https://github.com/couchbase/couchbase-cxx-client/pull/610[#610]).
 
