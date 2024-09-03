@@ -89,7 +89,7 @@ any changes to expected behavior are noted in the release notes that follow.
 This is the first maintenance release of the 1.0 {cpp} SDK.
 
 https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.1[API reference] |
-https://github.com/couchbase/couchbase-cxx-client/compare/1.0.0...1.0.1++[Full Changelog]
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.0...1.0.1++[Full Changelog]
 
 ==== Enhancements
 
