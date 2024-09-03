@@ -50,8 +50,8 @@ How you combine the Data Service and {sqlpp} should depend on your use case, but
 
 Couchbase offers a choice of:
 
-* https://info.couchbase.com/CapellaColumnar_Private_Preview_SignUp_LP.html[Capella Columnar (currently in private preview)] for real-time analytics, with data stored elsewhere in your data lake.
-* xref:howtos:analytics-using-sdk.adoc[Couchbase Analytics Service (CBAS)] for traditional data analytics against your operational database.
+* xref:columnar:intro:intro.adoc[Capella Columnar] for real-time analytics, with data stored elsewhere in your data lake.
+* xref:howtos:analytics-using-sdk.adoc[Couchbase Analytics Service (CBAS)] for traditional data analytics against your operational database cluster.
 
 Both use versions of the {sqlpp} query language.
 
@@ -107,7 +107,9 @@ In all cases, it is useful to be aware of the choice you are making, so that you
 • Load the new inventory data.
 • Merge customer lists.
 30
-For doing each of these tasks, you need to search your database efficiently. Do the select-joingroup-project-aggregate-order processing of the data to produce a report. Similarly, y
+For doing each of these tasks, you need to search your cluster efficiently. 
+Do the select-joingroup-project-aggregate-order processing of the data to produce a report. 
+Similarly, y
 ////
 
 // schema validation - Ottoman?

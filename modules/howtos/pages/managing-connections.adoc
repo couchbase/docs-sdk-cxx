@@ -52,7 +52,7 @@ $ ./start_using couchbase://127.0.0.1 Administrator password
 ----
 
 Here we're talking to a local development cluster.
-For Capella, this will need `couchbases://` for TLS, followed by your Capella database name -- see xref:cloud:get-started:connect.adoc[].
+For Capella, this will need `couchbases://` for TLS, followed by your Capella cluster name -- see xref:cloud:get-started:connect.adoc[].
 The client certificate for connecting to Capella is included in the {name-SDK} installation.
 
 
