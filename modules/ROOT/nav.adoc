@@ -16,7 +16,7 @@
 // *** xref:concept-docs:collections.adoc[]
 *** xref:concept-docs:subdocument-operations.adoc[Sub-Documents]
 *** xref:concept-docs:nonjson.adoc[]
-*** xref:howtos:transcoders-nonjson.adoc[Transcoders & Non-JSON Documents]
+// *** xref:howtos:transcoders-nonjson.adoc[Transcoders & Non-JSON Documents]
 *** xref:concept-docs:xattr.adoc[XATTR & Virtual XATTR]
 // ** xref:howtos:encrypting-using-sdk.adoc[Encrypting Your Data]
 // *** xref:concept-docs:encryption.adoc[Understanding Field Level Encryption]
