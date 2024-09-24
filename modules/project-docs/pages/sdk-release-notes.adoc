@@ -84,6 +84,62 @@ All patch releases for each dot minor release should be API compatible, and safe
 any changes to expected behavior are noted in the release notes that follow.
 
 
+
+=== Version 1.0.2 (23 September 2024)
+
+This is a maintenance release of the 1.0 {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.2[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.1...1.0.2++[Full Changelog]
+
+
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform           | Architecture | File
+| Checksums          | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.2.sha256.txt[couchbase-cxx-client-1.0.2.sha256.txt]
+| Source Archive     | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.2.tar.gz[couchbase-cxx-client-1.0.2.tar.gz]
+| Amazon Linux 2023  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.2-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.0.2-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.2-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.0.2-1.amzn2023.aarch64.tar]
+| Enterprise Linux 9 | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.2-1.el9.x86_64.tar[couchbase-cxx-client-1.0.2-1.el9.x86_64.tar]
+| Enterprise Linux 9 | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.2-1.el9.aarch64.tar[couchbase-cxx-client-1.0.2-1.el9.aarch64.tar]
+|===
+
+==== Fixes
+
+* http://jira.issues.couchbase.com/browse/CXXCBC-577[CXXCBC-577]:
+Reduced duplicated code in `http_component` (https://github.com/couchbase/couchbase-cxx-client/pull/657[#657]).
+* http://jira.issues.couchbase.com/browse/CXXCBC-593[CXXCBC-593]:
+Configuration profile are now applied as the last step -- taking priority over all other defaults and options (https://github.com/couchbase/couchbase-cxx-client/pull/655[#655]).
+* http://jira.issues.couchbase.com/browse/CXXCBC-552[CXXCBC-552]:
+Cleaned up network selection options (, by deprecating `behavior_options#network()` in favor to `network_options#preferred_network()`
+https://github.com/couchbase/couchbase-cxx-client/pull/651[#651]).
+* http://jira.issues.couchbase.com/browse/CXXCBC-576[CXXCBC-576]:
+When `cluster.close()` is called, all in-progress HTTP operations should now be cancelled
+(https://github.com/couchbase/couchbase-cxx-client/pull/648[#648]).
+* Updated code samples in API reference (https://github.com/couchbase/couchbase-cxx-client/pull/653[#653]).
+
+==== Columnar changes
+
+* http://jira.issues.couchbase.com/browse/CXXCBC-577[CXXCBC-577]:
+Added Columnar database management operations.
+* http://jira.issues.couchbase.com/browse/CXXCBC-588[CXXCBC-588]:
+Updated timeout sent to server on each Columnar query retry (https://github.com/couchbase/couchbase-cxx-client/pull/654[#654]).
+* http://jira.issues.couchbase.com/browse/CXXCBC-580[CXXCBC-580]:
+SDK now reports last error when timing out on Columnar query retries (https://github.com/couchbase/couchbase-cxx-client/pull/650[#650]).
+
+==== Build and Test Infrastructure
+
+* http://jira.issues.couchbase.com/browse/CXXCBC-303[CXXCBC-303]:
+Updated build scripts to produce RPM packages (https://github.com/couchbase/couchbase-cxx-client/pull/660[#660]).
+* http://jira.issues.couchbase.com/browse/CXXCBC-597[CXXCBC-597]:
+SDK now use static library for ASIO; updated it to 1.31.0 (https://github.com/couchbase/couchbase-cxx-client/pull/658[#658]).
+* http://jira.issues.couchbase.com/browse/CXXCBC-596[CXXCBC-596]:
+No longer include `tao_json_serializer.hxx` by default (https://github.com/couchbase/couchbase-cxx-client/pull/656[#656]).
+* Include `<string>` in `string_hex.h` (https://github.com/couchbase/couchbase-cxx-client/pull/652[#652]).
+
+
 === Version 1.0.1 (22 August 2024)
 
 This is the first maintenance release of the 1.0 {cpp} SDK.
