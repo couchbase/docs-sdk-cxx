@@ -104,6 +104,8 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.1...1.0.2++
 | Amazon Linux 2023  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.2-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.0.2-1.amzn2023.aarch64.tar]
 | Enterprise Linux 9 | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.2-1.el9.x86_64.tar[couchbase-cxx-client-1.0.2-1.el9.x86_64.tar]
 | Enterprise Linux 9 | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.2-1.el9.aarch64.tar[couchbase-cxx-client-1.0.2-1.el9.aarch64.tar]
+| Enterprise Linux 8 | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.2-1.el8.x86_64.tar[couchbase-cxx-client-1.0.2-1.el8.x86_64.tar]
+| Enterprise Linux 8 | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.2-1.el8.aarch64.tar[couchbase-cxx-client-1.0.2-1.el8.aarch64.tar]
 |===
 
 ==== Fixes
