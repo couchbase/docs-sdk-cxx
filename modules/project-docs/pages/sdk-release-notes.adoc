@@ -83,7 +83,86 @@ We always recommend using the latest version of the SDK -- it contains all of th
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
 any changes to expected behavior are noted in the release notes that follow.
 
+=== Version 1.0.3 (22 October 2024)
 
+This is a maintenance release of the 1.0 {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.3[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.2...1.0.3++[Full Changelog]
+
+
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform           | Architecture | File
+| Checksums          | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.3.sha256.txt[couchbase-cxx-client-1.0.3.sha256.txt]
+| Source Archive     | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.3.tar.gz[couchbase-cxx-client-1.0.3.tar.gz]
+| Amazon Linux 2023  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.3-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.0.3-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.3-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.0.3-1.amzn2023.aarch64.tar]
+| Enterprise Linux 9 | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.3-1.el9.x86_64.tar[couchbase-cxx-client-1.0.3-1.el9.x86_64.tar]
+| Enterprise Linux 9 | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.3-1.el9.aarch64.tar[couchbase-cxx-client-1.0.3-1.el9.aarch64.tar]
+| Enterprise Linux 8 | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.3-1.el8.x86_64.tar[couchbase-cxx-client-1.0.3-1.el8.x86_64.tar]
+| Enterprise Linux 8 | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.3-1.el8.aarch64.tar[couchbase-cxx-client-1.0.3-1.el8.aarch64.tar]
+|===
+
+==== Fixes
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-599[CXXCBC-599]:
+Update allowed connection string options (https://github.com/couchbase/couchbase-cxx-client/pull/668[#668])
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-311[CXXCBC-311]:
+SDKs must encode URIs (https://github.com/couchbase/couchbase-cxx-client/pull/674[#674])
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-606[CXXCBC-606]:
+Fix detection of dysfunctional node (https://github.com/couchbase/couchbase-cxx-client/pull/673[#673])
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-574[CXXCBC-574]:
+Fix memory leak when open fails in public API (https://github.com/couchbase/couchbase-cxx-client/pull/649[#649])
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-614[CXXCBC-614]:
+Fix memory leak in `observe_poll` (https://github.com/couchbase/couchbase-cxx-client/pull/679[#679])
+
+* Add missing template parameters to fix compiler warnings (https://github.com/couchbase/couchbase-cxx-client/pull/671[#671])
+
+==== Features
+
+* Allow to query current log level (https://github.com/couchbase/couchbase-cxx-client/pull/672[#672])
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-582[CXXCBC-582]:
+Add cluster labels & system tag in spans (https://github.com/couchbase/couchbase-cxx-client/pull/682[#682])
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-582[CXXCBC-582]:
+Add cluster labels, keyspace & outcome in metrics (https://github.com/couchbase/couchbase-cxx-client/pull/677[#677])
+
+==== Columnar changes
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-598[CXXCBC-598]:
+Propagate bootstrap errors to HTTP operations (https://github.com/couchbase/couchbase-cxx-client/pull/666[#666])
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-602[CXXCBC-602]:
+Report first non-retriable code/message in query error (https://github.com/couchbase/couchbase-cxx-client/pull/667[#667])
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-604[CXXCBC-604]:
+Apply raw options last (https://github.com/couchbase/couchbase-cxx-client/pull/669[#669])
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-616[CXXCBC-616]:
+Report retry information when receiving a timeout from the HTTP component (https://github.com/couchbase/couchbase-cxx-client/pull/681[#681])
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-600[CXXCBC-600]:
+Reduce `origin::to_json` output for Columnar builds (https://github.com/couchbase/couchbase-cxx-client/pull/678[#678])
+
+==== Build and Test Infrastructure
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-303[CXXCBC-303]:
+Fix RPM for AmazonLinux (https://github.com/couchbase/couchbase-cxx-client/pull/663[#663])
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-303[CXXCBC-303]:
+Fix RPM for RHEL 8 (https://github.com/couchbase/couchbase-cxx-client/pull/664[#664])
+
+* Use timestamp from the tag for reproducible tarballs (https://github.com/couchbase/couchbase-cxx-client/pull/665[#665])
+
+* Update list of RPM-based platforms (https://github.com/couchbase/couchbase-cxx-client/pull/676[#676])
 
 === Version 1.0.2 (23 September 2024)
 
