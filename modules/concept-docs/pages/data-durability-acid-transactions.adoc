@@ -6,7 +6,8 @@
 :lang: C++
 :example-source: devguide:example$cxx/src/kv_operations.cxx
 :example-source-lang: c++
-:anyreplica-api: https://docs.couchbase.com/sdk-api/couchbase-java-client/com/couchbase/client/java/Collection.html#getAnyReplica(java.lang.String)
+// :anyreplica-api: https://docs.couchbase.com/sdk-api/couchbase-java-client/com/couchbase/client/java/Collection.html#getAnyReplica(java.lang.String)
+:anyreplica-api: https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1collection.html#a50bd3c4c405242fdcf22564585af12ce
 
 // Note to editors
 // 
@@ -169,9 +170,9 @@ This bucket will usually be updated before any replicas (see <<durability,Durabi
 and is best for consistency.
 
 Some use cases benefit -- for consistency or availability -- from accessing both the active copy of the document, and/or one or all replicas.
-This can be from the {anyreplica-api}[data service],
-and xref:howtos:subdocument-operations.adoc#reading-sub-documents-from-replicas[SubDoc Read from Replica].
-The method can either be one to return either the first result returned -- active or replica --
+This can be direct from the {anyreplica-api}[data service],
+or a xref:howtos:subdocument-operations.adoc#reading-sub-documents-from-replicas[SubDoc Read from Replica].
+The method can either be one to return the first result returned -- active or replica --
 which is useful if a node is timing out;
 or to return _all_ of the results, for client code to handle any inconsistency, or to build a consensus answer.
 
