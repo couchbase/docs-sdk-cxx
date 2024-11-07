@@ -46,3 +46,67 @@ CPMAddPackage(
 === Building from source
 
 Full instructions to build the SDK from source are given in the README of our https://github.com/couchbase/couchbase-cxx-client[GitHub repository].
+
+=== Install on RPM-based Systems
+
+First, check how the platform identifies itself
+
+[source,console]
+----
+$ rpm -E '%dist/%_arch' | sed 's/^\.//'
+----
+
+This command would print the distribution/architecture part of the `.repo` URL.
+For example, for AmazonLinux 2023 on ARM architecture it prints the following:
+
+[source,console]
+----
+$ rpm -E '%dist/%_arch' | sed 's/^\.//'
+amzn2023/aarch64
+----
+
+Now use this string to download repository URL:
+
+[source,console]
+----
+DIST_ARCH=$(rpm -E '%dist/%_arch' | sed 's/^\.//')
+REPO_URL="https://packages.couchbase.com/clients/cxx/repos/rpm/${DIST_ARCH}/couchbase-cxx-client.repo"
+curl -L -o/etc/yum.repos.d/couchbase-cxx-client.repo $REPO_URL
+----
+
+To list all the packages provided by the repository run this command:
+
+[source,console]
+----
+$ dnf list --available --disablerepo=* --enablerepo=couchbase
+Available Packages
+couchbase-cxx-client.aarch64                     1.0.3-1.amzn2023      couchbase
+couchbase-cxx-client.src                         1.0.3-1.amzn2023      couchbase
+couchbase-cxx-client-debuginfo.aarch64           1.0.3-1.amzn2023      couchbase
+couchbase-cxx-client-debugsource.aarch64         1.0.3-1.amzn2023      couchbase
+couchbase-cxx-client-devel.aarch64               1.0.3-1.amzn2023      couchbase
+couchbase-cxx-client-tools.aarch64               1.0.3-1.amzn2023      couchbase
+couchbase-cxx-client-tools-debuginfo.aarch64     1.0.3-1.amzn2023      couchbase
+----
+
+To install the library with the headers:
+
+[source,console]
+----
+dnf install couchbase-cxx-client couchbase-cxx-client-devel
+----
+
+To install the command line tools:
+
+[source,console]
+----
+dnf install couchbase-cxx-client-tools
+----
+
+Currently supported platforms are `aarch64` and `x86_64` for the following distributions:
+
+* `amzn2023` AmazonLinux 2023 (https://aws.amazon.com/linux/amazon-linux-2023/).
+* `el8` Rocky Linux 8 (https://docs.rockylinux.org/release_notes/8_10/), Red Hat Enterprise Linux 8 (https://developers.redhat.com/rhel8), AlmaLinux 8 (https://wiki.almalinux.org/release-notes/8.10.html), and Oracle Linux 8 (https://docs.oracle.com/en/operating-systems/oracle-linux/8/).
+* `el9` Rocky Linux 9 (https://docs.rockylinux.org/release_notes/9_4/), Red Hat Enterprise Linux 9 (https://developers.redhat.com/products/rhel/overview), AlmaLinux 9 (https://wiki.almalinux.org/release-notes/9.4.html), and Oracle Linux 9 (https://docs.oracle.com/en/operating-systems/oracle-linux/9/).
+* `suse.lp155` openSUSE Leap 15.5 (https://get.opensuse.org/leap/15.5).
+* `fc40` Fedora Linux 40 (https://docs.fedoraproject.org/en-US/fedora/f40/).
