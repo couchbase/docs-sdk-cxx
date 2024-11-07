@@ -89,14 +89,14 @@ couchbase-cxx-client-tools.aarch64               1.0.3-1.amzn2023      couchbase
 couchbase-cxx-client-tools-debuginfo.aarch64     1.0.3-1.amzn2023      couchbase
 ----
 
-Install library with the headers:
+To install the library with the headers:
 
 [source,console]
 ----
 dnf install couchbase-cxx-client couchbase-cxx-client-devel
 ----
 
-Install command line tools:
+To install the command line tools:
 
 [source,console]
 ----
@@ -105,8 +105,8 @@ dnf install couchbase-cxx-client-tools
 
 Currently supported platforms are `aarch64` and `x86_64` for the following distributions:
 
-* `amzn2023` AmazonLinux 2023 (https://aws.amazon.com/linux/amazon-linux-2023/)
-* `el8` Rocky Linux 8 (https://docs.rockylinux.org/release_notes/8_10/), Red Hat Enterprise Linux 8 (https://developers.redhat.com/rhel8), AlmaLinux 8 (https://wiki.almalinux.org/release-notes/8.10.html), Oracle Linux 8 (https://docs.oracle.com/en/operating-systems/oracle-linux/8/)
-* `el9` Rocky Linux 9 (https://docs.rockylinux.org/release_notes/9_4/), Red Hat Enterprise Linux 9 (https://developers.redhat.com/products/rhel/overview), AlmaLinux 9 (https://wiki.almalinux.org/release-notes/9.4.html), Oracle Linux 9 (https://docs.oracle.com/en/operating-systems/oracle-linux/9/)
-* `suse.lp155` openSUSE Leap 15.5 (https://get.opensuse.org/leap/15.5)
-* `fc40` Fedora Linux 40 (https://docs.fedoraproject.org/en-US/fedora/f40/)
+* `amzn2023` AmazonLinux 2023 (https://aws.amazon.com/linux/amazon-linux-2023/).
+* `el8` Rocky Linux 8 (https://docs.rockylinux.org/release_notes/8_10/), Red Hat Enterprise Linux 8 (https://developers.redhat.com/rhel8), AlmaLinux 8 (https://wiki.almalinux.org/release-notes/8.10.html), and Oracle Linux 8 (https://docs.oracle.com/en/operating-systems/oracle-linux/8/).
+* `el9` Rocky Linux 9 (https://docs.rockylinux.org/release_notes/9_4/), Red Hat Enterprise Linux 9 (https://developers.redhat.com/products/rhel/overview), AlmaLinux 9 (https://wiki.almalinux.org/release-notes/9.4.html), and Oracle Linux 9 (https://docs.oracle.com/en/operating-systems/oracle-linux/9/).
+* `suse.lp155` openSUSE Leap 15.5 (https://get.opensuse.org/leap/15.5).
+* `fc40` Fedora Linux 40 (https://docs.fedoraproject.org/en-US/fedora/f40/).
