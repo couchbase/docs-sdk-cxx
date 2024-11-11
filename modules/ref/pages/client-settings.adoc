@@ -321,31 +321,6 @@ A `wan_development` configuration profile can be used to modify client settings 
 This profile changes the default timeouts.
 
 
-.Profile Settings
-[cols="1,1"]
-|===
-| Setting | Value
-
-| `connect_timeout`
-| 20s
-
-| `key_vaue_timeout`
-| 20s
-
-| `key_value_durable_timeout`
-| 20s
-
-| `query_timeout`
-| 120s
-
-| `analytics_timeout`
-| 120s
-
-| `search_timeout`
-| 120s
-
-| `management_timeout`
-| 120s
-|===
-
+// table - WAN profile timeouts
+include::{version-common}@sdk:shared:partial$client-settings-wan-profile.adoc[tag=profile-values]
 
