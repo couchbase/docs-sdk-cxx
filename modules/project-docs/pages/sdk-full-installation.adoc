@@ -18,9 +18,11 @@
 This page gives full installation instructions for the {name-sdk}.
 In most cases, the xref:hello-world:start-using-sdk.adoc[Quickstart Guide] should be enough to get you up and running if you're in a hurry.
 
+
 == Prerequisites
 
 A {cpp} 17 compiler and https://cmake.org/[CMake] version 3.19 or newer is required. See the xref:project-docs:compatibility.adoc[Compatibility] section for details on supported platforms.
+
 
 == Installing the SDK
 
@@ -46,6 +48,24 @@ CPMAddPackage(
 === Building from source
 
 Full instructions to build the SDK from source are given in the README of our https://github.com/couchbase/couchbase-cxx-client[GitHub repository].
+
+=== Install on MacOS X
+
+Install Homebrew using instructions from https://docs.brew.sh/Installation.
+
+Configure tap for Couchbase:
+
+[source,console]
+----
+$ brew tap couchbaselabs/homebrew-couchbase
+----
+
+Install the library:
+
+[source,console]
+----
+$ brew install couchbase-cxx-client
+----
 
 === Install on RPM-based Systems
 
@@ -109,4 +129,78 @@ Currently supported platforms are `aarch64` and `x86_64` for the following distr
 * `el8` Rocky Linux 8 (https://docs.rockylinux.org/release_notes/8_10/), Red Hat Enterprise Linux 8 (https://developers.redhat.com/rhel8), AlmaLinux 8 (https://wiki.almalinux.org/release-notes/8.10.html), and Oracle Linux 8 (https://docs.oracle.com/en/operating-systems/oracle-linux/8/).
 * `el9` Rocky Linux 9 (https://docs.rockylinux.org/release_notes/9_4/), Red Hat Enterprise Linux 9 (https://developers.redhat.com/products/rhel/overview), AlmaLinux 9 (https://wiki.almalinux.org/release-notes/9.4.html), and Oracle Linux 9 (https://docs.oracle.com/en/operating-systems/oracle-linux/9/).
 * `suse.lp155` openSUSE Leap 15.5 (https://get.opensuse.org/leap/15.5).
-* `fc40` Fedora Linux 40 (https://docs.fedoraproject.org/en-US/fedora/f40/).
+* `fc40` Fedora Linux 40 (https://docs.fedoraproject.org/en-US/fedora/f40/release-notes/).
+* `fc41` Fedora Linux 41 (https://docs.fedoraproject.org/en-US/fedora/f41/release-notes/).
+
+
+=== Install on DEB-based Systems
+
+First, check how the platform identifies itself:
+
+[source,console]
+----
+$ (source /etc/os-release; echo ${VERSION_CODENAME}/$(uname -m))
+----
+
+This command prints the distribution/architecture part of the `.source` URL.
+For example, for Ubuntu 20.04 on x86_64 architecture it prints the following:
+
+[source,console]
+----
+$ (source /etc/os-release; echo ${VERSION_CODENAME}/$(uname -m))
+----
+
+[source,console]
+----
+jammy/x86_64
+----
+
+Ensure that `GnuPG` and `curl` are installed:
+
+[source,console]
+----
+$ apt update && apt install curl gpg
+----
+
+Now use this string to download the repository URL:
+
+[source,console]
+----
+$ DIST_ARCH=$(source /etc/os-release; echo ${VERSION_CODENAME}/$(uname -m))
+----
+
+[source,console]
+----
+$ curl -L https://packages.couchbase.com/clients/cxx/repos/deb/${DIST_ARCH}/DEB-GPG-KEY.txt | \
+  gpg --yes --dearmor -o /usr/share/keyrings/couchbase-archive-keyring.gpg
+----
+
+[source,console]
+----
+$ curl -L -o/etc/apt/sources.list.d/couchbase-cxx-client.sources \
+  https://packages.couchbase.com/clients/cxx/repos/deb/${DIST_ARCH}/couchbase-cxx-client.sources
+----
+
+.Update the apt Sources
+[source,console]
+----
+$ apt update
+----
+
+.Install the library with the headers:
+[source,console]
+----
+$ apt install couchbase-cxx-client couchbase-cxx-client-dev
+----
+
+.Install the command line tools:
+[source,console]
+----
+apt install couchbase-cxx-client-tools
+----
+
+Currently supported platforms are `aarch64` and `x86_64` for the following distributions:
+
+* `bookworm` Debian 12 (https://www.debian.org/releases/bookworm/).
+* `jammy` Ubuntu 20.04 (https://www.releases.ubuntu.com/jammy/).
+* `noble` Ubuntu 22.04 (https://www.releases.ubuntu.com/noble/).

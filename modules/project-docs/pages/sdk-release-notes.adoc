@@ -83,6 +83,80 @@ We always recommend using the latest version of the SDK -- it contains all of th
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
 any changes to expected behavior are noted in the release notes that follow.
 
+
+=== Version 1.0.4 (22 November 2024)
+
+This is a maintenance release of the 1.0 {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.4[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.2...1.0.4++[Full Changelog]
+
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform              | Architecture | File
+| Checksums             | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4.sha256.txt[couchbase-cxx-client-1.0.4.sha256.txt]
+| Source Archive        | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4.tar.gz[couchbase-cxx-client-1.0.4.tar.gz]
+| Amazon Linux 2023     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.0.4-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.0.4-1.amzn2023.aarch64.tar]
+| Enterprise Linux 9    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.el9.x86_64.tar[couchbase-cxx-client-1.0.4-1.el9.x86_64.tar]
+| Enterprise Linux 9    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.el9.aarch64.tar[couchbase-cxx-client-1.0.4-1.el9.aarch64.tar]
+| Enterprise Linux 8    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.el8.x86_64.tar[couchbase-cxx-client-1.0.4-1.el8.x86_64.tar]
+| Enterprise Linux 8    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.el8.aarch64.tar[couchbase-cxx-client-1.0.4-1.el8.aarch64.tar]
+| Debian 12 (Bookworm)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.bookworm.x86_64.tar[couchbase-cxx-client-1.0.4-1.bookworm.x86_64.tar]
+| Debian 12 (Bookworm)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.bookworm.aarch64.tar[couchbase-cxx-client-1.0.4-1.bookworm.aarch64.tar]
+| Ubuntu 20.04 (Jammy)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.jammy.x86_64.tar[couchbase-cxx-client-1.0.4-1.jammy.x86_64.tar]
+| Ubuntu 20.04 (Jammy)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.jammy.aarch64.tar[couchbase-cxx-client-1.0.4-1.jammy.aarch64.tar]
+| Ubuntu 22.04 (Noble)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.noble.x86_64.tar[couchbase-cxx-client-1.0.4-1.el8.x86_64.tar]
+| Ubuntu 22.04 (Noble)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-1.noble.aarch64.tar[couchbase-cxx-client-1.0.4-1.el8.aarch64.tar]
+| Alpine Linux 3.19     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-r1-x86_64-alpine-3.19.tar[couchbase-cxx-client-1.0.4-r1-x86_64-alpine-3.19.tar]
+| Alpine Linux 3.19     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-r1-aarch64-alpine-3.19.tar[couchbase-cxx-client-1.0.4-r1-aarch64-alpine-3.19.tar]
+| Alpine Linux 3.20     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-r1-x86_64-alpine-3.20.tar[couchbase-cxx-client-1.0.4-r1-x86_64-alpine-3.20.tar]
+| Alpine Linux 3.20     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.4-r1-aarch64-alpine-3.20.tar[couchbase-cxx-client-1.0.4-r1-aarch64-alpine-3.20.tar]
+|===
+
+
+==== Fixes
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-620[CXXCBC-620]:
+Updated core `analytics_link_get_all` to follow the RFC (https://github.com/couchbase/couchbase-cxx-client/pull/687[#687]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-615[CXXCBC-615]:
+Exposed `insert_raw` and `replace_raw` in core transactions attempt context (https://github.com/couchbase/couchbase-cxx-client/pull/686[#686]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-622[CXXCBC-622]:
+Updated `OpenTelemetry` metrics integration to use GA Metrics API (https://github.com/couchbase/couchbase-cxx-client/pull/688[#688]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-627[CXXCBC-627]:
+A preformance degradation was discovered to be caused by work done in the error function, even if the operation had been successful.
+The internal conversion work is now only carried out in response to error conditions (https://github.com/couchbase/couchbase-cxx-client/pull/693[#693]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-624[CXXCBC-624]:
+Fixed user agent ID generation (https://github.com/couchbase/couchbase-cxx-client/pull/692[#692]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-611[CXXCBC-611], https://jira.issues.couchbase.com/browse/CXXCBC-612[CXXCBC-612]:
+Updated metric operation names to follow RFC naming (https://github.com/couchbase/couchbase-cxx-client/pull/695[#695]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-632[CXXCBC-632]:
+A crash on testing against Analytics nodes under rebalance was caused by the assumption that Analytics would always send meta fields in its response.
+This has now been fixed, and the behoavior should not recur (https://github.com/couchbase/couchbase-cxx-client/pull/699[#699]).
+
+* URI encoding for `user_upsert` (https://github.com/couchbase/couchbase-cxx-client/pull/700[#700]).
+
+==== Features
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-609[CXXCBC-609]:
+Exposed `parent_span` in Public API options (https://github.com/couchbase/couchbase-cxx-client/pull/690[#690]).
+
+==== Build and Test Infrastructure
+
+* Updates for YUM/RPM builders (https://github.com/couchbase/couchbase-cxx-client/pull/691[#691]).
+* Debian/Ubuntu packaging scripts added (https://github.com/couchbase/couchbase-cxx-client/pull/694[#694]).
+* Fixed packaging scripts on MacOS (https://github.com/couchbase/couchbase-cxx-client/pull/698[#698]).
+* Added scripts to produce APK files for Alpine Linux (https://github.com/couchbase/couchbase-cxx-client/pull/685[#685]).
+
+
 === Version 1.0.3 (22 October 2024)
 
 This is a maintenance release of the 1.0 {cpp} SDK.
