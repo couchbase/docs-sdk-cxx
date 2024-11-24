@@ -83,6 +83,7 @@ We always recommend using the latest version of the SDK -- it contains all of th
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
 any changes to expected behavior are noted in the release notes that follow.
 
+
 === Version 1.0.4 (22 November 2024)
 
 This is a maintenance release of the 1.0 {cpp} SDK.
@@ -119,39 +120,42 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.2...1.0.4++
 ==== Fixes
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-620[CXXCBC-620]:
-Update core `analytics_link_get_all` to follow RFC (https://github.com/couchbase/couchbase-cxx-client/pull/687[#687])
+Updated core `analytics_link_get_all` to follow the RFC (https://github.com/couchbase/couchbase-cxx-client/pull/687[#687]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-615[CXXCBC-615]:
-Expose `insert_raw` and `replace_raw` in core transactions attempt context (https://github.com/couchbase/couchbase-cxx-client/pull/686[#686])
+Exposed `insert_raw` and `replace_raw` in core transactions attempt context (https://github.com/couchbase/couchbase-cxx-client/pull/686[#686]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-622[CXXCBC-622]:
-Update OpenTelemetry metrics integration to use GA Metrics API (https://github.com/couchbase/couchbase-cxx-client/pull/688[#688])
+Updated `OpenTelemetry` metrics integration to use GA Metrics API (https://github.com/couchbase/couchbase-cxx-client/pull/688[#688]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-627[CXXCBC-627]:
-Performance degradation after `couchbase::error` changes (https://github.com/couchbase/couchbase-cxx-client/pull/693[#693])
+A preformance degradation was discovered to be caused by work done in the error function, even if the operation had been successful.
+The internal conversion work is now only carried out in response to error conditions (https://github.com/couchbase/couchbase-cxx-client/pull/693[#693]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-624[CXXCBC-624]:
-Fix user agent ID generation (https://github.com/couchbase/couchbase-cxx-client/pull/692[#692])
+Fixed user agent ID generation (https://github.com/couchbase/couchbase-cxx-client/pull/692[#692]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-611[CXXCBC-611], https://jira.issues.couchbase.com/browse/CXXCBC-612[CXXCBC-612]:
-Follow RFC naming for metric operation names (https://github.com/couchbase/couchbase-cxx-client/pull/695[#695])
+Updated metric operation names to follow RFC naming (https://github.com/couchbase/couchbase-cxx-client/pull/695[#695]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-632[CXXCBC-632]:
-Do not assume Analytics will always send meta fields in response (https://github.com/couchbase/couchbase-cxx-client/pull/699[#699])
+A crash on testing against Analytics nodes under rebalance was caused by the assumption that Analytics would always send meta fields in its response.
+This has now been fixed, and the behoavior should not recur (https://github.com/couchbase/couchbase-cxx-client/pull/699[#699]).
 
-* URI encode user_upsert (https://github.com/couchbase/couchbase-cxx-client/pull/700[#700])
+* URI encoding for `user_upsert` (https://github.com/couchbase/couchbase-cxx-client/pull/700[#700]).
 
 ==== Features
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-609[CXXCBC-609]:
-Expose `parent_span` in Public API options (https://github.com/couchbase/couchbase-cxx-client/pull/690[#690])
+Exposed `parent_span` in Public API options (https://github.com/couchbase/couchbase-cxx-client/pull/690[#690]).
 
 ==== Build and Test Infrastructure
 
-* Updates for YUM/RPM builders (https://github.com/couchbase/couchbase-cxx-client/pull/691[#691])
-* Debian/Ubuntu packaging scripts (https://github.com/couchbase/couchbase-cxx-client/pull/694[#694])
-* Fix packaging scripts on MacOS (https://github.com/couchbase/couchbase-cxx-client/pull/698[#698])
-* Add scripts to produce APK files for Alpine Linux (https://github.com/couchbase/couchbase-cxx-client/pull/685[#685])
+* Updates for YUM/RPM builders (https://github.com/couchbase/couchbase-cxx-client/pull/691[#691]).
+* Debian/Ubuntu packaging scripts added (https://github.com/couchbase/couchbase-cxx-client/pull/694[#694]).
+* Fixed packaging scripts on MacOS (https://github.com/couchbase/couchbase-cxx-client/pull/698[#698]).
+* Added scripts to produce APK files for Alpine Linux (https://github.com/couchbase/couchbase-cxx-client/pull/685[#685]).
+
 
 === Version 1.0.3 (22 October 2024)
 
