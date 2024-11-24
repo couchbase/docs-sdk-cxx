@@ -18,9 +18,11 @@
 This page gives full installation instructions for the {name-sdk}.
 In most cases, the xref:hello-world:start-using-sdk.adoc[Quickstart Guide] should be enough to get you up and running if you're in a hurry.
 
+
 == Prerequisites
 
 A {cpp} 17 compiler and https://cmake.org/[CMake] version 3.19 or newer is required. See the xref:project-docs:compatibility.adoc[Compatibility] section for details on supported platforms.
+
 
 == Installing the SDK
 
@@ -55,14 +57,14 @@ Configure tap for Couchbase:
 
 [source,console]
 ----
-brew tap couchbaselabs/homebrew-couchbase
+$ brew tap couchbaselabs/homebrew-couchbase
 ----
 
 Install the library:
 
 [source,console]
 ----
-brew install couchbase-cxx-client
+$ brew install couchbase-cxx-client
 ----
 
 === Install on RPM-based Systems
@@ -71,7 +73,7 @@ First, check how the platform identifies itself
 
 [source,console]
 ----
-rpm -E '%dist/%_arch' | sed 's/^\.//'
+$ rpm -E '%dist/%_arch' | sed 's/^\.//'
 ----
 
 This command would print the distribution/architecture part of the `.repo` URL.
@@ -133,52 +135,65 @@ Currently supported platforms are `aarch64` and `x86_64` for the following distr
 
 === Install on DEB-based Systems
 
-First, check how the platform identifies itself
+First, check how the platform identifies itself:
 
 [source,console]
 ----
-(source /etc/os-release; echo ${VERSION_CODENAME}/$(uname -m))
+$ (source /etc/os-release; echo ${VERSION_CODENAME}/$(uname -m))
 ----
 
-This command would print the distribution/architecture part of the `.source` URL.
+This command prints the distribution/architecture part of the `.source` URL.
 For example, for Ubuntu 20.04 on x86_64 architecture it prints the following:
 
 [source,console]
 ----
 $ (source /etc/os-release; echo ${VERSION_CODENAME}/$(uname -m))
+----
+
+[source,console]
+----
 jammy/x86_64
 ----
 
-Ensure that GnuPG and cURL installed:
+Ensure that `GnuPG` and `curl` are installed:
 
 [source,console]
 ----
-apt update && apt install curl gpg
+$ apt update && apt install curl gpg
 ----
 
-Now use this string to download repository URL:
+Now use this string to download the repository URL:
 
 [source,console]
 ----
-DIST_ARCH=$(source /etc/os-release; echo ${VERSION_CODENAME}/$(uname -m))
+$ DIST_ARCH=$(source /etc/os-release; echo ${VERSION_CODENAME}/$(uname -m))
+----
 
-curl -L https://packages.couchbase.com/clients/cxx/repos/deb/${DIST_ARCH}/DEB-GPG-KEY.txt | \
+[source,console]
+----
+$ curl -L https://packages.couchbase.com/clients/cxx/repos/deb/${DIST_ARCH}/DEB-GPG-KEY.txt | \
   gpg --yes --dearmor -o /usr/share/keyrings/couchbase-archive-keyring.gpg
+----
 
-curl -L -o/etc/apt/sources.list.d/couchbase-cxx-client.sources \
+[source,console]
+----
+$ curl -L -o/etc/apt/sources.list.d/couchbase-cxx-client.sources \
   https://packages.couchbase.com/clients/cxx/repos/deb/${DIST_ARCH}/couchbase-cxx-client.sources
 ----
 
-To install the library with the headers:
-
+.Update the apt Sources
 [source,console]
 ----
-apt update
-apt install couchbase-cxx-client couchbase-cxx-client-dev
+$ apt update
 ----
 
-To install the command line tools:
+.Install the library with the headers:
+[source,console]
+----
+$ apt install couchbase-cxx-client couchbase-cxx-client-dev
+----
 
+.Install the command line tools:
 [source,console]
 ----
 apt install couchbase-cxx-client-tools
