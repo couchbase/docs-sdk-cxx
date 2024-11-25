@@ -202,5 +202,5 @@ apt install couchbase-cxx-client-tools
 Currently supported platforms are `aarch64` and `x86_64` for the following distributions:
 
 * `bookworm` Debian 12 (https://www.debian.org/releases/bookworm/).
-* `jammy` Ubuntu 20.04 (https://www.releases.ubuntu.com/jammy/).
-* `noble` Ubuntu 22.04 (https://www.releases.ubuntu.com/noble/).
+* `jammy` Ubuntu 22.04 (https://www.releases.ubuntu.com/jammy/).
+* `noble` Ubuntu 24.04 (https://www.releases.ubuntu.com/noble/).
