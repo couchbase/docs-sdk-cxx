@@ -30,13 +30,16 @@ include::{version-common}@sdk:shared:partial$durability-replication-failure-cons
 include::{version-common}@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=performance]
 
 
+
+// not likely to be implemented in CXX
+////
 === Legacy Durability
 
 Early versions of Couchbase Server used client-verified durablilty.
 This is still available in the SDK --
 see the https://docs.couchbase.com/sdk-api/couchbase-scala-client/com/couchbase/client/scala/durability/index.html[API documentation on durability] for details of `PersistTo` and `ReplicateTo` --
 but in almost every case with current Couchbase Server versions it's best to use the guarantees offered by the the Server.
-
+////
 
 
 
