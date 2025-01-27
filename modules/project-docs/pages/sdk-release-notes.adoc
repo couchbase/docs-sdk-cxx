@@ -121,7 +121,7 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.4...1.0.5++
 * https://jira.issues.couchbase.com/browse/CXXCBC-633[CXXCBC-633]:
 In a case of timeout, when the total deadline of the DNS-SRV request has been reached, the library will now report a timeout error code, and not the latest abort as it was doing.
 
-* Server group replica reads are now ecposed in `transaction_context` (https://github.com/couchbase/couchbase-cxx-client/pull/704[#704]).
+* Server group replica reads are now exposed in `transaction_context` (https://github.com/couchbase/couchbase-cxx-client/pull/704[#704]).
 
 
 ==== Build and Test Infrastructure
