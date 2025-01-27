@@ -119,25 +119,26 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.4...1.0.5++
 ==== Fixes
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-633[CXXCBC-633]:
-Ensure DNS-SRV resolver reports timeouts (https://github.com/couchbase/couchbase-cxx-client/pull/703[#703])
+In a case of timeout, when the total deadline of the DNS-SRV request has been reached, the library will now report a timeout error code, and not the latest abort as it was doing.
 
-* Expose server group replica read in transaction_context (https://github.com/couchbase/couchbase-cxx-client/pull/704[#704])
+* Server group replica reads are now ecposed in `transaction_context` (https://github.com/couchbase/couchbase-cxx-client/pull/704[#704]).
 
 
 ==== Build and Test Infrastructure
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-638[CXXCBC-638]:
-Fix transactions examples test (https://github.com/couchbase/couchbase-cxx-client/pull/710[#710])
+Fixed transactions examples test (https://github.com/couchbase/couchbase-cxx-client/pull/710[#710]).
 
-* Minor improvements (https://github.com/couchbase/couchbase-cxx-client/pull/706[#706])
+* Minor improvements (https://github.com/couchbase/couchbase-cxx-client/pull/706[#706]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-640[CXXCBC-640]:
-Do not force debug symbols for release builds (https://github.com/couchbase/couchbase-cxx-client/pull/708[#708])
+Debug symbols are no longer forced for release builds (https://github.com/couchbase/couchbase-cxx-client/pull/708[#708]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-638[CXXCBC-638]:
-Switch SDK to use bundled fmtlib for spdlog (https://github.com/couchbase/couchbase-cxx-client/pull/705[#705])
+Switched SDK to use bundled `fmtlib` for `spdlog` (https://github.com/couchbase/couchbase-cxx-client/pull/705[#705]).
 
-* Update spdlog to 1.15.0 (https://github.com/couchbase/couchbase-cxx-client/pull/709[#709])
+* Updated `spdlog` to `1.15.0` (https://github.com/couchbase/couchbase-cxx-client/pull/709[#709]).
+
 
 === Version 1.0.4 (22 November 2024)
 
