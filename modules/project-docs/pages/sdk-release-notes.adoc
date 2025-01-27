@@ -83,13 +83,69 @@ We always recommend using the latest version of the SDK -- it contains all of th
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
 any changes to expected behavior are noted in the release notes that follow.
 
+=== Version 1.0.5 (24 January 2025)
+
+This is a maintenance release of the 1.0 {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.5[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.4...1.0.5++[Full Changelog]
+
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform              | Architecture | File
+| Checksums             | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5.sha256.txt[couchbase-cxx-client-1.0.5.sha256.txt]
+| Source Archive        | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5.tar.gz[couchbase-cxx-client-1.0.5.tar.gz]
+| Amazon Linux 2023     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.0.5-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.0.5-1.amzn2023.aarch64.tar]
+| Enterprise Linux 9    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.el9.x86_64.tar[couchbase-cxx-client-1.0.5-1.el9.x86_64.tar]
+| Enterprise Linux 9    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.el9.aarch64.tar[couchbase-cxx-client-1.0.5-1.el9.aarch64.tar]
+| Enterprise Linux 8    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.el8.x86_64.tar[couchbase-cxx-client-1.0.5-1.el8.x86_64.tar]
+| Enterprise Linux 8    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.el8.aarch64.tar[couchbase-cxx-client-1.0.5-1.el8.aarch64.tar]
+| Debian 12 (Bookworm)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.bookworm.x86_64.tar[couchbase-cxx-client-1.0.5-1.bookworm.x86_64.tar]
+| Debian 12 (Bookworm)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.bookworm.aarch64.tar[couchbase-cxx-client-1.0.5-1.bookworm.aarch64.tar]
+| Ubuntu 20.04 (Jammy)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.jammy.x86_64.tar[couchbase-cxx-client-1.0.5-1.jammy.x86_64.tar]
+| Ubuntu 20.04 (Jammy)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.jammy.aarch64.tar[couchbase-cxx-client-1.0.5-1.jammy.aarch64.tar]
+| Ubuntu 22.04 (Noble)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.noble.x86_64.tar[couchbase-cxx-client-1.0.5-1.el8.x86_64.tar]
+| Ubuntu 22.04 (Noble)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-1.noble.aarch64.tar[couchbase-cxx-client-1.0.5-1.el8.aarch64.tar]
+| Alpine Linux 3.19     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-r1-x86_64-alpine-3.19.tar[couchbase-cxx-client-1.0.5-r1-x86_64-alpine-3.19.tar]
+| Alpine Linux 3.19     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-r1-aarch64-alpine-3.19.tar[couchbase-cxx-client-1.0.5-r1-aarch64-alpine-3.19.tar]
+| Alpine Linux 3.20     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-r1-x86_64-alpine-3.20.tar[couchbase-cxx-client-1.0.5-r1-x86_64-alpine-3.20.tar]
+| Alpine Linux 3.20     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.5-r1-aarch64-alpine-3.20.tar[couchbase-cxx-client-1.0.5-r1-aarch64-alpine-3.20.tar]
+|===
+
+
+==== Fixes
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-633[CXXCBC-633]:
+In a case of timeout, when the total deadline of the DNS-SRV request has been reached, the library will now report a timeout error code, and not the latest abort as it was doing.
+
+* Server group replica reads are now ecposed in `transaction_context` (https://github.com/couchbase/couchbase-cxx-client/pull/704[#704]).
+
+
+==== Build and Test Infrastructure
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-638[CXXCBC-638]:
+Fixed transactions examples test (https://github.com/couchbase/couchbase-cxx-client/pull/710[#710]).
+
+* Minor improvements (https://github.com/couchbase/couchbase-cxx-client/pull/706[#706]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-640[CXXCBC-640]:
+Debug symbols are no longer forced for release builds (https://github.com/couchbase/couchbase-cxx-client/pull/708[#708]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-638[CXXCBC-638]:
+Switched SDK to use bundled `fmtlib` for `spdlog` (https://github.com/couchbase/couchbase-cxx-client/pull/705[#705]).
+
+* Updated `spdlog` to `1.15.0` (https://github.com/couchbase/couchbase-cxx-client/pull/709[#709]).
+
 
 === Version 1.0.4 (22 November 2024)
 
 This is a maintenance release of the 1.0 {cpp} SDK.
 
 https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.4[API reference] |
-link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.2...1.0.4++[Full Changelog]
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.3...1.0.4++[Full Changelog]
 
 ==== Downloads
 
