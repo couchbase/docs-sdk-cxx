@@ -126,9 +126,6 @@ In a case of timeout, when the total deadline of the DNS-SRV request has been re
 
 ==== Build and Test Infrastructure
 
-* https://jira.issues.couchbase.com/browse/CXXCBC-638[CXXCBC-638]:
-Fixed transactions examples test (https://github.com/couchbase/couchbase-cxx-client/pull/710[#710]).
-
 * Minor improvements (https://github.com/couchbase/couchbase-cxx-client/pull/706[#706]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-640[CXXCBC-640]:
