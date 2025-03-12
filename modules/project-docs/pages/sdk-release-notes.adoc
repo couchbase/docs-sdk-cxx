@@ -121,13 +121,13 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.5...1.0.6++
 In a case of timeout, when the total deadline of the DNS-SRV request has been reached, the library will now report a timeout error code, and not the latest abort as it was doing.
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-646[CXXCBC-646]:
-Do not copy configuration when the operation depends on it (https://github.com/couchbase/couchbase-cxx-client/pull/713[#713], https://github.com/couchbase/couchbase-cxx-client/pull/721[#721]).
+For performance reasons, the SDK now stores bucket configuration as a shared pointer (https://github.com/couchbase/couchbase-cxx-client/pull/713[#713], https://github.com/couchbase/couchbase-cxx-client/pull/721[#721]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-660[CXXCBC-660]:
-Fix potential race condition in the logger (https://github.com/couchbase/couchbase-cxx-client/pull/723[#723])
+Fixed potential race condition in the logger (https://github.com/couchbase/couchbase-cxx-client/pull/723[#723]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-661[CXXCBC-661]:
-Reconnect cluster object on fork (https://github.com/couchbase/couchbase-cxx-client/pull/725[#725])
+The child process now reconnects all of its instances on fork -- previously, certain exceptions could cause this not to happen (https://github.com/couchbase/couchbase-cxx-client/pull/725[#725]).
 
 
 === Version 1.0.5 (24 January 2025)
