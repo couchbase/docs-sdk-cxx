@@ -143,14 +143,21 @@ Both the client and server require special configuration in this case.
 
 
 
-=== Using DNS SRV records
 
-As an alternative to specifying multiple hosts in your program, you can get the actual bootstrap node list from a DNS SRV record. The following steps are necessary to make it work:
+// DNS-SRV
+// == Using DNS SRV records
 
-. Set up your DNS server to respond properly from a DNS SRV request.
-. Enable it on the SDK and point it towards the DNS SRV entry.
+include::{version-common}@sdk:shared:partial$dnssrv-pars.adoc[tag=dnssrv-rev]
 
+DNS SRV bootstrapping is enabled by default in the {name-sdk}.
+In order to make the SDK use the SRV records, you need to pass in the hostname or host address from your records (here `1.1.1.1`),
+and can also pass in a timeout value:
 
+[source,cpp]
+----
+options.dns().timeout(std::chrono::seconds{1});
+options.dns().nameserver("1.1.1.1");
+----
 
 
 
