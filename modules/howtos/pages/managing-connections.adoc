@@ -150,8 +150,14 @@ Both the client and server require special configuration in this case.
 include::{version-common}@sdk:shared:partial$dnssrv-pars.adoc[tag=dnssrv-rev]
 
 DNS SRV bootstrapping is enabled by default in the {name-sdk}.
-In order to make the SDK use the SRV records, you need to pass in the hostname from your records (here `example.com`):
+In order to make the SDK use the SRV records, you need to pass in the hostname or host address from your records (here `1.1.1.1`),
+and can also pass in a timeout value:
 
+[source,cpp]
+----
+options.dns().timeout(std::chrono::seconds{1});
+options.dns().nameserver("1.1.1.1");
+----
 
 
 
