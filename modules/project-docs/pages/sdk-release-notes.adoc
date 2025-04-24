@@ -83,6 +83,49 @@ We always recommend using the latest version of the SDK -- it contains all of th
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
 any changes to expected behavior are noted in the release notes that follow.
 
+=== Version 1.0.7 (24 April 2025)
+
+This is a maintenance release of the 1.0 {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.0.7[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.5...1.0.7++[Full Changelog]
+
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform              | Architecture | File
+| Checksums             | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7.sha256.txt[couchbase-cxx-client-1.0.7.sha256.txt]
+| Source Archive        | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7.tar.gz[couchbase-cxx-client-1.0.7.tar.gz]
+| Amazon Linux 2023     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.0.7-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.0.7-1.amzn2023.aarch64.tar]
+| Enterprise Linux 9    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.el9.x86_64.tar[couchbase-cxx-client-1.0.7-1.el9.x86_64.tar]
+| Enterprise Linux 9    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.el9.aarch64.tar[couchbase-cxx-client-1.0.7-1.el9.aarch64.tar]
+| Enterprise Linux 8    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.el8.x86_64.tar[couchbase-cxx-client-1.0.7-1.el8.x86_64.tar]
+| Enterprise Linux 8    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.el8.aarch64.tar[couchbase-cxx-client-1.0.7-1.el8.aarch64.tar]
+| Debian 12 (Bookworm)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.bookworm.x86_64.tar[couchbase-cxx-client-1.0.7-1.bookworm.x86_64.tar]
+| Debian 12 (Bookworm)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.bookworm.aarch64.tar[couchbase-cxx-client-1.0.7-1.bookworm.aarch64.tar]
+| Ubuntu 20.04 (Jammy)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.jammy.x86_64.tar[couchbase-cxx-client-1.0.7-1.jammy.x86_64.tar]
+| Ubuntu 20.04 (Jammy)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.jammy.aarch64.tar[couchbase-cxx-client-1.0.7-1.jammy.aarch64.tar]
+| Ubuntu 22.04 (Noble)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.noble.x86_64.tar[couchbase-cxx-client-1.0.7-1.el8.x86_64.tar]
+| Ubuntu 22.04 (Noble)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-1.noble.aarch64.tar[couchbase-cxx-client-1.0.7-1.el8.aarch64.tar]
+| Alpine Linux 3.19     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-r1-x86_64-alpine-3.19.tar[couchbase-cxx-client-1.0.7-r1-x86_64-alpine-3.19.tar]
+| Alpine Linux 3.19     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-r1-aarch64-alpine-3.19.tar[couchbase-cxx-client-1.0.7-r1-aarch64-alpine-3.19.tar]
+| Alpine Linux 3.20     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-r1-x86_64-alpine-3.20.tar[couchbase-cxx-client-1.0.7-r1-x86_64-alpine-3.20.tar]
+| Alpine Linux 3.20     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.0.7-r1-aarch64-alpine-3.20.tar[couchbase-cxx-client-1.0.7-r1-aarch64-alpine-3.20.tar]
+|===
+
+==== Fixes
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-666[CXXCBC-666]:
+Fix pkg-config file (https://github.com/couchbase/couchbase-cxx-client/736[#736]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-667[CXXCBC-667]:
+Core implementation of prepend/append should encode CAS value (https://github.com/couchbase/couchbase-cxx-client/738[#738]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-671[CXXCBC-671]:
+Update snappy to support CMake 4.0 (https://github.com/couchbase/couchbase-cxx-client/745[#745]).
+
 === Version 1.0.6 (12 March 2025)
 
 This is a maintenance release of the 1.0 {cpp} SDK.
