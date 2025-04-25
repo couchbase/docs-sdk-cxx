@@ -83,6 +83,7 @@ We always recommend using the latest version of the SDK -- it contains all of th
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
 any changes to expected behavior are noted in the release notes that follow.
 
+
 === Version 1.0.7 (24 April 2025)
 
 This is a maintenance release of the 1.0 {cpp} SDK.
@@ -118,13 +119,14 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.5...1.0.7++
 ==== Fixes
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-666[CXXCBC-666]:
-Fix pkg-config file (https://github.com/couchbase/couchbase-cxx-client/736[#736]).
+Fixed `pkg-config` file to return absolute path for libdir (https://github.com/couchbase/couchbase-cxx-client/736[#736]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-667[CXXCBC-667]:
-Core implementation of prepend/append should encode CAS value (https://github.com/couchbase/couchbase-cxx-client/738[#738]).
+Core implementation of prepend/append no longer ignores encoded CAS value (https://github.com/couchbase/couchbase-cxx-client/738[#738]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-671[CXXCBC-671]:
-Update snappy to support CMake 4.0 (https://github.com/couchbase/couchbase-cxx-client/745[#745]).
+Updated snappy to support `CMake` `4.0` (https://github.com/couchbase/couchbase-cxx-client/745[#745]).
+
 
 === Version 1.0.6 (12 March 2025)
 
