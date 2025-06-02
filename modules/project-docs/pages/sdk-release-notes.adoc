@@ -113,60 +113,105 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.5...1.1.0++
 
 ==== New Features
 
-* CXXCBC-672: Add add_named_parameter and add_positional_parameter to query/analytics options (#762)
+* https://jira.issues.couchbase.com/browse/CXXCBC-672[CXXCBC-672]:
+Added `add_named_parameter` and `add_positional_parameter` to query/analytics options
+// (#762)
 
-* CXXCBC-684: Allow setting both named and positional parameters for queries (#759)
+* https://jira.issues.couchbase.com/browse/CXXCBC-684[CXXCBC-684]:
+Allow setting both named and positional parameters for queries.
+// (#759)
 
-* CXXCBC-654: Add num_vbuckets to bucket_settings (#746)
+* https://jira.issues.couchbase.com/browse/CXXCBC-654[CXXCBC-654]:
+Added `num_vbuckets` to `bucket_settings`.
+// (#746)
 
-* CXXCBC-605: Add custom log callback functionality (#743)
+* https://jira.issues.couchbase.com/browse/CXXCBC-605[CXXCBC-605]:
+Added custom log callback functionality.
+// (#743)
 
-* CXXCBC-665: Always return partial results for *_all_replica operations
-  if some get_replica requests succeeded (#742)
+* https://jira.issues.couchbase.com/browse/CXXCBC-665[CXXCBC-665]:
+Always return partial results for `*_all_replica` operations, if some get_replica requests succeeded.
+// (#742)
 
-* CXXCBC-626: Application Service Telemetry (#712, #719, #739, #750)
+* https://jira.issues.couchbase.com/browse/CXXCBC-626[CXXCBC-626]:
+Application Service Telemetry.
+// (#712, #719, #739, #750)
 
 ==== Fixes and Enhancements
 
-* CXXCBC-694: Handle case where requestID is missing from query response
-  payload (#768)
+* https://jira.issues.couchbase.com/browse/CXXCBC-694[CXXCBC-694]:
+Handle case where requestID is missing from query response payload.
+// (#768)
 
-* Add CAS to core append/prepend (#737)
+* Added CAS to core append/prepend.
+// (#737)
 
-* CXXCBC-657: Raise InvalidArgument error if empty subdoc specs (#727).
-  For subdoc operations, if no specs are provided raise and
-  `invalid_argument` error instead of crashing on an assert.
+* https://jira.issues.couchbase.com/browse/CXXCBC-657[CXXCBC-657]:
+Raise `InvalidArgument` error if empty subdoc specs.
+//(#727).
+For subdoc operations, if no specs are provided raise an `invalid_argument` error instead of crashing on an assert.
 
-* CXXCBC-661: Reconnect cluster object on fork (#724)
+* https://jira.issues.couchbase.com/browse/CXXCBC-661[CXXCBC-661]:
+Reconnect cluster object on fork.
+// (#724)
 
-* CXXCBC-660: Fix potential race condition in the logger (#722)
+* https://jira.issues.couchbase.com/browse/CXXCBC-660[CXXCBC-660]:
+Fixed potential race condition in the logger.
+// (#722)
 
-* CXXCBC-646: Do not copy configuration when the operation depends on it (#715, #720)
+* https://jira.issues.couchbase.com/browse/CXXCBC-646[CXXCBC-646]:
+Do not copy configuration when the operation depends on it.
+// (#715, #720)
 
 ==== Transactions
 
-* CXXCBC-688: Don't convert Public API TOF from lambda to Core API's TOF, rely on internal state (#765)
+* https://jira.issues.couchbase.com/browse/CXXCBC-688[CXXCBC-688]:
+Don't convert Public API TOF from lambda to Core API's TOF, rely on internal state.
+// (#765)
 
-* CXXCBC-690: Don't move staged_mutation item when capturing it in commit_doc lambdas (#767)
+* https://jira.issues.couchbase.com/browse/CXXCBC-690[CXXCBC-690]:
+Don't move `staged_mutation` item when capturing it in `commit_doc` lambdas.
+// (#767)
 
-* CXXCBC-683: Transactions replace: use CAS from given TransactionsGetResult when document is a staged insert (#763)
+* https://jira.issues.couchbase.com/browse/CXXCBC-683[CXXCBC-683]:
+Transactions replace: use CAS from given `TransactionsGetResult` when document is a staged insert.
+// (#763)
 
-* CXXCBC-682: Transaction replace/insert result should include post-op content (#756)
+* https://jira.issues.couchbase.com/browse/CXXCBC-682[CXXCBC-682]:
+Transaction replace/insert result should include post-op content.
+// (#756)
 
-* CXXCBC-645, CXXCBC-689, CXXCBC-687: Implement get_multi_* APIs for transactions (#761, #764, #766)
+* https://jira.issues.couchbase.com/browse/CXXCBC-645[CXXCBC-645],
+https://jira.issues.couchbase.com/browse/CXXCBC-689[CXXCBC-689],
+https://jira.issues.couchbase.com/browse/CXXCBC-687[CXXCBC-687]:
+Implement `get_multi_*` APIs for transactions.
+// (#761, #764, #766)
 
-* CXXCBC-681: Do not store entire transaction_get_result in staged mutations (#757)
+* https://jira.issues.couchbase.com/browse/CXXCBC-681[CXXCBC-681]:
+Do not store entire `transaction_get_result` in staged mutations.
+// (#757)
 
-* CXXCBC-649: Implement ExtReplaceBodyWithXattr (#752)
+* https://jira.issues.couchbase.com/browse/CXXCBC-649[CXXCBC-649]:
+Implement `ExtReplaceBodyWithXattr`.
+// (#752)
 
 ==== Build and Tests Fixes
 
-* CXXCBC-671: Update snappy to support CMake 4.0 (#744)
+* https://jira.issues.couchbase.com/browse/CXXCBC-671[CXXCBC-671]:
+Updated `snappy` to support `CMake` `4.0`.
+// (#744)
 
-* CXXCBC-666: Fix pkg-config file (#735). `couchbase_cxx_client.pc` have
-  to use absolute path for `libdir`.
+* https://jira.issues.couchbase.com/browse/CXXCBC-666[CXXCBC-666]:
+Fixed `pkg-config` file.
+// (#735). 
+`couchbase_cxx_client.pc` have to use absolute path for `libdir`.
 
-* CXXCBC-673: Update query integration tests to compare decoded rows (#747)
+* https://jira.issues.couchbase.com/browse/CXXCBC-673[CXXCBC-673]:
+Updated query integration tests to compare decoded rows.
+// (#747)
+
+
+
 
 == {cpp} SDK 1.0 Releases
 
