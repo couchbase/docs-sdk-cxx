@@ -77,6 +77,142 @@ $ cmake --build .
 
 
 [#latest-release]
+== {cpp} SDK 1.1 Releases
+
+=== Version 1.1.0 (01 June 2025)
+
+This is a first GA release of the 1.1 {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.1.0[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.5...1.1.0++[Full Changelog]
+
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform              | Architecture | File
+| Checksums             | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0.sha256.txt[couchbase-cxx-client-1.1.0.sha256.txt]
+| Source Archive        | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0.tar.gz[couchbase-cxx-client-1.1.0.tar.gz]
+| Amazon Linux 2023     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.1.0-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.1.0-1.amzn2023.aarch64.tar]
+| Enterprise Linux 9    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.el9.x86_64.tar[couchbase-cxx-client-1.1.0-1.el9.x86_64.tar]
+| Enterprise Linux 9    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.el9.aarch64.tar[couchbase-cxx-client-1.1.0-1.el9.aarch64.tar]
+| Enterprise Linux 8    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.el8.x86_64.tar[couchbase-cxx-client-1.1.0-1.el8.x86_64.tar]
+| Enterprise Linux 8    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.el8.aarch64.tar[couchbase-cxx-client-1.1.0-1.el8.aarch64.tar]
+| Debian 12 (Bookworm)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.bookworm.x86_64.tar[couchbase-cxx-client-1.1.0-1.bookworm.x86_64.tar]
+| Debian 12 (Bookworm)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.bookworm.aarch64.tar[couchbase-cxx-client-1.1.0-1.bookworm.aarch64.tar]
+| Ubuntu 20.04 (Jammy)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.jammy.x86_64.tar[couchbase-cxx-client-1.1.0-1.jammy.x86_64.tar]
+| Ubuntu 20.04 (Jammy)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.jammy.aarch64.tar[couchbase-cxx-client-1.1.0-1.jammy.aarch64.tar]
+| Ubuntu 22.04 (Noble)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.noble.x86_64.tar[couchbase-cxx-client-1.1.0-1.el8.x86_64.tar]
+| Ubuntu 22.04 (Noble)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-1.noble.aarch64.tar[couchbase-cxx-client-1.1.0-1.el8.aarch64.tar]
+| Alpine Linux 3.19     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-r1-x86_64-alpine-3.19.tar[couchbase-cxx-client-1.1.0-r1-x86_64-alpine-3.19.tar]
+| Alpine Linux 3.19     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-r1-aarch64-alpine-3.19.tar[couchbase-cxx-client-1.1.0-r1-aarch64-alpine-3.19.tar]
+| Alpine Linux 3.20     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-r1-x86_64-alpine-3.20.tar[couchbase-cxx-client-1.1.0-r1-x86_64-alpine-3.20.tar]
+| Alpine Linux 3.20     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.0-r1-aarch64-alpine-3.20.tar[couchbase-cxx-client-1.1.0-r1-aarch64-alpine-3.20.tar]
+|===
+
+==== New Features
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-672[CXXCBC-672]:
+Added `add_named_parameter` and `add_positional_parameter` to query/analytics options
+// (#762)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-684[CXXCBC-684]:
+Allow setting both named and positional parameters for queries.
+// (#759)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-654[CXXCBC-654]:
+Added `num_vbuckets` to `bucket_settings`.
+// (#746)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-605[CXXCBC-605]:
+Added custom log callback functionality.
+// (#743)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-665[CXXCBC-665]:
+Always return partial results for `*_all_replica` operations, if some get_replica requests succeeded.
+// (#742)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-626[CXXCBC-626]:
+Application Service Telemetry.
+// (#712, #719, #739, #750)
+
+==== Fixes and Enhancements
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-694[CXXCBC-694]:
+Handle case where requestID is missing from query response payload.
+// (#768)
+
+* Added CAS to core append/prepend.
+// (#737)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-657[CXXCBC-657]:
+Raise `InvalidArgument` error if empty subdoc specs.
+//(#727).
+For subdoc operations, if no specs are provided raise an `invalid_argument` error instead of crashing on an assert.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-661[CXXCBC-661]:
+Reconnect cluster object on fork.
+// (#724)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-660[CXXCBC-660]:
+Fixed potential race condition in the logger.
+// (#722)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-646[CXXCBC-646]:
+Do not copy configuration when the operation depends on it.
+// (#715, #720)
+
+==== Transactions
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-688[CXXCBC-688]:
+Don't convert Public API TOF from lambda to Core API's TOF, rely on internal state.
+// (#765)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-690[CXXCBC-690]:
+Don't move `staged_mutation` item when capturing it in `commit_doc` lambdas.
+// (#767)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-683[CXXCBC-683]:
+Transactions replace: use CAS from given `TransactionsGetResult` when document is a staged insert.
+// (#763)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-682[CXXCBC-682]:
+Transaction replace/insert result should include post-op content.
+// (#756)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-645[CXXCBC-645],
+https://jira.issues.couchbase.com/browse/CXXCBC-689[CXXCBC-689],
+https://jira.issues.couchbase.com/browse/CXXCBC-687[CXXCBC-687]:
+Implement `get_multi_*` APIs for transactions.
+// (#761, #764, #766)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-681[CXXCBC-681]:
+Do not store entire `transaction_get_result` in staged mutations.
+// (#757)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-649[CXXCBC-649]:
+Implement `ExtReplaceBodyWithXattr`.
+// (#752)
+
+==== Build and Tests Fixes
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-671[CXXCBC-671]:
+Updated `snappy` to support `CMake` `4.0`.
+// (#744)
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-666[CXXCBC-666]:
+Fixed `pkg-config` file.
+// (#735). 
+`couchbase_cxx_client.pc` have to use absolute path for `libdir`.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-673[CXXCBC-673]:
+Updated query integration tests to compare decoded rows.
+// (#747)
+
+
+
+
 == {cpp} SDK 1.0 Releases
 
 We always recommend using the latest version of the SDK -- it contains all of the latest security patches and support for new and upcoming features.
