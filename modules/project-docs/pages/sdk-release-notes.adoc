@@ -164,10 +164,10 @@ For performance reasons, the bucket configuration is now stored as shared pointe
 
 ==== Transactions
 
-https://jira.issues.couchbase.com/browse/CXXCBC-688[CXXCBC-688]:
+* https://jira.issues.couchbase.com/browse/CXXCBC-688[CXXCBC-688]:
 Don't convert Public API TOF from lambda to Core API's TOF, rely on internal state (https://github.com/couchbase/couchbase-cxx-client/pull/765[#765]).
 
-https://jira.issues.couchbase.com/browse/CXXCBC-690[CXXCBC-690]:
+* https://jira.issues.couchbase.com/browse/CXXCBC-690[CXXCBC-690]:
 Don't move `staged_mutation` item when capturing it in `commit_doc` lambdas (https://github.com/couchbase/couchbase-cxx-client/pull/767[#767]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-683[CXXCBC-683]:
