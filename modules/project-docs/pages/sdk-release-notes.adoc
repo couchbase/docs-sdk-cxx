@@ -120,103 +120,88 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.0.5...1.1.0++
 ==== New Features
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-672[CXXCBC-672]:
-Added `add_named_parameter` and `add_positional_parameter` to query/analytics options
-// (#762)
+Added `add_named_parameter` and `add_positional_parameter` to query/analytics options (https://github.com/couchbase/couchbase-cxx-client/pull/762[#762]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-684[CXXCBC-684]:
-Allow setting both named and positional parameters for queries.
-// (#759)
+The SDK now allows the setting of both named and positional parameters for queries --
+previously named parameters would be cleared if positional parameters were set (https://github.com/couchbase/couchbase-cxx-client/pull/759[#759]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-654[CXXCBC-654]:
-Added `num_vbuckets` to `bucket_settings`.
-// (#746)
+Added `num_vbuckets` to `bucket_settings` (https://github.com/couchbase/couchbase-cxx-client/pull/746[#746]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-605[CXXCBC-605]:
-Added custom log callback functionality.
-// (#743)
+Added custom log callback functionality (https://github.com/couchbase/couchbase-cxx-client/pull/743[#743]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-665[CXXCBC-665]:
-Always return partial results for `*_all_replica` operations, if some get_replica requests succeeded.
-// (#742)
+The SDK will now always return partial results for `*_all_replica` operations if some `get_replica` requests succeeded
+(https://github.com/couchbase/couchbase-cxx-client/pull/742[#742]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-626[CXXCBC-626]:
-Application Service Telemetry.
-// (#712, #719, #739, #750)
+Application Service Telemetry, for future Server releases
+(https://github.com/couchbase/couchbase-cxx-client/pull/712[#712], https://github.com/couchbase/couchbase-cxx-client/pull/719[#719], https://github.com/couchbase/couchbase-cxx-client/pull/739[#739], https://github.com/couchbase/couchbase-cxx-client/pull/750[#750]).
 
 ==== Fixes and Enhancements
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-694[CXXCBC-694]:
-Handle case where requestID is missing from query response payload.
-// (#768)
+Handle case where requestID is missing from query response payload (https://github.com/couchbase/couchbase-cxx-client/pull/768[#768]).
 
-* Added CAS to core append/prepend.
-// (#737)
+* Added CAS to core append/prepend
+(https://github.com/couchbase/couchbase-cxx-client/pull/737[#737]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-657[CXXCBC-657]:
-Raise `InvalidArgument` error if empty subdoc specs.
-//(#727).
-For subdoc operations, if no specs are provided raise an `invalid_argument` error instead of crashing on an assert.
+For subdoc operations, if no specs are provided then an `invalid_argument` error is raised instead of crashing on an assert
+(https://github.com/couchbase/couchbase-cxx-client/pull/727[#727]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-661[CXXCBC-661]:
-Reconnect cluster object on fork.
-// (#724)
+Reconnect cluster object on fork (https://github.com/couchbase/couchbase-cxx-client/pull/724[#724]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-660[CXXCBC-660]:
-Fixed potential race condition in the logger.
-// (#722)
+Fixed potential race condition in the logger (https://github.com/couchbase/couchbase-cxx-client/pull/722[#722]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-646[CXXCBC-646]:
-Do not copy configuration when the operation depends on it.
-// (#715, #720)
+For performance reasons, the bucket configuration is now stored as shared pointer, and this is copied into the handler instead of the entire configuration 
+(https://github.com/couchbase/couchbase-cxx-client/pull/715[#715], https://github.com/couchbase/couchbase-cxx-client/pull/720[#720]).
 
 ==== Transactions
 
-* https://jira.issues.couchbase.com/browse/CXXCBC-688[CXXCBC-688]:
-Don't convert Public API TOF from lambda to Core API's TOF, rely on internal state.
-// (#765)
+https://jira.issues.couchbase.com/browse/CXXCBC-688[CXXCBC-688]:
+Don't convert Public API TOF from lambda to Core API's TOF, rely on internal state (https://github.com/couchbase/couchbase-cxx-client/pull/765[#765]).
 
-* https://jira.issues.couchbase.com/browse/CXXCBC-690[CXXCBC-690]:
-Don't move `staged_mutation` item when capturing it in `commit_doc` lambdas.
-// (#767)
+https://jira.issues.couchbase.com/browse/CXXCBC-690[CXXCBC-690]:
+Don't move `staged_mutation` item when capturing it in `commit_doc` lambdas (https://github.com/couchbase/couchbase-cxx-client/pull/767[#767]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-683[CXXCBC-683]:
-Transactions replace: use CAS from given `TransactionsGetResult` when document is a staged insert.
-// (#763)
+Transactions replace now uses CAS from given `TransactionsGetResult` when the document is a staged insert (https://github.com/couchbase/couchbase-cxx-client/pull/763[#763]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-682[CXXCBC-682]:
-Transaction replace/insert result should include post-op content.
-// (#756)
+Transaction replace/insert result now includes post-op content (https://github.com/couchbase/couchbase-cxx-client/pull/756[#756]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-645[CXXCBC-645],
 https://jira.issues.couchbase.com/browse/CXXCBC-689[CXXCBC-689],
 https://jira.issues.couchbase.com/browse/CXXCBC-687[CXXCBC-687]:
-Implement `get_multi_*` APIs for transactions.
-// (#761, #764, #766)
+Implemented `get_multi_*` APIs for transactions
+(https://github.com/couchbase/couchbase-cxx-client/pull/761[#761], https://github.com/couchbase/couchbase-cxx-client/pull/764[#764], https://github.com/couchbase/couchbase-cxx-client/pull/766[#766]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-681[CXXCBC-681]:
-Do not store entire `transaction_get_result` in staged mutations.
-// (#757)
+No longer storing entire `transaction_get_result` in staged mutations, reducing memory use (https://github.com/couchbase/couchbase-cxx-client/pull/757[#757]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-649[CXXCBC-649]:
-Implement `ExtReplaceBodyWithXattr`.
-// (#752)
+Implemented `ExtReplaceBodyWithXattr` (https://github.com/couchbase/couchbase-cxx-client/pull/752[#752]).
 
 ==== Build and Tests Fixes
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-671[CXXCBC-671]:
-Updated `snappy` to support `CMake` `4.0`.
-// (#744)
+Updated `snappy` to support `CMake` `4.0`
+(https://github.com/couchbase/couchbase-cxx-client/pull/744[#744]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-666[CXXCBC-666]:
-Fixed `pkg-config` file.
-// (#735).
+Fixed `pkg-config` file -- 
 `couchbase_cxx_client.pc` have to use absolute path for `libdir`.
+(https://github.com/couchbase/couchbase-cxx-client/pull/735[#735]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-673[CXXCBC-673]:
-Updated query integration tests to compare decoded rows.
-// (#747)
-
-
+Updated query integration tests to compare decoded rows
+(https://github.com/couchbase/couchbase-cxx-client/pull/747[#747]).
 
 
 == {cpp} SDK 1.0 Releases
