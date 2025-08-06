@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
+include(cmake/CPM.cmake)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(docs_cxx)
@@ -9,21 +10,44 @@ macro(define_example name)
     target_link_libraries(
             ${name}
             ${CMAKE_THREAD_LIBS_INIT}
+            fmt::fmt
             taocpp::json
             couchbase_cxx_client)
-    if(COUCHBASE_CXX_CLIENT_STATIC_BORINGSSL AND WIN32)
-        # Ignore the `LNK4099: PDB ['crypto.pdb'|'ssl.pdb'] was not found` warnings, as we don't (atm) keep track fo the
-        # *.PDB from the BoringSSL build
-        set_target_properties(${name} PROPERTIES LINK_FLAGS "/ignore:4099")
-    endif()
 endmacro()
 
-set(COUCHBASE_CXX_CLIENT_BUILD_DOCS FALSE)
-set(COUCHBASE_CXX_CLIENT_BUILD_EXAMPLES FALSE)
-set(COUCHBASE_CXX_CLIENT_BUILD_TESTS FALSE)
-set(COUCHBASE_CXX_CLIENT_STATIC_BORINGSSL TRUE)
-set(COUCHBASE_CXX_CLIENT_EMBED_MOZILLA_CA_BUNDLE FALSE)
-add_subdirectory("${PROJECT_SOURCE_DIR}/couchbase-cxx-client")
+cpmaddpackage(
+        NAME
+        fmt
+        GIT_TAG
+        11.2.0
+        VERSION
+        11.2.0
+        GITHUB_REPOSITORY
+        "fmtlib/fmt"
+        EXCLUDE_FROM_ALL ON
+        OPTIONS
+        "FMT_INSTALL OFF"
+        "FMT_UNICODE OFF"
+        "FMT_DOC OFF"
+        "BUILD_SHARED_LIBS OFF"
+        "CMAKE_C_VISIBILITY_PRESET hidden"
+        "CMAKE_CXX_VISIBILITY_PRESET hidden"
+        "CMAKE_POSITION_INDEPENDENT_CODE ON"
+)
+
+cpmaddpackage(
+        NAME
+        couchbase_cxx_client
+        GIT_TAG
+        main
+        VERSION
+        1.2.0
+        GITHUB_REPOSITORY
+        "couchbase/couchbase-cxx-client"
+        OPTIONS
+        "COUCHBASE_CXX_CLIENT_INSTALL ON"
+        "COUCHBASE_CXX_CLIENT_BUILD_SHARED ON"
+        "COUCHBASE_CXX_CLIENT_BUILD_STATIC OFF")
 
 file(GLOB_RECURSE SOURCES "${PROJECT_SOURCE_DIR}/src/*.cxx")
 

@@ -48,7 +48,7 @@ main()
             fmt::println("Unable to perform query: {}", err);
         }
 
-        for (const auto& row : resp.rows_as_json()) {
+        for (const auto& row : resp.rows_as<couchbase::codec::tao_json_serializer>()) {
             fmt::println("row: {}", tao::json::to_string(row));
         }
         // #end::query[]
