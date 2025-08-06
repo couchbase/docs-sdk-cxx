@@ -25,7 +25,7 @@ main()
         if (err) {
             fmt::println("Got an error doing analytics query: {}", err);
         } else {
-            auto rows = res.rows_as_json();
+            auto rows = res.rows_as<couchbase::codec::tao_json_serializer>();
             for (const auto& row : rows) {
                 fmt::println("row: {}", tao::json::to_string(row));
             }
@@ -73,7 +73,7 @@ main()
         if (err) {
             fmt::println("Got an error doing analytics query: {}", err);
         } else {
-            auto rows = res.rows_as_json();
+            auto rows = res.rows_as<couchbase::codec::tao_json_serializer>();
             for (const auto& row : rows) {
                 fmt::println("row: {}", tao::json::to_string(row));
             }

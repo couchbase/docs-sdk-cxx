@@ -2,12 +2,14 @@
 
 // #tag::imports[]
 #include <couchbase/cluster.hxx>
-#include <couchbase/fmt/cas.hxx>
-#include <couchbase/fmt/error.hxx>
+#include <couchbase/codec/tao_json_serializer.hxx>
 
 #include <fmt/format.h>
 #include <tao/json/value.hpp>
 #include <tao/json/to_string.hpp>
+
+#include <couchbase/fmt/cas.hxx>
+#include <couchbase/fmt/error.hxx>
 
 #include <iostream>
 // #end::imports[]
@@ -38,7 +40,7 @@ main() -> int
     {
         // tag::simple[]
         std::string statement = "SELECT * from `travel-sample` LIMIT 10;";
-        auto [err, result] = cluster.query(statement, {}).get();
+        const auto [err, result] = cluster.query(statement, {}).get();
         // end::simple[]
 
         // tag::simple-results[]
@@ -52,11 +54,12 @@ main() -> int
 
     {
         // tag::get-rows[]
-        auto [err, result] = cluster.query("SELECT * FROM `travel-sample` LIMIT 10;", {}).get();
+        const auto [err, result] =
+          cluster.query("SELECT * FROM `travel-sample` LIMIT 10;", {}).get();
         if (err) {
             fmt::println("Error: {}", err);
         } else {
-            for (const auto& row : result.rows_as_json()) {
+            for (const auto& row : result.rows_as<couchbase::codec::tao_json_serializer>()) {
                 fmt::println("{}", tao::json::to_string(row));
             }
         }
@@ -70,14 +73,16 @@ main() -> int
                             FROM `travel-sample`.inventory.airport
                             WHERE country=$1;
                             )"""";
-        auto [err, result] =
+        const auto [err, result] =
           cluster
             .query(
               stmt, couchbase::query_options().adhoc(false).positional_parameters("United States")
             )
             .get();
         // end::positional[]
-        fmt::println("{}", tao::json::to_string(result.rows_as_json().at(0)));
+        fmt::println(
+          "{}", tao::json::to_string(result.rows_as<couchbase::codec::tao_json_serializer>().at(0))
+        );
     }
 
     {
@@ -87,22 +92,31 @@ main() -> int
                             FROM `travel-sample`.inventory.airport
                             WHERE country=$country;
                             )"""";
-        auto [err, result] =
+        const auto [err, result] =
           cluster
-            .query(stmt, couchbase::query_options().named_parameters(std::make_pair<std::string, std::string>("country", "United States")))
+            .query(
+              stmt,
+              couchbase::query_options().named_parameters(
+                std::make_pair<std::string, std::string>("country", "United States")
+              )
+            )
             .get();
         // end::named[]
-        fmt::println("{}", tao::json::to_string(result.rows_as_json().at(0)));
+        fmt::println(
+          "{}", tao::json::to_string(result.rows_as<couchbase::codec::tao_json_serializer>().at(0))
+        );
     }
 
     {
         // tag::request-plus[]
-        auto [err, result] = cluster
-                               .query(
-                                 "SELECT * FROM `travel-sample` LIMIT 10;",
-                                 couchbase::query_options().scan_consistency(couchbase::query_scan_consistency::request_plus)
-                               )
-                               .get();
+        const auto [err, result] = cluster
+                                     .query(
+                                       "SELECT * FROM `travel-sample` LIMIT 10;",
+                                       couchbase::query_options().scan_consistency(
+                                         couchbase::query_scan_consistency::request_plus
+                                       )
+                                     )
+                                     .get();
         // end::request-plus[]
     }
 
@@ -114,8 +128,12 @@ main() -> int
 
         couchbase::mutation_state state;
         state.add(upsert_result);
-        auto [err, result] =
-          cluster.query("SELECT * FROM `travel-sample` LIMIT 10;", couchbase::query_options().consistent_with(state)).get();
+        const auto [err, result] = cluster
+                                     .query(
+                                       "SELECT * FROM `travel-sample` LIMIT 10;",
+                                       couchbase::query_options().consistent_with(state)
+                                     )
+                                     .get();
         if (err) {
             fmt::println("Error: {}", err);
         }
@@ -124,11 +142,11 @@ main() -> int
 
     {
         // tag::scope-level[]
-        auto [err, result] = scope.query("SELECT * FROM airline LIMIT 10;", {}).get();
+        const auto [err, result] = scope.query("SELECT * FROM airline LIMIT 10;", {}).get();
         if (err) {
             fmt::println("Error: {}", err);
         } else {
-            for (const auto& row : result.rows_as_json()) {
+            for (const auto& row : result.rows_as<couchbase::codec::tao_json_serializer>()) {
                 fmt::println("{}", tao::json::to_string(row));
             }
         }
