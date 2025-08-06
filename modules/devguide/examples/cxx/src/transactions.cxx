@@ -2,13 +2,16 @@
 
 // #tag::imports[]
 #include <couchbase/cluster.hxx>
-#include <couchbase/fmt/cas.hxx>
-#include <couchbase/fmt/error.hxx>
+#include <couchbase/codec/tao_json_serializer.hxx>
+#include <couchbase/transactions.hxx>
 
 #include <fmt/chrono.h>
 #include <fmt/format.h>
 #include <tao/json/to_string.hpp>
 #include <tao/json/value.hpp>
+
+#include <couchbase/fmt/cas.hxx>
+#include <couchbase/fmt/error.hxx>
 
 #include <functional>
 #include <iostream>
@@ -74,7 +77,7 @@ main() -> int
               ctx->remove(doc_c);
 
               // Performing a SELECT SQL++ query against a scope
-              auto [query_err, query_res] = ctx->query(
+              const auto [query_err, query_res] = ctx->query(
                 inventory,
                 "SELECT * FROM hotel WHERE country = $1",
                 couchbase::transactions::transaction_query_options().positional_parameters(
@@ -82,7 +85,7 @@ main() -> int
                 )
               );
               if (!query_err) {
-                  auto rows = query_res.rows_as_json();
+                  auto rows = query_res.rows_as<couchbase::codec::tao_json_serializer>();
                   fmt::println("Query returned {} rows", rows.size());
               }
 
@@ -182,9 +185,11 @@ main() -> int
                                                         .positional_parameters("United Kingdom"),
                                                     [ctx,
                                                      err_barrier,
-                                                     &inventory](auto err, auto res) {
+                                                     &inventory](const auto err, const auto res) {
                                                         if (!err) {
-                                                            auto rows = res.rows_as_json();
+                                                            auto rows = res.template rows_as<
+                                                              couchbase::codec::
+                                                                tao_json_serializer>();
                                                             fmt::println(
                                                               "Query returned {} rows", rows.size()
                                                             );
@@ -387,13 +392,13 @@ main() -> int
             std::string statement{
                 "SELECT * FROM `travel-sample`.inventory.hotel WHERE country = $1"
             };
-            auto [err, result] = ctx->query(
+            const auto [err, result] = ctx->query(
               statement,
               couchbase::transactions::transaction_query_options().positional_parameters(
                 "United Kingdom"
               )
             );
-            auto rows = result.rows_as_json();
+            auto rows = result.template rows_as<couchbase::codec::tao_json_serializer>();
             return {};
         });
         // #end::query-select[]
@@ -404,14 +409,14 @@ main() -> int
 
         cluster.transactions()->run([&](auto ctx) -> couchbase::error {
             std::string statement{ "SELECT * FROM hotel WHERE country = $1" };
-            auto [err, result] = ctx->query(
+            const auto [err, result] = ctx->query(
               inventory,
               statement,
               couchbase::transactions::transaction_query_options().positional_parameters(
                 "United States"
               )
             );
-            auto rows = result.rows_as_json();
+            auto rows = result.template rows_as<couchbase::codec::tao_json_serializer>();
             return {};
         });
         // #end::query-select-scope[]

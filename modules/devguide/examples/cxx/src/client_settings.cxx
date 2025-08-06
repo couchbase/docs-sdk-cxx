@@ -1,6 +1,4 @@
 #include <couchbase/cluster.hxx>
-#include <couchbase/fmt/error.hxx>
-#include <couchbase/logger.hxx>
 
 #include <iostream>
 #include <system_error>

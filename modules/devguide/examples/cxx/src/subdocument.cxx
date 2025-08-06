@@ -2,11 +2,13 @@
 
 // #tag::imports[]
 #include <couchbase/cluster.hxx>
-#include <couchbase/fmt/cas.hxx>
-#include <couchbase/fmt/error.hxx>
+#include <couchbase/codec/tao_json_serializer.hxx>
 
 #include <fmt/format.h>
 #include <tao/json/value.hpp>
+
+#include <couchbase/fmt/cas.hxx>
+#include <couchbase/fmt/error.hxx>
 
 #include <iostream>
 // #end::imports[]

@@ -1,3 +1,0 @@
-[submodule "modules/devguide/examples/cxx/couchbase-cxx-client"]
-	path = modules/devguide/examples/cxx/couchbase-cxx-client
-	url = https://github.com/couchbaselabs/couchbase-cxx-client
