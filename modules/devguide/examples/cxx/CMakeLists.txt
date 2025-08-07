@@ -15,6 +15,18 @@ macro(define_example name)
             couchbase_cxx_client)
 endmacro()
 
+macro(define_fle_example name)
+    add_executable(${name} src/${name}.cxx)
+    target_include_directories(${name} PUBLIC ${PROJECT_SOURCE_DIR} ${PROJECT_SOURCE_DIR}/private)
+    target_link_libraries(
+            ${name}
+            ${CMAKE_THREAD_LIBS_INIT}
+            fmt::fmt
+            taocpp::json
+            couchbase_cxx_encryption
+            couchbase_cxx_client)
+endmacro()
+
 cpmaddpackage(
         NAME
         fmt
@@ -45,9 +57,23 @@ cpmaddpackage(
         GITHUB_REPOSITORY
         "couchbase/couchbase-cxx-client"
         OPTIONS
+        "COUCHBASE_CXX_CLIENT_EMBED_MOZILLA_CA_BUNDLE OFF"
+        "COUCHBASE_CXX_CLIENT_STATIC_BORING_SSL ON"
         "COUCHBASE_CXX_CLIENT_INSTALL ON"
         "COUCHBASE_CXX_CLIENT_BUILD_SHARED ON"
         "COUCHBASE_CXX_CLIENT_BUILD_STATIC OFF")
+
+cpmaddpackage(
+        NAME
+        couchbase_cxx_encryption
+        GIT_TAG
+        1.0.0
+        VERSION
+        1.0.0
+        GITHUB_REPOSITORY
+        "couchbase/couchbase-cxx-encryption"
+        OPTIONS
+        "COUCHBASE_CXX_ENCRYPTION_INSTALL ON")
 
 file(GLOB_RECURSE SOURCES "${PROJECT_SOURCE_DIR}/src/*.cxx")
 
@@ -58,3 +84,4 @@ define_example(queries)
 define_example(client_settings)
 define_example(transactions)
 define_example(data_model)
+define_fle_example(field_level_encryption)
