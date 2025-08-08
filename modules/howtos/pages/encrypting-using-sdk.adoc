@@ -16,7 +16,7 @@ For a high-level overview of this feature, see xref:concept-docs:encryption.adoc
 == Packaging
 
 
-The Couchbase {cpp} SDK works together with the https://github.com/couchbase/java-couchbase-encryption[{cpp} Couchbase Encryption^] library to provide support for encryption and decryption of JSON Object fields.
+The Couchbase {cpp} SDK works together with the https://github.com/couchbase/couchbase-cxx-encryption[{cpp} Couchbase Encryption^] library to provide support for encryption and decryption of JSON Object fields.
 This library makes use of the cryptographic algorithms available on the OpenSSL or BoringSSL libraries linked to the {cpp} SDK, and provides a framework for implementing your own crypto components.
 
 NOTE: The encryption code is packaged as an optional library and is subject to the Couchbase https://www.couchbase.com/LA03012021[License] and https://www.couchbase.com/ESLA08042020[Enterprise Subscription License] agreements.
@@ -37,10 +37,10 @@ CPMAddPackage(
   "couchbase/couchbase-cxx-encryption")
 ----
 
-[#requirements]
 === Requirements
 * Couchbase C++ SDK version `1.2.0` or later.
 * C++ Couchbase Encryption version `1.0.0` or later.
+
 
 == Configuration
 
@@ -50,6 +50,7 @@ To enable Field-Level Encryption, supply a `couchbase::crypto::manager` when xre
 ----
 include::{example-source}[indent=0,tag=cluster_options]
 ----
+
 
 == Usage
 
@@ -62,7 +63,8 @@ NOTE: Only fields of JSON Objects can be encrypted.
 
 === Custom document type example
 
-Sensitive fields of your data classes can be enumerated in an `encrypted_fields` static `std::vector<couchbase::crypto::encrypted_field>`. For each field, the name of the field, as it appears in the serialized JSON document, and optionally an encrypter alias should be specified.
+Sensitive fields of your data classes can be enumerated in an `encrypted_fields` static `std::vector<couchbase::crypto::encrypted_field>`. 
+For each field, the name of the field, as it appears in the serialized JSON document, and optionally an encrypter alias should be specified.
 
 [source,{example-source-lang}]
 ----
@@ -108,7 +110,7 @@ include::{example-source}[tag=decrypted_document,indent=0]
 
 === `couchbase::crypto::document` example
 
-If you need more control of which fields get decrypted, or if you prefer working with generic JSON types (such as `tao::json::value`)
+If you need more control of which fields get decrypted, or if you prefer working with generic JSON types (such as `tao::json::value`),
 you can use a `couchbase::crypto::document` instance and manually specify which fields to encrypt.
 
 First, create a `couchbase::crypto::document<tao::json::value>` instance and specify the fields to encrypt. Then upsert the document to Couchbase:
