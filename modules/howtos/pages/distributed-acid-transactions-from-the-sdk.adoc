@@ -2,10 +2,8 @@
 :reftext: Distributed ACID Transactions from the {cpp} SDK
 :description: A practical guide on using Couchbase Distributed ACID transactions, via the {cpp} SDK.
 :page-partial:
-:page-aliases: cxx-txns:ROOT:distributed-acid-transactions-from-the-sdk.adoc,cxx-txns:ROOT:distributed-transactions-cxx-release-notes.adoc
-// :page-aliases: acid-transactions
+// :page-aliases: cxx-txns:ROOT:distributed-acid-transactions-from-the-sdk.adoc,cxx-txns:ROOT:distributed-transactions-cxx-release-notes.adoc
 :page-toclevels: 2
-// :page-pagination: next
 
 :lang: C++
 :example-source: devguide:example$cxx/src/transactions.cxx
