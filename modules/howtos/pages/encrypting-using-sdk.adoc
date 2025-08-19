@@ -96,7 +96,7 @@ include::{example-source}[tag=encrypted_document,indent=0]
 
 Now let's read the `person` document using the crypto transcoder:
 
-[source,json]
+[source,{example-source-lang}]
 ----
 include::{example-source}[tag=person_get_decrypt,indent=0]
 ----
@@ -136,7 +136,7 @@ include::{example-source}[tag=encrypted_crypto_doc,indent=0]
 
 Now let's read the document using the crypto transcoder:
 
-[source,json]
+[source,{example-source-lang}]
 ----
 include::{example-source}[tag=crypto_doc_get_decrypt,indent=0]
 ----

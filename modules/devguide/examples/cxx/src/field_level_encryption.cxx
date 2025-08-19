@@ -307,7 +307,7 @@ Expected output
     },
     "encrypted$zip": {
       "alg": "AEAD_AES_256_CBC_HMAC_SHA512",
-      "ciphertext": 4gMGy74p3xicKxLnRq2kiZjwolBeidA53oiQy+FLIhPUA93O7f+SiwcHBX5eWcu114O6dX2NOvq6ScIRGFwMhQ==",
+      "ciphertext": "4gMGy74p3xicKxLnRq2kiZjwolBeidA53oiQy+FLIhPUA93O7f+SiwcHBX5eWcu114O6dX2NOvq6ScIRGFwMhQ==",
       "kid": "my-key"
     },
     "state": "ST"
