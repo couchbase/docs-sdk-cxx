@@ -6,8 +6,14 @@
 [abstract]
 {description}
 
-For a high-level overview of this feature, see xref:concept-docs:encryption.adoc[].
+This feature is available in the {cpp} SDK from xref:1.2@howtos:encrypting-using-sdk.adoc[version 1.2.0].
+For a high-level overview of this feature, see xref:1.2@concept-docs:encryption.adoc[].
 
+
+
+
+
+////
 [#package]
 == Packaging
 
@@ -223,3 +229,4 @@ include::example$EncryptingUsingSDK.java[tag=legacy_decrypters,indent=0]
 NOTE: The legacy decrypters require a mapping function.
 For AES, this function accepts an encryption key name and returns the corresponding signing key name.
 For RSA, this function accepts a public key name and returns the corresponding private key name.
+////
