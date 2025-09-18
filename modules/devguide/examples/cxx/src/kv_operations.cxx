@@ -22,6 +22,12 @@ static constexpr auto bucket_name{ "default" };
 static constexpr auto scope_name{ couchbase::scope::default_name };
 static constexpr auto collection_name{ couchbase::collection::default_name };
 
+auto
+should_increment_value(std::uint64_t value) -> bool
+{
+    return value == 10;
+}
+
 // #tag::replace-retry[]
 auto
 retry_on_cas_mismatch(std::function<couchbase::error()> op) -> couchbase::error
@@ -292,7 +298,7 @@ main() -> int
         // #tag::counters[]
         {
             auto options = couchbase::increment_options().delta(1).initial(1);
-            auto [err, result] = collection.binary().increment("document-key6", options).get();
+            auto [err, result] = collection.binary().increment("counter-key", options).get();
             if (err) {
                 fmt::println("Error: {}", err);
             } else {
@@ -301,7 +307,7 @@ main() -> int
         }
         {
             auto options = couchbase::decrement_options().delta(1).initial(10);
-            auto [err, result] = collection.binary().decrement("document-key6", options).get();
+            auto [err, result] = collection.binary().decrement("counter-key", options).get();
             if (err) {
                 fmt::println("Error: {}", err);
             } else {
@@ -309,6 +315,31 @@ main() -> int
             }
         }
         // #end::counters[]
+    }
+
+    {
+        std::uint64_t increment_amount = 5;
+
+        // #tag::counters-with-replace[]
+        auto [err, result] = collection.get("counter-key").get();
+        if (err) {
+            fmt::println("Error getting document: {}", err);
+        } else {
+            const auto cas = result.cas();
+            const auto value = result.content_as<std::uint64_t>();
+            if (should_increment_value(value)) {
+                auto [err, result] =
+                  collection
+                    .replace(
+                      "counter-key", value + increment_amount, couchbase::replace_options().cas(cas)
+                    )
+                    .get();
+                if (err) {
+                    fmt::println("Error replacing document: {}", err);
+                }
+            }
+        }
+        // #end::counters-with-replace[]
     }
 
     {
