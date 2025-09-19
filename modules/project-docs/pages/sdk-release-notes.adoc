@@ -123,7 +123,7 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.1.0...1.1.1++
 ==== New Features
 
 * [backport] https://jira.issues.couchbase.com/browse/CXXCBC-699[CXXCBC-699]:
-Allow to randomize list of bootstrap nodes (https://github.com/couchbase/couchbase-cxx-client/pull/#778[#778]).
+Allow to randomize list of bootstrap nodes (https://github.com/couchbase/couchbase-cxx-client/pull/778[#778]).
 
 ==== Fixes and Enhancements
 
@@ -131,22 +131,22 @@ Allow to randomize list of bootstrap nodes (https://github.com/couchbase/couchba
 Fix intermittent crash during hard failover (https://github.com/couchbase/couchbase-cxx-client/pull/#817[#817]). An HTTP workload can potentially use an invalid node index to access a node in the config in scenarios to where a node in the cluster has been failed over.
 
 * [backport] https://jira.issues.couchbase.com/browse/CXXCBC-651[CXXCBC-651]:
-Preserve cached node labels after generating report in app telemetry meter (https://github.com/couchbase/couchbase-cxx-client/pull/#804[#804]).
+Preserve cached node labels after generating report in app telemetry meter (https://github.com/couchbase/couchbase-cxx-client/pull/804[#804]).
 
 * [backport] https://jira.issues.couchbase.com/browse/CXXCBC-693[CXXCBC-693]:
-Fix clang-tidy else-after-return error (https://github.com/couchbase/couchbase-cxx-client/pull/#805[#805]).
+Fix clang-tidy else-after-return error (https://github.com/couchbase/couchbase-cxx-client/pull/805[#805]).
 
 * [backport] https://jira.issues.couchbase.com/browse/CXXCBC-693[CXXCBC-693]:
-Handle empty/null `indexDefs` for `search_index_get_all` (https://github.com/couchbase/couchbase-cxx-client/pull/#801[#801]). Do not return an error if/when indexDefs are empty/null. Instead return w/ an empty list of index definitions.
+Handle empty/null `indexDefs` for `search_index_get_all` (https://github.com/couchbase/couchbase-cxx-client/pull/#801[801]). Do not return an error if/when indexDefs are empty/null. Instead return w/ an empty list of index definitions.
 
 * [backport] https://jira.issues.couchbase.com/browse/CXXCBC-709[CXXCBC-709]:
-Fix `exists()` in transactions `get_multi` result (https://github.com/couchbase/couchbase-cxx-client/pull/#787[#787]).
+Fix `exists()` in transactions `get_multi` result (https://github.com/couchbase/couchbase-cxx-client/pull/787[#787]).
 
 * [backport] https://jira.issues.couchbase.com/browse/CXXCBC-696[CXXCBC-696]:
-Use the external exception field to determine transaction operation error code in Public API (https://github.com/couchbase/couchbase-cxx-client/pull/#772[#772])
+Use the external exception field to determine transaction operation error code in Public API (https://github.com/couchbase/couchbase-cxx-client/pull/772[#772])
 
 * [backport] https://jira.issues.couchbase.com/browse/CXXCBC-712[CXXCBC-712]:
-Fix build with CPM (#797)
+Fix build with CPM (https://github.com/couchbase/couchbase-cxx-client/pull/797[#797])
 
 
 === Version 1.1.0 (01 June 2025)
