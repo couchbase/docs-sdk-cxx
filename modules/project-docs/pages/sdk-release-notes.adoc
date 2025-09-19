@@ -148,7 +148,7 @@ instead returning an empty list of index definitions.
 Fixed a bug in the getter that was always returning `false` for `exists()` in transactions `get_multi` result (https://github.com/couchbase/couchbase-cxx-client/pull/787[#787]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-696[CXXCBC-696]:
-.the client now uses the external exception field to determine transaction operation error code in the Public API (https://github.com/couchbase/couchbase-cxx-client/pull/772[#772]).
+The client now uses the external exception field to determine transaction operation error code in the Public API (https://github.com/couchbase/couchbase-cxx-client/pull/772[#772]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-712[CXXCBC-712]:
 Fixed build issue with CPM (https://github.com/couchbase/couchbase-cxx-client/pull/797[#797])
