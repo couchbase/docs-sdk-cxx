@@ -107,13 +107,9 @@ include::devguide:example$cxx/src/kv_operations.cxx[tag=counters,indent=0]
 
 include::{version-common}@sdk:shared:partial$documents.adoc[tag=counters2]
 
-[source,python]
+[source,c++]
 ----
-# Python example:
-rv = cb.get('counter_id')
-value, cas = rv.value, rv.cas
-if should_increment_value(value):
-  cb.upsert('counter_id', value + increment_amount, cas=cas)
+include::devguide:example$cxx/src/kv_operations.cxx[tag=counters-with-replace,indent=0]
 ----
 
 include::{version-common}@sdk:shared:partial$documents.adoc[tag=counters3]
