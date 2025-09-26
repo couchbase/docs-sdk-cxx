@@ -96,6 +96,76 @@ any changes to expected behavior are noted in the release notes that follow.
 == {cpp} SDK 1.1 Releases
 
 
+=== Version 1.1.1 (18 September 2025)
+
+This is a second GA release of the 1.1 {cpp} SDK.
+It contains features and fixes backported from 1.2.0.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.1.1[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.1.0...1.1.1++[Full Changelog]
+
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform              | Architecture | File
+| Checksums             | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1.sha256.txt[couchbase-cxx-client-1.1.1.sha256.txt]
+| Source Archive        | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1.tar.gz[couchbase-cxx-client-1.1.1.tar.gz]
+| Amazon Linux 2023     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.1.1-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.1.1-1.amzn2023.aarch64.tar]
+| Enterprise Linux 9    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.el9.x86_64.tar[couchbase-cxx-client-1.1.1-1.el9.x86_64.tar]
+| Enterprise Linux 9    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.el9.aarch64.tar[couchbase-cxx-client-1.1.1-1.el9.aarch64.tar]
+| Enterprise Linux 8    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.el8.x86_64.tar[couchbase-cxx-client-1.1.1-1.el8.x86_64.tar]
+| Enterprise Linux 8    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.el8.aarch64.tar[couchbase-cxx-client-1.1.1-1.el8.aarch64.tar]
+| Debian 12 (Bookworm)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.bookworm.x86_64.tar[couchbase-cxx-client-1.1.1-1.bookworm.x86_64.tar]
+| Debian 12 (Bookworm)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.bookworm.aarch64.tar[couchbase-cxx-client-1.1.1-1.bookworm.aarch64.tar]
+| Ubuntu 22.04 (Jammy)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.jammy.x86_64.tar[couchbase-cxx-client-1.1.1-1.jammy.x86_64.tar]
+| Ubuntu 22.04 (Jammy)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.jammy.aarch64.tar[couchbase-cxx-client-1.1.1-1.jammy.aarch64.tar]
+| Ubuntu 24.04 (Noble)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.noble.x86_64.tar[couchbase-cxx-client-1.1.1-1.el8.x86_64.tar]
+| Ubuntu 24.04 (Noble)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-1.noble.aarch64.tar[couchbase-cxx-client-1.1.1-1.el8.aarch64.tar]
+| Alpine Linux 3.19     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-r1-x86_64-alpine-3.19.tar[couchbase-cxx-client-1.1.1-r1-x86_64-alpine-3.19.tar]
+| Alpine Linux 3.19     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-r1-aarch64-alpine-3.19.tar[couchbase-cxx-client-1.1.1-r1-aarch64-alpine-3.19.tar]
+| Alpine Linux 3.20     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-r1-x86_64-alpine-3.20.tar[couchbase-cxx-client-1.1.1-r1-x86_64-alpine-3.20.tar]
+| Alpine Linux 3.20     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-r1-aarch64-alpine-3.20.tar[couchbase-cxx-client-1.1.1-r1-aarch64-alpine-3.20.tar]
+| Alpine Linux 3.21     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-r1-x86_64-alpine-3.21.tar[couchbase-cxx-client-1.1.1-r1-x86_64-alpine-3.21.tar]
+| Alpine Linux 3.21     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-r1-aarch64-alpine-3.21.tar[couchbase-cxx-client-1.1.1-r1-aarch64-alpine-3.21.tar]
+| Alpine Linux 3.22     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-r1-x86_64-alpine-3.22.tar[couchbase-cxx-client-1.1.1-r1-x86_64-alpine-3.22.tar]
+| Alpine Linux 3.22     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.1.1-r1-aarch64-alpine-3.22.tar[couchbase-cxx-client-1.1.1-r1-aarch64-alpine-3.22.tar]
+|===
+
+==== New Features
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-699[CXXCBC-699]:
+By default the SDK will now shuffle the node list (including lists received via DNS-SRV request).
+To disable this behavior use the `preserve_bootstrap_nodes_order` option  
+(https://github.com/couchbase/couchbase-cxx-client/pull/778[#778]).
+
+==== Fixes and Enhancements
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-715[CXXCBC-715]:
+An HTTP workload could potentially use an invalid node index to access a node in the config in scenarios to where a node in the cluster has been failed over.
+This potential intermittent crash during hard failover has now been fixed
+(https://github.com/couchbase/couchbase-cxx-client/pull/817[#817]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-651[CXXCBC-651]:
+Cached node labels are now preserved after generating reports in app telemetry meter (https://github.com/couchbase/couchbase-cxx-client/pull/804[#804]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-693[CXXCBC-693]:
+Fixed clang-tidy else-after-return error (https://github.com/couchbase/couchbase-cxx-client/pull/805[#805]).
+Now correctly handle empty/null `indexDefs` for `search_index_get_all` (https://github.com/couchbase/couchbase-cxx-client/pull/801[801]).
+The client will no longer return an error if/when `indexDefs` are empty/null --
+instead returning an empty list of index definitions.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-709[CXXCBC-709]:
+Fixed a bug in the getter that was always returning `false` for `exists()` in transactions `get_multi` result (https://github.com/couchbase/couchbase-cxx-client/pull/787[#787]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-696[CXXCBC-696]:
+The client now uses the external exception field to determine transaction operation error code in the Public API (https://github.com/couchbase/couchbase-cxx-client/pull/772[#772]).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-712[CXXCBC-712]:
+Fixed build issue with CPM (https://github.com/couchbase/couchbase-cxx-client/pull/797[#797])
+
+
 
 === Version 1.1.0 (01 June 2025)
 
