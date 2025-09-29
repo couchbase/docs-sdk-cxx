@@ -131,7 +131,7 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.1.0...1.2.0++
 * https://jira.issues.couchbase.com/browse/CXXCBC-567[CXXCBC-567]:
 Added support for field-level encryption library (https://github.com/couchbase/couchbase-cxx-client/pull/791[#791]).
 * https://jira.issues.couchbase.com/browse/CXXCBC-713[CXXCBC-713], https://jira.issues.couchbase.com/browse/CXXCBC-729[CXXCBC-729]:
-Added `cbc-keygen`, a tool to generate keys for specific vBucket (https://github.com/couchbase/couchbase-cxx-client/pull/799[#799], https://github.com/couchbase/couchbase-cxx-client/pull/833[#833])
+Added `cbc-keygen`, a tool to generate keys for specific vBucket (https://github.com/couchbase/couchbase-cxx-client/pull/799[#799], https://github.com/couchbase/couchbase-cxx-client/pull/833[#833]).
 * https://jira.issues.couchbase.com/browse/CXXCBC-656[CXXCBC-656]:
 Added `cbc-remove` and `cbc-upsert` tools (https://github.com/couchbase/couchbase-cxx-client/pull/781[#781]).
 * https://jira.issues.couchbase.com/browse/CXXCBC-653[CXXCBC-653]:
@@ -188,10 +188,10 @@ Fixed usage of the `wan_development` profile in tests when required (https://git
 * https://jira.issues.couchbase.com/browse/CXXCBC-728[CXXCBC-728]:
 Removed handling for eventing handler headers bug (https://github.com/couchbase/couchbase-cxx-client/pull/832[#832]).
 * https://jira.issues.couchbase.com/browse/CXXCBC-724[CXXCBC-724]:
-Added eventing tests to handle Morpheus error behavior (https://github.com/couchbase/couchbase-cxx-client/pull/828[#828], https://github.com/couchbase/couchbase-cxx-client/pull/824[#824])
+Added eventing tests to handle Morpheus error behavior (https://github.com/couchbase/couchbase-cxx-client/pull/828[#828], https://github.com/couchbase/couchbase-cxx-client/pull/824[#824]).
 * https://jira.issues.couchbase.com/browse/CXXCBC-639[CXXCBC-639]:
 Build system adjustments (https://github.com/couchbase/couchbase-cxx-client/pull/825[#825]).
-* Added labels to all tests (https://github.com/couchbase/couchbase-cxx-client/pull/820[#820])
+* Added labels to all tests (https://github.com/couchbase/couchbase-cxx-client/pull/820[#820]).
 * Added test improvements (memcached buckets & cleanup search index) (https://github.com/couchbase/couchbase-cxx-client/pull/819[#819]).
 * Added logging of local TCP ports (https://github.com/couchbase/couchbase-cxx-client/pull/814[#814]).
 * Updated llhttp to 9.3.0 and cli11 to 2.5.0 (https://github.com/couchbase/couchbase-cxx-client/pull/811[#811]).
@@ -203,10 +203,10 @@ Fixed build with CPM (https://github.com/couchbase/couchbase-cxx-client/pull/795
 * https://jira.issues.couchbase.com/browse/CXXCBC-693[CXXCBC-693]:
 Fixed clang-tidy `else-after-return` error (https://github.com/couchbase/couchbase-cxx-client/pull/803[#803]).
 * Fixed gcc `maybe-uninitialized` warning with `std::nullopt` (https://github.com/couchbase/couchbase-cxx-client/pull/816[#816]).
-* Github Actions
-** Updated trigger rules (https://github.com/couchbase/couchbase-cxx-client/pull/779[#779]). include release branches
-** Removed windows-2019 runner & added windows-2025 (https://github.com/couchbase/couchbase-cxx-client/pull/790[#790])
-** Updated linters workflow (https://github.com/couchbase/couchbase-cxx-client/pull/808[#808])
+* Github Actions:
+** Updated trigger rules (https://github.com/couchbase/couchbase-cxx-client/pull/779[#779]), including release branches;
+** Removed windows-2019 runner & added windows-2025 (https://github.com/couchbase/couchbase-cxx-client/pull/790[#790]);
+** Updated linters workflow (https://github.com/couchbase/couchbase-cxx-client/pull/808[#808]).
 
 
 == {cpp} SDK 1.1 Releases
