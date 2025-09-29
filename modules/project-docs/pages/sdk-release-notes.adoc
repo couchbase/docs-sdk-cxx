@@ -84,13 +84,129 @@ All patch releases for each dot minor release should be API compatible, and safe
 any changes to expected behavior are noted in the release notes that follow.
 
 
+=== Version 1.2.0 (26 September 2025)
+
+This is a first GA release of the 1.2 {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.2.0[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.1.0...1.2.0++[Full Changelog]
 
 
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform              | Architecture | File
+| Checksums             | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0.sha256.txt[couchbase-cxx-client-1.2.0.sha256.txt]
+| Source Archive        | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0.tar.gz[couchbase-cxx-client-1.2.0.tar.gz]
+| Amazon Linux 2023     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.2.0-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.2.0-1.amzn2023.aarch64.tar]
+| Enterprise Linux 10   | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.el10.x86_64.tar[couchbase-cxx-client-1.2.0-1.el10.x86_64.tar]
+| Enterprise Linux 10   | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.el10.aarch64.tar[couchbase-cxx-client-1.2.0-1.el10.aarch64.tar]
+| Enterprise Linux 9    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.el9.x86_64.tar[couchbase-cxx-client-1.2.0-1.el9.x86_64.tar]
+| Enterprise Linux 9    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.el9.aarch64.tar[couchbase-cxx-client-1.2.0-1.el9.aarch64.tar]
+| Enterprise Linux 8    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.el8.x86_64.tar[couchbase-cxx-client-1.2.0-1.el8.x86_64.tar]
+| Enterprise Linux 8    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.el8.aarch64.tar[couchbase-cxx-client-1.2.0-1.el8.aarch64.tar]
+| Debian 13 (Trixie)    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.trixie.x86_64.tar[couchbase-cxx-client-1.2.0-1.trixie.x86_64.tar]
+| Debian 13 (Trixie)    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.trixie.aarch64.tar[couchbase-cxx-client-1.2.0-1.trixie.aarch64.tar]
+| Debian 12 (Bookworm)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.bookworm.x86_64.tar[couchbase-cxx-client-1.2.0-1.bookworm.x86_64.tar]
+| Debian 12 (Bookworm)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.bookworm.aarch64.tar[couchbase-cxx-client-1.2.0-1.bookworm.aarch64.tar]
+| Ubuntu 24.04 (Noble)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.noble.x86_64.tar[couchbase-cxx-client-1.2.0-1.el8.x86_64.tar]
+| Ubuntu 24.04 (Noble)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.noble.aarch64.tar[couchbase-cxx-client-1.2.0-1.el8.aarch64.tar]
+| Ubuntu 22.04 (Jammy)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.jammy.x86_64.tar[couchbase-cxx-client-1.2.0-1.jammy.x86_64.tar]
+| Ubuntu 22.04 (Jammy)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-1.jammy.aarch64.tar[couchbase-cxx-client-1.2.0-1.jammy.aarch64.tar]
+| Alpine Linux 3.22     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-r1-x86_64-alpine-3.22.tar[couchbase-cxx-client-1.2.0-r1-x86_64-alpine-3.22.tar]
+| Alpine Linux 3.22     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-r1-aarch64-alpine-3.22.tar[couchbase-cxx-client-1.2.0-r1-aarch64-alpine-3.22.tar]
+| Alpine Linux 3.21     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-r1-x86_64-alpine-3.21.tar[couchbase-cxx-client-1.2.0-r1-x86_64-alpine-3.21.tar]
+| Alpine Linux 3.21     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-r1-aarch64-alpine-3.21.tar[couchbase-cxx-client-1.2.0-r1-aarch64-alpine-3.21.tar]
+| Alpine Linux 3.20     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-r1-x86_64-alpine-3.20.tar[couchbase-cxx-client-1.2.0-r1-x86_64-alpine-3.20.tar]
+| Alpine Linux 3.20     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-r1-aarch64-alpine-3.20.tar[couchbase-cxx-client-1.2.0-r1-aarch64-alpine-3.20.tar]
+| Alpine Linux 3.19     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-r1-x86_64-alpine-3.19.tar[couchbase-cxx-client-1.2.0-r1-x86_64-alpine-3.19.tar]
+| Alpine Linux 3.19     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.0-r1-aarch64-alpine-3.19.tar[couchbase-cxx-client-1.2.0-r1-aarch64-alpine-3.19.tar]
+|===
 
 
+==== New Features
 
+* https://jira.issues.couchbase.com/browse/CXXCBC-567[CXXCBC-567]:
+Added support for field-level encryption library (https://github.com/couchbase/couchbase-cxx-client/pull/791[#791]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-713[CXXCBC-713], https://jira.issues.couchbase.com/browse/CXXCBC-729[CXXCBC-729]:
+Added `cbc-keygen`, a tool to generate keys for specific vBucket (https://github.com/couchbase/couchbase-cxx-client/pull/799[#799], https://github.com/couchbase/couchbase-cxx-client/pull/833[#833]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-656[CXXCBC-656]:
+Added `cbc-remove` and `cbc-upsert` tools (https://github.com/couchbase/couchbase-cxx-client/pull/781[#781]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-653[CXXCBC-653]:
+Added support "access_deleted" for Replica Reads (https://github.com/couchbase/couchbase-cxx-client/pull/821[#821]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-639[CXXCBC-639]:
+Added support of building both static and shared libraries (https://github.com/couchbase/couchbase-cxx-client/pull/707[#707]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-698[CXXCBC-698]:
+Added `flex_index` to `transaction_query_options` (https://github.com/couchbase/couchbase-cxx-client/pull/773[#773]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-675[CXXCBC-675]:
+Added support vector search prefilter (https://github.com/couchbase/couchbase-cxx-client/pull/775[#775]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-699[CXXCBC-699]:
+Added support of randomization of bootstrap nodes (https://github.com/couchbase/couchbase-cxx-client/pull/777[#777]).
+By default the SDK would shuffle node list (including list received via DNS-SRV request). To disable this behavior use `preserve_bootstrap_nodes_order` option.
+* https://jira.issues.couchbase.com/browse/CXXCBC-711[CXXCBC-711]:
+Promoted `scope_search_index_manager` to committed API (https://github.com/couchbase/couchbase-cxx-client/pull/793[#793]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-692[CXXCBC-692]:
+The SDK now prevents connection to Enterprise Analytics cluster (https://github.com/couchbase/couchbase-cxx-client/pull/792[#792], https://github.com/couchbase/couchbase-cxx-client/pull/807[#807], https://github.com/couchbase/couchbase-cxx-client/pull/810[#810]).
+There is a set of specialized SDKs for Enterprise Analytics clusters.
+* https://jira.issues.couchbase.com/browse/CXXCBC-707[CXXCBC-707]:
+Updated network selection heuristic (https://github.com/couchbase/couchbase-cxx-client/pull/809[#809]). The logic is improved in certain cloud-specific cases.
 
+==== Fixes and Enhancements
 
+* https://jira.issues.couchbase.com/browse/CXXCBC-715[CXXCBC-715]:
+Fixed Hard Failover Intermittent Crash in HTTP connection manager (https://github.com/couchbase/couchbase-cxx-client/pull/818[#818]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-693[CXXCBC-693]:
+Handle empty/null `indexDef`s for `search_index_get_all` (https://github.com/couchbase/couchbase-cxx-client/pull/800[#800]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-726[CXXCBC-726]:
+Added KV scan timeout to cluster options (https://github.com/couchbase/couchbase-cxx-client/pull/830[#830]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-721[CXXCBC-721]:
+Added caching of `FeatureNotAvailable` transactions operation failure for `get_replica*` operations (https://github.com/couchbase/couchbase-cxx-client/pull/823[#823]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-696[CXXCBC-696]:
+Use the external exception field to determine transaction operation error code in Public API (https://github.com/couchbase/couchbase-cxx-client/pull/770[#770]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-695[CXXCBC-695]:
+Always return unwrapped `doc_exists` from transactions insert (https://github.com/couchbase/couchbase-cxx-client/pull/771[#771]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-700[CXXCBC-700]:
+Updated `wan_development` profile for public API (https://github.com/couchbase/couchbase-cxx-client/pull/774[#774]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-704[CXXCBC-704]:
+Added handling `document_unretrievable` from `get_multi` individual fetch (https://github.com/couchbase/couchbase-cxx-client/pull/782[#782], https://github.com/couchbase/couchbase-cxx-client/pull/785[#785]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-709[CXXCBC-709]:
+Fixed `exists()` in transactions `get_multi` result (https://github.com/couchbase/couchbase-cxx-client/pull/786[#786]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-651[CXXCBC-651]:
+Added preserving cached node labels after generating report in app telemetry meter (https://github.com/couchbase/couchbase-cxx-client/pull/802[#802]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-706[CXXCBC-706]:
+Added closing of half-baked cluster object if connection fails (https://github.com/couchbase/couchbase-cxx-client/pull/783[#783]).
+
+==== Build and Test Infrastructure
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-733[CXXCBC-733]:
+Fixed build with BoringSSL (https://github.com/couchbase/couchbase-cxx-client/pull/839[#839]).
+* Improved stability of update collection max expiry tests (https://github.com/couchbase/couchbase-cxx-client/pull/838[#838]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-731[CXXCBC-731]:
+Fixed usage of the `wan_development` profile in tests when required (https://github.com/couchbase/couchbase-cxx-client/pull/835[#835]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-728[CXXCBC-728]:
+Removed handling for eventing handler headers bug (https://github.com/couchbase/couchbase-cxx-client/pull/832[#832]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-724[CXXCBC-724]:
+Added eventing tests to handle Morpheus error behavior (https://github.com/couchbase/couchbase-cxx-client/pull/828[#828], https://github.com/couchbase/couchbase-cxx-client/pull/824[#824]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-639[CXXCBC-639]:
+Build system adjustments (https://github.com/couchbase/couchbase-cxx-client/pull/825[#825]).
+* Added labels to all tests (https://github.com/couchbase/couchbase-cxx-client/pull/820[#820]).
+* Added test improvements (memcached buckets & cleanup search index) (https://github.com/couchbase/couchbase-cxx-client/pull/819[#819]).
+* Added logging of local TCP ports (https://github.com/couchbase/couchbase-cxx-client/pull/814[#814]).
+* Updated llhttp to 9.3.0 and cli11 to 2.5.0 (https://github.com/couchbase/couchbase-cxx-client/pull/811[#811]).
+* Updated asio to 1.34.2 (https://github.com/couchbase/couchbase-cxx-client/pull/776[#776]).
+* Updated CPM.cmake to 0.42.0 (https://github.com/couchbase/couchbase-cxx-client/pull/794[#794]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-712[CXXCBC-712]:
+Fixed build with CPM (https://github.com/couchbase/couchbase-cxx-client/pull/795[#795]).
+* Fixed building tests with system OpenSSL on MacOS (https://github.com/couchbase/couchbase-cxx-client/pull/798[#798]).
+* https://jira.issues.couchbase.com/browse/CXXCBC-693[CXXCBC-693]:
+Fixed clang-tidy `else-after-return` error (https://github.com/couchbase/couchbase-cxx-client/pull/803[#803]).
+* Fixed gcc `maybe-uninitialized` warning with `std::nullopt` (https://github.com/couchbase/couchbase-cxx-client/pull/816[#816]).
+* Github Actions:
+** Updated trigger rules (https://github.com/couchbase/couchbase-cxx-client/pull/779[#779]), including release branches;
+** Removed windows-2019 runner & added windows-2025 (https://github.com/couchbase/couchbase-cxx-client/pull/790[#790]);
+** Updated linters workflow (https://github.com/couchbase/couchbase-cxx-client/pull/808[#808]).
 
 
 == {cpp} SDK 1.1 Releases
@@ -137,7 +253,7 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.1.0...1.1.1++
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-699[CXXCBC-699]:
 By default the SDK will now shuffle the node list (including lists received via DNS-SRV request).
-To disable this behavior use the `preserve_bootstrap_nodes_order` option  
+To disable this behavior use the `preserve_bootstrap_nodes_order` option
 (https://github.com/couchbase/couchbase-cxx-client/pull/778[#778]).
 
 ==== Fixes and Enhancements
@@ -241,7 +357,7 @@ Reconnect cluster object on fork (https://github.com/couchbase/couchbase-cxx-cli
 Fixed potential race condition in the logger (https://github.com/couchbase/couchbase-cxx-client/pull/722[#722]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-646[CXXCBC-646]:
-For performance reasons, the bucket configuration is now stored as shared pointer, and this is copied into the handler instead of the entire configuration 
+For performance reasons, the bucket configuration is now stored as shared pointer, and this is copied into the handler instead of the entire configuration
 (https://github.com/couchbase/couchbase-cxx-client/pull/715[#715], https://github.com/couchbase/couchbase-cxx-client/pull/720[#720]).
 
 ==== Transactions
@@ -277,7 +393,7 @@ Updated `snappy` to support `CMake` `4.0`
 (https://github.com/couchbase/couchbase-cxx-client/pull/744[#744]).
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-666[CXXCBC-666]:
-Fixed `pkg-config` file -- 
+Fixed `pkg-config` file --
 `couchbase_cxx_client.pc` have to use absolute path for `libdir`.
 (https://github.com/couchbase/couchbase-cxx-client/pull/735[#735]).
 
