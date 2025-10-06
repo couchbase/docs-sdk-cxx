@@ -113,16 +113,22 @@ It is best to upgrade either the SDK or the Couchbase version you are using.
 .Recommended SDK per Server Version Matrix
 [#table_sdk_versions]
 |===
-| | 1.0 | 1.1
+| | 1.0 | 1.1 | 1.2
 
 | *Server 7.0 - 7.2*
+| *✔*
 | *✔*
 | *✔*
 
 | *Server 7.6*
 | *✔*
 | *✔*
+| *✔*
 |===
+
+Note the https://www.couchbase.com/support-policy/EOL/[End of Life dates^] for Couchbase Server and SDK versions.
+See the notes there for Support details.
+
 
 === Capella Compatibility
 
