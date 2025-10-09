@@ -2,7 +2,8 @@
 :page-toclevels: 2
 :description: Vector Search from the SDK, to enable AI integration, semantic search, and use of RAG frameworks.
 :lang: C++
-:example-source: devguide:example$cxx/src/search.cxx
+:fts-example-source: devguide:example$cxx/src/search.cxx
+:query-example-source: devguide:example$cxx/src/queries.cxx
 :example-source-lang: c++
 
 // Note to editors
@@ -53,41 +54,18 @@ Here is the xref:server:vector-index:hyperscale-vector-index.adoc#query-example[
 wrapped inside the {name-sdk} Query API.
 
 .Hyperscale Index Example
-[source,scala]
+[source,{example-source-lang}]
 ----
-cluster
-  .query(
-        "SELECT d.id, d.question, d.wanted_similar_color_from_search, " +
-        "  ARRAY_CONCAT( " +
-          "d.couchbase_search_query.knn[0].vector[0:4], " +
-          "['...'] " +
-        ") AS vector " +
-        "FROM `vector-sample`.`color`.`rgb-questions` AS d " +
-        "WHERE d.id = '#87CEEB';",
-        queryOptions().metrics(true));
-  .flatMap(_.rowsAs[JsonObject]) match {
-  case Success(rows: Seq[JsonObject]) =>
-    rows.foreach(row => println(row))
-  case Failure(err) =>
-    println(s"Error: $err")
-}
+include::{query-example-source}[indent=0,tag=vector_search_with_query_hyperscale_index]
 ----
 
 Parameterizing the query, as with xref:sqlpp-queries-with-sdk.adoc#parameterized-queries[regular queries], will allow the reuse of the xref:server:n1ql:n1ql-intro/queriesandresults.adoc#prepare-stmts[Query Plan].
 This can be more efficient, unless you are doing a lot of optimization to your query.
 
 .Parameterized Vector Query
+[source,{example-source-lang}]
 ----
-      val stmt = (
-        "SELECT d.id, d.question, d.wanted_similar_color_from_search, " +
-        "  ARRAY_CONCAT( " +
-          "d.couchbase_search_query.knn[0].vector[0:4], " +
-          "['...'] " +
-        ") AS vector " +
-	    "FROM `vector-sample`.`color`.`rgb-questions` AS d " +
-		"WHERE d.id = $id;",
-	QueryOptions()
-		.parameters(JsonObject.create().put("id", "#87CEEB")));
+include::{query-example-source}[indent=0,tag=vector_search_with_query_parameterized]
 ----
 
 
@@ -108,7 +86,7 @@ Couchbase Server 7.6.0 (7.6.2 for base64-encoded vectors) — or recent Cape
 In this first example we are performing a single vector query:
 [source,{example-source-lang}]
 ----
-include::{example-source}[indent=0,tag=vector_search]
+include::{fts-example-source}[indent=0,tag=vector_search]
 ----
 
 Let's break this down.
@@ -171,7 +149,7 @@ You can run multiple vector queries together:
 
 [source,{example-source-lang}]
 ----
-include::{example-source}[indent=0,tag=multiple_vector_queries]
+include::{fts-example-source}[indent=0,tag=multiple_vector_queries]
 ----
 
 How the results are combined (ANDed or ORed) can be controlled with `vector_search_options.query_combination()`.
@@ -182,7 +160,7 @@ You can combine a traditional FTS query with vector queries:
 
 [source,{example-source-lang}]
 ----
-include::{example-source}[indent=0,tag=combined_search_request]
+include::{fts-example-source}[indent=0,tag=combined_search_request]
 ----
 
 How the results are combined (ANDed or ORed) can be controlled with `vector_search_options.query_combination()`.
