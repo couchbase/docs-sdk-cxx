@@ -6,6 +6,15 @@
 [abstract]
 {description}
 
+
+
+[TIP] 
+====
+In addition to Tracing and other metrics, and client logging, SDK is telemetry is also sent to the Server -- available from 8.0, and in new Capella Operational clusters -- for ingestion with other Prometheus metrics.
+Capella Operatioal exposes these metrics through the UI.
+====
+
+
 // tag::rto[]
 // tag::xplatform[]
 Health indicators can tell you a lot about the performance of an application.
