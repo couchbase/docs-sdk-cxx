@@ -162,7 +162,7 @@ from a simple match, as above, to a string query:
                                 .setQuery("+description:sea -color_hex:fff5ee")))
 ----
 
-See the link:++https://docs.couchbase.com/sdk-api/couchbase-java-client/com/couchbase/client/java/search/vector/VectorQuery.html#prefilter(com.couchbase.client.java.search.SearchQuery)++[API reference].
+See the link:++https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1vector__query.html#aed005b80a8376445e114b59935f9465f++[API reference].
 
 
 ==== Multiple vector queries
