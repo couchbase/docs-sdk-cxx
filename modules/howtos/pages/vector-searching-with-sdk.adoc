@@ -79,7 +79,7 @@ Vector embeddings can be an array of floats or a xref:server:vector-search:run-v
 Couchbase Server 7.6.0 (7.6.2 for base64-encoded vectors) — or recent Capella instance.
 
 
-=== examples
+=== Examples
 
 ==== Single vector query
 
