@@ -205,6 +205,62 @@ main() -> int
         // #end::build-index[]
     }
 
+    {
+        // clang-format off
+        // #tag::vector_search_with_query_hyperscale_index[]
+        auto [err, res] =
+          cluster
+            .query(
+              "SELECT d.id, d.question, d.wanted_similar_color_from_search, "
+              "  ARRAY_CONCAT( "
+                 "d.couchbase_search_query.knn[0].vector[0:4], "
+                 "['...'] "
+              ") AS vector "
+              "FROM `vector-sample`.`color`.`rgb-questions` AS d "
+              "WHERE d.id = '#87CEEB';",
+              couchbase::query_options().metrics(true)
+            )
+            .get();
+        if (err) {
+            fmt::println("Error: {}", err);
+        } else {
+            auto rows = res.rows_as<couchbase::codec::tao_json_serializer>();
+            for (const auto& row : rows) {
+                fmt::println("Row: {}", tao::json::to_string(row));
+            }
+        }
+        // #end::vector_search_with_query_hyperscale_index[]
+        // clang-format on
+    }
+
+    {
+        // clang-format off
+        // #tag::vector_search_with_query_parameterized[]
+        auto [err, res] =
+          cluster
+            .query(
+              "SELECT d.id, d.question, d.wanted_similar_color_from_search, "
+              "  ARRAY_CONCAT( "
+                 "d.couchbase_search_query.knn[0].vector[0:4], "
+                 "['...'] "
+              ") AS vector "
+              "FROM `vector-sample`.`color`.`rgb-questions` AS d "
+              "WHERE d.id = $id;",
+              couchbase::query_options().named_parameters(std::make_pair("id", "#87CEEB"))
+            )
+            .get();
+        if (err) {
+            fmt::println("Error: {}", err);
+        } else {
+            auto rows = res.rows_as<couchbase::codec::tao_json_serializer>();
+            for (const auto& row : rows) {
+                fmt::println("Row: {}", tao::json::to_string(row));
+            }
+        }
+        // #end::vector_search_with_query_parameterized[]
+        // clang-format on
+    }
+
     cluster.close().get();
     return 0;
 }
