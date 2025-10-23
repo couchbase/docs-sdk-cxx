@@ -133,11 +133,9 @@ couchbase::vector_query("vector_field", vector_query)
 The prefilter can be any Search Query --
 from a simple match, as above, to a string query:
 
-[source,java]
+[source,{example-source-lang}]
 ----
-  .setPrefilter(SearchQuery.newBuilder()
-                        .setQueryString(QueryStringQuery.newBuilder()
-                                .setQuery("+description:sea -color_hex:fff5ee")))
+  .prefilter(couchbase::query_string_query("+description:sea -color_hex:fff5ee"))
 ----
 
 See the link:++https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1vector__query.html#aed005b80a8376445e114b59935f9465f++[API reference].
