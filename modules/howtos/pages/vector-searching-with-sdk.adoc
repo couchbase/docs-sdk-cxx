@@ -122,13 +122,12 @@ auto prefilter(SearchQuery prefilter) -> couchbase::vector_query&
 
 If no prefilter is specified, the server executes the vector query on all indexed documents.
 
-[source,java]
+[source,{example-source-lang}]
 ----
-  .setOptions(VectorQueryOptions.newBuilder()
-                    .setNumCandidates(numCandidates)
-                        .setPrefilter(SearchQuery.newBuilder()
-                                .setMatch(MatchQuery.newBuilder()
-                                        .setMatch("primary").setField("color_wheel_pos"))))
+couchbase::vector_query("vector_field", vector_query)
+  .num_candidates(num_candidates)
+  .prefilter(couchbase::match_query("primary")
+    .field("color_wheel_pos"))
 ----
 
 The prefilter can be any Search Query --
