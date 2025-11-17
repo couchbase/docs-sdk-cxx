@@ -1,6 +1,6 @@
 = Migrating from SDK2 to SDK3 API
-:description: This is the first release of the Couchbase Scala SDK -- you will not have any code based upon older API versions.
-:nav-title: Migrating to Scala SDK 3.x API
+:description: This is the first major release of the Couchbase {cpp} SDK -- you will not have any code based upon older API versions.
+:nav-title: Migrating to SDK 3.x API
 // :page-aliases: ROOT:migrate.adoc
 :page-aliases: howtos:view-queries-with-sdk.adoc,concept-docs:understanding-views.adoc,howtos:working-with-collections.adoc
 
@@ -8,9 +8,11 @@
 {description}
 
 Couchbase {name-sdk} {sdk_dot_minor} implements the Couchbase SDK {sdk_api} API.
-1.x is the first release of the Couchbase Scala SDK, there are no releases implementing older APIs.
+1.x is the first release of the Couchbase {cpp} SDK, there are no releases implementing older APIs.
 
+// Need a page on migration from LCB
 
+////
 == Mixing Code from Other JVM Platforms
 
 Migration will only be a concern if you are mixing code from different JVM SDKs in your application
@@ -18,7 +20,7 @@ Migration will only be a concern if you are mixing code from different JVM SDKs 
 in which case you will need to be using a supported 3.x Java SDK. 
 If you have programmed Couchbase client software against the Java 2.x SDK previously, 
 then you may want to read the xref:java-sdk:project-docs:migrating-sdk-code-to-3.n.adoc[Java migration guide].
-
+////
 
 == Legacy MapReduce Views
 
