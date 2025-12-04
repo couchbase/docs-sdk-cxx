@@ -17,7 +17,7 @@
 
 Common use cases are outlined here, less common use cases are covered in the https://docs.couchbase.com/sdk-api/couchbase-cxx-client/[API docs].
 
-
+include::{version-common}@sdk:shared:partial$provisioning-clusters.adoc[tag=not-capella]
 
 
 // include::{version-common}@sdk:shared:partial$flush-info-pars.adoc[tag=management-intro]
