@@ -63,6 +63,7 @@
 *** xref:home:contribute:index.adoc[Improve the Docs]
 * xref:ref:index.adoc[]
 ** https://docs.couchbase.com/sdk-api/couchbase-cxx-client[API Reference^]
+** https://github.com/couchbaselabs/couchbase-cxx-client/[{cpp} SDK source code^]
 ** xref:ref:client-settings.adoc[]
 ** xref:ref:error-codes.adoc[]
 ** xref:ref:glossary.adoc[Glossary]
