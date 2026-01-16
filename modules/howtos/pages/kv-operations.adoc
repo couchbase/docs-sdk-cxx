@@ -229,7 +229,6 @@ Some applications may find `getAndTouch` useful, which fetches a document while 
 include::{example-source}[indent=0,tag=expiry-get-and-touch]
 ----
 
-include::{version-common}@sdk:shared:partial$documents.adoc[tag=exp-note]
 
 
 // CAS
