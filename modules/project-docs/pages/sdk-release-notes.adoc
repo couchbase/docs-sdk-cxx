@@ -101,9 +101,55 @@ This is a first GA release of the 1.3 {cpp} SDK.
 == {cpp} SDK 1.2 Releases
 
 
+=== Version 1.2.2 (19 February 2026)
+
+This is a second patch release of the 1.2 {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.2.2[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.2.1...1.2.2++[Full Changelog]
+
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform              | Architecture | File
+| Checksums             | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2.sha256.txt[couchbase-cxx-client-1.2.2.sha256.txt]
+| Source Archive        | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2.tar.gz[couchbase-cxx-client-1.2.2.tar.gz]
+| Amazon Linux 2023     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.2.2-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.2.2-1.amzn2023.aarch64.tar]
+| Enterprise Linux 10   | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.el10.x86_64.tar[couchbase-cxx-client-1.2.2-1.el10.x86_64.tar]
+| Enterprise Linux 10   | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.el10.aarch64.tar[couchbase-cxx-client-1.2.2-1.el10.aarch64.tar]
+| Enterprise Linux 9    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.el9.x86_64.tar[couchbase-cxx-client-1.2.2-1.el9.x86_64.tar]
+| Enterprise Linux 9    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.el9.aarch64.tar[couchbase-cxx-client-1.2.2-1.el9.aarch64.tar]
+| Enterprise Linux 8    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.el8.x86_64.tar[couchbase-cxx-client-1.2.2-1.el8.x86_64.tar]
+| Enterprise Linux 8    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.el8.aarch64.tar[couchbase-cxx-client-1.2.2-1.el8.aarch64.tar]
+| Debian 13 (Trixie)    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.trixie.x86_64.tar[couchbase-cxx-client-1.2.2-1.trixie.x86_64.tar]
+| Debian 13 (Trixie)    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.trixie.aarch64.tar[couchbase-cxx-client-1.2.2-1.trixie.aarch64.tar]
+| Debian 12 (Bookworm)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.bookworm.x86_64.tar[couchbase-cxx-client-1.2.2-1.bookworm.x86_64.tar]
+| Debian 12 (Bookworm)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.bookworm.aarch64.tar[couchbase-cxx-client-1.2.2-1.bookworm.aarch64.tar]
+| Ubuntu 24.04 (Noble)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.noble.x86_64.tar[couchbase-cxx-client-1.2.2-1.el8.x86_64.tar]
+| Ubuntu 24.04 (Noble)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.noble.aarch64.tar[couchbase-cxx-client-1.2.2-1.el8.aarch64.tar]
+| Ubuntu 22.04 (Jammy)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.jammy.x86_64.tar[couchbase-cxx-client-1.2.2-1.jammy.x86_64.tar]
+| Ubuntu 22.04 (Jammy)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-1.jammy.aarch64.tar[couchbase-cxx-client-1.2.2-1.jammy.aarch64.tar]
+| Alpine Linux 3.23     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-r1-x86_64-alpine-3.23.tar[couchbase-cxx-client-1.2.2-r1-x86_64-alpine-3.23.tar]
+| Alpine Linux 3.23     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-r1-aarch64-alpine-3.23.tar[couchbase-cxx-client-1.2.2-r1-aarch64-alpine-3.23.tar]
+| Alpine Linux 3.22     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-r1-x86_64-alpine-3.22.tar[couchbase-cxx-client-1.2.2-r1-x86_64-alpine-3.22.tar]
+| Alpine Linux 3.22     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-r1-aarch64-alpine-3.22.tar[couchbase-cxx-client-1.2.2-r1-aarch64-alpine-3.22.tar]
+| Alpine Linux 3.21     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-r1-x86_64-alpine-3.21.tar[couchbase-cxx-client-1.2.2-r1-x86_64-alpine-3.21.tar]
+| Alpine Linux 3.21     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-r1-aarch64-alpine-3.21.tar[couchbase-cxx-client-1.2.2-r1-aarch64-alpine-3.21.tar]
+| Alpine Linux 3.20     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-r1-x86_64-alpine-3.20.tar[couchbase-cxx-client-1.2.2-r1-x86_64-alpine-3.20.tar]
+| Alpine Linux 3.20     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.2.2-r1-aarch64-alpine-3.20.tar[couchbase-cxx-client-1.2.2-r1-aarch64-alpine-3.20.tar]
+|===
+
+==== Fixes and Enhancements
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-768[CXXCBC-768]:
+Prevent DNS-SRV refresh loop on `bucket_not_found` bootstrap errors (https://github.com/couchbase/couchbase-cxx-client/pull/897[#897]).
+
 === Version 1.2.1 (23 January 2026)
 
-This is a second GA release of the 1.2 {cpp} SDK.
+This is a first patch release of the 1.2 {cpp} SDK.
+
 
 https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.2.1[API reference] |
 link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.2.0...1.2.1++[Full Changelog]
