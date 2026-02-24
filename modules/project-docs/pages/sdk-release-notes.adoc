@@ -84,9 +84,9 @@ All patch releases for each dot minor release should be API compatible, and safe
 any changes to expected behavior are noted in the release notes that follow.
 
 
-=== Version 1.2.2 (19 Ferbuary 2026)
+=== Version 1.2.2 (19 February 2026)
 
-This is a second GA release of the 1.2 {cpp} SDK.
+This is a second patch release of the 1.2 {cpp} SDK.
 
 https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.2.2[API reference] |
 link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.2.1...1.2.2++[Full Changelog]
@@ -127,11 +127,11 @@ link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.2.1...1.2.2++
 ==== Fixes and Enhancements
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-768[CXXCBC-768]:
-Prevent DNS-SRV refresh loop on bucket_not_found bootstrap errors (https://github.com/couchbase/couchbase-cxx-client/pull/897[#897]).
+Prevent DNS-SRV refresh loop on `bucket_not_found` bootstrap errors (https://github.com/couchbase/couchbase-cxx-client/pull/897[#897]).
 
 === Version 1.2.1 (23 January 2026)
 
-This is a second GA release of the 1.2 {cpp} SDK.
+This is a first patch release of the 1.2 {cpp} SDK.
 
 https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.2.1[API reference] |
 link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.2.0...1.2.1++[Full Changelog]
