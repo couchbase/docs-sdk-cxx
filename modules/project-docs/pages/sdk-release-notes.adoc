@@ -86,14 +86,126 @@ any changes to expected behavior are noted in the release notes that follow.
 
 
 
-=== Version 1.3.0 (???? February 2026)
+=== Version 1.3.0 (11 March 2026)
 
 This is a first GA release of the 1.3 {cpp} SDK.
 
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.3.0[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.2.0...1.3.0++[Full Changelog]
+
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform              | Architecture | File
+| Checksums             | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0.sha256.txt[couchbase-cxx-client-1.3.0.sha256.txt]
+| Source Archive        | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0.tar.gz[couchbase-cxx-client-1.3.0.tar.gz]
+| Amazon Linux 2023     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.3.0-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.3.0-1.amzn2023.aarch64.tar]
+| Enterprise Linux 10   | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.el10.x86_64.tar[couchbase-cxx-client-1.3.0-1.el10.x86_64.tar]
+| Enterprise Linux 10   | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.el10.aarch64.tar[couchbase-cxx-client-1.3.0-1.el10.aarch64.tar]
+| Enterprise Linux 9    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.el9.x86_64.tar[couchbase-cxx-client-1.3.0-1.el9.x86_64.tar]
+| Enterprise Linux 9    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.el9.aarch64.tar[couchbase-cxx-client-1.3.0-1.el9.aarch64.tar]
+| Enterprise Linux 8    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.el8.x86_64.tar[couchbase-cxx-client-1.3.0-1.el8.x86_64.tar]
+| Enterprise Linux 8    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.el8.aarch64.tar[couchbase-cxx-client-1.3.0-1.el8.aarch64.tar]
+| Debian 13 (Trixie)    | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.trixie.x86_64.tar[couchbase-cxx-client-1.3.0-1.trixie.x86_64.tar]
+| Debian 13 (Trixie)    | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.trixie.aarch64.tar[couchbase-cxx-client-1.3.0-1.trixie.aarch64.tar]
+| Debian 12 (Bookworm)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.bookworm.x86_64.tar[couchbase-cxx-client-1.3.0-1.bookworm.x86_64.tar]
+| Debian 12 (Bookworm)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.bookworm.aarch64.tar[couchbase-cxx-client-1.3.0-1.bookworm.aarch64.tar]
+| Ubuntu 24.04 (Noble)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.noble.x86_64.tar[couchbase-cxx-client-1.3.0-1.el8.x86_64.tar]
+| Ubuntu 24.04 (Noble)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.noble.aarch64.tar[couchbase-cxx-client-1.3.0-1.el8.aarch64.tar]
+| Ubuntu 22.04 (Jammy)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.jammy.x86_64.tar[couchbase-cxx-client-1.3.0-1.jammy.x86_64.tar]
+| Ubuntu 22.04 (Jammy)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-1.jammy.aarch64.tar[couchbase-cxx-client-1.3.0-1.jammy.aarch64.tar]
+| Alpine Linux 3.23     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-r1-x86_64-alpine-3.23.tar[couchbase-cxx-client-1.3.0-r1-x86_64-alpine-3.23.tar]
+| Alpine Linux 3.23     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-r1-aarch64-alpine-3.23.tar[couchbase-cxx-client-1.3.0-r1-aarch64-alpine-3.23.tar]
+| Alpine Linux 3.22     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-r1-x86_64-alpine-3.22.tar[couchbase-cxx-client-1.3.0-r1-x86_64-alpine-3.22.tar]
+| Alpine Linux 3.22     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-r1-aarch64-alpine-3.22.tar[couchbase-cxx-client-1.3.0-r1-aarch64-alpine-3.22.tar]
+| Alpine Linux 3.21     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-r1-x86_64-alpine-3.21.tar[couchbase-cxx-client-1.3.0-r1-x86_64-alpine-3.21.tar]
+| Alpine Linux 3.21     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-r1-aarch64-alpine-3.21.tar[couchbase-cxx-client-1.3.0-r1-aarch64-alpine-3.21.tar]
+| Alpine Linux 3.20     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-r1-x86_64-alpine-3.20.tar[couchbase-cxx-client-1.3.0-r1-x86_64-alpine-3.20.tar]
+| Alpine Linux 3.20     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.3.0-r1-aarch64-alpine-3.20.tar[couchbase-cxx-client-1.3.0-r1-aarch64-alpine-3.20.tar]
+|===
 
 
+New Features
+------------
 
+* https://jira.issues.couchbase.com/browse/CXXCBC-768[CXXCBC-768]:
 
+* https://jira.issues.couchbase.com/browse/CXXCBC-691[CXXCBC-691]:
+**OpenTelemetry Support** - Added initial OpenTelemetry support with tracing and metrics export via OTLP HTTP. The SDK now exposes spans and metrics following OpenTelemetry conventions. The feature can be enabled with `-DCOUCHBASE_CXX_CLIENT_BUILD_OPENTELEMETRY=ON` at build time.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-740[CXXCBC-740]:
+**JWT Authentication** - Added JWT-based authentication support via `jwt_authenticator`. The authenticator can refresh tokens automatically and supports reauthentication when tokens become stale.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-745[CXXCBC-745]:
+**Lazy Connections Mode** - Added new `enable_lazy_connections` option that delays opening KV connections until the first operation is executed, reducing initial connection overhead.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-739[CXXCBC-739]:
+**mTLS Certificate Refresh** - Added support for refreshing TLS certificates without restarting the application. Certificates can now be updated via `cluster::update_credentials()` and new TLS sessions will use the updated certificates.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-751[CXXCBC-751]:
+**cbc-get Replica Support** - Added `--replica` flag to `cbc-get` tool to fetch documents from replica nodes.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-754[CXXCBC-754]:
+**cbc-config Tool** - Added new `cbc-config` tool to dump cluster configuration to stdout for debugging.
+
+Improvements
+------------
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-719[CXXCBC-719]:
+**Enhanced Tracing** - Added top-level spans in the Public API for all KV and HTTP operations, providing better observability into operation lifecycle.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-750[CXXCBC-750]:
+**Internal Tracer for Wrapper SDKs** - Added internal tracer interface (`tracer_wrapper::wrapped()`) for use by wrapper SDKs that want to integrate with the SDK's tracing.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-742[CXXCBC-742]:
+**cbc-query Improvements** - Enhanced error reporting with JSON-encoded error context for query failures.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-771[CXXCBC-771]:
+**Credentials Update Restrictions** - `cluster::update_credentials()` now prevents switching between authenticator types (e.g., password to certificate) to avoid unexpected behavior.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-768[CXXCBC-768]:
+**DNS-SRV Refresh Fix** - Fixed an issue where `bucket_not_found` errors during bootstrap would trigger unnecessary DNS-SRV record refresh loops.
+
+Bug Fixes
+---------
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-769[CXXCBC-769],
+https://jira.issues.couchbase.com/browse/CXXCBC-770[CXXCBC-770],
+https://jira.issues.couchbase.com/browse/CXXCBC-756[CXXCBC-756],
+https://jira.issues.couchbase.com/browse/CXXCBC-761[CXXCBC-761],
+https://jira.issues.couchbase.com/browse/CXXCBC-755[CXXCBC-755]:
+Various OpenTelemetry integration fixes and improvements.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-767[CXXCBC-767]:
+Implemented AuthStale handling and JWT reauthentication support.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-763[CXXCBC-763]:
+Fixed `set_authenticator` not applying updated cert/key pairs to new TLS sessions.
+
+* Fixed build issues on macOS 14 with gcc-15 (missing `std::quick_exit`).
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-732[CXXCBC-732]:
+Fixed memory leaks in concurrent fixed queue reporting.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-743[CXXCBC-743]:
+Fixed HTTP command handler signature to properly handle decoded response types.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-766[CXXCBC-766]:
+Fixed OpenSSL headers priority in BoringSSL builds.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-718[CXXCBC-718]:
+Improved GitHub Actions stability using cbdinocluster.
+
+Deprecations
+------------
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-752[CXXCBC-752]:
+MapReduce Views are now deprecated. Use Query with SQL++ instead.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-740[CXXCBC-740]:
+`jwt_authenticator` is marked as `@uncommitted` and may change in future releases.
 
 
 
