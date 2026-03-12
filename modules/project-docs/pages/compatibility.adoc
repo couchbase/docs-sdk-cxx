@@ -113,9 +113,10 @@ It is best to upgrade either the SDK or the Couchbase version you are using.
 .Recommended SDK per Server Version Matrix
 [#table_sdk_versions]
 |===
-| | 1.0 | 1.1 | 1.2
+| | 1.0 | 1.1 | 1.2 | 1.3
 
 | *Server 7.0 - 7.2*
+| *✔*
 | *✔*
 | *✔*
 | *✔*
@@ -124,8 +125,10 @@ It is best to upgrade either the SDK or the Couchbase version you are using.
 | *✔*
 | *✔*
 | *✔*
+| *✔*
 
 | *Server 8.0* ①
+| *✔*
 | *✔*
 | *✔*
 | *✔*
@@ -152,20 +155,23 @@ include::{version-common}@sdk:shared:partial$capella.adoc[tag=cloud]
 
 .Couchbase Server and SDK Supported Version Matrix
 [.table-merge-cells]
-[cols="5,4,4,10"]
+[cols="5,4,4,5,5"]
 |===
-| | Server 7.0 & 7.1 | Server 7.2 | Server 7.6
+| | Server 7.0 & 7.1 | Server 7.2 | Server 7.6  | Server 8.0
 
 | Enhanced Durability
-3+| All SDK versions
+4+| All SDK versions
 
 | Vector Search
 2+| N/A
-| From SDK 1.0.0
+2+| From SDK 1.0.0
 
 | Replica Reads
 2+| N/A
-| From SDK 1.0.0 -- _Preferred Server Group Replica Reads_ from Server 7.6.2 and SDK 1.0.0
+2+| From SDK 1.0.0 -- _Preferred Server Group Replica Reads_ from Server 7.6.2 and SDK 1.0.0
+
+| Response Time Observability
+4+| From SDK 1.3.0
 |===
 
 This table is not an exhaustive list -- just a few highlights -- provided to help assess compatibility of older versions in particular.
