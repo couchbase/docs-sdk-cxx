@@ -1,4 +1,4 @@
-= User Management
+Users= User Management
 :description: pass:q[The Java SDK lets you create _users_, assign them _roles_ and associated _privileges_, and remove them from the system.]
 :page-aliases: ROOT:sdk-user-management-example.adoc
 

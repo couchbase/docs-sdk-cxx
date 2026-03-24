@@ -1,5 +1,5 @@
 = Search
-:description: You can use the Full Text Search service (FTS) to create queryable full-text indexes in Couchbase Server.
+:description: You can use the Search service to create queryable Search indexes in Couchbase Server.
 :page-pagination: full
 :page-toclevels: 2
 :lang: C++
@@ -10,15 +10,12 @@
 [abstract]
 {description}
 
-
 // add scoring note on https://docs.couchbase.com/server/current/release-notes/relnotes.html#known-issues-761 
 
-
-
-Full Text Search or FTS allows you to create, manage, and query full text indexes on JSON documents stored in Couchbase buckets.
+The Search Service allows you to create, manage, and query Search indexes on JSON documents stored in Couchbase buckets. 
 It uses natural language processing for querying documents, provides relevance scoring on the results of your queries, and has fast indexes for querying a wide range of possible text searches.
-Some of the supported query types include simple queries like Match and Term queries; range queries like Date Range and Numeric Range; and compound queries for conjunctions, disjunctions, and/or boolean queries.
-The Scala SDK exposes an API for performing FTS queries which abstracts some of the complexity of using the underlying REST API.
+The supported query types include queries like Match and Term queries, range queries like Date Range and Numeric Range, compound queries for conjunctions, disjunctions, and boolean queries.
+The Scala SDK exposes an API for performing Search queries which abstracts some of the complexity of using the underlying REST API.
 
 == Examples
 The examples below use these imports:
@@ -29,7 +26,7 @@ include::{example-source}[indent=0,tag=imports]
 ----
 
 Search queries are executed at Cluster level (not bucket or collection).
-Here is a simple match_query that looks for the text “swanky” using a defined index:
+Here is an example match_query that looks for the text 'swanky' using a defined index:
 
 [source,{example-source-lang}]
 ----
@@ -47,13 +44,13 @@ For information about formatting your Search query and specifying limits, see xr
 For information about pagination in Search responses, see xref:server:fts:fts-search-response.adoc#pagination[Pagination].
 ====
 
-All simple query types are created in the same manner.
+All the query types are created in the same manner.
 Some have additional properties, which can be seen in common query type descriptions.
-Couchbase FTS's xref:{version-server}@server:fts:fts-query-types.adoc[range of query types] enable powerful searching using multiple options, to ensure results are just within the range wanted.
+Couchbase Search Service xref:{version-server}@server:fts:fts-query-types.adoc[range of query types] enable powerful searching using multiple options, to ensure results are just within the range wanted.
 
 == Working with Results
 
-The result of a search query has three components: rows, facets, and metadata.
+The result of a Search query has 3 components: rows, facets, and metadata.
 Rows are the documents that match the query.
 Facets allow the aggregation of information collected on a particular result set.
 Metadata holds additional information not directly related to your query, such as total rows and how long the query took to execute in the cluster.
@@ -66,7 +63,7 @@ include::{example-source}[indent=0,tag=working_with_results]
 
 == Consistency
 
-Like the Couchbase Query Service, FTS allows provides optional _Read-Your-Own-Writes (RYOW)_ consistency, ensuring results contain information from updated indexes:
+Like the Couchbase Query Service, the Search Service allows provides optional _Read-Your-Own-Writes (RYOW)_ consistency, ensuring results contain information from updated indexes:
 
 [source,{example-source-lang}]
 ----

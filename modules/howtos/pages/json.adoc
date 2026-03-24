@@ -14,26 +14,27 @@ The Couchbase Server is a key-value store that's agnostic to what's stored, but 
 The Scala SDK has these main objectives for JSON:
 
 * Be usable 'out-of-the-box'.
-A simple JSON library is included, so you can get started right away.  Bonus: it's simple to use and very fast!
+A simple JSON library is included, so you can get started right away.
+Bonus: It's easy to use and is fast!
 * Be agnostic.
 Your application may already be using its own JSON representation, and it shouldn't be forced to use the built-in JSON library.
 * Be inclusive.
 There's a wide range of great, popular JSON libaries for the JVM, and we've supported many of them directly.
 That is, you can use types from the https://circe.github.io/circe/[Circe library], and many others, when doing any operation.
-And if we're missing support for your favourite, then please let us know on the http://forums.couchbase.com/[forums].
+In case of any missing support for your favorite, do let us know on the http://forums.couchbase.com/[forums].
 
 
 == Optional Dependencies
 
 Dependencies on third-party JSON libraries are performed with Maven's `optional` scope.
-This means that if you have the Circe dependency in your _own_ project (be it SBT, Gradle or Maven based), then you will be able to use the Circe types with the Scala SDK.
+This means that if you have the Circe dependency in your _own_ project (be it SBT, Gradle or Maven based), then you'll be able to use the Circe types with the Scala SDK.
 But the SDK will not pull in the dependency itself, to stay lean and mean.
 
 
 == Getting Started
 
 The examples below assume you're familiar with connecting to a Couchbase cluster using the Scala SDK, and opening resources.
-Please check out xref:hello-world:start-using-sdk[the Getting Started guide] for help with this.
+Check out xref:hello-world:start-using-sdk[the Getting Started guide] for help with this.
 
 In the examples below we'll use the following case classes:
 
@@ -47,7 +48,7 @@ Let's dive into some practical examples of the many ways you can use JSON with t
 
 == Circe
 
-https://circe.github.io/circe/[Circe] has the very useful property of being able to encode case classes directly to and from Circe data types,
+https://circe.github.io/circe/[Circe] has the useful property of being able to encode case classes directly to and from Circe data types,
 without having to write the 'codec' logic usually required for this.
 
 Here's an example of how to use Circe with Couchbase:
