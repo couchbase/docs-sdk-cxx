@@ -21,7 +21,7 @@ Your application may already be using its own JSON representation, and it should
 * Be inclusive.
 There's a wide range of great, popular JSON libaries for the JVM, and we've supported many of them directly.
 That is, you can use types from the https://circe.github.io/circe/[Circe library], and many others, when doing any operation.
-In case of any missing support for your favorite, do let us know on the http://forums.couchbase.com/[forums].
+And if we're missing support for your favorite, then please let us know on the http://forums.couchbase.com/[forums].
 
 
 == Optional Dependencies

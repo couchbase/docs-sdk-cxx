@@ -107,7 +107,7 @@ Which, for a single-node test cluster, will return a payload similar to this:
       "remote" : "localhost:8092",
       "local" : "localhost:53309"
     } ],
-    "Search Service" : [ {
+    "fts" : [ {
       "last_activity_us" : 2625,
       "state" : "connected",
       "id" : "0x1c5de614",
