@@ -26,7 +26,7 @@ include::{example-source}[indent=0,tag=imports]
 ----
 
 Search queries are executed at Cluster level (not bucket or collection).
-Here is an example match_query that looks for the text 'swanky' using a defined index:
+Here is a __match_query__ example that looks for the text 'swanky' using a defined index:
 
 [source,{example-source-lang}]
 ----
