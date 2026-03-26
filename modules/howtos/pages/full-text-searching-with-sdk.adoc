@@ -44,7 +44,7 @@ For information about formatting your Search query and specifying limits, see xr
 For information about pagination in Search responses, see xref:server:fts:fts-search-response.adoc#pagination[Pagination].
 ====
 
-All the query types are created in the same manner.
+All simple query types are created in the same manner.
 Some have additional properties, which can be seen in common query type descriptions.
 Couchbase Search Service xref:{version-server}@server:fts:fts-query-types.adoc[range of query types] enable powerful searching using multiple options, to ensure results are just within the range wanted.
 
