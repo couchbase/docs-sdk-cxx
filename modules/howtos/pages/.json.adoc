@@ -14,8 +14,8 @@ The Couchbase Server is a key-value store that's agnostic to what's stored, but 
 The Scala SDK has these main objectives for JSON:
 
 * Be usable 'out-of-the-box'.
-A simple JSON library is included, so you can get started right away.
-Bonus: It's easy to use and is fast!
+A simple JSON library is included, so you can get started right away. 
+Bonus: it's simple to use and very fast!
 * Be agnostic.
 Your application may already be using its own JSON representation, and it shouldn't be forced to use the built-in JSON library.
 * Be inclusive.
@@ -48,7 +48,7 @@ Let's dive into some practical examples of the many ways you can use JSON with t
 
 == Circe
 
-https://circe.github.io/circe/[Circe] has the useful property of being able to encode case classes directly to and from Circe data types,
+https://circe.github.io/circe/[Circe] has the very useful property of being able to encode case classes directly to and from Circe data types,
 without having to write the 'codec' logic usually required for this.
 
 Here's an example of how to use Circe with Couchbase:
