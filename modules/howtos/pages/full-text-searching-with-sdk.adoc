@@ -46,7 +46,7 @@ For information about pagination in Search responses, see xref:server:fts:fts-se
 
 All simple query types are created in the same manner.
 Some have additional properties, which can be seen in common query type descriptions.
-Couchbase Search Service xref:{version-server}@server:fts:fts-query-types.adoc[range of query types] enable powerful searching using multiple options, to ensure results are just within the range wanted.
+Couchbase Search Service's xref:{version-server}@server:fts:fts-query-types.adoc[range of query types] enable powerful searching using multiple options, to ensure results are just within the range wanted.
 
 == Working with Results
 
