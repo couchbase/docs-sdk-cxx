@@ -129,7 +129,7 @@ couchbase::vector_query("vector_field", vector_query)
     .field("color_wheel_pos"))
 ----
 
-NOTE: The `num_candidates` sets how many similar vectors are returned. 
+Note that `num_candidates` sets how many similar vectors are returned. 
 If it is not set, then the Cluster's default of `3` will be used --
 this corresponds with `k` on the Server side, for K-Nearest Neighbors.
 
