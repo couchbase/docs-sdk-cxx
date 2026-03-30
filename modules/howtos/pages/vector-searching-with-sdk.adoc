@@ -90,7 +90,7 @@ include::{fts-example-source}[indent=0,tag=vector_search]
 ----
 
 Let's break this down. 
-We create a `search_request`, which can contain a traditional Search query `search_query`, andor the new `vector_search`.
+We create a `search_request`, which can contain a traditional Search query `search_query`, and/or the new `vector_search`.
 Here we are just using the latter.
 
 The `vector_search` allows you to perform one or more ``vector_query``s.
