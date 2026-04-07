@@ -2,7 +2,7 @@
 :description: Release notes, brief installation instructions, and download archive for the Couchbase {cpp} Client.
 :navtitle: Release Notes
 :page-toclevels: 2
-// :page-aliases: relnotes-cxx-sdk
+:page-partial:
 
 // tag::all[]
 [abstract]
@@ -1249,3 +1249,4 @@ Handle alternate addresses when locating `preferred_node` (https://github.com/co
 == Older Versions
 
 Release Notes for the developer preview releases before the 1.0.0 release can be found on {sdk-gh-link}releases[GitHub].
+// end::all[]
