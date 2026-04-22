@@ -1,7 +1,6 @@
 = Migrating from SDK2 to SDK3 API
 :description: This is the first major release of the Couchbase {cpp} SDK -- you will not have any code based upon older API versions.
 :nav-title: Migrating to SDK 3.x API
-// :page-aliases: ROOT:migrate.adoc
 :page-aliases: howtos:view-queries-with-sdk.adoc,concept-docs:understanding-views.adoc,howtos:working-with-collections.adoc
 
 [abstract]
@@ -25,10 +24,7 @@ then you may want to read the xref:java-sdk:project-docs:migrating-sdk-code-to-3
 == Legacy MapReduce Views
 
 Note, if you are looking for information about Couchbase's legacy MapReduce Views Service, 
-MapReduce Views are deprecated in Couchbase Server, and will eventually be removed.
-Information on using MapReduce Views with the SDK can still be accessed in our https://docs-archive.couchbase.com/scala-sdk/1.2/howtos/view-queries-with-sdk.html[documentation archive].
+MapReduce Views has been deprecated since Couchbase Server 7.0, and is unsupported in the current {name-sdk}.
 
-Views are the only service which does not benefit from xref:{version-server}@server:learn:services-and-indexes/services/services.adoc#services-and-multi-dimensional-scaling[Multi-Dimensional Scaling],
-and is rarely the best choice over, say, xref:howtos:sqlpp-queries-with-sdk.adoc[our Query service] if you are starting a fresh application.
+Use the {sqlpp} Query Service, which benefits from xref:{version-server}@server:learn:services-and-indexes/services/services.adoc#services-and-multi-dimensional-scaling[Multi-Dimensional Scaling].
 See our discussion document on xref:concept-docs:querying-your-data.adoc[the best service for your use case] for querying your data.
-
