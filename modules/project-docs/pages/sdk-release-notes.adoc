@@ -144,8 +144,9 @@ Each entry is the same `node_id` the SDK reports on KV results and errors, so th
 Nodes that do not expose a KV port for the configured transport are filtered out.
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-822[CXXCBC-822]:
-**External Circuit Breaker Example** -- Added a copy-pasteable circuit breaker example built on the `node_id` API and modelled on Netflix Hystrix / Resilience4j.
-It demonstrates a per-node registry keyed on `couchbase::node_id`, a sliding-window state machine (closed/open/half_open/forced_open/disabled), failure-rate and slow-call-rate tripping, per-node isolation, and a topology-sweep that prunes tracker state using `collection::node_ids()`.
+**External Circuit Breaker Example** -- Added a copy-pastable circuit breaker example built on the `node_id` API and modelled on Netflix `Hystrix` and `Resilience4j`.
+It demonstrates a per-node registry keyed on `couchbase::node_id`, a sliding-window state machine (closed/open/half_open/forced_open/disabled),
+failure-rate and slow-call-rate tripping, per-node isolation, and a topology-sweep that prunes tracker state using `collection::node_ids()`.
 
 
 ==== Improvements
