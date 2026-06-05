@@ -1,0 +1,54 @@
+name: Check Examples Compile
+
+on:
+  pull_request:
+    paths:
+      - 'modules/devguide/examples/cxx/**'
+      - '.github/workflows/check-examples.yml'
+      - 'antora.yml'
+  workflow_dispatch:
+    inputs:
+      sdk_commit_sha:
+        description: 'Commit SHA of couchbase-cxx-client to use (leave blank for latest main)'
+        required: false
+        default: ''
+
+jobs:
+  check-examples:
+    name: Compile Examples
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout docs-sdk-cxx
+        uses: actions/checkout@v4
+
+      - name: Checkout couchbase-cxx-client SDK
+        uses: actions/checkout@v4
+        with:
+          repository: couchbase/couchbase-cxx-client
+          path: couchbase-cxx-client
+          ref: ${{ (github.event_name == 'workflow_dispatch' && inputs.sdk_commit_sha != '') && inputs.sdk_commit_sha || 'main' }}
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y ninja-build
+
+      - name: Set up ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ github.workflow }}-${{ runner.os }}
+
+      - name: Configure examples with local SDK
+        working-directory: modules/devguide/examples/cxx
+        run: |
+          cmake -S . -B build \
+            -GNinja \
+            -DCMAKE_BUILD_TYPE=Debug \
+            -DCMAKE_C_COMPILER_LAUNCHER=ccache \
+            -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+            -DFETCHCONTENT_SOURCE_DIR_COUCHBASE_CXX_CLIENT=${{ github.workspace }}/couchbase-cxx-client
+
+      - name: Build examples
+        working-directory: modules/devguide/examples/cxx
+        run: cmake --build build --parallel $(nproc)
