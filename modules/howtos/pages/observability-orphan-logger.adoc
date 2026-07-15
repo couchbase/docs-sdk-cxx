@@ -1,15 +1,16 @@
 = Orphaned Requests Logging
 :description: In addition to request tracing and metrics reporting, logging orphaned requests provides additional insight into why an operation might have timed out (or got cancelled for a different reason).
-:page-topic-type: howto
 
 [abstract]
 {description}
 
 While tracing and metrics can also be consumed through external interfaces, getting information about orphaned requests only works through the built-in mechanisms.
 
-The way it works is that every time a response is in the process of being completed, when the SDK detects that the original caller is not listening anymore (likely because of a timeout), it will send this "orphaned" response to a reporting utility which aggregates all responses and in regular intervals logs them in a specific format.
+The way it works is that every time a response is in the process of being completed, when the SDK detects that the original caller is not listening anymore (likely because of a timeout),
+it will send this "orphaned" response to a reporting utility which aggregates all responses and in regular intervals logs them in a specific format.
 
 When you spot a `TimeoutException` in your log file, you can look for the output of the `OrphanReporter` and correlate the information.
+
 
 == Output Format
 
@@ -119,6 +120,8 @@ Each individual request has the following format:
 }
 ----
 
+
+////
 .Experimental JSON Output Format Descriptions 
 [options="header"]
 |====
@@ -137,20 +140,21 @@ Each individual request has the following format:
 |====
 
 If a field is not available, it will not be included in the output.
+////
+
 
 == Configuration
 
-The orphan logger can be configured through the `OrphanReporterConfig`.
-
+The orphan logger can be configured through `tracing_options`.
 The following properties can be configured:
 
 .OrphanReporterConfig Properties 
 [options="header"]
 |====
 | Property       | Default | Description
-| `emitInterval` | 10 seconds | The interval where found orphans are emitted.
+| `emitInterval` | 10,000 milliseconds | The interval where found orphans are emitted.
 | `sampleSize`   | 10 | The number of samples to store per service.
-| `queueLength`  | 1024 | Maximum buffer size of orphans to store to pick up for the reporter.
 |====
 
-In addition to those properties, if you want to try out the new logging format you can set the `com.couchbase.orphanReporterNewOutputFormat` system property to `true`.
+Configuration details can be found in the 
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-{sdk_current_version}/classcouchbase_1_1tracing__options.html#a2872a66bcf62fa033181a3da656bec9e[API reference].
