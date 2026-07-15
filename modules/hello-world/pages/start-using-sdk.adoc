@@ -294,7 +294,6 @@ Otherwise, changes might get lost if two people change the same document at the 
 
 The remove method deletes a document from a collection:
 
-[source,cxx]
 [source,{example-source-lang}]
 ----
 include::{example-source}[indent=0,tag=remove]
