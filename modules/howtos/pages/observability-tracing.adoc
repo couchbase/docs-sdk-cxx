@@ -1,5 +1,8 @@
 = Request Tracing
 :description: Collecting information about an individual request and its response is an essential feature of every observability stack.
+:example-source-lang: c++
+
+
 
 [abstract]
 {description}
@@ -70,7 +73,7 @@ The snippets used on this page are taken from that example.
 
 The SDK's internal metric collection is activated with `options.metrics().enable(true)`:
 
-[source,cxx]
+[source,{example-source-lang}]
 ----
   options.metrics().enable(true);
   options.metrics().meter(std::make_shared<couchbase::metrics::otel_meter>(
@@ -82,7 +85,7 @@ The SDK's internal metric collection is activated with `options.metrics().enable
 The SDK reads the meter and tracer from the options object at connect time.
 OTel metrics and tracing must be wired into cluster options before calling `couchbase::cluster::connect()`:
 
-[source,cxx]
+[source,{example-source-lang}]
 ----
   auto meter_provider = apply_opentelemetry_meter_options(options, config.metrics_config);
   auto tracer_provider = apply_opentelemetry_tracer_options(options, config.traces_config);
@@ -103,7 +106,7 @@ OTel metrics and tracing must be wired into cluster options before calling `couc
 In the example, the SDK records per-operation latency histograms and retry/timeout counters, all labelled by bucket, scope, collection, and operation type.
 A `PeriodicExportingMetricReader` then pushes those measurements to the configured OTLP endpoint.
 
-[source,cxx]
+[source,{example-source-lang}]
 ----
   opentelemetry::sdk::metrics::PeriodicExportingMetricReaderOptions reader_options{};
   reader_options.export_interval_millis = metrics.reader_export_interval;
