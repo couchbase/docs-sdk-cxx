@@ -1,26 +1,52 @@
 = Quickstart in Couchbase with Spring Boot and Java
 :page-toclevels: 2
-:description: Quickstart app to build a REST API using Couchbase Capella in Java using Spring Boot.
+:description: Quickstart app to build a REST API using Couchbase Capella in {cpp}.
 :dev-portal-link: https://github.com/couchbase-examples/cxx-quickstart
 :this-platform: (in C++)
-:dir-name: ./
+:dir-name: cxx-quickstart
 :clang: clang++
 :g: g++
 :example-source-lang: c++
 
 
 // abstract
-include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=abstract]
+// include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=abstract]
+[abstract]
+{description}
+Discover how to program interactions with Couchbase via the Data, Query, and Search services.
 
 
 
 // intro
-include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=intro]
+// include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=intro]
+After you have navigated through https://cloud.couchbase.com/sign-up[signing up to Capella],
+if {name_platform} is entered as your chosen language, you will be pointed to a clonable quickstart app on GitHub.
+If you were not, you can still find it {dev-portal-link}[here].
+
+
+Often, the first step developers take after creating their database is to create a REST API that can perform Create, Read, Update, and Delete (CRUD) operations for that database.
+The {dev-portal-link}[quickstart project] is designed to teach you and give you a starter project {this-platform} to generate such a REST API.
+After you have loaded the travel-sample bucket in your database, you can run this application which is a REST API with Swagger documentation so that you can learn:
+
+. How to create, read, update, and delete documents using xref:howto:kv-operations[Key-Value operations].
+KV operations are unique to Couchbase and provide super fast (under millisecond) operations.
+. How to write simple parametrized xref:howtos:n1ql-queries-with-sdk.html[{sqlpp} queries] using the built-in travel-sample bucket.
+
+This documentation -- and a number of other useful developer tutorials --
+can be found on the {dev-portal-link}[Couchbase Developer Portal].
 
 
 == Prerequisites
 
-include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=prereq]
+// include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=prereq]
+
+To run this prebuilt project, you will need:
+
+* A https://www.couchbase.com/products/capella/[Couchbase Capella] cluster with the xref:ref:travel-app-data-model.adoc[travel-sample] bucket loaded.
++
+To run this tutorial using a self-managed Couchbase cluster, please refer to the <<#running-self-managed-couchbase-cluster>> section.
+
+* The Travel Sample Bucket is pre-loaded in Capella Free Tier. If you need to load it manually, see the xref:cloud:clusters:data-service/import-data-documents.adoc#import-sample-data[sample data impost page].
 
 * https://cmake.org/[CMake] 3.9 or higher installed
 
@@ -30,15 +56,43 @@ https://clang.llvm.org/[{clang}] or https://gcc.gnu.org/[{g}].
 
 == App Setup
 
-include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=setup]
+We will walk through the different steps required to get the application running:
+
+. Cloning Repo
++
+[source,console,subs="+attributes"]
+----
+$ git clone {dev-portal-link}.git
+----
+
+. Navigate to the Project Directory
++
+[source,console,subs="+attributes"]
+----
+$ cd {dir-name}
+----
+
+////
 +
 This project makes use of CMake and CPM to install dependencies.
 We will cover this at the install and build stage, after setting up the database.
+////
+
+
+// ^
+// include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=setup]
+
 
 
 === Setup Database Configuration
 
-include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=db-config]
+// include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=db-config]
+
+To learn more about connecting to your Capella cluster, please follow the https://docs.couchbase.com/cloud/get-started/connect.html[instructions].
+Specifically, you need to do the following:
+
+. Create the xref:cloud:clusters:manage-database-users.adoc[database credentials] to access the travel-sample bucket (Read and Write) used in the application.
+. https://docs.couchbase.com/cloud/clusters/allow-ip-address.html[Allow access] to the Cluster from the IP on which the application is running.
 
 All configuration for communication with the database is read from the environment variables.
 We have provided a convenience feature in this quickstart to set the required environment variables using the shell script `set_env_vars.sh`.
@@ -97,7 +151,16 @@ and it will build the executable required to run the application.
 == Running The Application
 
 // constrained network environment
-include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=dev-pc]
+// include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=dev-pc]
+
+.Running from a Development Machine
+[TIP]
+====
+Couchbase -- including Capella -- is designed to run in a LAN-like environment.
+For development, connecting to a remote cloud instance from a local laptop instead of an application server in the same region,
+may require you to adjust some timeouts.
+If you have problems, refer to the xref:ref:client-settings.adoc#constrained-network-environments[constrained network environments] section of the docs.
+====
 
 
 === Directly on Your Local Machine
@@ -388,7 +451,10 @@ std::cout << "Search result contains:\t" << search_res.size() << std::endl;
 The `Filter` function aims to demo the construction and execution of a `conjunction_query` which can be described as an AND operation on two or more types of filters.
 This particular implementation performs a conjunction on `couchbase::match_query("United States").field("country")` and `couchbase::term_query("San Diego").field("city")`.
 
-//operations.cpp
+
+[source,{example-source-lang}]
+.operations.cpp
+----
 auto query = couchbase::conjunction_query{
         couchbase::match_query("United States").field("country"),
         couchbase::term_query("San Diego").field("city")
@@ -401,8 +467,12 @@ for(auto &row:res.rows()){
   rows_res.push_back(fields["name"].as<std::string>());
 }
 return rows_res;
+----
 
-//main.cpp
+
+[source,{example-source-lang}]
+.main.cpp
+----
 auto filter_res = Filter(scope, index_name, 50, 1);
 std::cout << "Filter result contains:\t" << filter_res.size() << std::endl;
 ----
@@ -411,7 +481,12 @@ std::cout << "Filter result contains:\t" << filter_res.size() << std::endl;
 
 == Running Self-Managed Couchbase Cluster
 
-include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=self-managed]
+// include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=self-managed]
+
+If you are running this quickstart with a self-managed Couchbase cluster, you need to [load](https://docs.couchbase.com/server/current/manage/manage-settings/install-sample-buckets.html) the travel-sample data bucket in your cluster and generate the credentials for the bucket.
+
+You need to update the connection string and the credentials in the `application.properties` file in the `src/main/resources` folder.
+
 
 
 ////
