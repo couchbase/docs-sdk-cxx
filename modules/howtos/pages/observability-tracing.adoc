@@ -118,7 +118,7 @@ A `PeriodicExportingMetricReader` then pushes those measurements to the configur
 ----
 ////
 
-=== []
+=== {}
 
 .Complete tracing and metrics sample code: [*Click to open or collapse the listing*]
 [%collapsible]
