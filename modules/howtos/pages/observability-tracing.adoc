@@ -151,7 +151,7 @@ so we do not provide any stability guarantees on the logging output format and i
 
 A new, yet to be stabilized, format can be enabled by setting the `com.couchbase.thresholdRequestTracerNewOutputFormat` system property to `true`. 
 More information will be provided as we get closer to stabilization.
-////
+
 
 == OpenTelemetry Integration
 
