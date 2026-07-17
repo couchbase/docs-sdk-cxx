@@ -121,9 +121,10 @@ A `PeriodicExportingMetricReader` then pushes those measurements to the configur
 .Complete tracing and metrics sample code: [*Click to open or collapse the listing*]
 [%collapsible]
 ====
-....
-include::devguide:example$cxx/src/inventory_with_opentelemetry[]
-....
+[source,{example-source-lang}]
+----
+include::devguide:example$cxx/src/inventory_with_opentelemetry.cpp[]
+----
 ====
 
 

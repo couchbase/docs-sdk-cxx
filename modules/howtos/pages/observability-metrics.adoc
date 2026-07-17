@@ -7,7 +7,7 @@
 [abstract]
 {description}
 
-In the {name-sdk}, `couchbase::metrics::otel_meter` wraps an opentelemetry::metrics::Meter`.
+In the {name-sdk}, `couchbase::metrics::otel_meter` wraps an `opentelemetry::metrics::Meter`.
 
 A complete code example showing how to instrument a Couchbase {cpp} application with `OpenTelemetry`, distributed tracing, and metrics, can be found https://github.com/couchbaselabs/couchbase-cxx-client-demo/blob/main/examples/inventory_with_opentelemetry.cpp[in our GitHub repo].
 The snippets used on this page are taken from that example.
@@ -65,9 +65,10 @@ A `PeriodicExportingMetricReader` then pushes those measurements to the configur
 .Complete tracing and metrics sample code: [*Click to open or collapse the listing*]
 [%collapsible]
 ====
-....
-include::devguide:example$cxx/src/inventory_with_opentelemetry[]
-....
+[source,{example-source-lang}]
+----
+include::devguide:example$cxx/src/inventory_with_opentelemetry.cpp[]
+----
 ====
 
 
