@@ -1,4 +1,4 @@
-= Quickstart in Couchbase with Spring Boot and Java
+= Quickstart in Couchbase with {cpp}
 :page-toclevels: 2
 :description: Quickstart app to build a REST API using Couchbase Capella in {cpp}.
 :dev-portal-link: https://github.com/couchbase-examples/cxx-quickstart
@@ -44,7 +44,7 @@ To run this prebuilt project, you will need:
 
 * A https://www.couchbase.com/products/capella/[Couchbase Capella] cluster with the xref:ref:travel-app-data-model.adoc[travel-sample] bucket loaded.
 +
-To run this tutorial using a self-managed Couchbase cluster, please refer to the <<#running-self-managed-couchbase-cluster>> section.
+To run this tutorial using a self-managed Couchbase cluster, refer to the <<#running-self-managed-couchbase-cluster>> section.
 
 * The Travel Sample Bucket is pre-loaded in Capella Free Tier. If you need to load it manually, see the xref:cloud:clusters:data-service/import-data-documents.adoc#import-sample-data[sample data impost page].
 
@@ -58,7 +58,7 @@ https://clang.llvm.org/[{clang}] or https://gcc.gnu.org/[{g}].
 
 We will walk through the different steps required to get the application running:
 
-. Cloning Repo
+. Cloning the Repo
 +
 [source,console,subs="+attributes"]
 ----
@@ -88,7 +88,7 @@ We will cover this at the install and build stage, after setting up the database
 
 // include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=db-config]
 
-To learn more about connecting to your Capella cluster, please follow the https://docs.couchbase.com/cloud/get-started/connect.html[instructions].
+To learn more about connecting to your Capella cluster, follow the https://docs.couchbase.com/cloud/get-started/connect.html[instructions].
 Specifically, you need to do the following:
 
 . Create the xref:cloud:clusters:manage-database-users.adoc[database credentials] to access the travel-sample bucket (Read and Write) used in the application.
@@ -159,7 +159,7 @@ and it will build the executable required to run the application.
 Couchbase -- including Capella -- is designed to run in a LAN-like environment.
 For development, connecting to a remote cloud instance from a local laptop instead of an application server in the same region,
 may require you to adjust some timeouts.
-If you have problems, refer to the xref:ref:client-settings.adoc#constrained-network-environments[constrained network environments] section of the docs.
+For more information, see the xref:ref:client-settings.adoc#constrained-network-environments[constrained network environments] section of the docs.
 ====
 
 
@@ -222,7 +222,7 @@ In the `db.cpp` we implement the functions that help us connect to the database.
 We begin by implementing a few utility functions that will help us later.
 The `parseEnvironmentVariables` serves as a utility to get the values set for a list of environment variables.
 This enables us to get the connection parameters and credentials set by running source `set_env_vars.sh`.
-Following this, `checkScopeAndColExists` and `checkSearchEnabled` are implemented to check for the existence of a scope and collection of a given name and to verify if the search service is enabled respectively.
+Following this, `checkScopeAndColExists` and `checkSearchEnabled` are implemented to check for the existence of a scope and collection of a given name and to verify if the Search Service is enabled respectively.
 Finally we have the `InitCluster` function which returns the connection objects as a tuple.
 
 [source,{example-source-lang}]
@@ -294,7 +294,7 @@ auto insert_res2 = Insert(col, "quickstart_test2", "doc.json", true);
 === Upsert Document
 
 The `Upsert` function is the equivalent of the `PUT` request.
-It can be used to update any existing document or to insert a new document to the collection if the `doc_id` doesn't exist already.
+It can be used to update any existing document or to insert a new document to the collection if the `doc_id` does not already exist.
 Similar to Insert -- we can pass the document to be inserted as a JSON string or as a JSON file path, the function takes in `file_flag` which is used to differentiate between the two.
 
 * The value gets converted to the type `tao::json::value` and inserts it to the collection if `file_flag=false`.
@@ -321,7 +321,7 @@ The `Read` function is equivalent to `GET` requests and can be used to fetch doc
 
 * First checks if the document exists using `col.exists(doc_id)`.
 * If the document exists, it retrieves the document's content using `col.get(doc_id)` and returns it after converting it to `tao::json::value` for easier usage on return.
-* If an error occurs (e.g., document not found), it prints an error message and returns an empty `tao::json::value` object.
+* If an error occurs (such as "document not found"), it prints an error message and returns an empty `tao::json::value` object.
 
 [source,{example-source-lang}]
 .operations.cpp
@@ -393,7 +393,7 @@ for (auto& row : query_res) {
 }
 ----
 
-=== Create Search Index
+=== Create a Search Index
 
 Search indexes in Couchbase are used for full-text search and efficient querying of documents based on specific fields or attributes.
 The `CreateSearchIndex` function helps in creating a new Search index which can then be used.
@@ -418,10 +418,10 @@ std::string index_name = CreateSearchIndex(scope, "hotel_search_index.json");
 
 === Search By Name
 
-The `SearchByName` function aims to demonstrate the usage of a search index to search for documents in a scope. Params:
+The `SearchByName` function aims to demonstrate the usage of a Search index to search for documents in a scope. Params:
 
 * `scope`: The Couchbase scope to search in.
-* `index`: The search index name to use for the query.
+* `index`: The Search index name to use for the query.
 * `name`: The name to search for in the documents.
 * `field`: The field where the name should be searched.
 * `limit`: The maximum number of results to return.
@@ -483,7 +483,7 @@ std::cout << "Filter result contains:\t" << filter_res.size() << std::endl;
 
 // include::{version-common}@sdk:shared:partial$sample-application.adoc[tag=self-managed]
 
-If you are running this quickstart with a self-managed Couchbase cluster, you need to [load](https://docs.couchbase.com/server/current/manage/manage-settings/install-sample-buckets.html) the travel-sample data bucket in your cluster and generate the credentials for the bucket.
+If you are running this quickstart with a self-managed Couchbase cluster, you need to xref:server:manage:manage-settings/install-sample-buckets.adoc[load] the travel-sample data bucket in your cluster and generate the credentials for the bucket.
 
 You need to update the connection string and the credentials in the `application.properties` file in the `src/main/resources` folder.
 
