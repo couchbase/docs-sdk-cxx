@@ -1,5 +1,8 @@
 = Request Tracing
 :description: Collecting information about an individual request and its response is an essential feature of every observability stack.
+:example-source-lang: c++
+
+
 
 [abstract]
 {description}
@@ -7,11 +10,14 @@
 To give insight into a request/response flow, the SDK provides a `RequestTracer` interface and ships with both a default implementation as well as modules that can feed the traces to external systems (including OpenTelemetry).
 
 
-== The Default ThresholdRequestTracer
+== The Default TracerProvider
 
 By default, the SDK will emit information about requests that are over a configurable threshold every 10 seconds. 
-Note that if no requests are over the threshold then no event / log will be emitted.
+Note that if no requests are over the threshold then no event or log will be emitted.
 
+
+
+////
 It is possible to customize this behavior by modifying the configuration:
 
 [source,scala]
@@ -54,7 +60,91 @@ The JSON blob emitted looks similar to the following (prettified here for readab
    }
 ]
 ----
+////
 
+
+
+
+A complete code example showing how to instrument a Couchbase {cpp} application with `OpenTelemetry`, distributed tracing, and metrics, can be found https://github.com/couchbaselabs/couchbase-cxx-client-demo/blob/main/examples/inventory_with_opentelemetry.cpp[in our GitHub repo].
+The snippets used on this page are taken from that example.
+
+////
+== Metrics Collection
+
+The SDK's internal metric collection is activated with `options.metrics().enable(true)`:
+
+[source,{example-source-lang}]
+----
+  options.metrics().enable(true);
+  options.metrics().meter(std::make_shared<couchbase::metrics::otel_meter>(
+    opentelemetry::metrics::Provider::GetMeterProvider()->GetMeter(k_service_name,
+                                                                   k_service_version)));
+----
+
+
+The SDK reads the meter and tracer from the options object at connect time.
+OTel metrics and tracing must be wired into cluster options before calling `couchbase::cluster::connect()`:
+
+[source,{example-source-lang}]
+----
+  auto meter_provider = apply_opentelemetry_meter_options(options, config.metrics_config);
+  auto tracer_provider = apply_opentelemetry_tracer_options(options, config.traces_config);
+
+  auto [connect_err, cluster] =
+    couchbase::cluster::connect(config.connection_string, options).get();
+  if (connect_err) {
+    std::cout << "Unable to connect to the cluster. ec: " << connect_err.message() << "\n";
+  } else {
+    auto collection = cluster.bucket(config.bucket_name)
+                        .scope(config.scope_name)
+                        .collection(config.collection_name);
+----
+
+
+== Exporting Metrics
+
+In the example, the SDK records per-operation latency histograms and retry/timeout counters, all labelled by bucket, scope, collection, and operation type.
+A `PeriodicExportingMetricReader` then pushes those measurements to the configured OTLP endpoint.
+
+[source,{example-source-lang}]
+----
+  opentelemetry::sdk::metrics::PeriodicExportingMetricReaderOptions reader_options{};
+  reader_options.export_interval_millis = metrics.reader_export_interval;
+  reader_options.export_timeout_millis = metrics.reader_export_timeout;
+
+  std::unique_ptr<opentelemetry::sdk::metrics::MetricReader> reader{
+    new opentelemetry::sdk::metrics::PeriodicExportingMetricReader(std::move(exporter),
+                                                                   reader_options)
+----
+////
+
+== {empty}
+
+.Complete tracing and metrics sample code: [*Click to open or collapse the listing*]
+[%collapsible]
+====
+[source,{example-source-lang}]
+----
+include::devguide:example$cxx/src/inventory_with_opentelemetry.cpp[]
+----
+====
+
+
+
+
+
+
+=== Legacy OpenTracing Integration
+
+The {name-sdk} does not provide support for `OpenTracing`, since OpenTracing has been sunsetted.
+
+
+
+
+
+
+
+////
 For each service (e.g. Key-Value or Query), an entry exists in the outer JSON array. 
 The top N (10 by default) slowest operations are collected and displayed, sorted by the total duration. 
 This promotes quick visibility of the "worst offenders", and more efficient troubleshooting.
@@ -202,3 +292,4 @@ val config: Try[ClusterEnvironment] = ClusterEnvironment.builder
 ----
 
 OpenTracing spans can be wrapped with `OpenTracingRequestSpan.wrap` and passed as parent spans to all SDK operations, in the same way as with OpenTelemetry.
+////
