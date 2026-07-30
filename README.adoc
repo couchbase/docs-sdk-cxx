@@ -121,6 +121,19 @@ Production branches use the *release/x.y* naming pattern (e.g. `release/1.4`, `r
 Antora uses the branch names in the playbook, but also uses the `version` given in the antor.yml file, to create the version navigation -- so this version number must be unique within the repo for any branches included in the playbook.
 When creating a new branch for a new release, remember to update the antora.yml file before trying to build.
 
+==== Dotminor Tasks
+
+After creating the new branch:
+
+* Update antora.yml
+* Update README.adoc
+* Update modules/project-docs/pages/compatibility.adoc
+* Add new headings in modules/project-docs/pages/sdk-release-notes.adoc
+* In modules/howtos/pages/distributed-acid-transactions-from-the-sdk.adoc -- remove the aliases for `cxx-transactions` from the no-longer-latest branch version of this page,so that the alias points to the latest branch only.
+* Do a test build ...
+* ... And then start to add new content.
+
+
 === Code Sample Testing
 
 This is in the process of being changed -- documentation will appear here once this is completed.
