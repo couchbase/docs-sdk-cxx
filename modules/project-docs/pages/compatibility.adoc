@@ -46,7 +46,7 @@ The {name-sdk} is tested and supported on the following OSs and platforms:
 === Mac OS X
 
 The current and previous two releases of OS X.
-At time of writing (June 2026): 26 (Tahoe), 15 (Sequoia), and 14 (Sonoma).
+At time of writing (August 2026): 26 (Tahoe), 15 (Sequoia), and 14 (Sonoma).
 ****
 
 The SDK should also be expected to run on other commonly-available GNU/Linux distributions which support an appropriate compiler, but not all combinations can be tested.
