@@ -11,13 +11,13 @@
 // Note to editors
 //
 // This page pulls in content from
-// https://github.com/couchbase/docs-sdk-common/blob/release/7.6/modules/shared/partials/start-using-sdk.adoc
+// https://github.com/couchbase/docs-sdk-common/blob/api/3.10/modules/shared/partials/start-using-sdk.adoc
 //
 // and code samples from
-// https://github.com/couchbase/docs-sdk-scala/tree/release/1.6/modules/devguide/examples/scala
+// https://github.com/couchbase/docs-sdk-cxx/tree/release/1.4/modules/devguide/examples/scala
 //
 // It can be seen built at
-// https://docs.couchbase.com/scala-sdk/1.6/hello-world/start-using-sdk.html
+// https://docs.couchbase.com/cxx-sdk/1.4/hello-world/start-using-sdk.html
 
 
 [abstract]
@@ -210,6 +210,26 @@ Self-Managed Couchbase Server::
 ----
 include::{example-source}[indent=0,tag=connect_onprem]
 ----
+--
+
+Cloud Native Gateway (CNG)::
++
+--
+Couchbase's large number of ports across the URLs of many services can be proxied by using a `couchbase2://` endpoint as the connection string --
+currently only compatible with recent versions of xref:operator:ROOT:concept-cloud-native-gateway.adoc[Couchbase Autonomous Operator]:
+
+[source,{example-source-lang}]
+----
+static constexpr auto connection_string{ "couchbase2://192.168.42.42" };  // replace with your IP address
+static constexpr auto username{ "Administrator" };
+static constexpr auto password{ "password" };
+auto options = couchbase::cluster_options(username, password);
+options.apply_profile("wan_development");
+
+auto [err, cluster] = couchbase::cluster::connect(connection_string, options).get();
+----
+
+Read more on the xref:howtos:managing-connections.adoc#cloud-native-gateway[Connections] page.
 --
 ====
 
