@@ -140,11 +140,11 @@ Both are non-pimpl public base classes, so the library `SOVERSION` is bumped and
 * https://jira.issues.couchbase.com/browse/CXXCBC-886[CXXCBC-886]:
 **Cloud Native Gateway Support (`couchbase2://`)** -- A connection string with the `couchbase2://` scheme routes every operation over gRPC to a single Cloud Native Gateway endpoint, instead of opening MCBP and HTTP connections to each cluster node.
 The public API is unchanged: no type or method is specific to the transport.
-Key-value, query, analytics, search, views, and bucket, scope, collection, query index and search index management are all routed over it, together with the SDK retry strategy, value compression, level-based durability, and the transport-agnostic tracing and metrics recorders.
+Key-value, query, analytics, search, views -- and bucket, scope, collection, query index, and search index management -- are all routed over it, together with the SDK retry strategy, value compression, level-based durability, and the transport-agnostic tracing and metrics recorders.
 The scheme implies TLS (default port 18098) and accepts exactly one host, since the gateway fronts the whole cluster.
 Support is a compile-time option and is off by default: a library built without `COUCHBASE_CXX_CLIENT_BUILD_COUCHBASE2` reports `errc::common::feature_not_available` from `cluster::connect()`.
 Operations the transport cannot carry -- ping, diagnostics, replica reads, subdocument operations, range scan, and poll-based durability -- are documented per entity in the API reference and on its dedicated page.
-The transport is uncommitted in 1.4.0.
+The transport is uncommitted in `1.4.0`.
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-102[CXXCBC-102],
 https://jira.issues.couchbase.com/browse/CXXCBC-485[CXXCBC-485],
@@ -155,7 +155,7 @@ The HTTP layer reads on demand with byte back-pressure and an idle timeout, and 
 `query_row` and `analytics_row` decode individual rows, `signature()` is available before the stream is drained, `meta_data()` resolves once it is, and `cancel()` abandons a partially consumed stream.
 Streaming failures carry an error context and a new `errc::streaming_json_lexer` category.
 Prepared statements (`adhoc` set to false) fall back to the buffered path and replay their rows through the same handle.
-The API is volatile in 1.4.0.
+The API is volatile in `1.4.0`.
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-820[CXXCBC-820],
 https://jira.issues.couchbase.com/browse/CXXCBC-821[CXXCBC-821],
@@ -165,7 +165,7 @@ It is propagated through the whole key-value path: `result::node_id()` and `erro
 `collection::node_id_for()` resolves a key to its owning node, and `collection::node_ids()` enumerates the nodes currently serving key-value traffic; both read the client-side topology with no network round-trip.
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-822[CXXCBC-822]:
-**External Circuit Breaker Example** -- Added a copy-pasteable per-node circuit breaker built on the node id API and modelled on Netflix Hystrix / Resilience4j.
+**External Circuit Breaker Example** -- Added a copy-pasteable per-node circuit breaker built on the node id API and modelled on Netflix `Hystrix` / `Resilience4j`.
 It demonstrates a sliding-window state machine, failure-rate and slow-call-rate tripping, per-node isolation, and a topology sweep that prunes tracker state using `collection::node_ids()`.
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-845[CXXCBC-845]:
@@ -189,12 +189,12 @@ https://jira.issues.couchbase.com/browse/CXXCBC-859[CXXCBC-859],
 https://jira.issues.couchbase.com/browse/CXXCBC-860[CXXCBC-860]:
 **Reduced Per-Operation Overhead** -- A pass over the key-value hot path: log arguments are formatted only when a consumer exists, diagnostic and dispatch identifiers are built lazily, metrics value recorders and per-connection telemetry recorders are memoized, dispatch attributes are captured through typed span setters, in-flight handlers are tracked in a ring/slot table, send-path flush posts are coalesced, and response body buffers are recycled to avoid a per-operation `mmap` at large values.
 A typical completion handler previously took one to three heap allocations and now takes none.
-No throughput benchmarks are published for this release; these items are characterized by the allocations, syscalls and locks removed per operation.
+No throughput benchmarks are published for this release; these items are characterized by the allocations, syscalls, and locks removed per operation.
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-828[CXXCBC-828],
 https://jira.issues.couchbase.com/browse/CXXCBC-829[CXXCBC-829]:
-**Reduced std::regex Usage in Error Handling** -- Errors built from server response text now use `std::string::find()` and a new `utils::contains_string()` helper with optional ASCII-only case folding.
-The remaining `std::regex` objects are `static const` so they are compiled once.
+**Reduced `std::regex` Usage in Error Handling** -- Errors built from server response text now use `std::string::find()` and a new `utils::contains_string()` helper with optional ASCII-only case folding.
+The remaining `std::regex` objects are `static const`, so they are compiled once.
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-896[CXXCBC-896],
 https://jira.issues.couchbase.com/browse/CXXCBC-902[CXXCBC-902],
@@ -202,7 +202,7 @@ https://jira.issues.couchbase.com/browse/CXXCBC-904[CXXCBC-904],
 https://jira.issues.couchbase.com/browse/CXXCBC-905[CXXCBC-905],
 https://jira.issues.couchbase.com/browse/CXXCBC-906[CXXCBC-906],
 https://jira.issues.couchbase.com/browse/CXXCBC-907[CXXCBC-907]:
-**couchbase2 Behavioral Parity** -- Key-value and non-key-value operations over `couchbase2://` are retried through the SDK retry strategy, `kv_durable_timeout` is honored for durable mutations, and ping and diagnostics report `errc::common::feature_not_available` rather than failing opaquely.
+**couchbase2 Behavioral Parity** -- Key-value and non-key-value operations over `couchbase2://` are retried through the SDK retry strategy, `kv_durable_timeout` is honored for durable mutations, and `ping` and `diagnostics` report `errc::common::feature_not_available` rather than failing opaquely.
 The key-value path requests compressed content and snappy-compresses mutations above a size threshold that shrink by a configured ratio, so large values are not sent raw.
 Tracers and meters see the same spans and metrics as over MCBP.
 
@@ -213,7 +213,7 @@ Tracers and meters see the same spans and metrics as over MCBP.
 **Eventing Function Statuses** -- Added the resuming and unknown function statuses to the Eventing core API.
 
 * **Platform and Packaging** -- Added Windows ARM64 builds and test runs, and support for the GCC 16 and LLVM 22 toolchains.
-The package targets were refreshed: Ubuntu 26.04 (Resolute) and Fedora 44 were added, and Fedora 41, Fedora 42 and openSUSE Leap were dropped.
+The package targets were refreshed: Ubuntu 26.04 (Resolute) and Fedora 44 were added, and Fedora 41, Fedora 42, and openSUSE Leap were dropped.
 Source archives and packages are now reproducible byte-for-byte, redistributable packages build their vendored dependencies from source, the bundled static archive is stripped, Debian packaging supports rootless sbuild, and RPM packaging gained a rootless podman path and gates gRPC-based components by platform.
 
 
@@ -230,7 +230,7 @@ Disabling verification (`tls_verify=none`) logs a prominent warning and is refus
 The prefix length is now validated against the body length and such frames are rejected.
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-836[CXXCBC-836]:
-**Analytics Identifier Quoting** -- Bucket, scope and collection names are quoted and escaped when composing Analytics statements, closing a SQL++ injection vector on names taken from application input.
+**Analytics Identifier Quoting** -- Bucket, scope, and collection names are quoted and escaped when composing Analytics statements, closing a {sqlpp} injection vector on names taken from application input.
 
 
 ==== Bug Fixes
@@ -244,7 +244,8 @@ https://jira.issues.couchbase.com/browse/CXXCBC-864[CXXCBC-864],
 https://jira.issues.couchbase.com/browse/CXXCBC-872[CXXCBC-872],
 https://jira.issues.couchbase.com/browse/CXXCBC-912[CXXCBC-912],
 https://jira.issues.couchbase.com/browse/CXXCBC-924[CXXCBC-924]:
-**Lifetime and Thread-Safety Fixes** -- Fixed a use-after-free in `mcbp_session` handler dispatch on a re-entrant `stop()`, a `cluster`/`bucket` `shared_ptr` cycle leaked by parked deferred operations, an `mcbp_command` leak on replica reads at `io_context` teardown, handler-drop lifetime in asynchronous public API operations, an in-flight bootstrap session left running when a bucket is closed, parked operations never completed on teardown mid-bucket-bootstrap, races in key-value operation routing and finalization, a use-after-free in the forked child that also damaged the parent, and a cluster reference held past close completion.
+**Lifetime and Thread-Safety Fixes** -- Fixed a use-after-free in `mcbp_session` handler dispatch on a re-entrant `stop()`, a `cluster`/`bucket` `shared_ptr` cycle leaked by parked deferred operations, an `mcbp_command` leak on replica reads at `io_context` teardown, handler-drop lifetime in asynchronous public API operations,
+an in-flight bootstrap session left running when a bucket is closed, parked operations never completed on teardown mid-bucket-bootstrap, races in key-value operation routing and finalization, a use-after-free in the forked child that also damaged the parent, and a cluster reference held past close completion.
 Tearing down a cluster while a bucket was still bootstrapping could leave a `std::future` caller with `broken_promise` or hung; enqueues into a closed bucket are now rejected and parked operations are completed with `cluster_closed`.
 Observability members are stopped in place rather than moved out of `close()`, so a null dereference no longer follows `notify_fork(fork_event::child)`.
 The `*_any_replica` fan-out no longer shares one cancellation token across sibling commands, which let the first response cancel the others on an IO thread while the caller was still dispatching them.
@@ -286,7 +287,7 @@ Lost-attempts cleanup scans up to 16 ATRs concurrently instead of strictly one a
 ==== Deprecations
 
 * https://jira.issues.couchbase.com/browse/CXXCBC-925[CXXCBC-925]:
-**Columnar Build Mode** -- `COUCHBASE_CXX_CLIENT_COLUMNAR` gates a prototype build mode scheduled for removal in 1.5.0.
+**Columnar Build Mode** -- `COUCHBASE_CXX_CLIENT_COLUMNAR` gates a prototype build mode scheduled for removal in `1.5.0`.
 Configuring with the option now emits a CMake warning and a compiler diagnostic naming the deprecating and removing versions.
 Neither can fail a build.
 
