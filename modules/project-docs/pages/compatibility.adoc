@@ -22,7 +22,9 @@ The Couchbase {cpp} SDK {sdk_dot_minor} Client supports {cpp} 17, or more recent
 In general, the SDK should run on any modern platform with the correct compiler and version of `cmake`,
 and the Couchbase {cpp} SDK can be expected to run on all of the Operating Systems supported by xref:{version-server}@server:install:install-platforms.adoc[Couchbase Server].
 
-The {name-sdk} is tested and supported on the following OSs and platforms:
+The {name-sdk} will run on, and is supported on, the following OSs and platforms.
+The SDK has been tested on a representative subset of the platforms listed below.
+
 
 ****
 [discrete]
