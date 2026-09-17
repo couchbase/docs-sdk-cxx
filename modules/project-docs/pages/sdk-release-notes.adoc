@@ -87,6 +87,24 @@ any changes to expected behavior are noted in the release notes that follow.
 
 
 
+=== Version 1.5.0 (?? October 2026)
+
+This is the first GA release of the 1.5 {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.5.0[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.4.0...1.5.0++[Full Changelog]
+
+
+
+
+
+
+
+
+== {cpp} SDK 1.4 Releases
+
+
+
 === Version 1.4.0 (13 August 2026)
 
 This is the first GA release of the 1.4 {cpp} SDK.

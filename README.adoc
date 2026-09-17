@@ -1,9 +1,9 @@
 = Couchbase C++ SDK Documentation
 
-This repository hosts the documentation source for the https://docs.couchbase.com/cxx-sdk/1.3/hello-world/overview.html[Couchbase {cpp} SDK].
+This repository hosts the documentation source for the https://docs.couchbase.com/cxx-sdk/1.5/hello-world/overview.html[Couchbase {cpp} SDK].
 
-This branch documents the 1.4 release of the SDK.
-It follows the https://docs.couchbase.com/cxx-sdk/1.4/project-docs/compatibility.html#api-version[SDK 3.10 API].
+This branch documents the 1.5 release of the SDK.
+It follows the https://docs.couchbase.com/cxx-sdk/1.5/project-docs/compatibility.html#api-version[SDK 3.10 API].
 
 == Contributing
 

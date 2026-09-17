@@ -22,74 +22,26 @@ The Couchbase {cpp} SDK {sdk_dot_minor} Client supports {cpp} 17, or more recent
 In general, the SDK should run on any modern platform with the correct compiler and version of `cmake`,
 and the Couchbase {cpp} SDK can be expected to run on all of the Operating Systems supported by xref:{version-server}@server:install:install-platforms.adoc[Couchbase Server].
 
-The {name-sdk} will run on, and is supported on, the following OSs and platforms.
-The SDK has been tested on a representative subset of the platforms listed below.
 
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=os-compat]
 
-****
-[discrete]
-=== GNU/Linux
-
-* Amazon Linux 2 & AL2023.
-* Red Hat Enterprise Linux 8, 9, & 10.
-* Oracle Linux 8, 9, & 10.
-* Ubuntu (LTS) 26.04 (_Resolute_), 24.04 (_Noble_), & 22.04 (_Jammy_) .
-* Debian 12 (_Bookworm_) & Debian 13 (_Trixie_).
-// * SUSE Enterprise Linux 12 & 15.
-* Alpine Linux 3.21 - 3.24.
-
-[discrete]
-=== Microsoft Windows
-
-* Microsoft Windows 10 & 11;
-* Windows Server 2019, 2022, & 2025.
-
-[discrete]
-=== Mac OS X
-
-The current and previous two releases of OS X.
-At time of writing (August 2026): 26 (Tahoe), 15 (Sequoia), and 14 (Sonoma).
-****
-
-The SDK should also be expected to run on other commonly-available GNU/Linux distributions which support an appropriate compiler, but not all combinations can be tested.
-
-
-////
- -- notable exceptions are listed below.
-
-==== Alpine Linux Compatibility
-
-The https://netty.io[Netty] I/O library used by our JVM SDKs supports native optimizations to achieve higher throughput and lower latency 
--- which the SDK enables by default. 
-Those modules are compiled against `glibc` and Alpine Linux uses `musl` instead --
-so the {name-sdk} is unable to complete bootstrapping on this platform.
-
-Because Alpine Linux does not have the `glibc` support needed,
-we highly recommend that you seek an alternative distribution where possible. 
-If that is not a option, then a possible workaround that can be applied is as follows:
-
-* Disable the native IO:
-+
-[source,toml]
-====
-ClusterEnvironment env = ClusterEnvironment.builder().ioEnvironment(IoEnvironment.enableNativeIo(false)).build();
-====
-
-* Disable it in Netty itself via the following system property:
-`-Dcom.couchbase.client.core.deps.io.netty.transport.noNative=true`
-
-The downside of these workarounds is potentially reduced performance, which can be determined through benchmarking and profiling.
-////
 
 
 
 // Platforms, Chipsets, and Virtual Environments.
-include::{version-common}@sdk:shared:partial$platform.adoc[tag=virtual]
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=virtual]
+
+
 
 
 
 // Network Requirements
-include::{version-common}@sdk:shared:partial$network-requirements.adoc[]
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=network-requirements]
+
+
+
+// Serverless Environments
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=serverless]
 
 
 
@@ -114,7 +66,7 @@ It is best to upgrade either the SDK or the Couchbase version you are using.
 .Recommended SDK per Server Version Matrix
 [#table_sdk_versions]
 |===
-| | 1.0 | 1.1 | 1.2, 1.3 | 1.4
+| | 1.0 | 1.1 | 1.2, 1.3 | 1.4, 1.5
 
 | *Server 8.0* ①
 | *✔*
@@ -136,21 +88,14 @@ It is best to upgrade either the SDK or the Couchbase version you are using.
 |===
 
 
-① Server 7.6 & 8.0 are compatible with all supported (not yet End-of-Life) versions of the {name-sdk}, but for full support of the latest features you need to upgrade to a recent version of the SDK.
-See the <<#couchbase-new-feature-availability-matrix,Feature Availablity matrix below>> and the xref:sdk-release-notes.adoc[Release Notes page].
-
-Note the https://www.couchbase.com/support-policy/EOL/[End of Life dates^] for Couchbase Server and SDK versions.
-See the notes there for Support details.
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=matrix-notes2]
 
 
 
 
 === Capella Compatibility
 
-The Couchbase {name_platform} SDK is fully compatible with Couchbase Capella, our fully-hosted database-as-a-service.
-To make development easier, the SDK includes the Capella client certificate ready installed.
-
-include::{version-common}@sdk:shared:partial$capella.adoc[tag=cloud]
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=cloud]
 
 
 // add in Columnar link
@@ -159,32 +104,35 @@ include::{version-common}@sdk:shared:partial$capella.adoc[tag=cloud]
 
 .Couchbase Server and SDK Supported Version Matrix
 [.table-merge-cells]
-[cols="5,4,4,5,5"]
+[cols="7,6,6,6"]
 |===
-| | Server 7.0 & 7.1 | Server 7.2 | Server 7.6  | Server 8.0
+| | Server 7.2 | Server 7.6.x  | Server 8.0
 
-| Enhanced Durability
-4+| All SDK versions
-
-| Vector Search
-2+| N/A
+| KV Range Scan
+| N/A
 2+| From SDK 1.0.0
 
-| Replica Reads
-2+| N/A
+| Vector Search
+| N/A
+2+| From SDK 1.0.0
+
+| Zone Aware Replica Reads
+| N/A
 2+| From SDK 1.0.0 -- _Preferred Server Group Replica Reads_ from Server 7.6.2 and SDK 1.0.0
 
-| Response Time Observability
-4+| From SDK 1.3.0
+| Vector Query using GSI
+2+| N/A
+| From SDK 1.2.0 ①
 |===
 
-This table is not an exhaustive list -- just a few highlights -- provided to help assess compatibility of older versions in particular.
-For alignment of SDKs and new Server features, scroll down to the information below the <<api-version,API Version table>>.
+include::{version-common}@sdk:shared:partial$compat[tag=feature-notes]
+
+
 
 
 === API Version
 
-include::{version-common}@sdk:shared:partial$api-version.adoc[tag=api-version]
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=api-version]
 
 
 
@@ -194,9 +142,10 @@ include::{version-common}@sdk:shared:partial$api-version.adoc[tag=api-version]
 
 === Interface Stability
 
-include::{version-common}@sdk:shared:partial$interface-stability-pars.adoc[tag=interface-stability-section]
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=interface-stability-section]
 
 
 === Older SDK Versions
 
-include::{version-common}@sdk:shared:partial$archive.adoc[tag=link]
+
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=archive-link]
