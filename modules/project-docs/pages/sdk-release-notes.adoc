@@ -77,7 +77,7 @@ $ cmake --build .
 
 
 [#latest-release]
-== {cpp} SDK 1.4 Releases
+== {cpp} SDK 1.5 Releases
 
 We always recommend using the latest version of the SDK -- it contains all of the latest security patches and support for new and upcoming features.
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
