@@ -61,6 +61,9 @@ And you can use different APIs at different times.
 
 === Bulk Operations
 
+include::{version-common}@sdk:shared:partial$best-practices.adoc[tag=bulk-get-sidebar]
+
+
 The {cpp} source repo contains an example of 
 https://github.com/couchbase/couchbase-cxx-client/blob/{sdk_current_version}/examples/bulk_base_api.cxx[implementing a bulk get].
 Careful benchmarking would be required to ensure that this approach is beneficial for your particular workload.
