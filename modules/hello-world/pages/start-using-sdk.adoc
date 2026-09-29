@@ -215,8 +215,8 @@ include::{example-source}[indent=0,tag=connect_onprem]
 Cloud Native Gateway (CNG)::
 +
 --
-Couchbase's large number of ports across the URLs of many services can be proxied by using a `couchbase2://` endpoint as the connection string --
-currently only compatible with recent versions of xref:operator:ROOT:concept-cloud-native-gateway.adoc[Couchbase Autonomous Operator]:
+include::{version-common}@sdk:shared:partial$start-using-sdk.adoc[tag=cng]
+
 
 [source,{example-source-lang}]
 ----
