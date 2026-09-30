@@ -25,7 +25,7 @@ _Diagnostics_ requests a report from a node, giving instant health check informa
 
 
 // Uses
-include::{version-common}@sdk:pages:partial$health-check.adoc[tag="uses"]
+include::{version-common}@sdk:shared:partial$health-check.adoc[tag="uses"]
 
 
 

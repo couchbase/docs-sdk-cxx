@@ -38,13 +38,13 @@ Management operations in the SDK may be performed through several interfaces dep
 * BucketManager -- `couchbase::bucket_manager`
 -- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1bucket__manager.html[API docs].
 * QueryIndexManager -- `couchbase::query_index_manager`
--- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1query__index__manager.html[API docs].
+-- see link:++https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1query__index__manager.html++[API docs].
 * CollectionManager -- `couchbase::collection_manager`
--- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1collection__manager.html[API docs].
+-- see link:++https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1collection__manager.html++[API docs].
 * AnalyticsIndexManager -- `couchbase::analytics_index_manager`
--- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1analytics__index__manager.html[API docs].
+-- see link:++https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1analytics__index__manager.html++[API docs].
 * SearchIndexManager -- `couchbase::search_index_manager`
--- see https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1search__index__manager.html[API docs].
+-- see link:++https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1search__index__manager.html++[API docs].
 
 
 
