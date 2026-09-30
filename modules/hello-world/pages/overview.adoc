@@ -174,7 +174,7 @@ Useful resources to help support your development experience with Couchbase and 
 * xref:ref:client-settings.adoc[]
 * xref:ref:error-codes.adoc[]
 * {sdk-gh-link}[SDK source code]
-// * xref:ref:glossary.adoc[Glossary]
+* xref:ref:glossary.adoc[Glossary]
 // * xref:ref:travel-app-data-model.adoc[]
 
 [.column]
