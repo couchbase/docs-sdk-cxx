@@ -2,8 +2,6 @@
 :page-layout: landing-page-top-level-sdk
 :page-role: tiles
 :!sectids:
-:lang: C++
-:example-source: 
 
 
 // Note to editors
