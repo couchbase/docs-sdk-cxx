@@ -16,7 +16,7 @@ asciidoc:
     version-common: '3.10'
     name_platform: 'C++'
     name_platform_lc: 'cxx'
-    lang-code: 'cpp'
+    lang-code: 'c++'
     name-sdk: 'C++ SDK'
     archive_version: 2.10
     archive_major: 2.x
