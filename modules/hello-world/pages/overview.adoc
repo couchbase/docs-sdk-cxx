@@ -3,8 +3,7 @@
 :page-role: tiles
 :!sectids:
 :lang: C++
-:example-source: devguide:example$cxx/src/overview.cxx
-:example-source-lang: c++
+:example-source: 
 
 
 // Note to editors
@@ -40,9 +39,9 @@ Couchbase gives you the {name_platform} APIs to work with Capella, our managed s
 Data Ops (CRUD)::
 +
 --
-[source,{example-source-lang}]
+[source,{lang-code}]
 ----
-include::{example-source}[indent=0,tag=upsert]
+include::devguide:example$cxx/src/overview.cxx[indent=0,tag=upsert]
 ----
 --
 
@@ -50,18 +49,18 @@ include::{example-source}[indent=0,tag=upsert]
 +
 --
 
-[source,{example-source-lang}]
+[source,{lang-code}]
 ----
-include::{example-source}[indent=0,tag=query]
+include::devguide:example$cxx/src/overview.cxx[indent=0,tag=query]
 ----
 --
 Vector Search::
 +
 --
 
-[source,{example-source-lang}]
+[source,{lang-code}]
 ----
-include::{example-source}[indent=0,tag=vector_search]
+include::devguide:example$cxx/src/overview.cxx[indent=0,tag=vector_search]
 ----
 --
 ====
