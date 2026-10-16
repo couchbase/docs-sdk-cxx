@@ -32,8 +32,8 @@ but first let's look at those data operations, and installing the {name-sdk}.
 
 // remember to add a nomenclature note to the next version of this page for LCB.
 
-.Creating a new database entry with the {cpp} SDK, using `upsert()`
-[source,{example-source-lang}]
+.Creating a new database entry with the {name_platform} SDK, using `upsert()`
+[source,{lang-code}]
 ----
 include::{example-source}[indent=0,tag=upsert]
 ----
