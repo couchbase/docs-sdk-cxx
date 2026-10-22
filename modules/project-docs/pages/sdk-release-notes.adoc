@@ -87,14 +87,256 @@ any changes to expected behavior are noted in the release notes that follow.
 
 
 
-=== Version 1.5.0 (?? October 2026)
+=== Version 1.5.0 (20 October 2026)
 
 This is the first GA release of the 1.5 {cpp} SDK.
 
 https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.5.0[API reference] |
 link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.4.0...1.5.0++[Full Changelog]
 
+[IMPORTANT]
+.Not binary compatible with 1.4.x
+====
+Applications built against 1.4.x must be recompiled.
 
+* The library `SOVERSION` follows the release version, so it changes to 1.5.0.
+* `search_options::built` gained a `scoring` member (https://jira.issues.couchbase.com/browse/CXXCBC-911[CXXCBC-911]), which changes its layout.
+====
+
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform                 | Architecture | File
+| Checksums                | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0.sha256.txt[couchbase-cxx-client-1.5.0.sha256.txt]
+| Source Archive           | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0.tar.gz[couchbase-cxx-client-1.5.0.tar.gz]
+| Amazon Linux 2023        | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.5.0-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023        | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.5.0-1.amzn2023.aarch64.tar]
+| Enterprise Linux 10      | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.el10.x86_64.tar[couchbase-cxx-client-1.5.0-1.el10.x86_64.tar]
+| Enterprise Linux 10      | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.el10.aarch64.tar[couchbase-cxx-client-1.5.0-1.el10.aarch64.tar]
+| Enterprise Linux 9       | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.el9.x86_64.tar[couchbase-cxx-client-1.5.0-1.el9.x86_64.tar]
+| Enterprise Linux 9       | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.el9.aarch64.tar[couchbase-cxx-client-1.5.0-1.el9.aarch64.tar]
+| Enterprise Linux 8       | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.el8.x86_64.tar[couchbase-cxx-client-1.5.0-1.el8.x86_64.tar]
+| Enterprise Linux 8       | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.el8.aarch64.tar[couchbase-cxx-client-1.5.0-1.el8.aarch64.tar]
+| Debian 13 (Trixie)       | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.trixie.x86_64.tar[couchbase-cxx-client-1.5.0-1.trixie.x86_64.tar]
+| Debian 13 (Trixie)       | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.trixie.aarch64.tar[couchbase-cxx-client-1.5.0-1.trixie.aarch64.tar]
+| Debian 12 (Bookworm)     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.bookworm.x86_64.tar[couchbase-cxx-client-1.5.0-1.bookworm.x86_64.tar]
+| Debian 12 (Bookworm)     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.bookworm.aarch64.tar[couchbase-cxx-client-1.5.0-1.bookworm.aarch64.tar]
+| Ubuntu 26.04 (Resolute)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.resolute.x86_64.tar[couchbase-cxx-client-1.5.0-1.resolute.x86_64.tar]
+| Ubuntu 26.04 (Resolute)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.resolute.aarch64.tar[couchbase-cxx-client-1.5.0-1.resolute.aarch64.tar]
+| Ubuntu 24.04 (Noble)     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.noble.x86_64.tar[couchbase-cxx-client-1.5.0-1.noble.x86_64.tar]
+| Ubuntu 24.04 (Noble)     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.noble.aarch64.tar[couchbase-cxx-client-1.5.0-1.noble.aarch64.tar]
+| Ubuntu 22.04 (Jammy)     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.jammy.x86_64.tar[couchbase-cxx-client-1.5.0-1.jammy.x86_64.tar]
+| Ubuntu 22.04 (Jammy)     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-1.jammy.aarch64.tar[couchbase-cxx-client-1.5.0-1.jammy.aarch64.tar]
+| Alpine Linux 3.24        | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-r1-x86_64-alpine-3.24.tar[couchbase-cxx-client-1.5.0-r1-x86_64-alpine-3.24.tar]
+| Alpine Linux 3.24        | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-r1-aarch64-alpine-3.24.tar[couchbase-cxx-client-1.5.0-r1-aarch64-alpine-3.24.tar]
+| Alpine Linux 3.23        | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-r1-x86_64-alpine-3.23.tar[couchbase-cxx-client-1.5.0-r1-x86_64-alpine-3.23.tar]
+| Alpine Linux 3.23        | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-r1-aarch64-alpine-3.23.tar[couchbase-cxx-client-1.5.0-r1-aarch64-alpine-3.23.tar]
+| Alpine Linux 3.22        | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-r1-x86_64-alpine-3.22.tar[couchbase-cxx-client-1.5.0-r1-x86_64-alpine-3.22.tar]
+| Alpine Linux 3.22        | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-r1-aarch64-alpine-3.22.tar[couchbase-cxx-client-1.5.0-r1-aarch64-alpine-3.22.tar]
+| Alpine Linux 3.21        | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-r1-x86_64-alpine-3.21.tar[couchbase-cxx-client-1.5.0-r1-x86_64-alpine-3.21.tar]
+| Alpine Linux 3.21        | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.0-r1-aarch64-alpine-3.21.tar[couchbase-cxx-client-1.5.0-r1-aarch64-alpine-3.21.tar]
+|===
+
+
+==== New Features
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-980[CXXCBC-980]:
+**Read a Named Replica** -- `collection::get_replica()` reads one specific replica of a document, as defined by SDK-RFC 0053.
+** `get_any_replica()` returns whichever copy answers first. `get_replica()` lets the application choose the copy.
+** The copy is selected with `get_replica_strategy::from_index(replica_index::first)`, or `second` and `third`. The active copy cannot be selected.
+** The result is a `get_replica_result`, the same type the other replica reads return.
+** The operation has callback and `std::future` overloads, and is `@committed`.
+** Three new `errc::key_value` codes describe why the chosen copy cannot answer:
+*** `replica_index_out_of_bounds`: the bucket has fewer replicas than the index. It is reported without a network round trip, and retrying cannot help.
+*** `replica_index_currently_unavailable`: the replica is configured but not placed on a node yet. A rebalance resolves it.
+*** `document_not_found_on_replica`: the replica answered but does not hold the document. `error::cause()` carries `document_not_found`.
+** `get_replica_strategy_from_index_options::wrap(true)` reads the next readable replica instead of failing. It still fails if the bucket has no replicas, or if no replica is readable.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-911[CXXCBC-911]:
+**Hybrid Search Score Fusion** -- `search_options::scoring()` controls how the server merges the FTS and vector result sets of a hybrid search into one ranked list.
+** `search_scoring_reciprocal_rank_fusion` merges the two lists by rank, not by raw score. It is the recommended strategy and works well with the server defaults.
+*** `rank_constant()` sets the rank constant of the Reciprocal Rank Fusion formula.
+*** `window_size()` sets how many results from each list take part in the fusion.
+** `search_scoring_relative_score_fusion` merges the two lists by normalized score. Its `window_size()` has the same meaning.
+** `search_scoring_none` turns scoring off. It also works on servers older than 8.1.
+** Both fusion strategies require Couchbase Server 8.1. The SDK checks the cluster capability, and an older cluster fails the request with `errc::common::feature_not_available`.
+** Without a hybrid request, the server re-scores the hits but keeps their order.
+** `search_options::scoring()` is `@committed`. The two fusion classes are `@uncommitted`.
+** Calling both `scoring()` and `disable_scoring(true)` throws `std::invalid_argument`, because both set the same request field.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-978[CXXCBC-978]:
+**Log Redaction** -- The SDK can tag sensitive values in its logs.
+A tool such as `cblogredaction` then strips or hashes them before the logs are shared.
+** Redaction is enabled with `log_redaction=true` in the connection string. It is off by default.
+** When it is off, log output is unchanged.
+** Values are tagged by category:
+*** `<ud>` user data: document keys and bodies, usernames, query statements.
+*** `<md>` metadata: bucket, scope, collection, design document, view and index names.
+*** `<sd>` system data: hostnames, IP addresses and ports.
+** The SDK only adds tags. It does not remove or hash anything itself.
+** The setting is process-wide and is applied when a cluster opens. No cluster can turn it off again.
+** The `dump_configuration` option writes untagged cluster configurations to the log. Combining it with `log_redaction` logs a warning.
+** Warnings about an unrecognised MCBP frame no longer print the frame body, which could hold document data.
+
+==== Improvements
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1037[CXXCBC-1037]:
+**Tracing for Streaming Requests** -- `query_stream()`, `analytics_query_stream()` and other streaming HTTP requests now create a `dispatch_to_server` span.
+** The span is a child of the request's parent span, as for buffered requests.
+** A tracer previously saw no dispatch span for a streaming request.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1087[CXXCBC-1087]:
+**Faster Reopen After fork()** -- `notify_fork(fork_event::child)` reopens the cluster in the child without waiting for the bootstrap to finish.
+** A child whose seed nodes do not answer is no longer blocked for `bootstrap_timeout`.
+** Requests issued while the cluster is opening are held, and sent once the bootstrap completes. Each request is still bounded by its own timeout.
+** If the bootstrap fails, the held requests complete with `cluster_closed`.
+** `open_bucket()` is the exception. It waits for the bootstrap to end.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-920[CXXCBC-920]:
+**cbc-pillowfight Document Bodies** -- `--incompressible-body` is replaced by a set of options that control generated document bodies.
+** The options are `--document-body-fill`, `--document-body-format`, `--document-body-size`, `--document-body-pool-size` and `--document-body-seed`.
+** Every generated document now has its own body. The old option reused one body per thread, so the server compressed the load as repeated data.
+** A random fill compresses 1.00x under lz4 and snappy in 4096-byte blocks. The load can therefore be used to size a dataset.
+** Insert operations in `--operation-ratio` now insert documents. They previously called replace on new ids and failed with `document_not_found`.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1055[CXXCBC-1055],
+https://jira.issues.couchbase.com/browse/CXXCBC-1092[CXXCBC-1092],
+https://jira.issues.couchbase.com/browse/CXXCBC-1104[CXXCBC-1104],
+https://jira.issues.couchbase.com/browse/CXXCBC-1107[CXXCBC-1107]:
+**Build Portability** -- The library builds on more toolchains:
+** MinGW GCC on Windows, for the asio target.
+** clang on Windows ARM64.
+** libc++ 23, including with `_LIBCPP_REMOVE_TRANSITIVE_INCLUDES`.
+** GCC 8 on Enterprise Linux 8.
+
+==== Security Fixes
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1072[CXXCBC-1072],
+https://jira.issues.couchbase.com/browse/CXXCBC-1106[CXXCBC-1106]:
+**Management Request Encoding** -- Names and values passed by the application can no longer change the meaning of a management request.
+** User and group upsert requests encoded their fields with a URL encoder that leaves `&`, `=` and `+` unescaped.
+** A password such as `Pw123456&roles=admin` therefore added a `roles` field and granted the `admin` role.
+** These request bodies are now form-encoded. The server decodes exactly the values the caller passed.
+** Names placed into REST paths are now escaped. A `#`, `?` or `/` in a name could cut the path short or address a different entity.
+** This covers user, group, eventing function, search index, design document, view, bucket, scope and link names.
+** `url_encode()` no longer stops escaping after a `+` or an existing `%XX` sequence.
+** `form_encode()` and `url_encode()` write each escaped byte with two hex digits.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-981[CXXCBC-981]:
+**vBucket Map Bounds Check** -- Replica reads no longer index past the end of a vBucket map row.
+** After replicas are added to a bucket, the replica count grows before the vBucket map does.
+** Replica reads and durability polling read past the end of the shorter row. The read could route a request to a node that does not hold the vBucket.
+** Rows are now bounds-checked. A missing entry is treated like an unassigned replica.
+** Range scan rejects a map whose rows name no active node.
+** A map with no rows no longer causes a division by zero.
+
+==== Bug Fixes
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1057[CXXCBC-1057]:
+**Client Certificate Rotation** -- A new certificate set with `cluster::set_authenticator()` is used by the next HTTP request.
+** Pooled HTTP connections were reused with the old certificate until their idle timeout.
+** Open key-value connections keep the certificate they were opened with.
+** Under TLS 1.3, a refused client certificate is now retried until the request times out. TLS 1.2 already behaved this way. If a valid certificate is set in time, the request succeeds.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-984[CXXCBC-984],
+https://jira.issues.couchbase.com/browse/CXXCBC-985[CXXCBC-985],
+https://jira.issues.couchbase.com/browse/CXXCBC-986[CXXCBC-986],
+https://jira.issues.couchbase.com/browse/CXXCBC-987[CXXCBC-987],
+https://jira.issues.couchbase.com/browse/CXXCBC-1022[CXXCBC-1022],
+https://jira.issues.couchbase.com/browse/CXXCBC-1023[CXXCBC-1023],
+https://jira.issues.couchbase.com/browse/CXXCBC-1090[CXXCBC-1090],
+https://jira.issues.couchbase.com/browse/CXXCBC-1093[CXXCBC-1093]:
+**Request Completion** -- Several paths no longer drop a key-value request without calling its handler.
+** A request waiting in a retry backoff when the cluster closes now completes with an error. It previously waited for a deadline that never fired.
+** A request whose retry or re-dispatch is refused now completes with an error.
+** A request routed to a node that cannot bootstrap is retried or cancelled. It previously waited for its deadline without being sent.
+** Requests that leave the operation queue, and requests whose collection id lookup cannot start, no longer leak.
+** A key-value request's timeout now includes the time spent waiting for its bucket to open. Range scan and collection id lookups keep their own deadlines.
+** A durable mutation completes within `max(timeout, 1.5 s)` of being issued.
+** A range scan of a missing collection fails at once with `collection_not_found`. It previously timed out after the full scan timeout.
+** `ping()` no longer completes before every ping request has been sent.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1032[CXXCBC-1032],
+https://jira.issues.couchbase.com/browse/CXXCBC-1034[CXXCBC-1034],
+https://jira.issues.couchbase.com/browse/CXXCBC-1035[CXXCBC-1035],
+https://jira.issues.couchbase.com/browse/CXXCBC-1039[CXXCBC-1039],
+https://jira.issues.couchbase.com/browse/CXXCBC-1046[CXXCBC-1046],
+https://jira.issues.couchbase.com/browse/CXXCBC-1048[CXXCBC-1048]:
+**HTTP Session Lifecycle** -- HTTP session shutdown is now serialised and runs once.
+** `close()` on a busy session no longer causes a use-after-free.
+** A session stopped mid-response no longer throws `std::bad_function_call` on the IO thread.
+** A reused connection no longer loses part of a streamed body.
+** A streamed result that is dropped or abandoned early releases its connection. It previously held it until a timeout or until the cluster closed.
+** A request deadline that fires just after the response no longer stops the pooled session.
+** `cancel()` on a completed operation no longer stops a session that another request is using.
+** A session that replaced a failed node is returned to the pool after the request.
+** A row stream with a zero low-water mark no longer stalls.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-882[CXXCBC-882],
+https://jira.issues.couchbase.com/browse/CXXCBC-1049[CXXCBC-1049],
+https://jira.issues.couchbase.com/browse/CXXCBC-1059[CXXCBC-1059]:
+**Error Mapping** -- HTTP errors map to more accurate error codes.
+** An unrecognised HTTP 400 now reports `errc::common::invalid_argument`, as SDK-RFC 0058 requires.
+** This applies to query, analytics, search, eventing and management requests.
+** These requests previously reported `internal_server_failure`, `unsupported_operation`, `parsing_failure`, or even success.
+** A 400 body that lacks an expected field no longer throws inside the SDK.
+** Query error 2120 (`E_ADMIN_AUTH`) maps to `authentication_failure`.
+** Dropping a query index that does not exist reports `index_not_found`, whatever HTTP status the server returns.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1063[CXXCBC-1063],
+https://jira.issues.couchbase.com/browse/CXXCBC-1089[CXXCBC-1089],
+https://jira.issues.couchbase.com/browse/CXXCBC-1091[CXXCBC-1091]:
+**wait_until_ready** -- The waits now complete in cases that previously timed out or never completed.
+** `bucket::wait_until_ready()` waits only for the replicas the data nodes can hold. A one-replica bucket on a single node now reaches `online`.
+** Over `couchbase2://`, both waits end once the gRPC channel to the gateway is connected.
+** Over `couchbase2://`, opening a bucket fails at once with `feature_not_available`.
+** A wait pending at `cluster::close()`, or started after it, completes with `cluster_closed`.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-913[CXXCBC-913],
+https://jira.issues.couchbase.com/browse/CXXCBC-914[CXXCBC-914]:
+**fork() Handling** -- A forked child no longer interferes with the parent's connections or transactions client record.
+** The child closes the sockets it inherited before it starts its own I/O.
+** The child previously ran the parent's pending reads, and took responses meant for the parent.
+** Closing the inherited cluster in the child keeps the parent's entry in the transactions client record.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1011[CXXCBC-1011]:
+**Big-Endian Hosts** -- The SDK now connects from big-endian hosts.
+** On a big-endian host, MCBP header fields were sent in the wrong byte order. The server closed the connection during bootstrap.
+** Byte order is now converted for the host. An emulated s390x client connects and completes key-value operations.
+** On every host, a server duration is now read when 16 or more bytes of framing extras precede it.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1052[CXXCBC-1052],
+https://jira.issues.couchbase.com/browse/CXXCBC-1054[CXXCBC-1054],
+https://jira.issues.couchbase.com/browse/CXXCBC-1086[CXXCBC-1086]:
+**Transactions** -- Fixes for expiry and for retry waits.
+** On Windows, the ATR expiry was computed in 32 bits and wrapped above about 2.15 s. Lost-attempts cleanup could treat a live attempt as expired.
+** Waits between retries now use a timer and no longer block the IO thread.
+** With a single IO thread, the transaction being waited for can now commit. The waiting write previously failed with a write-write conflict.
+** A query-mode transaction whose rollback finds it expired now raises `EXPIRY` instead of `FAIL`.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-994[CXXCBC-994]:
+**couchbase2 Close** -- An operation in flight while the cluster closes now completes with `cluster_closed`.
+It previously reported `temporary_failure`, which suggests a retry.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1002[CXXCBC-1002]:
+**Application Telemetry Units** -- The latency histograms for HTTP services now report `_sum` in milliseconds, as SDK-RFC 0084 requires.
+** This affects query, search, analytics, management and eventing.
+** The sum was divided by 1000, so a mean latency computed from it was 1000 times too low.
+** Dashboards and alerts built on the old values need review.
+
+==== Removals
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-782[CXXCBC-782]:
+**Columnar Build Mode** -- The `COUCHBASE_CXX_CLIENT_COLUMNAR` build option, deprecated in 1.4.0, is removed with the code it enabled.
+** Setting the option now leaves an unused CMake cache entry.
+** Connection string parameters accepted only by a Columnar build are no longer recognised. They include `security.trust_only_pem_file`, `timeout.dispatch_timeout` and `timeout.query_timeout`.
+** The build-info map no longer has a `columnar` key.
+
+==== Deprecations
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-911[CXXCBC-911]:
+**search_options::disable_scoring()** -- Replaced by `search_options::scoring(search_scoring_none{})`, which sends the same request.
 
 
 
