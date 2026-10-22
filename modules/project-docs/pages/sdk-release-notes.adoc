@@ -9,7 +9,7 @@
 {description}
 
 Version {sdk_dot_minor} of the {cpp} SDK implements the {sdk_api} xref:compatibility.adoc#api-version[SDK API].
-See the xref:compatibility.adoc#couchbase-feature-availability-matrix[compatibility pages] for more information on feature compatibility with different versions of Couchbase Server.
+See the xref:compatibility.adoc#couchbase-versionsdk-version-matrix[compatibility pages] for more information on feature compatibility with different versions of Couchbase Server.
 
 
 == Installation
