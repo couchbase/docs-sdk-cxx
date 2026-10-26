@@ -87,7 +87,7 @@ any changes to expected behavior are noted in the release notes that follow.
 
 
 
-=== Version 1.5.1 (26 November 2026)
+=== Version 1.5.1 (26 October 2026)
 
 This is the second GA release of the 1.5 {cpp} SDK.
 
