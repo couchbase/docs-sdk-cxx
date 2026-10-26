@@ -161,6 +161,14 @@ This is the first GA release of the 1.5 {cpp} SDK.
 https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.5.0[API reference] |
 link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.4.0...1.5.0++[Full Changelog]
 
+[WARNING]
+.Upgrade to 1.5.1
+====
+The 1.5.0 source archive and packages embed no Mozilla CA certificate (https://jira.issues.couchbase.com/browse/CXXCBC-1112[CXXCBC-1112]).
+Without an explicit trust certificate, `couchbases://` connections trust only the system CAs and the Capella root, and `couchbase2://` connections only the Capella root.
+Upgrading to 1.5.1, which restores the bundle, is recommended.
+====
+
 [IMPORTANT]
 .Not binary compatible with 1.4.x
 ====
