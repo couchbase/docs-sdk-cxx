@@ -87,12 +87,87 @@ any changes to expected behavior are noted in the release notes that follow.
 
 
 
+=== Version 1.5.1 (26 October 2026)
+
+This is the second GA release of the 1.5 {cpp} SDK.
+
+https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.5.1[API reference] |
+link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.5.0...1.5.1++[Full Changelog]
+
+==== Downloads
+
+[cols="12,^8,23"]
+|===
+| Platform                 | Architecture | File
+| Checksums                | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1.sha256.txt[couchbase-cxx-client-1.5.1.sha256.txt]
+| Source Archive           | Any          | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1.tar.gz[couchbase-cxx-client-1.5.1.tar.gz]
+| Amazon Linux 2023        | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.amzn2023.x86_64.tar[couchbase-cxx-client-1.5.1-1.amzn2023.x86_64.tar]
+| Amazon Linux 2023        | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.amzn2023.aarch64.tar[couchbase-cxx-client-1.5.1-1.amzn2023.aarch64.tar]
+| Enterprise Linux 10      | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.el10.x86_64.tar[couchbase-cxx-client-1.5.1-1.el10.x86_64.tar]
+| Enterprise Linux 10      | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.el10.aarch64.tar[couchbase-cxx-client-1.5.1-1.el10.aarch64.tar]
+| Enterprise Linux 9       | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.el9.x86_64.tar[couchbase-cxx-client-1.5.1-1.el9.x86_64.tar]
+| Enterprise Linux 9       | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.el9.aarch64.tar[couchbase-cxx-client-1.5.1-1.el9.aarch64.tar]
+| Enterprise Linux 8       | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.el8.x86_64.tar[couchbase-cxx-client-1.5.1-1.el8.x86_64.tar]
+| Enterprise Linux 8       | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.el8.aarch64.tar[couchbase-cxx-client-1.5.1-1.el8.aarch64.tar]
+| Debian 13 (Trixie)       | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.trixie.x86_64.tar[couchbase-cxx-client-1.5.1-1.trixie.x86_64.tar]
+| Debian 13 (Trixie)       | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.trixie.aarch64.tar[couchbase-cxx-client-1.5.1-1.trixie.aarch64.tar]
+| Debian 12 (Bookworm)     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.bookworm.x86_64.tar[couchbase-cxx-client-1.5.1-1.bookworm.x86_64.tar]
+| Debian 12 (Bookworm)     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.bookworm.aarch64.tar[couchbase-cxx-client-1.5.1-1.bookworm.aarch64.tar]
+| Ubuntu 26.04 (Resolute)  | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.resolute.x86_64.tar[couchbase-cxx-client-1.5.1-1.resolute.x86_64.tar]
+| Ubuntu 26.04 (Resolute)  | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.resolute.aarch64.tar[couchbase-cxx-client-1.5.1-1.resolute.aarch64.tar]
+| Ubuntu 24.04 (Noble)     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.noble.x86_64.tar[couchbase-cxx-client-1.5.1-1.noble.x86_64.tar]
+| Ubuntu 24.04 (Noble)     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.noble.aarch64.tar[couchbase-cxx-client-1.5.1-1.noble.aarch64.tar]
+| Ubuntu 22.04 (Jammy)     | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.jammy.x86_64.tar[couchbase-cxx-client-1.5.1-1.jammy.x86_64.tar]
+| Ubuntu 22.04 (Jammy)     | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-1.jammy.aarch64.tar[couchbase-cxx-client-1.5.1-1.jammy.aarch64.tar]
+| Alpine Linux 3.24        | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-r1-x86_64-alpine-3.24.tar[couchbase-cxx-client-1.5.1-r1-x86_64-alpine-3.24.tar]
+| Alpine Linux 3.24        | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-r1-aarch64-alpine-3.24.tar[couchbase-cxx-client-1.5.1-r1-aarch64-alpine-3.24.tar]
+| Alpine Linux 3.23        | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-r1-x86_64-alpine-3.23.tar[couchbase-cxx-client-1.5.1-r1-x86_64-alpine-3.23.tar]
+| Alpine Linux 3.23        | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-r1-aarch64-alpine-3.23.tar[couchbase-cxx-client-1.5.1-r1-aarch64-alpine-3.23.tar]
+| Alpine Linux 3.22        | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-r1-x86_64-alpine-3.22.tar[couchbase-cxx-client-1.5.1-r1-x86_64-alpine-3.22.tar]
+| Alpine Linux 3.22        | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-r1-aarch64-alpine-3.22.tar[couchbase-cxx-client-1.5.1-r1-aarch64-alpine-3.22.tar]
+| Alpine Linux 3.21        | x86_64       | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-r1-x86_64-alpine-3.21.tar[couchbase-cxx-client-1.5.1-r1-x86_64-alpine-3.21.tar]
+| Alpine Linux 3.21        | aarch64      | https://packages.couchbase.com/clients/cxx/couchbase-cxx-client-1.5.1-r1-aarch64-alpine-3.21.tar[couchbase-cxx-client-1.5.1-r1-aarch64-alpine-3.21.tar]
+|===
+
+==== Bug Fixes
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1112[CXXCBC-1112]:
+**Embedded Mozilla CA Bundle** -- A build now embeds every certificate of the curl.se CA bundle.
+** Since 2026-10-20, the bundle puts a `# Fingerprint (SHA-256):` line between each certificate's name and its PEM block.
+** The build extracted no certificate from that format, and configure still succeeded.
+** The 1.5.0 source archive and packages carry a bundle in this format, so they embed no Mozilla certificate.
+** With no explicit trust certificate, `couchbases://` connections, key-value and HTTP alike, then trusted only the system CAs and the Capella root. `couchbase2://` connections trusted only the Capella root.
+** With `COUCHBASE_CXX_CLIENT_EMBED_MOZILLA_CA_BUNDLE` enabled, which is the default, configure now fails on a bundle it cannot embed in full.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1113[CXXCBC-1113]:
+**Shared Library soname** -- The soname now carries the major and minor version only, so later 1.5.x releases replace the library in place.
+** The 1.5.1 soname is `libcouchbase_cxx_client.so.1.5`, and every later 1.5.x release keeps it.
+** On macOS the install name is `libcouchbase_cxx_client.1.5.dylib`.
+** A minor release changes the soname, because it may change the ABI.
+
+* https://jira.issues.couchbase.com/browse/CXXCBC-1109[CXXCBC-1109]:
+**Eventing Function Not Found** -- Eventing management requests report `errc::management::eventing_function_not_found` when the server answers `ERR_APP_NOT_FOUND`.
+** Only `ERR_APP_NOT_FOUND_TS` mapped to that code. `ERR_APP_NOT_FOUND` reported `invalid_argument` on HTTP 400, and `internal_server_failure` otherwise.
+
+* **Windows Builds** -- Two compile errors are fixed.
+** MSVC 19.29 (Visual Studio 2019) rejected `cluster::query_stream()` and `cluster::analytics_query_stream()` with error C2039.
+** A 32-bit build failed in the WebSocket frame encoder with warning C4293, which the default `WARNINGS_AS_ERRORS` makes an error. To fill the 64-bit length field, a `std::size_t` was shifted by 32 to 56 bits, at or beyond its width where it is 32 bits.
+
+
 === Version 1.5.0 (20 October 2026)
 
 This is the first GA release of the 1.5 {cpp} SDK.
 
 https://docs.couchbase.com/sdk-api/couchbase-cxx-client-1.5.0[API reference] |
 link:++https://github.com/couchbase/couchbase-cxx-client/compare/1.4.0...1.5.0++[Full Changelog]
+
+[WARNING]
+.Upgrade to 1.5.1
+====
+The 1.5.0 source archive and packages embed no Mozilla CA certificate (https://jira.issues.couchbase.com/browse/CXXCBC-1112[CXXCBC-1112]).
+Without an explicit trust certificate, `couchbases://` connections trust only the system CAs and the Capella root, and `couchbase2://` connections only the Capella root.
+Upgrading to 1.5.1, which restores the bundle, is recommended.
+====
 
 [IMPORTANT]
 .Not binary compatible with 1.4.x
